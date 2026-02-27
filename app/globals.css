@@ -17,12 +17,25 @@
 }
 
 @layer components {
+  /* Mengganti semua sintaks Tailwind dengan standard CSS agar 100% aman saat di-build dengan Tailwind v4 */
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .glass-button {
-    @apply bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all duration-300;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
