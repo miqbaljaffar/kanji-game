@@ -6,13 +6,13 @@ interface MascotProps {
 }
 
 export function Mascot({ state }: MascotProps) {
-  // Maskot Kucing Ninja Ceria
+  // Ukuran diperkecil secara drastis (64px) dan dibatasi maksimalnya agar tidak melar di HP
   return (
-    <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-2 drop-shadow-xl transition-transform duration-300">
+    <div className="relative w-16 h-16 md:w-20 md:h-20 max-w-[64px] max-h-[64px] md:max-w-[80px] md:max-h-[80px] mx-auto mb-1 drop-shadow-md transition-transform duration-300 shrink-0">
       
       {/* STATE IDLE: Menunggu Jawaban */}
       {state === "idle" && (
-        <svg viewBox="0 0 100 100" className="w-full h-full animate-bounce-slow">
+        <svg viewBox="0 0 100 100" className="w-full h-full object-contain animate-bounce-slow">
           {/* Telinga */}
           <path d="M 15 35 L 25 5 L 40 20 Z" fill="#facc15" />
           <path d="M 85 35 L 75 5 L 60 20 Z" fill="#facc15" />
@@ -32,7 +32,7 @@ export function Mascot({ state }: MascotProps) {
 
       {/* STATE CORRECT: Jawaban Benar */}
       {state === "correct" && (
-        <svg viewBox="0 0 100 100" className="w-full h-full animate-bounce-in">
+        <svg viewBox="0 0 100 100" className="w-full h-full object-contain animate-bounce-in">
           <path d="M 15 35 L 25 5 L 40 20 Z" fill="#4ade80" />
           <path d="M 85 35 L 75 5 L 60 20 Z" fill="#4ade80" />
           <circle cx="50" cy="50" r="40" fill="#86efac" />
@@ -47,7 +47,7 @@ export function Mascot({ state }: MascotProps) {
 
       {/* STATE WRONG: Jawaban Salah */}
       {state === "wrong" && (
-        <svg viewBox="0 0 100 100" className="w-full h-full animate-shake">
+        <svg viewBox="0 0 100 100" className="w-full h-full object-contain animate-shake">
           <path d="M 15 45 L 20 15 L 40 30 Z" fill="#f87171" />
           <path d="M 85 45 L 80 15 L 60 30 Z" fill="#f87171" />
           <circle cx="50" cy="50" r="40" fill="#fca5a5" />
