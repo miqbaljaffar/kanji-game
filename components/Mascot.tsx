@@ -8,7 +8,7 @@ interface MascotProps {
 export function Mascot({ state }: MascotProps) {
   // Maskot Kucing Ninja Ceria
   return (
-    <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-2 drop-shadow-xl transition-transform duration-300">
+    <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-2 drop-shadow-xl transition-transform duration-300">
       
       {/* STATE IDLE: Menunggu Jawaban */}
       {state === "idle" && (
