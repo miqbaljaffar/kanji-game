@@ -10,8 +10,8 @@
   --font-body: 'Nunito', sans-serif;
   --font-jp: 'Noto Sans JP', sans-serif;
   
-  /* Palet Warna Eksklusif: Hitam, Putih, Biru */
-  --theme-bg: #030305;
+  /* Palet Warna Eksklusif: Hitam pekat, Putih, Biru */
+  --theme-bg: #000000;
   --theme-blue-light: #60a5fa;
   --theme-blue-main: #2563eb;
   --theme-blue-dark: #1e3a8a;
@@ -23,7 +23,7 @@
   .glass-panel {
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.6) 100%);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.8) 100%);
     box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
@@ -53,7 +53,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  background-color: var(--theme-bg);
+  background-color: var(--theme-bg) !important;
   color: var(--theme-white);
   overflow-x: hidden;
 }
