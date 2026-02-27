@@ -186,3 +186,93 @@ html, body {
 button {
   outline: none !important;
 }
+
+/* TINGGALKAN KODE LAMA ANDA, TAMBAHKAN KODE INI DI BAWAHNYA */
+
+/* =========================================
+   KIDS THEME OVERRIDES (UI UNTUK ANAK-ANAK)
+   ========================================= */
+.theme-kids {
+  color: #1e293b;
+}
+
+.theme-kids .glass-panel {
+  background: #ffffff;
+  box-shadow: 0 10px 0px rgba(0, 0, 0, 0.08); /* Shadow bergaya "chunky/kartun" */
+  border: 4px solid #bae6fd;
+  border-radius: 36px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.theme-kids .glass-button {
+  background-color: #ffffff;
+  border: 4px solid #e2e8f0;
+  border-radius: 24px;
+  color: #334155;
+  box-shadow: 0 6px 0px #cbd5e1;
+  font-weight: 800;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.theme-kids .glass-button:hover {
+  background-color: #f8fafc;
+  transform: translateY(2px);
+  box-shadow: 0 4px 0px #cbd5e1;
+  border-color: #93c5fd;
+}
+
+.theme-kids .glass-button:active {
+  transform: translateY(6px);
+  box-shadow: 0 0px 0px transparent;
+}
+
+/* Custom warna jawaban untuk anak-anak (warna solid dan cerah) */
+.theme-kids .neon-border-green {
+  background-color: #dcfce7 !important;
+  border-color: #22c55e !important;
+  box-shadow: 0 6px 0px #16a34a !important;
+}
+
+.theme-kids .neon-border-red {
+  background-color: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 6px 0px #dc2626 !important;
+}
+
+/* Override Text Classes agar terbaca jelas di background cerah */
+.theme-kids .text-white { color: #0f172a; }
+.theme-kids .text-gray-300 { color: #334155; }
+.theme-kids .text-gray-400 { color: #475569; }
+.theme-kids .text-gray-500 { color: #64748b; }
+.theme-kids .bg-black { background-color: #f1f5f9; }
+
+/* =========================================
+   ANIMASI KHUSUS MASKOT & LATAR
+   ========================================= */
+@keyframes float-cloud {
+  0% { transform: translateX(0) translateY(0) scale(1); }
+  100% { transform: translateX(30px) translateY(-10px) scale(1.05); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-8px) rotate(-8deg); }
+  75% { transform: translateX(8px) rotate(8deg); }
+}
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

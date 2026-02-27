@@ -1,13 +1,15 @@
 "use client";
-
+import clsx from "clsx";
 import { useGame } from "@/hooks/useGame";
 import { HomeScreen } from "@/components/HomeScreen";
 import { GameScreen } from "@/components/GameScreen";
 import { ResultScreen } from "@/components/ResultScreen";
-import { SakuraBackground, ShootingStars, GridOverlay } from "@/components/Background";
+import { GameBackground } from "@/components/Background";
 
 export default function Home() {
   const {
+    theme,
+    setTheme,
     gameState,
     gameMode,
     difficulty,
@@ -27,20 +29,20 @@ export default function Home() {
   } = useGame();
 
   return (
-    // Dihapus bg-gradient-to-br dari ungu ke hitam, sekarang menggunakan latar hitam pekat murni
-    <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Atmospheric backgrounds */}
-      <GridOverlay />
-      <SakuraBackground />
-      <ShootingStars />
-
-      {/* Ambient glow blobs - Dikonversi ke tema Hitam, Putih, Biru (menghilangkan pink & ungu) */}
-      <div className="fixed top-20 left-10 w-72 h-72 rounded-full bg-blue-500/10 blur-[80px] pointer-events-none" />
-      <div className="fixed bottom-20 right-10 w-72 h-72 rounded-full bg-cyan-400/5 blur-[80px] pointer-events-none" />
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-blue-900/10 blur-[100px] pointer-events-none" />
+    // Class dinamis menyesuaikan tema terpilih
+    <div className={clsx("relative min-h-screen overflow-hidden transition-colors duration-700", theme === "kids" ? "theme-kids bg-[#87CEEB]" : "bg-black")}>
+      
+      {/* Background yang dinamis bereaksi terhadap theme */}
+      <GameBackground theme={theme} />
 
       {/* Game States */}
-      {gameState === "home" && <HomeScreen onStart={startGame} />}
+      {gameState === "home" && (
+        <HomeScreen 
+          theme={theme} 
+          onThemeChange={setTheme} 
+          onStart={startGame} 
+        />
+      )}
 
       {gameState === "playing" && currentQuestion && (
         <GameScreen
@@ -54,6 +56,7 @@ export default function Home() {
           timeRatio={timeRatio}
           gameMode={gameMode}
           difficulty={difficulty}
+          theme={theme}
           showFloatingScore={showFloatingScore}
           floatingScoreValue={floatingScoreValue}
           onAnswer={handleAnswer}
