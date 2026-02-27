@@ -1,5 +1,5 @@
 "use client";
-import clsx from "clsx";
+
 import { useGame } from "@/hooks/useGame";
 import { HomeScreen } from "@/components/HomeScreen";
 import { GameScreen } from "@/components/GameScreen";
@@ -8,8 +8,6 @@ import { GameBackground } from "@/components/Background";
 
 export default function Home() {
   const {
-    theme,
-    setTheme,
     gameState,
     gameMode,
     difficulty,
@@ -29,17 +27,13 @@ export default function Home() {
   } = useGame();
 
   return (
-    // Class dinamis menyesuaikan tema terpilih
-    <div className={clsx("relative min-h-screen overflow-hidden transition-colors duration-700", theme === "kids" ? "theme-kids bg-[#87CEEB]" : "bg-black")}>
-      
-      {/* Background yang dinamis bereaksi terhadap theme */}
-      <GameBackground theme={theme} />
+    <div className="relative min-h-screen overflow-hidden bg-[#87CEEB] text-slate-800 font-body">
+      {/* Background awan ceria */}
+      <GameBackground />
 
       {/* Game States */}
       {gameState === "home" && (
         <HomeScreen 
-          theme={theme} 
-          onThemeChange={setTheme} 
           onStart={startGame} 
         />
       )}
@@ -56,7 +50,6 @@ export default function Home() {
           timeRatio={timeRatio}
           gameMode={gameMode}
           difficulty={difficulty}
-          theme={theme}
           showFloatingScore={showFloatingScore}
           floatingScoreValue={floatingScoreValue}
           onAnswer={handleAnswer}

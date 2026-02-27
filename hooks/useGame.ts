@@ -1,16 +1,13 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { KanjiEntry, GameMode, GameState, AnswerState, GameStats, QuizQuestion, Difficulty, AppTheme } from "@/types";
+import { KanjiEntry, GameMode, GameState, AnswerState, GameStats, QuizQuestion, Difficulty } from "@/types";
 import { kanjiData, getRandomOptions, shuffleArray } from "@/data/kanji";
 
 const QUESTION_TIME = { easy: 20, medium: 12, hard: 7 };
 const QUESTIONS_PER_GAME = 20;
 
 export function useGame() {
-  // State untuk menyimpan tema (Default bisa diset ke kids)
-  const [theme, setTheme] = useState<AppTheme>("kids");
-  
   const [gameState, setGameState] = useState<GameState>("home");
   const [gameMode, setGameMode] = useState<GameMode>("kanji-to-arti");
   const [difficulty, setDifficulty] = useState<Difficulty>("medium");
@@ -109,10 +106,9 @@ export function useGame() {
 
     setTimeout(() => {
       nextQuestion();
-    }, 1500); // Waktu jeda agar anak bisa melihat maskot bereaksi
+    }, 1500);
   }, [answerState, currentQuestion, timeLeft, clearTimer, nextQuestion]);
 
-  // Timer
   useEffect(() => {
     if (gameState !== "playing" || answerState !== "idle") return;
     
@@ -120,7 +116,7 @@ export function useGame() {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current!);
-          handleAnswer(-1); // Time out = wrong
+          handleAnswer(-1);
           return 0;
         }
         return prev - 1;
@@ -139,8 +135,6 @@ export function useGame() {
   const timeRatio = timeLeft / QUESTION_TIME[difficulty];
 
   return {
-    theme,           // Export state theme
-    setTheme,        // Export setter theme
     gameState,
     gameMode,
     difficulty,

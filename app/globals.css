@@ -1,48 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Noto+Sans+JP:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Menggunakan Nunito secara menyeluruh untuk kesan elegan dan modern */
   --font-display: 'Nunito', sans-serif;
   --font-body: 'Nunito', sans-serif;
   --font-jp: 'Noto Sans JP', sans-serif;
-  
-  /* Palet Warna Eksklusif: Hitam pekat, Putih, Biru */
-  --theme-bg: #000000;
-  --theme-blue-light: #60a5fa;
-  --theme-blue-main: #2563eb;
-  --theme-blue-dark: #1e3a8a;
-  --theme-white: #ffffff;
-}
-
-@layer components {
-  /* Premium Glassmorphism: Gelap, tajam, dan berkelas */
-  .glass-panel {
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.8) 100%);
-    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .glass-button {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    background-color: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--theme-white);
-  }
-  
-  .glass-button:hover {
-    background-color: rgba(37, 99, 235, 0.1); /* Efek sentuhan biru */
-    border-color: rgba(96, 165, 250, 0.5);
-    box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.5);
-    transform: translateY(-2px);
-  }
 }
 
 * {
@@ -53,204 +18,103 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  background-color: var(--theme-bg) !important;
-  color: var(--theme-white);
+  background-color: #87CEEB !important; /* Warna Langit Cerah (Sky Blue) */
+  color: #1e293b; /* Slate-800 */
   overflow-x: hidden;
 }
 
 /* =========================================
-   BACKGROUND ANIMATIONS (ELEGANT MODE)
+   GAYA DUOLINGO (KIDS FRIENDLY)
    ========================================= */
-.sakura-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
 
-/* Mengganti bunga sakura dengan partikel cahaya biru/putih (Orb) */
-.sakura {
-  position: absolute;
-  top: -50px;
-  animation: sakuraFall linear infinite;
-  opacity: 0;
-}
+@layer components {
+  /* Kotak Putih Utama (Card) */
+  .duo-card {
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0; /* Slate-200 */
+    border-bottom-width: 6px;
+    border-radius: 24px;
+  }
 
-.sakura::before {
-  content: '';
-  display: block;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 0%, rgba(96, 165, 250, 0.8) 30%, transparent 70%);
-  box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
-}
+  /* Tombol Pilihan Jawaban */
+  .duo-btn {
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-bottom-width: 4px;
+    border-radius: 16px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    font-weight: 800;
+    color: #475569; /* Slate-600 */
+  }
 
-@keyframes sakuraFall {
-  0% { transform: translateY(-5vh) translateX(0) scale(0.5); opacity: 0; }
-  20% { opacity: 0.6; }
-  50% { transform: translateY(50vh) translateX(30px) scale(1.2); }
-  80% { opacity: 0.6; }
-  100% { transform: translateY(110vh) translateX(-30px) scale(0.5); opacity: 0; }
-}
+  .duo-btn:hover:not(:disabled) {
+    background-color: #f8fafc;
+  }
 
-.grid-pattern {
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
-}
+  .duo-btn:active:not(:disabled) {
+    transform: translateY(4px);
+    border-bottom-width: 0px;
+    margin-top: 4px;
+  }
 
-.shooting-star {
-  position: absolute;
-  width: 1px;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8), transparent);
-  animation: shootingStar linear infinite;
-  opacity: 0;
-  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.8));
-}
+  /* Status Jawaban Benar */
+  .duo-btn-correct {
+    background-color: #dcfce7 !important; /* Hijau muda */
+    border-color: #22c55e !important;
+    color: #15803d !important;
+  }
 
-@keyframes shootingStar {
-  0% { opacity: 0; transform: translate(0, -100px) rotate(45deg); }
-  15% { opacity: 1; }
-  30% { opacity: 0; transform: translate(500px, 400px) rotate(45deg); }
-  100% { opacity: 0; }
+  /* Status Jawaban Salah */
+  .duo-btn-wrong {
+    background-color: #fee2e2 !important; /* Merah muda */
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+  }
+
+  /* Tombol Utama (Start/Lanjut) */
+  .duo-btn-primary {
+    background-color: #22c55e; /* Hijau */
+    border: 2px solid #16a34a;
+    border-bottom-width: 6px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 900;
+    transition: all 0.1s ease;
+  }
+
+  .duo-btn-primary:hover:not(:disabled) {
+    background-color: #4ade80;
+  }
+
+  .duo-btn-primary:active:not(:disabled) {
+    transform: translateY(6px);
+    border-bottom-width: 0px;
+    margin-top: 6px;
+  }
+
+  /* Tombol Keluar / Secondary */
+  .duo-btn-secondary {
+    background-color: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    border-bottom-width: 4px;
+    border-radius: 16px;
+    color: #64748b;
+    font-weight: 800;
+    transition: all 0.1s ease;
+  }
+
+  .duo-btn-secondary:active:not(:disabled) {
+    transform: translateY(4px);
+    border-bottom-width: 0px;
+    margin-top: 4px;
+  }
 }
 
 /* =========================================
-   TEXT & BORDER EFFECTS (OVERRIDE WARNA)
+   ANIMASI KHUSUS ANAK-ANAK
    ========================================= */
-/* Memaksa efek glow sebelumnya agar selaras dengan tema Putih & Biru */
-.text-glow-pink {
-  text-shadow: 0 0 20px rgba(96, 165, 250, 0.6); /* Diubah ke Biru */
-}
 
-.text-glow-cyan {
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Diubah ke Putih */
-}
-
-/* Jawaban Benar: Dikonversi ke Cahaya Biru Elegan */
-.neon-border-green {
-  box-shadow: 0 0 25px rgba(37, 99, 235, 0.4), inset 0 0 15px rgba(37, 99, 235, 0.2);
-  border-color: var(--theme-blue-light) !important;
-  background-color: rgba(37, 99, 235, 0.1) !important;
-}
-
-/* Jawaban Salah: Dikonversi ke Putih / Abu-abu Tegas */
-.neon-border-red {
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.5) !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-.animate-bounce-in {
-  animation: bounceIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes bounceIn {
-  0% { transform: scale(0.9); opacity: 0; filter: blur(4px); }
-  100% { transform: scale(1); opacity: 1; filter: blur(0); }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; filter: blur(4px); }
-  to { transform: translateY(0); opacity: 1; filter: blur(0); }
-}
-
-.float-score {
-  animation: floatScore 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes floatScore {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  15% { transform: translateY(-20px) scale(1.1); opacity: 1; }
-  100% { transform: translateY(-100px) scale(1); opacity: 0; }
-}
-
-/* Scrollbar - Nuansa Biru Premium */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--theme-bg); }
-::-webkit-scrollbar-thumb { background: rgba(96, 165, 250, 0.3); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(96, 165, 250, 0.6); }
-
-/* Menghilangkan outline biru bawaan browser saat klik */
-button {
-  outline: none !important;
-}
-
-/* TINGGALKAN KODE LAMA ANDA, TAMBAHKAN KODE INI DI BAWAHNYA */
-
-/* =========================================
-   KIDS THEME OVERRIDES (UI UNTUK ANAK-ANAK)
-   ========================================= */
-.theme-kids {
-  color: #1e293b;
-}
-
-.theme-kids .glass-panel {
-  background: #ffffff;
-  box-shadow: 0 10px 0px rgba(0, 0, 0, 0.08); /* Shadow bergaya "chunky/kartun" */
-  border: 4px solid #bae6fd;
-  border-radius: 36px;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.theme-kids .glass-button {
-  background-color: #ffffff;
-  border: 4px solid #e2e8f0;
-  border-radius: 24px;
-  color: #334155;
-  box-shadow: 0 6px 0px #cbd5e1;
-  font-weight: 800;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.theme-kids .glass-button:hover {
-  background-color: #f8fafc;
-  transform: translateY(2px);
-  box-shadow: 0 4px 0px #cbd5e1;
-  border-color: #93c5fd;
-}
-
-.theme-kids .glass-button:active {
-  transform: translateY(6px);
-  box-shadow: 0 0px 0px transparent;
-}
-
-/* Custom warna jawaban untuk anak-anak (warna solid dan cerah) */
-.theme-kids .neon-border-green {
-  background-color: #dcfce7 !important;
-  border-color: #22c55e !important;
-  box-shadow: 0 6px 0px #16a34a !important;
-}
-
-.theme-kids .neon-border-red {
-  background-color: #fee2e2 !important;
-  border-color: #ef4444 !important;
-  box-shadow: 0 6px 0px #dc2626 !important;
-}
-
-/* Override Text Classes agar terbaca jelas di background cerah */
-.theme-kids .text-white { color: #0f172a; }
-.theme-kids .text-gray-300 { color: #334155; }
-.theme-kids .text-gray-400 { color: #475569; }
-.theme-kids .text-gray-500 { color: #64748b; }
-.theme-kids .bg-black { background-color: #f1f5f9; }
-
-/* =========================================
-   ANIMASI KHUSUS MASKOT & LATAR
-   ========================================= */
 @keyframes float-cloud {
   0% { transform: translateX(0) translateY(0) scale(1); }
   100% { transform: translateX(30px) translateY(-10px) scale(1.05); }
@@ -275,4 +139,28 @@ button {
 
 .animate-pulse-slow {
   animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.float-score {
+  animation: floatScore 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes floatScore {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  20% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-60px) scale(1); opacity: 0; }
+}
+
+button {
+  outline: none !important;
 }
