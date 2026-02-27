@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🀄 漢字マスター — Kanji Master JFT Basic A2
 
-## Getting Started
+Game tebak kanji interaktif berbasis web untuk persiapan ujian **JFT Basic A2**, dibangun dengan **Next.js 14 + TypeScript**.
 
-First, run the development server:
+---
+
+## 🎮 Fitur Game
+
+### Mode Permainan
+| Mode | Deskripsi |
+|---|---|
+| **漢字 → Arti** | Lihat kanji, pilih artinya dalam Bahasa Indonesia |
+| **Arti → 漢字** | Lihat arti Indonesia, pilih kanji yang tepat |
+| **ひら → Arti** | Lihat hiragana, pilih artinya |
+
+### Tingkat Kesulitan
+| Level | Waktu/Soal |
+|---|---|
+| Santai 🌸 | 20 detik |
+| Normal ⚡ | 12 detik |
+| Sulit 🔥 | 7 detik |
+
+### Sistem Poin
+- ✅ Jawaban benar: **+100 poin**
+- 🔥 Streak bonus: **+10 poin per streak** (maks +100)
+- ⏱ Time bonus: **sisa waktu × 5 poin**
+
+### Fitur Lainnya
+- 📊 20 soal acak per ronde dari **250+ kosakata**
+- 🏆 Ranking: Master / Hebat / Bagus / Cukup / Belajar
+- ⭐ Rating bintang berdasarkan akurasi
+- 🌸 Animasi sakura & efek neon
+
+---
+
+## 🚀 Cara Menjalankan
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Jalankan development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 3. Buka browser
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build Production
+```bash
+npm run build
+npm start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Struktur Proyek
 
-## Learn More
+```
+src/
+├── app/
+│   ├── layout.tsx        # Root layout + metadata
+│   ├── page.tsx          # Main page (state router)
+│   └── globals.css       # Global styles & animations
+├── components/
+│   ├── Background.tsx    # Sakura, shooting stars, grid
+│   ├── HomeScreen.tsx    # Layar utama & pilihan mode
+│   ├── GameScreen.tsx    # Layar permainan aktif
+│   └── ResultScreen.tsx  # Layar hasil akhir
+├── data/
+│   └── kanji.ts          # 250+ data kosakata JFT Basic A2
+├── hooks/
+│   └── useGame.ts        # Game logic & state management
+└── types/
+    └── index.ts          # TypeScript interfaces
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js 14** (App Router)
+- **TypeScript**
+- **Tailwind CSS** (custom theme, animations)
+- **Noto Sans JP** (Japanese font)
+- **Fredoka One** (display font)
+- **Nunito** (body font)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Design System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Aesthetic**: Neon arcade + Japanese motif
+- **Colors**: Dark background (#0a0010) + neon accents (pink, cyan, yellow, green)
+- **Animations**: Sakura falling, shooting stars, bounce-in, neon glow
+- **Responsive**: Mobile-first, optimal di HP & desktop
+
+---
+
+## 📝 Data Kosakata
+
+Mencakup semua kategori dari PDF **DAFTAR KANJI JFT BASIC A2**:
+- Kata kerja (Verbs)
+- Kata sifat (Adjectives)  
+- Kata benda (Nouns)
+- Tempat, waktu, keluarga, tubuh, alam, dll.
+
+---
+
+## 🌸 頑張ってください！
+
+Semangat belajar dan sukses ujian JFT Basic A2! 🎌
