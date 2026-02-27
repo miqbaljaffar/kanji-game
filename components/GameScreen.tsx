@@ -20,168 +20,118 @@ interface GameScreenProps {
   onHome: () => void;
 }
 
-const OPTION_COLORS = [
-  { idle: "border-pink-500/40 hover:border-pink-400", bg: "hover:bg-pink-500/10", label: "A", labelBg: "bg-pink-500" },
-  { idle: "border-cyan-500/40 hover:border-cyan-400", bg: "hover:bg-cyan-500/10", label: "B", labelBg: "bg-cyan-500" },
-  { idle: "border-violet-500/40 hover:border-violet-400", bg: "hover:bg-violet-500/10", label: "C", labelBg: "bg-violet-500" },
-  { idle: "border-amber-500/40 hover:border-amber-400", bg: "hover:bg-amber-500/10", label: "D", labelBg: "bg-amber-500" },
-];
-
-const DIFFICULTY_COLORS = { easy: "text-green-400", medium: "text-yellow-400", hard: "text-red-400" };
-const TIMER_COLORS = { high: "bg-green-400", mid: "bg-yellow-400", low: "bg-red-400" };
-
-const MODE_LABELS: Record<GameMode, string> = {
-  "kanji-to-arti": "漢字 → Arti",
-  "arti-to-kanji": "Arti → 漢字",
-  "hiragana-to-arti": "ひら → Arti",
-};
+const OPTION_LABELS = ["A", "B", "C", "D"];
 
 function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
   const { question: entry } = question;
-  if (gameMode === "kanji-to-arti") {
-    return { main: entry.kanji, sub: entry.hiragana, prompt: "Apa artinya?" };
-  } else if (gameMode === "hiragana-to-arti") {
-    return { main: entry.hiragana, sub: entry.romaji, prompt: "Apa artinya?" };
-  } else {
-    return { main: entry.arti, sub: entry.romaji, prompt: "Pilih kanjinya!" };
-  }
-}
-
-function getOptionText(option: { kanji: string; arti: string; hiragana: string }, gameMode: GameMode): string {
-  if (gameMode === "arti-to-kanji") return option.kanji;
-  return option.arti;
+  if (gameMode === "kanji-to-arti") return { main: entry.kanji, sub: entry.hiragana, prompt: "Apa arti dari kanji ini?" };
+  if (gameMode === "hiragana-to-arti") return { main: entry.hiragana, sub: entry.romaji, prompt: "Apa arti dari kosakata ini?" };
+  return { main: entry.arti, sub: entry.romaji, prompt: "Pilih kanji yang tepat!" };
 }
 
 export function GameScreen({
-  question, questionIndex, totalQuestions, answerState,
-  selectedIndex, stats, timeLeft, timeRatio, gameMode, difficulty,
+  question, questionIndex, totalQuestions, answerState, selectedIndex,
+  stats, timeLeft, timeRatio, gameMode,
   showFloatingScore, floatingScoreValue, onAnswer, onHome,
 }: GameScreenProps) {
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
 
-  const timerColor = timeRatio > 0.6 ? TIMER_COLORS.high : timeRatio > 0.3 ? TIMER_COLORS.mid : TIMER_COLORS.low;
-
-  const getOptionState = (idx: number) => {
-    if (answerState === "idle") return "idle";
-    if (idx === question.correctIndex) return "correct";
-    if (idx === selectedIndex && idx !== question.correctIndex) return "wrong";
-    return "disabled";
-  };
-
   return (
-    <div className="relative z-10 min-h-screen flex flex-col px-4 py-4 max-w-lg mx-auto">
-      {/* Top HUD */}
-      <div className="flex items-center justify-between mb-4">
+    <div className="relative z-10 min-h-screen flex flex-col px-4 py-6 max-w-2xl mx-auto">
+      
+      {/* HUD Header */}
+      <div className="flex items-center justify-between mb-6 animate-slide-up">
         <button
           onClick={onHome}
-          className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors text-sm cursor-pointer px-3 py-1.5 rounded-lg hover:bg-white/10 border border-white/10"
+          className="glass-button px-4 py-2 rounded-xl text-sm font-bold text-gray-300 flex items-center gap-2 hover:text-white"
         >
-          ← Menu
+          <span>←</span> Keluar
         </button>
 
-        {/* Score & Streak */}
-        <div className="flex items-center gap-3">
-          {stats.streak >= 2 && (
-            <div className="flex items-center gap-1 bg-orange-500/20 border border-orange-500/50 rounded-full px-3 py-1 animate-bounce-in">
-              <span className="text-xs">🔥</span>
-              <span className="text-xs font-black text-orange-400">×{stats.streak}</span>
-            </div>
-          )}
-          <div className="text-right">
-            <div className="text-xs text-gray-500">SKOR</div>
-            <div className="text-lg font-black text-white neon-text-yellow leading-none">
-              {stats.score.toLocaleString()}
-            </div>
+        <div className="flex flex-col items-end">
+          <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Skor Saat Ini</div>
+          <div className="text-2xl font-black text-white text-glow-yellow leading-none font-display">
+            {stats.score.toLocaleString()}
           </div>
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mb-4">
-        <div className="flex justify-between text-xs text-gray-500 mb-1.5">
-          <span>Soal {questionIndex + 1} / {totalQuestions}</span>
-          <span className={DIFFICULTY_COLORS[difficulty]}>{MODE_LABELS[gameMode]}</span>
+      {/* Progress & Timer Area */}
+      <div className="glass-panel rounded-2xl p-4 mb-6 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+        <div className="flex justify-between items-end mb-2">
+          <div>
+            <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Pertanyaan</div>
+            <div className="text-sm font-bold text-white">{questionIndex + 1} <span className="text-gray-500">/ {totalQuestions}</span></div>
+          </div>
+          <div className="text-right">
+             <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Waktu</div>
+             <div className={clsx("text-xl font-black leading-none", timeRatio <= 0.3 ? "text-red-400 animate-pulse" : "text-cyan-400")}>
+               {timeLeft}s
+             </div>
+          </div>
         </div>
-        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+        
+        {/* Timer Bar */}
+        <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden mt-3">
           <div
-            className="h-full bg-gradient-to-r from-pink-500 to-rose-400 rounded-full transition-all duration-500"
-            style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%` }}
-          />
-        </div>
-        {/* Progress dots */}
-        <div className="flex gap-1 mt-2 flex-wrap">
-          {Array.from({ length: totalQuestions }).map((_, i) => (
-            <div
-              key={i}
-              className={clsx("progress-dot", {
-                "bg-pink-500": i < questionIndex,
-                "bg-pink-400 ring-2 ring-pink-300": i === questionIndex,
-                "bg-white/15": i > questionIndex,
-              })}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Timer */}
-      <div className="mb-5 relative">
-        <div className="flex justify-between text-xs mb-1">
-          <span className="text-gray-500">⏱ Waktu</span>
-          <span className={clsx("font-black", {
-            "text-green-400": timeRatio > 0.6,
-            "text-yellow-400": timeRatio > 0.3 && timeRatio <= 0.6,
-            "text-red-400 animate-pulse": timeRatio <= 0.3,
-          })}>{timeLeft}s</span>
-        </div>
-        <div className="h-2.5 bg-white/10 rounded-full overflow-hidden">
-          <div
-            className={clsx("h-full rounded-full transition-all duration-1000 ease-linear", timerColor)}
+            className={clsx(
+              "h-full rounded-full transition-all duration-1000 ease-linear",
+              timeRatio > 0.5 ? "bg-gradient-to-r from-cyan-400 to-blue-500" : timeRatio > 0.25 ? "bg-gradient-to-r from-yellow-400 to-orange-500" : "bg-gradient-to-r from-red-500 to-rose-600"
+            )}
             style={{ width: `${timeRatio * 100}%` }}
           />
         </div>
       </div>
 
       {/* Question Card */}
-      <div className="relative mb-6">
-        <div className="relative rounded-2xl bg-gradient-to-br from-white/8 to-white/3 border border-white/15 backdrop-blur-sm p-6 md:p-8 text-center overflow-hidden">
-          {/* Corner decorations */}
-          <div className="absolute top-2 left-3 text-pink-500/30 text-2xl font-black">「</div>
-          <div className="absolute bottom-2 right-3 text-pink-500/30 text-2xl font-black">」</div>
+      <div className="relative mb-8 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+        <div className="glass-panel rounded-3xl p-8 md:p-12 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[220px]">
+          {/* Subtle glow behind text */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-pink-500/20 blur-[50px] rounded-full pointer-events-none" />
 
-          <div className="text-xs text-gray-500 uppercase tracking-widest mb-3">{display.prompt}</div>
+          <p className="text-sm text-pink-300 font-bold tracking-widest uppercase mb-4 relative z-10">
+            {display.prompt}
+          </p>
 
-          <div
+          <h2 
             className={clsx(
-              "font-black leading-none mb-3 transition-all",
-              gameMode === "kanji-to-arti"
-                ? "text-6xl md:text-8xl neon-text-pink text-pink-300"
-                : gameMode === "hiragana-to-arti"
-                ? "text-4xl md:text-5xl neon-text-cyan text-cyan-300"
-                : "text-2xl md:text-3xl text-white"
+              "font-black leading-tight text-white relative z-10 drop-shadow-xl",
+              gameMode === "arti-to-kanji" ? "text-3xl md:text-4xl" : "text-6xl md:text-8xl"
             )}
             style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-body)" : "var(--font-jp)" }}
           >
             {display.main}
-          </div>
+          </h2>
 
-          <div className="text-sm text-gray-500" style={{ fontFamily: "var(--font-jp)" }}>
-            {display.sub}
-          </div>
+          {display.sub && (
+            <p className="text-gray-400 mt-4 font-medium relative z-10" style={{ fontFamily: "var(--font-jp)" }}>
+              {display.sub}
+            </p>
+          )}
         </div>
 
-        {/* Floating score */}
+        {/* Floating Score Animation */}
         {showFloatingScore && (
-          <div className="absolute top-0 right-4 float-score pointer-events-none">
-            <span className="text-2xl font-black text-yellow-400 neon-text-yellow">+{floatingScoreValue}</span>
+          <div className="absolute -top-6 right-4 float-score z-20">
+            <span className="text-3xl font-black text-yellow-400 drop-shadow-[0_0_15px_rgba(255,238,0,0.5)]">
+              +{floatingScoreValue}
+            </span>
           </div>
         )}
       </div>
 
-      {/* Answer Options */}
-      <div className="grid grid-cols-2 gap-3 flex-1">
+      {/* Options Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 animate-slide-up" style={{ animationDelay: "0.3s" }}>
         {question.options.map((option, idx) => {
-          const state = getOptionState(idx);
-          const colorSet = OPTION_COLORS[idx];
+          let state = "idle";
+          if (answerState !== "idle") {
+            if (idx === question.correctIndex) state = "correct";
+            else if (idx === selectedIndex) state = "wrong";
+            else state = "disabled";
+          }
+
+          const optionText = gameMode === "arti-to-kanji" ? option.kanji : option.arti;
 
           return (
             <button
@@ -189,59 +139,43 @@ export function GameScreen({
               onClick={() => onAnswer(idx)}
               disabled={answerState !== "idle"}
               className={clsx(
-                "answer-btn rounded-xl p-3 md:p-4 text-left border-2 transition-all duration-200 relative overflow-hidden",
-                "bg-white/5 backdrop-blur-sm min-h-[80px] md:min-h-[90px]",
-                {
-                  [`border-white/15 ${colorSet.bg}`]: state === "idle",
-                  "neon-border-green !bg-green-500/20 scale-[1.02]": state === "correct",
-                  "neon-border-red !bg-red-500/20": state === "wrong",
-                  "border-white/5 opacity-40": state === "disabled",
-                }
+                "relative w-full p-5 rounded-2xl text-left transition-all duration-300 group overflow-hidden flex items-center gap-4",
+                state === "idle" ? "glass-button hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(0,245,255,0.15)] hover:-translate-y-1" : "",
+                state === "correct" ? "bg-green-500/20 border border-green-400 neon-border-green scale-[1.02]" : "",
+                state === "wrong" ? "bg-red-500/20 border border-red-500 neon-border-red" : "",
+                state === "disabled" ? "opacity-30 border border-white/5 cursor-not-allowed bg-black/20" : ""
               )}
             >
-              {/* Option label */}
+              {/* Option Letter Indicator */}
               <div className={clsx(
-                "absolute top-2 right-2 w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center text-white",
-                state === "correct" ? "bg-green-500" : state === "wrong" ? "bg-red-500" : colorSet.labelBg
+                "w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black transition-colors",
+                state === "correct" ? "bg-green-500 text-white" :
+                state === "wrong" ? "bg-red-500 text-white" :
+                "bg-white/10 text-gray-400 group-hover:bg-cyan-500/20 group-hover:text-cyan-300"
               )}>
-                {state === "correct" ? "✓" : state === "wrong" ? "✗" : colorSet.label}
+                {state === "correct" ? "✓" : state === "wrong" ? "✗" : OPTION_LABELS[idx]}
               </div>
 
-              <span
-                className={clsx(
-                  "block text-sm md:text-base font-bold leading-snug pr-6",
-                  { "text-green-300": state === "correct", "text-red-300": state === "wrong", "text-white": state === "idle" || state === "disabled" }
-                )}
-                style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-jp)" : "var(--font-body)" }}
-              >
-                {getOptionText(option, gameMode)}
-              </span>
-
-              {/* Show romaji hint for kanji mode after answer */}
-              {gameMode === "arti-to-kanji" && state !== "idle" && (
-                <span className="block text-xs text-gray-400 mt-1" style={{ fontFamily: "var(--font-jp)" }}>
-                  {option.hiragana}
+              {/* Option Text */}
+              <div className="flex-1">
+                <span 
+                  className={clsx(
+                    "block font-bold text-lg",
+                    state === "correct" ? "text-green-300" : state === "wrong" ? "text-red-300" : "text-white"
+                  )}
+                  style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-jp)" : "var(--font-body)" }}
+                >
+                  {optionText}
                 </span>
-              )}
+                
+                {/* Reveal Subtext on Answer */}
+                {gameMode === "arti-to-kanji" && state !== "idle" && (
+                  <span className="block text-xs text-gray-400 mt-1">{option.hiragana}</span>
+                )}
+              </div>
             </button>
           );
         })}
-      </div>
-
-      {/* Stats bar bottom */}
-      <div className="mt-4 flex justify-center gap-6 text-center">
-        <div>
-          <div className="text-xs text-gray-600">✅ Benar</div>
-          <div className="text-sm font-black text-green-400">{stats.correct}</div>
-        </div>
-        <div>
-          <div className="text-xs text-gray-600">❌ Salah</div>
-          <div className="text-sm font-black text-red-400">{stats.wrong}</div>
-        </div>
-        <div>
-          <div className="text-xs text-gray-600">🎯 Akurasi</div>
-          <div className="text-sm font-black text-cyan-400">{stats.accuracy || 0}%</div>
-        </div>
       </div>
     </div>
   );

@@ -9,131 +9,80 @@ interface ResultScreenProps {
   onHome: () => void;
 }
 
-function getRank(accuracy: number, score: number): { label: string; emoji: string; color: string; message: string } {
-  if (accuracy >= 95 && score >= 2500) return { label: "MASTER", emoji: "👑", color: "text-yellow-400", message: "Luar biasa! Kamu benar-benar MASTER kanji!" };
-  if (accuracy >= 85) return { label: "HEBAT", emoji: "🏆", color: "text-orange-400", message: "Keren sekali! Hampir sempurna!" };
-  if (accuracy >= 70) return { label: "BAGUS", emoji: "⭐", color: "text-cyan-400", message: "Bagus! Terus berlatih ya!" };
-  if (accuracy >= 50) return { label: "CUKUP", emoji: "🌸", color: "text-pink-400", message: "Lumayan! Jangan menyerah!" };
-  return { label: "BELAJAR", emoji: "📚", color: "text-gray-400", message: "Yuk belajar lebih giat lagi!" };
+function getRankDetail(accuracy: number) {
+  if (accuracy >= 95) return { title: "SENSEI", emoji: "👑", color: "text-yellow-400", gradient: "from-yellow-400 to-orange-500", desc: "Sempurna! Kamu adalah master kanji sejati." };
+  if (accuracy >= 80) return { title: "HEBAT", emoji: "🔥", color: "text-pink-400", gradient: "from-pink-400 to-rose-500", desc: "Luar biasa! Sedikit lagi menuju kesempurnaan." };
+  if (accuracy >= 60) return { title: "BAGUS", emoji: "⭐", color: "text-cyan-400", gradient: "from-cyan-400 to-blue-500", desc: "Kerja bagus! Latihan lagi agar makin lancar." };
+  return { title: "BERJUANG", emoji: "📚", color: "text-gray-400", gradient: "from-gray-400 to-gray-600", desc: "Jangan menyerah! Semua butuh proses." };
 }
 
-const MODE_EMOJIS: Record<GameMode, string> = {
-  "kanji-to-arti": "🀄",
-  "arti-to-kanji": "🎯",
-  "hiragana-to-arti": "✨",
-};
-
-const DIFF_LABELS: Record<Difficulty, string> = {
-  easy: "Santai 🌸",
-  medium: "Normal ⚡",
-  hard: "Sulit 🔥",
-};
-
-export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome }: ResultScreenProps) {
-  const rank = getRank(stats.accuracy, stats.score);
-
-  const bars = [
-    { label: "Benar", value: stats.correct, total: stats.total, color: "bg-green-400", textColor: "text-green-400" },
-    { label: "Salah", value: stats.wrong, total: stats.total, color: "bg-red-400", textColor: "text-red-400" },
-  ];
+export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) {
+  const rank = getRankDetail(stats.accuracy);
 
   return (
-    <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
-      <div className="w-full max-w-sm mx-auto">
-        {/* Rank Badge */}
-        <div className="text-center mb-6 animate-bounce-in">
-          <div className="text-7xl mb-2">{rank.emoji}</div>
-          <div className={`text-4xl font-black ${rank.color}`} style={{ fontFamily: "var(--font-display)", textShadow: "0 0 20px currentColor" }}>
-            {rank.label}!
-          </div>
-          <div className="text-gray-400 text-sm mt-2">{rank.message}</div>
+    <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-10">
+      
+      <div className="w-full max-w-md w-full glass-panel rounded-3xl p-8 relative overflow-hidden animate-bounce-in">
+        {/* Decorative background flare */}
+        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b ${rank.gradient} opacity-20 blur-[50px] pointer-events-none`} />
+
+        {/* Header / Rank */}
+        <div className="text-center mb-8 relative z-10">
+          <div className="text-7xl mb-4 transform hover:scale-110 transition-transform cursor-default">{rank.emoji}</div>
+          <h2 className="text-xs text-gray-400 uppercase tracking-[0.3em] font-bold mb-1">Peringkat Kamu</h2>
+          <h1 className={`text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r ${rank.gradient}`} style={{ fontFamily: "var(--font-display)" }}>
+            {rank.title}
+          </h1>
+          <p className="text-sm text-gray-400 mt-2">{rank.desc}</p>
         </div>
 
-        {/* Score Card */}
-        <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm p-5 mb-4 animate-slide-up">
-          {/* Big Score */}
-          <div className="text-center mb-4">
-            <div className="text-xs text-gray-500 uppercase tracking-widest mb-1">Total Skor</div>
-            <div className="text-5xl font-black text-white neon-text-yellow" style={{ fontFamily: "var(--font-display)" }}>
-              {stats.score.toLocaleString()}
-            </div>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-3 mb-4">
-            {[
-              { label: "✅ Benar", value: stats.correct, color: "text-green-400" },
-              { label: "❌ Salah", value: stats.wrong, color: "text-red-400" },
-              { label: "🎯 Akurasi", value: `${stats.accuracy}%`, color: "text-cyan-400" },
-              { label: "🔥 Max Streak", value: `×${stats.maxStreak}`, color: "text-orange-400" },
-            ].map((item) => (
-              <div key={item.label} className="text-center bg-white/5 rounded-xl py-3 px-2">
-                <div className="text-xs text-gray-500 mb-1">{item.label}</div>
-                <div className={`text-xl font-black ${item.color}`}>{item.value}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Progress bars */}
-          {bars.map((bar) => (
-            <div key={bar.label} className="mb-2">
-              <div className="flex justify-between text-xs mb-1">
-                <span className={bar.textColor}>{bar.label}</span>
-                <span className="text-gray-400">{bar.value}/{bar.total}</span>
-              </div>
-              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className={`h-full ${bar.color} rounded-full transition-all duration-1000`}
-                  style={{ width: `${(bar.value / bar.total) * 100}%` }}
-                />
-              </div>
-            </div>
-          ))}
-
-          {/* Game info */}
-          <div className="flex justify-center gap-3 mt-4 pt-3 border-t border-white/10">
-            <span className="text-xs text-gray-600">{MODE_EMOJIS[gameMode]}</span>
-            <span className="text-xs text-gray-500">{DIFF_LABELS[difficulty]}</span>
-            <span className="text-xs text-gray-600">⏱ {stats.timeSpent}s</span>
+        {/* Big Score Box */}
+        <div className="bg-black/30 rounded-2xl p-6 text-center border border-white/5 mb-8">
+          <div className="text-xs text-gray-500 uppercase tracking-widest font-bold mb-2">Total Skor</div>
+          <div className="text-6xl font-black text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" style={{ fontFamily: "var(--font-display)" }}>
+            {stats.score.toLocaleString()}
           </div>
         </div>
 
-        {/* Star rating based on accuracy */}
-        <div className="flex justify-center gap-2 mb-6">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <span
-              key={star}
-              className={`text-2xl transition-all ${star <= Math.round(stats.accuracy / 20) ? "opacity-100" : "opacity-20"}`}
-            >
-              ⭐
-            </span>
-          ))}
+        {/* Detailed Stats Grid */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="glass-panel p-4 rounded-xl flex flex-col items-center justify-center text-center">
+            <span className="text-2xl mb-1">🎯</span>
+            <span className="text-2xl font-black text-cyan-400">{stats.accuracy}%</span>
+            <span className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Akurasi</span>
+          </div>
+          <div className="glass-panel p-4 rounded-xl flex flex-col items-center justify-center text-center">
+            <span className="text-2xl mb-1">⚡</span>
+            <span className="text-2xl font-black text-orange-400">{stats.maxStreak}</span>
+            <span className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Max Streak</span>
+          </div>
+          <div className="glass-panel p-4 rounded-xl flex flex-col items-center justify-center text-center">
+            <span className="text-2xl mb-1">✅</span>
+            <span className="text-2xl font-black text-green-400">{stats.correct}</span>
+            <span className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Benar</span>
+          </div>
+          <div className="glass-panel p-4 rounded-xl flex flex-col items-center justify-center text-center">
+            <span className="text-2xl mb-1">❌</span>
+            <span className="text-2xl font-black text-red-400">{stats.wrong}</span>
+            <span className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Salah</span>
+          </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3">
-          <button
-            onClick={onHome}
-            className="flex-1 py-3 rounded-xl border border-white/20 text-gray-300 hover:bg-white/10 hover:text-white 
-              transition-all duration-200 font-bold cursor-pointer text-sm"
-          >
-            🏠 Menu
-          </button>
+        <div className="flex flex-col gap-3">
           <button
             onClick={onPlayAgain}
-            className="flex-1 py-3 rounded-xl font-black text-white cursor-pointer text-sm
-              bg-gradient-to-r from-pink-600 to-rose-500 hover:from-pink-500 hover:to-rose-400
-              transition-all duration-200 hover:scale-105 active:scale-95"
-            style={{ boxShadow: "0 0 20px rgba(255, 45, 120, 0.5)" }}
+            className="w-full py-4 rounded-xl font-black text-white text-lg transition-all duration-300 bg-gradient-to-r from-pink-600 to-purple-600 hover:shadow-[0_0_30px_rgba(255,45,120,0.5)] hover:scale-[1.02] active:scale-[0.98]"
           >
-            🎮 Main Lagi!
+            MAIN LAGI
+          </button>
+          <button
+            onClick={onHome}
+            className="w-full py-4 rounded-xl font-bold text-gray-300 glass-button text-sm"
+          >
+            KEMBALI KE MENU
           </button>
         </div>
-
-        {/* Encouragement */}
-        <p className="text-center text-xs text-gray-600 mt-4">
-          頑張ってください！ Semangat belajar! 🌸
-        </p>
       </div>
     </div>
   );
