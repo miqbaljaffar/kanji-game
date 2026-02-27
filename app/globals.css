@@ -147,9 +147,6 @@ html, body {
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
-/* =========================================
-   CUSTOM ANIMATIONS
-   ========================================= */
 .animate-bounce-in {
   animation: bounceIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
