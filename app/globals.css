@@ -1,41 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Noto+Sans+JP:wght@300;400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-display: 'Fredoka One', cursive;
+  /* Menggunakan Nunito secara menyeluruh untuk kesan elegan dan modern */
+  --font-display: 'Nunito', sans-serif;
   --font-body: 'Nunito', sans-serif;
   --font-jp: 'Noto Sans JP', sans-serif;
   
-  --neon-pink: #ff2d78;
-  --neon-cyan: #00f5ff;
-  --neon-yellow: #ffee00;
-  --neon-green: #00ff88;
-  --neon-purple: #b300ff;
+  /* Palet Warna Eksklusif: Hitam, Putih, Biru */
+  --theme-bg: #030305;
+  --theme-blue-light: #60a5fa;
+  --theme-blue-main: #2563eb;
+  --theme-blue-dark: #1e3a8a;
+  --theme-white: #ffffff;
 }
 
 @layer components {
-  /* Mengganti semua sintaks Tailwind dengan standard CSS agar 100% aman saat di-build dengan Tailwind v4 */
+  /* Premium Glassmorphism: Gelap, tajam, dan berkelas */
   .glass-panel {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.6) 100%);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
   
   .glass-button {
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--theme-white);
   }
   
   .glass-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(37, 99, 235, 0.1); /* Efek sentuhan biru */
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.5);
+    transform: translateY(-2px);
   }
 }
 
@@ -47,13 +53,13 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  background-color: #07000d;
-  color: white;
+  background-color: var(--theme-bg);
+  color: var(--theme-white);
   overflow-x: hidden;
 }
 
 /* =========================================
-   BACKGROUND ANIMATIONS
+   BACKGROUND ANIMATIONS (ELEGANT MODE)
    ========================================= */
 .sakura-container {
   position: fixed;
@@ -63,106 +69,123 @@ html, body {
   overflow: hidden;
 }
 
+/* Mengganti bunga sakura dengan partikel cahaya biru/putih (Orb) */
 .sakura {
   position: absolute;
   top: -50px;
   animation: sakuraFall linear infinite;
   opacity: 0;
-  filter: drop-shadow(0 0 5px rgba(255, 183, 204, 0.4));
 }
 
 .sakura::before {
-  content: '🌸';
-  font-size: inherit;
+  content: '';
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, rgba(96, 165, 250, 0.8) 30%, transparent 70%);
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
 }
 
 @keyframes sakuraFall {
-  0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.7; }
-  50% { transform: translateY(50vh) translateX(40px) rotate(180deg); }
-  90% { opacity: 0.7; }
-  100% { transform: translateY(110vh) translateX(-40px) rotate(360deg); opacity: 0; }
+  0% { transform: translateY(-5vh) translateX(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.6; }
+  50% { transform: translateY(50vh) translateX(30px) scale(1.2); }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(110vh) translateX(-30px) scale(0.5); opacity: 0; }
 }
 
 .grid-pattern {
   background-image: 
-    linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
-  background-size: 50px 50px;
-  /* Membuat grid perlahan menghilang di pinggiran layar */
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
   mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
 }
 
 .shooting-star {
   position: absolute;
-  width: 2px;
-  height: 100px;
-  background: linear-gradient(to bottom, transparent, rgba(0, 245, 255, 0.8), transparent);
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8), transparent);
   animation: shootingStar linear infinite;
   opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.8));
 }
 
 @keyframes shootingStar {
   0% { opacity: 0; transform: translate(0, -100px) rotate(45deg); }
-  10% { opacity: 1; }
-  20% { opacity: 0; transform: translate(400px, 300px) rotate(45deg); }
+  15% { opacity: 1; }
+  30% { opacity: 0; transform: translate(500px, 400px) rotate(45deg); }
   100% { opacity: 0; }
 }
 
 /* =========================================
-   TEXT & BORDER GLOW EFFECTS
+   TEXT & BORDER EFFECTS (OVERRIDE WARNA)
    ========================================= */
+/* Memaksa efek glow sebelumnya agar selaras dengan tema Putih & Biru */
 .text-glow-pink {
-  text-shadow: 0 0 15px rgba(255, 45, 120, 0.6);
+  text-shadow: 0 0 20px rgba(96, 165, 250, 0.6); /* Diubah ke Biru */
 }
 
 .text-glow-cyan {
-  text-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Diubah ke Putih */
 }
 
+/* Jawaban Benar: Dikonversi ke Cahaya Biru Elegan */
 .neon-border-green {
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), inset 0 0 10px rgba(0, 255, 136, 0.1);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.4), inset 0 0 15px rgba(37, 99, 235, 0.2);
+  border-color: var(--theme-blue-light) !important;
+  background-color: rgba(37, 99, 235, 0.1) !important;
 }
 
+/* Jawaban Salah: Dikonversi ke Putih / Abu-abu Tegas */
 .neon-border-red {
-  box-shadow: 0 0 20px rgba(255, 51, 51, 0.3), inset 0 0 10px rgba(255, 51, 51, 0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* =========================================
    CUSTOM ANIMATIONS
    ========================================= */
 .animate-bounce-in {
-  animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: bounceIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes bounceIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { transform: scale(0.9); opacity: 0; filter: blur(4px); }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
 }
 
 .animate-slide-up {
-  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
 
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { transform: translateY(40px); opacity: 0; filter: blur(4px); }
+  to { transform: translateY(0); opacity: 1; filter: blur(0); }
 }
 
 .float-score {
-  animation: floatScore 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: floatScore 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes floatScore {
   0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  20% { transform: translateY(-20px) scale(1.2); opacity: 1; }
-  100% { transform: translateY(-80px) scale(1); opacity: 0; }
+  15% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(1); opacity: 0; }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0010; }
-::-webkit-scrollbar-thumb { background: rgba(255, 45, 120, 0.5); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 45, 120, 0.8); }
+/* Scrollbar - Nuansa Biru Premium */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--theme-bg); }
+::-webkit-scrollbar-thumb { background: rgba(96, 165, 250, 0.3); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(96, 165, 250, 0.6); }
+
+/* Menghilangkan outline biru bawaan browser saat klik */
+button {
+  outline: none !important;
+}
