@@ -27,7 +27,7 @@ export default function Home() {
   } = useGame();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#87CEEB] text-slate-800 font-body">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#87CEEB] text-slate-800 font-body">
       {/* Background awan ceria */}
       <GameBackground />
 

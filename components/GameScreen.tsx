@@ -36,7 +36,7 @@ export function GameScreen({
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
 
   return (
-    <div className="relative z-10 flex flex-col h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto overflow-hidden">
+    <div className="relative z-10 flex flex-col min-h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
       
       {/* HEADER: Compact & Glassmorphism */}
       <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
