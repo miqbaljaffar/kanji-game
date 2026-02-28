@@ -39,7 +39,7 @@ export function GameScreen({
     <div className="relative z-10 h-[100dvh] flex flex-col p-4 sm:p-6 max-w-2xl mx-auto overflow-hidden">
       
       {/* Header Bar Modern dengan efek glassmorphism */}
-      <div className="flex items-center justify-between bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-3xl shadow-lg border border-white mb-4 shrink-0 animate-slide-down">
+      <div className="flex items-center justify-between bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-3xl shadow-lg border border-white mb-4 shrink-0 animate-slide-down opacity-0">
         
         {/* Tombol Keluar dengan desain circular */}
         <button
@@ -80,12 +80,12 @@ export function GameScreen({
       </div>
 
       {/* Maskot Karakter Kucing dengan animasi fade-up */}
-      <div className="my-2 shrink-0 animate-fade-up z-20">
+      <div className="my-2 shrink-0 animate-fade-up opacity-0 z-20">
         <Mascot state={answerState} />
       </div>
 
       {/* Kartu Pertanyaan Utama dengan desain modern */}
-      <div className="relative flex-1 flex flex-col mb-4 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+      <div className="relative flex-1 flex flex-col mb-4 animate-fade-up opacity-0" style={{ animationDelay: "0.1s" }}>
         
         <div className="w-full h-full bg-white/90 backdrop-blur-lg border-2 border-slate-100 shadow-xl rounded-[2.5rem] flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
           
@@ -105,7 +105,7 @@ export function GameScreen({
 
           {/* Skor Melayang di dalam kartu */}
           {showFloatingScore && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 float-score pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float-score pointer-events-none">
               <span className="text-5xl md:text-7xl font-black text-green-400 drop-shadow-2xl" style={{ WebkitTextStroke: "2px white" }}>
                 +{floatingScoreValue}
               </span>
@@ -115,7 +115,7 @@ export function GameScreen({
       </div>
 
       {/* Grid Pilihan Jawaban 2x2 dengan desain modern */}
-      <div className="grid grid-cols-2 gap-3 md:gap-4 shrink-0 pb-2 md:pb-4 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+      <div className="grid grid-cols-2 gap-3 md:gap-4 shrink-0 pb-2 md:pb-4 animate-fade-up opacity-0" style={{ animationDelay: "0.2s" }}>
         {question.options.map((option, idx) => {
           let state = "idle";
           if (answerState !== "idle") {
