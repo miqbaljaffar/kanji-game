@@ -211,495 +211,495 @@ export const bunpouData: BunpouEntry[] = [
     options: ["ぐらい", "など", "ごろ", "しか"],
     correctOption: "ぐらい"
   },
-  {
+    {
     id: "b31",
-    sentence: "私は 毎朝 7時 ___ 起きます。",
-    translation: "Saya bangun setiap pagi sekitar jam 7.",
-    options: ["ごろ", "ぐらい", "など", "まで"],
-    correctOption: "ごろ"
-  },
-  {
-    id: "b32",
-    sentence: "外は 寒いです ___、窓を 閉めます。",
-    translation: "Karena di luar dingin, saya tutup jendela.",
-    options: ["から", "でも", "ながら", "のに"],
-    correctOption: "から"
-  },
-  {
-    id: "b33",
-    sentence: "電話を ___ ながら、運転しないでください。",
-    translation: "Tolong jangan mengemudi sambil menelepon.",
-    options: ["し", "する", "して", "すれば"],
-    correctOption: "し"
-  },
-  {
-    id: "b34",
-    sentence: "コーヒーは ホット ___ アイス、どちらが いいですか。",
-    translation: "Kopi, panas atau es, mana yang Anda suka?",
-    options: ["と", "か", "も", "や"],
-    correctOption: "か"
-  },
-  {
-    id: "b35",
-    sentence: "日本に 来る 前に、日本語を 勉強 ___ いました。",
-    translation: "Sebelum datang ke Jepang, saya sudah belajar bahasa Jepang.",
-    options: ["して", "し", "する", "した"],
-    correctOption: "して"
-  },
-  {
-    id: "b36",
-    sentence: "あした 試験が ある ___ を 知っていますか。",
-    translation: "Apakah kamu tahu kalau besok ada ujian?",
-    options: ["こと", "の", "もの", "ところ"],
-    correctOption: "こと"
-  },
-  {
-    id: "b37",
-    sentence: "この 漢字の 読み ___ を 教えてください。",
-    translation: "Tolong beritahu saya cara baca kanji ini.",
-    options: ["かた", "方", "こと", "もの"],
-    correctOption: "かた"
-  },
-  {
-    id: "b38",
-    sentence: "病気な ___、会社を 休みました。",
-    translation: "Karena sakit, saya libur dari kantor.",
-    options: ["ので", "でも", "から", "のに"],
-    correctOption: "ので"
-  },
-  {
-    id: "b39",
-    sentence: "もう 少し 早く 来れば よかった ___。",
-    translation: "Seandainya saja saya datang sedikit lebih awal.",
-    options: ["です", "ます", "でした", "た"],
-    correctOption: "でした"
-  },
-  {
-    id: "b40",
-    sentence: "先生が 言った ___ に 書いてください。",
-    translation: "Tolong tulis seperti yang guru katakan.",
-    options: ["とおり", "まま", "あと", "まえ"],
-    correctOption: "とおり"
-  },
-  {
-    id: "b41",
-    sentence: "毎日 運動する ___ に しています。",
-    translation: "Saya berusaha untuk berolahraga setiap hari.",
-    options: ["よう", "ため", "こと", "もの"],
-    correctOption: "よう"
-  },
-  {
-    id: "b42",
-    sentence: "留学すると 両親に 言ったら、とても 喜ば ___。",
-    translation: "Saat saya bilang akan kuliah ke luar negeri ke orang tua, mereka sangat senang.",
-    options: ["れました", "せました", "されました", "させました"],
-    correctOption: "れました"
-  },
-  {
-    id: "b43",
-    sentence: "私は よく 母に 料理を 作って ___ ます。",
-    translation: "Saya sering membuatkan masakan untuk ibu.",
-    options: ["あげ", "もらい", "くれ", "いただき"],
-    correctOption: "あげ"
-  },
-  {
-    id: "b44",
-    sentence: "友達に 本を 貸して ___ ました。",
-    translation: "Saya meminjamkan buku kepada teman.",
-    options: ["あげ", "もらい", "くれ", "いただき"],
-    correctOption: "あげ"
-  },
-  {
-    id: "b45",
-    sentence: "先生に 手紙を 書いて ___ ました。",
-    translation: "Saya menulis surat untuk guru.",
-    options: ["さしあげ", "あげ", "もらい", "いただき"],
-    correctOption: "さしあげ"
-  },
-  {
-    id: "b46",
-    sentence: "鈴木さんは 私に 本を 貸して ___ ました。",
-    translation: "Suzuki meminjamkan buku kepada saya.",
-    options: ["くれ", "あげ", "もらい", "いただき"],
-    correctOption: "くれ"
-  },
-  {
-    id: "b47",
-    sentence: "私は 友達に 日本語を 教えて ___ ました。",
-    translation: "Saya diajari bahasa Jepang oleh teman.",
-    options: ["もらい", "あげ", "くれ", "いただき"],
-    correctOption: "もらい"
-  },
-  {
-    id: "b48",
-    sentence: "社長に 写真を 撮って ___ ました。",
-    translation: "Saya minta difoto oleh direktur (saya difotokan ke direktur).",
-    options: ["いただき", "もらい", "あげ", "くれ"],
-    correctOption: "いただき"
-  },
-  {
-    id: "b49",
-    sentence: "留学したい ですが、お金が ない ___、できません。",
-    translation: "Saya ingin kuliah di luar negeri, tapi karena tidak ada uang, tidak bisa.",
-    options: ["ので", "から", "のに", "でも"],
-    correctOption: "ので"
-  },
-  {
-    id: "b50",
-    sentence: "たくさん 勉強した ___、試験に 合格できませんでした。",
-    translation: "Meskipun sudah banyak belajar, saya tidak lulus ujian.",
-    options: ["のに", "ので", "から", "でも"],
-    correctOption: "のに"
-  },
-  {
-    id: "b51",
-    sentence: "雨が 降って ___ きましたね。",
-    translation: "Hujan mulai turun ya.",
-    options: ["き", "いき", "で", "に"],
-    correctOption: "き"
-  },
-  {
-    id: "b52",
-    sentence: "ずっと 本を 読んで いたので、目が 疲れて ___ ました。",
-    translation: "Karena baca buku terus, mata jadi lelah.",
-    options: ["しまい", "い", "き", "おき"],
-    correctOption: "しまい"
-  },
-  {
-    id: "b53",
-    sentence: "旅行の 前に ホテルを 予約して ___ ます。",
-    translation: "Saya akan memesan hotel sebelum jalan-jalan.",
-    options: ["おき", "い", "しまい", "み"],
-    correctOption: "おき"
-  },
-  {
-    id: "b54",
-    sentence: "一度 あの レストランに 行って ___ たいです。",
-    translation: "Saya ingin coba pergi ke restoran itu sekali.",
-    options: ["み", "い", "おき", "しまい"],
-    correctOption: "み"
-  },
-  {
-    id: "b55",
-    sentence: "ここに 車を 止めて も いいですか。",
-    translation: "Bolehkah saya parkir mobil di sini?",
-    options: ["は", "が", "も", "を"],
-    correctOption: "は"
-  },
-  {
-    id: "b56",
-    sentence: "田中さんは 毎朝 6時に 起きる ___ です。",
-    translation: "Konon Tanaka bangun setiap jam 6 pagi.",
-    options: ["そう", "よう", "らしい", "みたい"],
-    correctOption: "そう"
-  },
-  {
-    id: "b57",
-    sentence: "この ケーキは とても おいし ___ です。",
-    translation: "Kue ini kelihatannya sangat enak.",
-    options: ["そう", "よう", "らしい", "みたい"],
-    correctOption: "そう"
-  },
-  {
-    id: "b58",
-    sentence: "天気予報に よると、明日は 雨が 降る ___ です。",
-    translation: "Menurut ramalan cuaca, besok sepertinya akan hujan.",
-    options: ["そう", "よう", "らしい", "みたい"],
-    correctOption: "そう"
-  },
-  {
-    id: "b59",
-    sentence: "彼は 学生の ___ です。",
-    translation: "Dia seperti mahasiswa.",
-    options: ["よう", "そう", "らしい", "みたい"],
-    correctOption: "よう"
-  },
-  {
-    id: "b60",
-    sentence: "子供でも 使える 簡単 ___ カメラが ほしいです。",
-    translation: "Saya ingin kamera sederhana yang bahkan anak kecil pun bisa pakai.",
-    options: ["な", "の", "に", "で"],
-    correctOption: "な"
-  },
-  {
-    id: "b61",
-    sentence: "あの 店の ラーメンは 安い うえ ___、おいしいです。",
-    translation: "Ramen di toko itu selain murah juga enak.",
+    sentence: "コーヒー ___ 砂糖を 入れますか。",
+    translation: "Apakah Anda memasukkan gula ke dalam kopi?",
     options: ["に", "で", "を", "が"],
     correctOption: "に"
   },
   {
-    id: "b62",
-    sentence: "この パソコンは 小さくて、持ち歩く ___ 便利です。",
-    translation: "PC ini kecil, jadi mudah dibawa ke mana-mana.",
+    id: "b32",
+    sentence: "私の しゅみは 映画を 見る ___ です。",
+    translation: "Hobi saya adalah menonton film.",
+    options: ["こと", "もの", "の", "ため"],
+    correctOption: "こと"
+  },
+  {
+    id: "b33",
+    sentence: "母は 毎朝 6時 ___ 起きます。",
+    translation: "Ibu bangun setiap pagi sekitar jam 6.",
+    options: ["ごろ", "ぐらい", "など", "まで"],
+    correctOption: "ごろ"
+  },
+  {
+    id: "b34",
+    sentence: "ここに 住所と 名前を 書いて ___。",
+    translation: "Tolong tulis alamat dan nama di sini.",
+    options: ["ください", "ましょう", "しませんか", "たい"],
+    correctOption: "ください"
+  },
+  {
+    id: "b35",
+    sentence: "図書館 ___ 静かに 本を 読みます。",
+    translation: "Saya membaca buku dengan tenang di perpustakaan.",
+    options: ["で", "に", "へ", "を"],
+    correctOption: "で"
+  },
+  {
+    id: "b36",
+    sentence: "昨日は 頭が 痛 ___ でした。",
+    translation: "Kemarin kepala saya sakit.",
+    options: ["く", "い", "かった", "な"],
+    correctOption: "かった"
+  },
+  {
+    id: "b37",
+    sentence: "すみません、トイレは どこ ___ 教えてください。",
+    translation: "Maaf, tolong beritahu saya di mana toilet?",
+    options: ["か", "が", "を", "に"],
+    correctOption: "か"
+  },
+  {
+    id: "b38",
+    sentence: "私は 毎朝 ジョギング ___ します。",
+    translation: "Saya jogging setiap pagi.",
+    options: ["を", "が", "に", "で"],
+    correctOption: "を"
+  },
+  {
+    id: "b39",
+    sentence: "この ケーキは 甘 ___ すぎます。",
+    translation: "Kue ini terlalu manis.",
+    options: ["く", "い", "な", "に"],
+    correctOption: "く"
+  },
+  {
+    id: "b40",
+    sentence: "電車の 中で お年寄りに 席を かして ___。",
+    translation: "Saya mempersilakan duduk kepada orang tua di dalam kereta.",
+    options: ["あげました", "くれました", "もらいました", "くださいました"],
+    correctOption: "あげました"
+  },
+  {
+    id: "b41",
+    sentence: "窓を しめて 寝た ___、寒かったです。",
+    translation: "Meskipun tidur dengan menutup jendela, tetap dingin.",
     options: ["のに", "ので", "から", "でも"],
     correctOption: "のに"
   },
   {
-    id: "b63",
-    sentence: "電車の 中で 携帯電話を 使う ___ を やめてください。",
-    translation: "Tolong hentikan kebiasaan menggunakan ponsel di dalam kereta.",
-    options: ["こと", "もの", "の", "ところ"],
-    correctOption: "こと"
+    id: "b42",
+    sentence: "雨が 降って きたので、かさを  ___。",
+    translation: "Karena hujan turun, saya membuka payung.",
+    options: ["ひらきました", "あげました", "さしました", "つけました"],
+    correctOption: "さしました"
   },
   {
-    id: "b64",
-    sentence: "朝 早く 起きる ___ が できません。",
-    translation: "Saya tidak bisa bangun pagi.",
-    options: ["こと", "もの", "の", "ところ"],
-    correctOption: "こと"
+    id: "b43",
+    sentence: "さとうさんは 来月 けっこんする ___ です。",
+    translation: "Saya dengar Sato-san akan menikah bulan depan.",
+    options: ["そう", "よう", "らしい", "みたい"],
+    correctOption: "そう"
   },
   {
-    id: "b65",
-    sentence: "私は 毎日 日本語を 勉強 ___ つづけています。",
-    translation: "Saya terus belajar bahasa Jepang setiap hari.",
-    options: ["し", "して", "する", "した"],
-    correctOption: "し"
+    id: "b44",
+    sentence: "にほんご ___ はなしてください。",
+    translation: "Tolong bicara dalam bahasa Jepang.",
+    options: ["で", "を", "に", "が"],
+    correctOption: "で"
   },
   {
-    id: "b66",
-    sentence: "旅行に 行く なら、カメラを 持って 行く ほう ___ いいですよ。",
-    translation: "Kalau mau jalan-jalan, sebaiknya bawa kamera.",
-    options: ["が", "は", "を", "に"],
-    correctOption: "が"
+    id: "b45",
+    sentence: "あしたは テストですから、はやく ねた ___ が いいです。",
+    translation: "Besok ada ujian, jadi sebaiknya tidur cepat.",
+    options: ["ほう", "こと", "もの", "ため"],
+    correctOption: "ほう"
   },
   {
-    id: "b67",
-    sentence: "これは あした 会議で 使う 資料 ___ です。",
-    translation: "Ini adalah dokumen yang akan dipakai dalam rapat besok.",
-    options: ["ため", "よう", "もの", "こと"],
-    correctOption: "ため"
+    id: "b46",
+    sentence: "母に 電話 ___ もらいました。",
+    translation: "Saya menerima telepon dari ibu.",
+    options: ["を", "が", "に", "で"],
+    correctOption: "を"
   },
   {
-    id: "b68",
-    sentence: "健康の ___、毎日 歩いています。",
-    translation: "Demi kesehatan, saya jalan kaki setiap hari.",
-    options: ["ため", "よう", "もの", "こと"],
-    correctOption: "ため"
-  },
-  {
-    id: "b69",
-    sentence: "ここに 住所と 名前を 書けば いい ___ です。",
-    translation: "Cukup tulis alamat dan nama di sini saja.",
-    options: ["わけ", "はず", "べき", "ため"],
-    correctOption: "わけ"
-  },
-  {
-    id: "b70",
-    sentence: "急げば、間に合う ___ です。",
-    translation: "Kalau cepat, seharusnya bisa sampai tepat waktu.",
-    options: ["はず", "わけ", "べき", "ため"],
-    correctOption: "はず"
-  },
-  {
-    id: "b71",
-    sentence: "子供は 早く 寝る ___ です。",
-    translation: "Anak-anak seharusnya tidur cepat.",
-    options: ["べき", "はず", "わけ", "ため"],
-    correctOption: "べき"
-  },
-  {
-    id: "b72",
-    sentence: "私は 一度も 富士山に 登った ことが あり ___。",
-    translation: "Saya belum pernah sekali pun mendaki Gunung Fuji.",
-    options: ["ません", "ない", "なく", "なかった"],
-    correctOption: "ません"
-  },
-  {
-    id: "b73",
-    sentence: "この 本は もう 読んで しまいました ___、まだ 読んで いません。",
-    translation: "Buku ini sudah saya baca? Eh, belum baca.",
-    options: ["か", "ね", "よ", "わ"],
-    correctOption: "か"
-  },
-  {
-    id: "b74",
-    sentence: "旅行に 行く なら、この カメラが いい ___。",
-    translation: "Kalau mau jalan-jalan, kamera ini bagus lho.",
-    options: ["よ", "ね", "か", "わ"],
-    correctOption: "よ"
-  },
-  {
-    id: "b75",
-    sentence: "今日は いい 天気です ___。",
-    translation: "Hari ini cuacanya bagus ya.",
-    options: ["ね", "よ", "か", "わ"],
-    correctOption: "ね"
-  },
-  {
-    id: "b76",
-    sentence: "さっきまで ここに 本が あった ___ ですが、もう ありません。",
-    translation: "Tadi sampai tadi buku ada di sini, tapi sekarang sudah tidak ada.",
-    options: ["はず", "わけ", "べき", "つもり"],
-    correctOption: "はず"
-  },
-  {
-    id: "b77",
-    sentence: "この 漢字は どう 読む ___ ですか。",
-    translation: "Bagaimana cara baca kanji ini?",
-    options: ["ん", "の", "か", "も"],
-    correctOption: "ん"
-  },
-  {
-    id: "b78",
-    sentence: "私は コーヒーは 飲まない ___ です。",
-    translation: "Saya (memutuskan) tidak minum kopi.",
-    options: ["こと", "もの", "の", "ところ"],
-    correctOption: "こと"
-  },
-  {
-    id: "b79",
-    sentence: "日本語が 上手に なりたい ___、一生懸命 勉強しています。",
-    translation: "Karena ingin pandai bahasa Jepang, saya belajar dengan giat.",
-    options: ["ので", "から", "のに", "ても"],
-    correctOption: "ので"
-  },
-  {
-    id: "b80",
-    sentence: "いくら 探して ___、鍵が 見つかりません。",
-    translation: "Meskipun sudah dicari berkali-kali, kuncinya tidak ketemu.",
+    id: "b47",
+    sentence: "ここに 車を 止めて も ___ いいですか。",
+    translation: "Bolehkah saya parkir mobil di sini?",
     options: ["も", "は", "が", "に"],
     correctOption: "も"
   },
   {
-    id: "b81",
-    sentence: "部屋を 出る ときは、電気を 消す ___ 忘れないでください。",
-    translation: "Jangan lupa matikan lampu saat keluar ruangan.",
-    options: ["のを", "ことを", "ものを", "のが"],
-    correctOption: "のを"
+    id: "b48",
+    sentence: "先生は もう 帰られました。",
+    translation: "Guru sudah pulang (bentuk sopan).",
+    options: ["帰りました", "帰られました", "帰りでした", "帰っています"],
+    correctOption: "帰られました"
   },
   {
-    id: "b82",
-    sentence: "私は 先生に 作文を 褒め ___ ました。",
-    translation: "Saya dipuji karangannya oleh guru.",
-    options: ["られ", "させ", "され", "させられ"],
-    correctOption: "られ"
+    id: "b49",
+    sentence: "この 漢字の 読み ___ を 教えてください。",
+    translation: "Tolong ajari saya cara baca kanji ini.",
+    options: ["かた", "ほう", "こと", "もの"],
+    correctOption: "かた"
   },
   {
-    id: "b83",
-    sentence: "母は 私に ピアノを 習わ ___ ました。",
-    translation: "Ibu menyuruh saya belajar piano.",
-    options: ["せ", "され", "させられ", "られ"],
-    correctOption: "せ"
-  },
-  {
-    id: "b84",
-    sentence: "私は 友達に 待ち合わせの 場所を 間違え ___ ました。",
-    translation: "Saya salah tempat janjian oleh teman (saya dibuat salah tempat oleh teman).",
-    options: ["させられ", "され", "られ", "せ"],
-    correctOption: "させられ"
-  },
-  {
-    id: "b85",
-    sentence: "もう 帰らなければ なり ___。",
-    translation: "Saya harus pulang sekarang.",
-    options: ["ません", "ない", "なく", "なかった"],
-    correctOption: "ません"
-  },
-  {
-    id: "b86",
-    sentence: "明日は 早い ので、今日は 早く 寝 ___ ます。",
-    translation: "Karena besok harus cepat, saya akan tidur cepat hari ini.",
-    options: ["な", "に", "く", "で"],
-    correctOption: "な"
-  },
-  {
-    id: "b87",
-    sentence: "この 靴は 歩き ___ です。",
-    translation: "Sepatu ini susah dipakai jalan.",
-    options: ["にくい", "やすい", "すぎる", "はじめる"],
-    correctOption: "にくい"
-  },
-  {
-    id: "b88",
-    sentence: "食べ ___ たら、必ず 歯を みがいてください。",
-    translation: "Kalau sudah selesai makan, pasti gosok gigi.",
-    options: ["終わっ", "過ぎ", "出し", "かけ"],
-    correctOption: "終わっ"
-  },
-  {
-    id: "b89",
-    sentence: "雨が 降り ___ しました。",
-    translation: "Hujan mulai turun.",
-    options: ["はじめ", "出し", "かけ", "ながら"],
-    correctOption: "はじめ"
-  },
-  {
-    id: "b90",
-    sentence: "その 本は もう 読み ___ です。",
-    translation: "Buku itu sudah hampir selesai dibaca.",
-    options: ["かけ", "ながら", "はじめ", "出し"],
-    correctOption: "かけ"
-  },
-  {
-    id: "b91",
-    sentence: "この 問題は 難しくて、私に は できません。",
-    translation: "Soal ini susah, tidak bisa saya kerjakan.",
-    options: ["は", "が", "に", "で"],
+    id: "b50",
+    sentence: "わたしは あまり 肉 ___ 食べません。",
+    translation: "Saya tidak terlalu sering makan daging.",
+    options: ["を", "は", "が", "に"],
     correctOption: "は"
   },
   {
-    id: "b92",
-    sentence: "私は 自分 ___ できないことは、人に も できません。",
-    translation: "Saya tidak bisa menyuruh orang melakukan hal yang saya sendiri tidak bisa lakukan.",
-    options: ["に", "で", "が", "は"],
+    id: "b51",
+    sentence: "この レストランは いつも おきゃくさん ___ いっぱいです。",
+    translation: "Restoran ini selalu penuh dengan pelanggan.",
+    options: ["で", "に", "を", "が"],
+    correctOption: "で"
+  },
+  {
+    id: "b52",
+    sentence: "あねは ピアノが じょうずに ひけます。",
+    translation: "Kakak perempuan saya bisa main piano dengan baik.",
+    options: ["ひきます", "ひく", "ひける", "ひいた"],
+    correctOption: "ひけます"
+  },
+  {
+    id: "b53",
+    sentence: "あしたは 雨 ___ らしいです。",
+    translation: "Sepertinya besok akan hujan.",
+    options: ["が", "の", "に", "で"],
+    correctOption: "が"
+  },
+  {
+    id: "b54",
+    sentence: "私は 子どもの ときに よく 公園で 遊んだ ___ です。",
+    translation: "Saya sering bermain di taman ketika kecil (kenangan).",
+    options: ["もの", "こと", "の", "ため"],
+    correctOption: "もの"
+  },
+  {
+    id: "b55",
+    sentence: "パスポートは かばんの 中に 入れて あります。",
+    translation: "Paspor sudah dimasukkan ke dalam tas (sengaja).",
+    options: ["います", "あります", "みます", "おきます"],
+    correctOption: "あります"
+  },
+  {
+    id: "b56",
+    sentence: "仕事が おわった あとで、飲みに 行きませんか。",
+    translation: "Setelah kerja selesai, mau pergi minum?",
+    options: ["まで", "あとで", "まえに", "ながら"],
+    correctOption: "あとで"
+  },
+  {
+    id: "b57",
+    sentence: "彼女は 髪が 長いです。 ___ とても 親切です。",
+    translation: "Dia rambutnya panjang. Dan juga sangat baik.",
+    options: ["そして", "しかし", "それから", "だから"],
+    correctOption: "そして"
+  },
+  {
+    id: "b58",
+    sentence: "会議は 何時に 終わる ___ わかりますか。",
+    translation: "Apakah Anda tahu jam berapa rapat selesai?",
+    options: ["か", "が", "を", "かどうか"],
+    correctOption: "か"
+  },
+  {
+    id: "b59",
+    sentence: "先生が 書いた こと ___ メモしました。",
+    translation: "Saya mencatat hal yang ditulis guru.",
+    options: ["を", "に", "で", "が"],
+    correctOption: "を"
+  },
+  {
+    id: "b60",
+    sentence: "熱が あります。 ___ 会社を 休みました。",
+    translation: "Saya demam. Oleh karena itu saya tidak masuk kerja.",
+    options: ["だから", "しかし", "そして", "それに"],
+    correctOption: "だから"
+  },
+  {
+    id: "b61",
+    sentence: "日本の アニメが 好きで、毎日 見て ___。",
+    translation: "Saya suka anime Jepang, jadi setiap hari menonton.",
+    options: ["みます", "あります", "しまいます", "います"],
+    correctOption: "います"
+  },
+  {
+    id: "b62",
+    sentence: "ここに すわっても いいです ___。",
+    translation: "Bolehkah duduk di sini?",
+    options: ["か", "ね", "よ", "わ"],
+    correctOption: "か"
+  },
+  {
+    id: "b63",
+    sentence: "父は 毎日 新聞を 読みます。___ テレビを 見ます。",
+    translation: "Ayah setiap hari baca koran. Lalu nonton TV.",
+    options: ["それから", "だから", "しかし", "ところで"],
+    correctOption: "それから"
+  },
+  {
+    id: "b64",
+    sentence: "ドアが しまって ___。",
+    translation: "Pintunya dalam keadaan tertutup.",
+    options: ["います", "あります", "みます", "おきます"],
+    correctOption: "います"
+  },
+  {
+    id: "b65",
+    sentence: "この 本は あなた ___ あげます。",
+    translation: "Buku ini saya berikan kepada Anda.",
+    options: ["に", "を", "へ", "まで"],
     correctOption: "に"
   },
   {
-    id: "b93",
-    sentence: "もう 少し 頑張れ ___ よかったのに。",
-    translation: "Kalau saja bisa berusaha sedikit lebih keras, bagus.",
-    options: ["ば", "たら", "なら", "と"],
-    correctOption: "ば"
+    id: "b66",
+    sentence: "明日は 試験ですから、早く 寝 ___ ほうが いいですよ。",
+    translation: "Besok ada ujian, jadi sebaiknya tidur cepat.",
+    options: ["た", "る", "ない", "よう"],
+    correctOption: "た"
   },
   {
-    id: "b94",
-    sentence: "私の 国は 日本 ___ 広いです。",
-    translation: "Negara saya lebih luas daripada Jepang.",
-    options: ["より", "ほど", "から", "まで"],
-    correctOption: "より"
-  },
-  {
-    id: "b95",
-    sentence: "私の 国は 日本ほど 広く ___ です。",
-    translation: "Negara saya tidak seluas Jepang.",
-    options: ["ない", "ありません", "なく", "なかった"],
-    correctOption: "ない"
-  },
-  {
-    id: "b96",
-    sentence: "食べ物を 食べる ときは、いただきます ___ 言います。",
-    translation: "Saat makan, kita bilang itadakimasu.",
-    options: ["と", "は", "が", "に"],
+    id: "b67",
+    sentence: "たばこは 体に 悪い ___ 知っています。",
+    translation: "Saya tahu bahwa rokok itu tidak baik untuk tubuh.",
+    options: ["と", "を", "が", "に"],
     correctOption: "と"
   },
   {
-    id: "b97",
-    sentence: "大学を 卒業した 後、銀行に 就職 ___ ました。",
-    translation: "Setelah lulus kuliah, saya bekerja di bank.",
-    options: ["し", "して", "する", "した"],
-    correctOption: "し"
+    id: "b68",
+    sentence: "電車の 中で お年寄りに 席を かして ___。",
+    translation: "Saya dipersilakan duduk oleh orang tua di kereta (saya diberi kursi).",
+    options: ["あげました", "くれました", "もらいました", "くださいました"],
+    correctOption: "もらいました"
   },
   {
-    id: "b98",
-    sentence: "熱が ある ___ 、会社を 休みます。",
-    translation: "Karena demam, saya libur kantor.",
+    id: "b69",
+    sentence: "すみません、写真を とって ___ ませんか。",
+    translation: "Maaf, maukah Anda memfoto saya?",
+    options: ["いただけ", "いただき", "もらい", "くれ"],
+    correctOption: "いただけ"
+  },
+  {
+    id: "b70",
+    sentence: "日本に 来る まえに、日本語を 少し 勉強しました。",
+    translation: "Sebelum datang ke Jepang, saya belajar bahasa Jepang sedikit.",
+    options: ["あとで", "まえに", "ときに", "ながら"],
+    correctOption: "まえに"
+  },
+  {
+    id: "b71",
+    sentence: "お金が なくて、何も 食べられません。",
+    translation: "Karena tidak ada uang, saya tidak bisa makan apa pun.",
+    options: ["なくて", "ないで", "ないと", "なければ"],
+    correctOption: "なくて"
+  },
+  {
+    id: "b72",
+    sentence: "私は 車を 買う ために、お金を ためています。",
+    translation: "Saya mengumpulkan uang untuk membeli mobil.",
+    options: ["ために", "ように", "ことに", "ものに"],
+    correctOption: "ために"
+  },
+  {
+    id: "b73",
+    sentence: "漢字を 忘れて しまいました。",
+    translation: "Saya sudah lupa kanjinya (sayang sekali).",
+    options: ["いました", "ありました", "しまいました", "おきました"],
+    correctOption: "しまいました"
+  },
+  {
+    id: "b74",
+    sentence: "これは 私が 母から もらった 指輪です。",
+    translation: "Ini cincin yang saya terima dari ibu.",
+    options: ["もらった", "あげた", "くれた", "くださった"],
+    correctOption: "もらった"
+  },
+  {
+    id: "b75",
+    sentence: "テレビを 見ながら ごはんを 食べます。",
+    translation: "Saya makan sambil menonton TV.",
+    options: ["ながら", "ときに", "あとで", "まえに"],
+    correctOption: "ながら"
+  },
+  {
+    id: "b76",
+    sentence: "時間が なかったので、朝ごはんを 食べ ___ で きました。",
+    translation: "Karena tidak ada waktu, saya datang tanpa sarapan.",
+    options: ["ない", "なく", "ず", "ぬ"],
+    correctOption: "ず"
+  },
+  {
+    id: "b77",
+    sentence: "もっと 野菜を 食べた ほうが いいですよ。",
+    translation: "Sebaiknya Anda lebih banyak makan sayur.",
+    options: ["た", "る", "ない", "よう"],
+    correctOption: "た"
+  },
+  {
+    id: "b78",
+    sentence: "私は 毎朝 6時に 起きる ___ に しています。",
+    translation: "Saya berusaha untuk bangun setiap jam 6 pagi.",
+    options: ["よう", "こと", "もの", "ため"],
+    correctOption: "よう"
+  },
+  {
+    id: "b79",
+    sentence: "この 料理の 作り ___ を 教えてください。",
+    translation: "Tolong ajari saya cara membuat masakan ini.",
+    options: ["かた", "よう", "こと", "もの"],
+    correctOption: "かた"
+  },
+  {
+    id: "b80",
+    sentence: "来週、京都に 行く ___ です。",
+    translation: "Saya berencana pergi ke Kyoto minggu depan.",
+    options: ["予定", "つもり", "はず", "ため"],
+    correctOption: "予定"
+  },
+  {
+    id: "b81",
+    sentence: "かさを 忘れた ___、雨に ぬれて しまいました。",
+    translation: "Karena lupa payung, saya kehujanan.",
     options: ["ので", "から", "のに", "でも"],
     correctOption: "ので"
   },
   {
+    id: "b82",
+    sentence: "父は 会社員です。母 ___ 会社員です。",
+    translation: "Ayah pegawai kantor. Ibu juga pegawai kantor.",
+    options: ["も", "は", "が", "に"],
+    correctOption: "も"
+  },
+  {
+    id: "b83",
+    sentence: "この 本は 読み ___ です。",
+    translation: "Buku ini mudah dibaca.",
+    options: ["やすい", "にくい", "すぎる", "たい"],
+    correctOption: "やすい"
+  },
+  {
+    id: "b84",
+    sentence: "子どもの とき、よく 母と 買い物に 行った ものだ。",
+    translation: "Waktu kecil, saya sering pergi belanja dengan ibu (kenangan).",
+    options: ["ものだ", "ことだ", "わけだ", "はずだ"],
+    correctOption: "ものだ"
+  },
+  {
+    id: "b85",
+    sentence: "この 服は ちょっと 大き ___ ます。",
+    translation: "Baju ini terlalu besar.",
+    options: ["すぎ", "やす", "にく", "たい"],
+    correctOption: "すぎ"
+  },
+  {
+    id: "b86",
+    sentence: "日本に 来て から、3年 ___ なりました。",
+    translation: "Sudah 3 tahun sejak datang ke Jepang.",
+    options: ["に", "が", "を", "で"],
+    correctOption: "に"
+  },
+  {
+    id: "b87",
+    sentence: "この 店の ラーメンは おいしい ___ で 有名です。",
+    translation: "Ramen di toko ini terkenal karena enak.",
+    options: ["こと", "もの", "の", "ところ"],
+    correctOption: "こと"
+  },
+  {
+    id: "b88",
+    sentence: "会議室に だれ ___ いません。",
+    translation: "Tidak ada siapa pun di ruang rapat.",
+    options: ["も", "か", "が", "は"],
+    correctOption: "も"
+  },
+  {
+    id: "b89",
+    sentence: "コーヒーは 飲みますか。___ 紅茶は どうですか。",
+    translation: "Minum kopi? Kalau begitu bagaimana dengan teh?",
+    options: ["では", "でも", "そして", "それに"],
+    correctOption: "では"
+  },
+  {
+    id: "b90",
+    sentence: "窓が 閉まって いない。",
+    translation: "Jendelanya tidak tertutup.",
+    options: ["いない", "ない", "いません", "ありません"],
+    correctOption: "いない"
+  },
+  {
+    id: "b91",
+    sentence: "彼は 来月 結婚する そうです。",
+    translation: "Katanya dia akan menikah bulan depan.",
+    options: ["そう", "よう", "らしい", "みたい"],
+    correctOption: "そう"
+  },
+  {
+    id: "b92",
+    sentence: "あの 店の ケーキは おいしいです。___ 高いです。",
+    translation: "Kue di toko itu enak. Tetapi mahal.",
+    options: ["しかし", "そして", "だから", "それに"],
+    correctOption: "しかし"
+  },
+  {
+    id: "b93",
+    sentence: "私は 父に にています。",
+    translation: "Saya mirip dengan ayah.",
+    options: ["に", "と", "が", "を"],
+    correctOption: "に"
+  },
+  {
+    id: "b94",
+    sentence: "どうやって ここ ___ 来ましたか。",
+    translation: "Bagaimana Anda datang ke sini?",
+    options: ["まで", "から", "に", "へ"],
+    correctOption: "まで"
+  },
+  {
+    id: "b95",
+    sentence: "バスが なかなか 来ない。",
+    translation: "Bus tidak kunjung datang.",
+    options: ["こない", "こなかった", "きない", "くるない"],
+    correctOption: "こない"
+  },
+  {
+    id: "b96",
+    sentence: "この 辞書は とても 使い ___ です。",
+    translation: "Kamus ini sangat mudah digunakan.",
+    options: ["やすい", "にくい", "たい", "ながら"],
+    correctOption: "やすい"
+  },
+  {
+    id: "b97",
+    sentence: "さとうさんは ピアノが ひけます。",
+    translation: "Sato-san bisa bermain piano.",
+    options: ["ひけます", "ひきます", "ひく", "ひける"],
+    correctOption: "ひけます"
+  },
+  {
+    id: "b98",
+    sentence: "あしたは 雨が 降る かもしれません。",
+    translation: "Besok mungkin akan hujan.",
+    options: ["かもしれません", "はずです", "そうです", "ようです"],
+    correctOption: "かもしれません"
+  },
+  {
     id: "b99",
-    sentence: "たくさん お金が あれば いい ___ なあ。",
-    translation: "Andai saja punya banyak uang ya.",
-    options: ["の", "ん", "もの", "こと"],
-    correctOption: "の"
+    sentence: "もっと 日本語を 勉強しなければ なりません。",
+    translation: "Saya harus lebih banyak belajar bahasa Jepang.",
+    options: ["しなければ", "しないと", "しくは", "しないは"],
+    correctOption: "しなければ"
   },
   {
     id: "b100",
-    sentence: "私は 山田さん ___ 結婚したいです。",
-    translation: "Saya ingin menikah dengan Yamada.",
-    options: ["と", "に", "を", "が"],
-    correctOption: "と"
+    sentence: "時間が ないので、急がなければ なりません。",
+    translation: "Karena tidak ada waktu, saya harus cepat.",
+    options: ["急がなければ", "急げば", "急ぐと", "急いで"],
+    correctOption: "急がなければ"
   }
 
 ];
