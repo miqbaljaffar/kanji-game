@@ -22,10 +22,18 @@ html, body {
   color: #1e293b;
   overflow-x: hidden;
   /* Mencegah scroll mental di HP */
-  overscroll-behavior-y: none; 
+  overscroll-behavior-y: none;
+  /* Hilangkan highlight tap di HP */
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent; /* Hilangkan blink biru saat di tap di HP */
 }
 
 @layer components {
+  /* Duolingo style cards and buttons */
   .duo-card {
     background-color: #ffffff;
     border: 2px solid #e2e8f0;
@@ -104,17 +112,34 @@ html, body {
     border-bottom-width: 0px;
     margin-top: 4px;
   }
+
+  /* Modern glassmorphism card dari kode kedua */
+  .modern-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  }
 }
 
-@keyframes float-cloud {
-  0% { transform: translateX(0) translateY(0) scale(1); }
-  100% { transform: translateX(30px) translateY(-10px) scale(1.05); }
+/* Animations dari kode pertama */
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  will-change: transform, opacity;
 }
 
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
+
 .animate-bounce-slow {
   animation: bounce-slow 2s ease-in-out infinite;
   will-change: transform;
@@ -125,26 +150,51 @@ html, body {
   25% { transform: translateX(-6px) rotate(-6deg); }
   75% { transform: translateX(6px) rotate(6deg); }
 }
+
 .animate-shake {
   animation: shake 0.4s ease-in-out;
 }
 
-.animate-pulse-slow {
-  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Animasi slide up dipercepat agar terasa lebih ringan */
-.animate-slide-up {
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
+/* Animations dari kode kedua */
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
+.animate-slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-soft {
+  animation: bounceSoft 3s ease-in-out infinite;
+}
+
+@keyframes bouncePop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-bounce-pop {
+  animation: bouncePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Floating score animation */
 .float-score {
   animation: floatScore 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: transform, opacity;
@@ -156,7 +206,12 @@ html, body {
   100% { transform: translateY(-50px) scale(1); opacity: 0; }
 }
 
-button {
-  outline: none !important;
-  -webkit-tap-highlight-color: transparent; /* Hilangkan blink biru saat di tap di HP */
+/* Cloud animation */
+@keyframes float-cloud {
+  0% { transform: translateX(0) translateY(0) scale(1); }
+  100% { transform: translateX(30px) translateY(-10px) scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
