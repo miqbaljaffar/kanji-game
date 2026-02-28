@@ -17,9 +17,9 @@ const MODES = [
 ];
 
 const DIFFICULTIES = [
-  { id: "easy" as Difficulty, label: "Santai", icon: "🐢", desc: "20s / soal", color: "text-green-600", bg: "bg-green-100/80", border: "border-green-300" },
-  { id: "medium" as Difficulty, label: "Normal", icon: "🏃", desc: "12s / soal", color: "text-yellow-600", bg: "bg-yellow-100/80", border: "border-yellow-300" },
-  { id: "hard" as Difficulty, label: "Cepat", icon: "🚀", desc: "7s / soal", color: "text-red-600", bg: "bg-red-100/80", border: "border-red-300" },
+  { id: "easy" as Difficulty, label: "Santai", icon: "🐢", desc: "20s / soal", color: "text-green-600", bg: "bg-green-100/80", border: "border-green-300", shadow: "shadow-[0_6px_0_#86efac] sm:shadow-[0_8px_0_#86efac]" },
+  { id: "medium" as Difficulty, label: "Normal", icon: "🏃", desc: "12s / soal", color: "text-yellow-600", bg: "bg-yellow-100/80", border: "border-yellow-300", shadow: "shadow-[0_6px_0_#fde047] sm:shadow-[0_8px_0_#fde047]" },
+  { id: "hard" as Difficulty, label: "Cepat", icon: "🚀", desc: "7s / soal", color: "text-red-600", bg: "bg-red-100/80", border: "border-red-300", shadow: "shadow-[0_6px_0_#fca5a5] sm:shadow-[0_8px_0_#fca5a5]" },
 ];
 
 export function HomeScreen({ onStart }: HomeScreenProps) {
@@ -96,7 +96,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                 className={clsx(
                   "relative p-3 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border-2",
                   selectedDiff === diff.id 
-                    ? `${diff.bg} ${diff.border} shadow-[0_6px_0_currentColor] sm:shadow-[0_8px_0_currentColor] -translate-y-1 sm:-translate-y-2 !border-b-2` 
+                    ? `${diff.bg} ${diff.border} ${diff.shadow} -translate-y-1 sm:-translate-y-2 !border-b-2` 
                     : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]"
                 )}
               >
