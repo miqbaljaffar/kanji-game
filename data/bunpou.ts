@@ -211,7 +211,7 @@ export const bunpouData: BunpouEntry[] = [
     options: ["ぐらい", "など", "ごろ", "しか"],
     correctOption: "ぐらい"
   },
-    {
+  {
     id: "b31",
     sentence: "コーヒー ___ 砂糖を 入れますか。",
     translation: "Apakah Anda memasukkan gula ke dalam kopi?",
@@ -248,7 +248,7 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b36",
-    sentence: "昨日は 頭が 痛 ___ でした。",
+    sentence: "昨日は 頭が 痛 ___ です。",
     translation: "Kemarin kepala saya sakit.",
     options: ["く", "い", "かった", "な"],
     correctOption: "かった"
@@ -269,15 +269,15 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b39",
-    sentence: "この ケーキは 甘 ___ すぎます。",
+    sentence: "この ケーキは ___ すぎます。",
     translation: "Kue ini terlalu manis.",
-    options: ["く", "い", "な", "に"],
-    correctOption: "く"
+    options: ["甘い", "甘く", "甘", "甘かった"],
+    correctOption: "甘"
   },
   {
     id: "b40",
     sentence: "電車の 中で お年寄りに 席を かして ___。",
-    translation: "Saya mempersilakan duduk kepada orang tua di dalam kereta.",
+    translation: "Saya mempersilakan duduk (memberikan kursi) kepada orang tua di dalam kereta.",
     options: ["あげました", "くれました", "もらいました", "くださいました"],
     correctOption: "あげました"
   },
@@ -318,21 +318,21 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b46",
-    sentence: "母に 電話 ___ もらいました。",
-    translation: "Saya menerima telepon dari ibu.",
+    sentence: "母に プレゼント ___ もらいました。",
+    translation: "Saya menerima hadiah dari ibu.",
     options: ["を", "が", "に", "で"],
     correctOption: "を"
   },
   {
     id: "b47",
-    sentence: "ここに 車を 止めて も ___ いいですか。",
+    sentence: "ここに 車を 止めて ___ いいですか。",
     translation: "Bolehkah saya parkir mobil di sini?",
     options: ["も", "は", "が", "に"],
     correctOption: "も"
   },
   {
     id: "b48",
-    sentence: "先生は もう 帰られました。",
+    sentence: "先生は もう ___。",
     translation: "Guru sudah pulang (bentuk sopan).",
     options: ["帰りました", "帰られました", "帰りでした", "帰っています"],
     correctOption: "帰られました"
@@ -348,8 +348,8 @@ export const bunpouData: BunpouEntry[] = [
     id: "b50",
     sentence: "わたしは あまり 肉 ___ 食べません。",
     translation: "Saya tidak terlalu sering makan daging.",
-    options: ["を", "は", "が", "に"],
-    correctOption: "は"
+    options: ["を", "で", "が", "に"],
+    correctOption: "を"
   },
   {
     id: "b51",
@@ -360,15 +360,15 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b52",
-    sentence: "あねは ピアノが じょうずに ひけます。",
+    sentence: "あねは ピアノが じょうずに ___。",
     translation: "Kakak perempuan saya bisa main piano dengan baik.",
-    options: ["ひきます", "ひく", "ひける", "ひいた"],
+    options: ["ひきます", "ひく", "ひける", "ひけます"],
     correctOption: "ひけます"
   },
   {
     id: "b53",
-    sentence: "あしたは 雨 ___ らしいです。",
-    translation: "Sepertinya besok akan hujan.",
+    sentence: "あしたは 雨 ___ 降るそうです。",
+    translation: "Katanya besok akan turun hujan.",
     options: ["が", "の", "に", "で"],
     correctOption: "が"
   },
@@ -381,14 +381,14 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b55",
-    sentence: "パスポートは かばんの 中に 入れて あります。",
-    translation: "Paspor sudah dimasukkan ke dalam tas (sengaja).",
+    sentence: "パスポートは かばんの 中に 入れて ___。",
+    translation: "Paspor sudah dimasukkan ke dalam tas (sengaja/persiapan).",
     options: ["います", "あります", "みます", "おきます"],
     correctOption: "あります"
   },
   {
     id: "b56",
-    sentence: "仕事が おわった あとで、飲みに 行きませんか。",
+    sentence: "仕事が おわった ___ 、飲みに 行きませんか。",
     translation: "Setelah kerja selesai, mau pergi minum?",
     options: ["まで", "あとで", "まえに", "ながら"],
     correctOption: "あとで"
@@ -424,7 +424,7 @@ export const bunpouData: BunpouEntry[] = [
   {
     id: "b61",
     sentence: "日本の アニメが 好きで、毎日 見て ___。",
-    translation: "Saya suka anime Jepang, jadi setiap hari menonton.",
+    translation: "Saya suka anime Jepang, jadi setiap hari menontonnya.",
     options: ["みます", "あります", "しまいます", "います"],
     correctOption: "います"
   },
@@ -465,15 +465,15 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b67",
-    sentence: "たばこは 体に 悪い ___ 知っています。",
-    translation: "Saya tahu bahwa rokok itu tidak baik untuk tubuh.",
+    sentence: "たばこは 体に 悪い ___ 思います。",
+    translation: "Saya pikir rokok itu tidak baik untuk tubuh.",
     options: ["と", "を", "が", "に"],
     correctOption: "と"
   },
   {
     id: "b68",
-    sentence: "電車の 中で お年寄りに 席を かして ___。",
-    translation: "Saya dipersilakan duduk oleh orang tua di kereta (saya diberi kursi).",
+    sentence: "駅で 知らない 人に かさを かして ___。",
+    translation: "Saya dipinjami (menerima pinjaman) payung oleh orang yang tidak dikenal di stasiun.",
     options: ["あげました", "くれました", "もらいました", "くださいました"],
     correctOption: "もらいました"
   },
@@ -486,59 +486,59 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b70",
-    sentence: "日本に 来る まえに、日本語を 少し 勉強しました。",
+    sentence: "日本に 来る ___ 、日本語を 少し 勉強しました。",
     translation: "Sebelum datang ke Jepang, saya belajar bahasa Jepang sedikit.",
     options: ["あとで", "まえに", "ときに", "ながら"],
     correctOption: "まえに"
   },
   {
     id: "b71",
-    sentence: "お金が なくて、何も 食べられません。",
+    sentence: "お金が ___ 、何も 食べられません。",
     translation: "Karena tidak ada uang, saya tidak bisa makan apa pun.",
     options: ["なくて", "ないで", "ないと", "なければ"],
     correctOption: "なくて"
   },
   {
     id: "b72",
-    sentence: "私は 車を 買う ために、お金を ためています。",
+    sentence: "私は 車を 買う ___ 、お金を ためています。",
     translation: "Saya mengumpulkan uang untuk membeli mobil.",
     options: ["ために", "ように", "ことに", "ものに"],
     correctOption: "ために"
   },
   {
     id: "b73",
-    sentence: "漢字を 忘れて しまいました。",
-    translation: "Saya sudah lupa kanjinya (sayang sekali).",
+    sentence: "漢字を 忘れて ___。",
+    translation: "Saya sudah (terlanjur) lupa kanjinya.",
     options: ["いました", "ありました", "しまいました", "おきました"],
     correctOption: "しまいました"
   },
   {
     id: "b74",
-    sentence: "これは 私が 母から もらった 指輪です。",
+    sentence: "これは 私が 母から ___ 指輪です。",
     translation: "Ini cincin yang saya terima dari ibu.",
     options: ["もらった", "あげた", "くれた", "くださった"],
     correctOption: "もらった"
   },
   {
     id: "b75",
-    sentence: "テレビを 見ながら ごはんを 食べます。",
+    sentence: "テレビを ___ ごはんを 食べます。",
     translation: "Saya makan sambil menonton TV.",
-    options: ["ながら", "ときに", "あとで", "まえに"],
-    correctOption: "ながら"
+    options: ["見ながら", "見るとき", "見たあと", "見るまえ"],
+    correctOption: "見ながら"
   },
   {
     id: "b76",
     sentence: "時間が なかったので、朝ごはんを 食べ ___ で きました。",
     translation: "Karena tidak ada waktu, saya datang tanpa sarapan.",
     options: ["ない", "なく", "ず", "ぬ"],
-    correctOption: "ず"
+    correctOption: "ない"
   },
   {
     id: "b77",
-    sentence: "もっと 野菜を 食べた ほうが いいですよ。",
+    sentence: "もっと 野菜を ___ ほうが いいですよ。",
     translation: "Sebaiknya Anda lebih banyak makan sayur.",
-    options: ["た", "る", "ない", "よう"],
-    correctOption: "た"
+    options: ["食べた", "食べる", "食べない", "食べよう"],
+    correctOption: "食べた"
   },
   {
     id: "b78",
@@ -558,14 +558,14 @@ export const bunpouData: BunpouEntry[] = [
     id: "b80",
     sentence: "来週、京都に 行く ___ です。",
     translation: "Saya berencana pergi ke Kyoto minggu depan.",
-    options: ["予定", "つもり", "はず", "ため"],
+    options: ["予定", "よう", "はず", "ため"],
     correctOption: "予定"
   },
   {
     id: "b81",
     sentence: "かさを 忘れた ___、雨に ぬれて しまいました。",
     translation: "Karena lupa payung, saya kehujanan.",
-    options: ["ので", "から", "のに", "でも"],
+    options: ["ので", "のに", "ても", "ながら"],
     correctOption: "ので"
   },
   {
@@ -584,7 +584,7 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b84",
-    sentence: "子どもの とき、よく 母と 買い物に 行った ものだ。",
+    sentence: "子どもの とき、よく 母と 買い物に 行った ___。",
     translation: "Waktu kecil, saya sering pergi belanja dengan ibu (kenangan).",
     options: ["ものだ", "ことだ", "わけだ", "はずだ"],
     correctOption: "ものだ"
@@ -626,14 +626,14 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b90",
-    sentence: "窓が 閉まって いない。",
+    sentence: "窓が 閉まって ___。",
     translation: "Jendelanya tidak tertutup.",
-    options: ["いない", "ない", "いません", "ありません"],
-    correctOption: "いない"
+    options: ["いません", "ありません", "ないです", "ないでした"],
+    correctOption: "いません"
   },
   {
     id: "b91",
-    sentence: "彼は 来月 結婚する そうです。",
+    sentence: "彼は 来月 結婚する ___ です。",
     translation: "Katanya dia akan menikah bulan depan.",
     options: ["そう", "よう", "らしい", "みたい"],
     correctOption: "そう"
@@ -647,24 +647,24 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b93",
-    sentence: "私は 父に にています。",
+    sentence: "私は 父 ___ にています。",
     translation: "Saya mirip dengan ayah.",
     options: ["に", "と", "が", "を"],
     correctOption: "に"
   },
   {
     id: "b94",
-    sentence: "どうやって ここ ___ 来ましたか。",
-    translation: "Bagaimana Anda datang ke sini?",
-    options: ["まで", "から", "に", "へ"],
+    sentence: "駅から ここ ___ 歩いて きました。",
+    translation: "Saya jalan kaki dari stasiun sampai ke sini.",
+    options: ["まで", "から", "で", "を"],
     correctOption: "まで"
   },
   {
     id: "b95",
-    sentence: "バスが なかなか 来ない。",
+    sentence: "バスが なかなか ___。",
     translation: "Bus tidak kunjung datang.",
-    options: ["こない", "こなかった", "きない", "くるない"],
-    correctOption: "こない"
+    options: ["きません", "きない", "こないです", "こないで"],
+    correctOption: "きません"
   },
   {
     id: "b96",
@@ -675,30 +675,30 @@ export const bunpouData: BunpouEntry[] = [
   },
   {
     id: "b97",
-    sentence: "さとうさんは ピアノが ひけます。",
+    sentence: "さとうさんは ピアノが ___。",
     translation: "Sato-san bisa bermain piano.",
     options: ["ひけます", "ひきます", "ひく", "ひける"],
     correctOption: "ひけます"
   },
   {
     id: "b98",
-    sentence: "あしたは 雨が 降る かもしれません。",
+    sentence: "あしたは 雨が 降る ___。",
     translation: "Besok mungkin akan hujan.",
     options: ["かもしれません", "はずです", "そうです", "ようです"],
     correctOption: "かもしれません"
   },
   {
     id: "b99",
-    sentence: "もっと 日本語を 勉強しなければ なりません。",
+    sentence: "もっと 日本語を 勉強 ___ なりません。",
     translation: "Saya harus lebih banyak belajar bahasa Jepang.",
-    options: ["しなければ", "しないと", "しくは", "しないは"],
+    options: ["しなければ", "しないと", "しては", "しないでは"],
     correctOption: "しなければ"
   },
   {
     id: "b100",
-    sentence: "時間が ないので、急がなければ なりません。",
+    sentence: "時間が ないので、___ なりません。",
     translation: "Karena tidak ada waktu, saya harus cepat.",
-    options: ["急がなければ", "急げば", "急ぐと", "急いで"],
+    options: ["急がなければ", "急がないと", "急いでは", "急ぐ"],
     correctOption: "急がなければ"
   }
 
