@@ -60,7 +60,6 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       {/* Area Pemilihan */}
       <div className="w-full max-w-lg space-y-5 animate-fade-up" style={{ animationDelay: "0.2s" }}>
         
-        {/* Pilih Mode */}
         <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40">
           <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Mode Belajar</h2>
           <div className="grid grid-cols-2 gap-3">
