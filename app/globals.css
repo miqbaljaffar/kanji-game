@@ -18,34 +18,31 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-body);
-  background-color: #87CEEB !important; /* Warna Langit Cerah (Sky Blue) */
-  color: #1e293b; /* Slate-800 */
+  background-color: #87CEEB !important;
+  color: #1e293b;
   overflow-x: hidden;
+  /* Mencegah scroll mental di HP */
+  overscroll-behavior-y: none; 
 }
 
-/* =========================================
-   GAYA DUOLINGO (KIDS FRIENDLY)
-   ========================================= */
-
 @layer components {
-  /* Kotak Putih Utama (Card) */
   .duo-card {
     background-color: #ffffff;
-    border: 2px solid #e2e8f0; /* Slate-200 */
+    border: 2px solid #e2e8f0;
     border-bottom-width: 6px;
     border-radius: 24px;
   }
 
-  /* Tombol Pilihan Jawaban */
   .duo-btn {
     background-color: #ffffff;
     border: 2px solid #e2e8f0;
     border-bottom-width: 4px;
     border-radius: 16px;
-    transition: all 0.1s ease;
+    transition: transform 0.1s ease, background-color 0.1s ease;
     cursor: pointer;
     font-weight: 800;
-    color: #475569; /* Slate-600 */
+    color: #475569;
+    will-change: transform;
   }
 
   .duo-btn:hover:not(:disabled) {
@@ -58,29 +55,27 @@ html, body {
     margin-top: 4px;
   }
 
-  /* Status Jawaban Benar */
   .duo-btn-correct {
-    background-color: #dcfce7 !important; /* Hijau muda */
+    background-color: #dcfce7 !important;
     border-color: #22c55e !important;
     color: #15803d !important;
   }
 
-  /* Status Jawaban Salah */
   .duo-btn-wrong {
-    background-color: #fee2e2 !important; /* Merah muda */
+    background-color: #fee2e2 !important;
     border-color: #ef4444 !important;
     color: #b91c1c !important;
   }
 
-  /* Tombol Utama (Start/Lanjut) */
   .duo-btn-primary {
-    background-color: #22c55e; /* Hijau */
+    background-color: #22c55e;
     border: 2px solid #16a34a;
     border-bottom-width: 6px;
     border-radius: 20px;
     color: white;
     font-weight: 900;
-    transition: all 0.1s ease;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+    will-change: transform;
   }
 
   .duo-btn-primary:hover:not(:disabled) {
@@ -93,7 +88,6 @@ html, body {
     margin-top: 6px;
   }
 
-  /* Tombol Keluar / Secondary */
   .duo-btn-secondary {
     background-color: #f1f5f9;
     border: 2px solid #cbd5e1;
@@ -101,7 +95,8 @@ html, body {
     border-radius: 16px;
     color: #64748b;
     font-weight: 800;
-    transition: all 0.1s ease;
+    transition: transform 0.1s ease;
+    will-change: transform;
   }
 
   .duo-btn-secondary:active:not(:disabled) {
@@ -111,10 +106,6 @@ html, body {
   }
 }
 
-/* =========================================
-   ANIMASI KHUSUS ANAK-ANAK
-   ========================================= */
-
 @keyframes float-cloud {
   0% { transform: translateX(0) translateY(0) scale(1); }
   100% { transform: translateX(30px) translateY(-10px) scale(1.05); }
@@ -122,45 +113,50 @@ html, body {
 
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-8px); }
 }
 .animate-bounce-slow {
   animation: bounce-slow 2s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0) rotate(0); }
-  25% { transform: translateX(-8px) rotate(-8deg); }
-  75% { transform: translateX(8px) rotate(8deg); }
+  25% { transform: translateX(-6px) rotate(-6deg); }
+  75% { transform: translateX(6px) rotate(6deg); }
 }
 .animate-shake {
-  animation: shake 0.5s ease-in-out;
+  animation: shake 0.4s ease-in-out;
 }
 
 .animate-pulse-slow {
   animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Animasi slide up dipercepat agar terasa lebih ringan */
 .animate-slide-up {
-  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
+  from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 .float-score {
-  animation: floatScore 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: floatScore 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }
 
 @keyframes floatScore {
   0% { transform: translateY(0) scale(0.8); opacity: 0; }
   20% { transform: translateY(-10px) scale(1.2); opacity: 1; }
-  100% { transform: translateY(-60px) scale(1); opacity: 0; }
+  100% { transform: translateY(-50px) scale(1); opacity: 0; }
 }
 
 button {
   outline: none !important;
+  -webkit-tap-highlight-color: transparent; /* Hilangkan blink biru saat di tap di HP */
 }
