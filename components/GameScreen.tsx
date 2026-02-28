@@ -1,6 +1,6 @@
 "use client";
 import { useMemo } from "react";
-import { QuizQuestion, AnswerState, GameStats, GameMode, Difficulty } from "@/types";
+import { QuizQuestion, AnswerState, GameStats, GameMode, Difficulty, KanjiEntry } from "@/types";
 import { Mascot } from "./Mascot";
 import clsx from "clsx";
 
@@ -22,7 +22,15 @@ interface GameScreenProps {
 }
 
 function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
-  const { question: entry } = question;
+  if (question.mode === "bunpou" && question.bunpouQuestion) {
+    return { 
+      main: question.bunpouQuestion.sentence, 
+      prompt: "Lengkapi kalimat berikut!",
+      sub: question.bunpouQuestion.translation
+    };
+  }
+
+  const entry = question.kanjiQuestion!;
   if (gameMode === "kanji-to-arti") return { main: entry.kanji, prompt: "Apa arti dari kanji ini?" };
   if (gameMode === "hiragana-to-arti") return { main: entry.hiragana, prompt: "Apa arti kosakata ini?" };
   return { main: entry.arti, prompt: "Pilih kanji yang tepat!" };
@@ -36,7 +44,7 @@ export function GameScreen({
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
 
   return (
-    <div className="relative z-10 flex flex-col min-h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto pb-12">
+    <div className="relative z-10 flex flex-col min-h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
       
       {/* HEADER: Compact & Glassmorphism */}
       <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
@@ -85,7 +93,7 @@ export function GameScreen({
       {/* KARTU PERTANYAAN (Dynamic Flex) */}
       <div className="flex-1 flex flex-col justify-center relative mt-12 mb-6 sm:mb-8 z-10 min-h-0">
         
-        {/* Maskot - Diposisikan melayang (absolute) di atas kartu untuk menghemat ruang vertikal */}
+        {/* Maskot */}
         <div className="absolute -top-14 left-1/2 -translate-x-1/2 z-20">
           <div className="bg-white/80 backdrop-blur-md p-2 rounded-full shadow-lg border-4 border-white">
              <Mascot state={answerState} />
@@ -102,12 +110,20 @@ export function GameScreen({
           <h2 
             className={clsx(
               "font-black leading-tight text-slate-800 break-words w-full",
-              gameMode === "arti-to-kanji" ? "text-4xl sm:text-5xl" : "text-6xl sm:text-8xl"
+              gameMode === "arti-to-kanji" ? "text-4xl sm:text-5xl" : 
+              gameMode === "bunpou" ? "text-2xl sm:text-3xl" : "text-6xl sm:text-8xl"
             )}
             style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-body)" : "var(--font-jp)" }}
           >
             {display.main}
           </h2>
+
+          {/* Terjemahan Khusus Bunpou - DIPERBAIKI */}
+          {display.sub && (
+             <p className="text-sm sm:text-base font-bold text-slate-500 mt-4 px-2">
+               {`"${display.sub}"`}
+             </p>
+          )}
 
           {/* Skor Melayang saat benar */}
           {showFloatingScore && (
@@ -120,9 +136,9 @@ export function GameScreen({
         </div>
       </div>
 
-      {/* GRID JAWABAN (Tetap di bawah) */}
+      {/* GRID JAWABAN */}
       <div className="flex-none grid grid-cols-2 gap-3 sm:gap-4 pb-2 sm:pb-4 z-20">
-        {question.options.map((option, idx) => {
+        {(question.mode === "bunpou" ? question.stringOptions! : question.kanjiOptions!).map((opt, idx) => {
           let state = "idle";
           if (answerState !== "idle") {
             if (idx === question.correctIndex) state = "correct";
@@ -130,35 +146,33 @@ export function GameScreen({
             else state = "disabled";
           }
 
-          const optionText = gameMode === "arti-to-kanji" ? option.kanji : option.arti;
+          let optionText = "";
+          if (question.mode === "bunpou") {
+            optionText = opt as string;
+          } else {
+            const option = opt as KanjiEntry;
+            optionText = gameMode === "arti-to-kanji" ? option.kanji : option.arti;
+          }
 
           return (
             <button
-              key={option.id}
+              key={idx}
               onClick={() => onAnswer(idx)}
               disabled={answerState !== "idle"}
               className={clsx(
                 "relative w-full p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none rounded-2xl sm:rounded-3xl border-2",
-                
-                /* Efek 3D Standar (Idle) */
                 state === "idle" && "bg-white border-slate-200 border-b-[6px] text-slate-700 hover:bg-slate-50 hover:-translate-y-1 hover:border-b-[8px] active:border-b-[2px] active:translate-y-[4px]",
-                
-                /* Efek Benar (Correct) */
                 state === "correct" && "bg-green-100 border-green-500 border-b-[6px] text-green-700 z-10 scale-105 shadow-xl",
-                
-                /* Efek Salah (Wrong) */
                 state === "wrong" && "bg-red-50 border-red-500 border-b-[2px] text-red-700 translate-y-[4px]",
-                
-                /* Efek Disabled (Non-aktif saat jawaban sudah dipilih) */
                 state === "disabled" && "bg-slate-50 border-slate-200 border-b-[2px] text-slate-400 opacity-60 translate-y-[4px]"
               )}
             >
               <span 
                 className={clsx(
                   "block font-black leading-tight",
-                  gameMode === "arti-to-kanji" ? "text-3xl sm:text-4xl" : "text-lg sm:text-xl"
+                  (gameMode === "arti-to-kanji" || gameMode === "bunpou") ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
                 )}
-                style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-jp)" : "var(--font-body)" }}
+                style={{ fontFamily: (gameMode === "arti-to-kanji" || gameMode === "bunpou") ? "var(--font-jp)" : "var(--font-body)" }}
               >
                 {optionText}
               </span>
