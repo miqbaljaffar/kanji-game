@@ -23,7 +23,8 @@ export function useGame() {
   const [showFloatingScore, setShowFloatingScore] = useState(false);
   const [floatingScoreValue, setFloatingScoreValue] = useState(0);
 
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Mengadopsi tipe NodeJS.Timeout dari kode kedua
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeRef = useRef<number>(0);
 
   const clearTimer = useCallback(() => {
