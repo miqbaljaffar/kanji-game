@@ -36,42 +36,45 @@ export function GameScreen({
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
 
   return (
-    <div className="relative z-10 h-[100dvh] flex flex-col p-4 sm:p-6 max-w-2xl mx-auto overflow-hidden">
+    <div className="relative z-10 flex flex-col h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto overflow-hidden">
       
-      {/* Header Bar Modern dengan efek glassmorphism */}
-      <div className="flex items-center justify-between bg-white/80 backdrop-blur-xl p-3 md:p-4 rounded-3xl shadow-lg border border-white mb-4 shrink-0 animate-slide-down opacity-0">
+      {/* HEADER: Compact & Glassmorphism */}
+      <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
         
-        {/* Tombol Keluar dengan desain circular */}
+        {/* Tombol Keluar */}
         <button
           onClick={onHome}
-          className="w-10 h-10 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full font-black text-xl transition-colors"
+          className="w-10 h-10 flex items-center justify-center bg-white shadow-sm hover:bg-slate-50 text-slate-400 hover:text-red-500 rounded-full font-black text-xl transition-all"
         >
           ✕
         </button>
 
-        {/* Progress Bar Soal dengan gradient */}
-        <div className="flex-1 mx-4">
-          <div className="h-3 md:h-4 w-full bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
+        {/* Progress Bar Soal */}
+        <div className="flex-1 mx-3 sm:mx-5">
+          <div className="h-3 w-full bg-slate-200/80 rounded-full overflow-hidden relative shadow-inner">
             <div 
-              className="h-full bg-gradient-to-r from-blue-400 to-blue-500 transition-all duration-500 rounded-full"
+              className="h-full bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-500 rounded-full"
               style={{ width: `${(questionIndex / totalQuestions) * 100}%` }}
             >
-              <div className="h-1.5 w-full bg-white/30 mt-0.5 rounded-full mx-1"></div>
+              <div className="h-1 w-full bg-white/30 mt-0.5 rounded-full mx-1"></div>
             </div>
           </div>
         </div>
 
-        {/* Indikator Skor dan Timer dalam satu grup */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center bg-yellow-50 px-3 py-1.5 rounded-2xl border border-yellow-200">
-            <span className="text-lg mr-1 drop-shadow-sm">⭐</span>
-            <span className="font-black text-yellow-500 text-sm md:text-base">
+        {/* Indikator Skor dan Timer */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center bg-yellow-100/80 px-2.5 py-1.5 rounded-2xl border border-yellow-200/50">
+            <span className="text-sm sm:text-base mr-1">⭐</span>
+            <span className="font-black text-yellow-600 text-sm sm:text-base">
               {stats.score}
             </span>
           </div>
-          <div className="flex items-center bg-slate-50 px-3 py-1.5 rounded-2xl border border-slate-200">
-            <span className="text-lg mr-1">⏱</span>
-            <span className={clsx("font-black text-sm md:text-base w-5 text-center", timeRatio <= 0.3 ? "text-red-500 animate-pulse" : "text-blue-500")}>
+          <div className="flex items-center bg-white/80 px-2.5 py-1.5 rounded-2xl border border-slate-200/50 shadow-sm">
+            <span className="text-sm sm:text-base mr-1">⏱</span>
+            <span className={clsx(
+              "font-black text-sm sm:text-base w-5 text-center", 
+              timeRatio <= 0.3 ? "text-red-500 animate-pulse" : "text-blue-500"
+            )}>
               {timeLeft}
             </span>
           </div>
@@ -79,34 +82,37 @@ export function GameScreen({
 
       </div>
 
-      {/* Maskot Karakter Kucing dengan animasi fade-up */}
-      <div className="my-2 shrink-0 animate-fade-up opacity-0 z-20">
-        <Mascot state={answerState} />
-      </div>
-
-      {/* Kartu Pertanyaan Utama dengan desain modern */}
-      <div className="relative flex-1 flex flex-col mb-4 animate-fade-up opacity-0" style={{ animationDelay: "0.1s" }}>
+      {/* KARTU PERTANYAAN (Dynamic Flex) */}
+      <div className="flex-1 flex flex-col justify-center relative mt-12 mb-6 sm:mb-8 z-10 min-h-0">
         
-        <div className="w-full h-full bg-white/90 backdrop-blur-lg border-2 border-slate-100 shadow-xl rounded-[2.5rem] flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+        {/* Maskot - Diposisikan melayang (absolute) di atas kartu untuk menghemat ruang vertikal */}
+        <div className="absolute -top-14 left-1/2 -translate-x-1/2 z-20">
+          <div className="bg-white/80 backdrop-blur-md p-2 rounded-full shadow-lg border-4 border-white">
+             <Mascot state={answerState} />
+          </div>
+        </div>
+
+        {/* Card Utama */}
+        <div className="w-full h-full min-h-[180px] bg-white/95 backdrop-blur-xl border-4 border-white rounded-[2rem] shadow-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden transition-all duration-300">
           
-          <p className="text-sm md:text-base font-black text-blue-400 uppercase tracking-widest mb-4">
+          <p className="text-xs sm:text-sm font-black text-blue-400/80 uppercase tracking-widest mb-3 mt-4">
             {display.prompt}
           </p>
 
           <h2 
             className={clsx(
               "font-black leading-tight text-slate-800 break-words w-full",
-              gameMode === "arti-to-kanji" ? "text-4xl md:text-5xl" : "text-6xl md:text-8xl"
+              gameMode === "arti-to-kanji" ? "text-4xl sm:text-5xl" : "text-6xl sm:text-8xl"
             )}
             style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-body)" : "var(--font-jp)" }}
           >
             {display.main}
           </h2>
 
-          {/* Skor Melayang di dalam kartu */}
+          {/* Skor Melayang saat benar */}
           {showFloatingScore && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float-score pointer-events-none">
-              <span className="text-5xl md:text-7xl font-black text-green-400 drop-shadow-2xl" style={{ WebkitTextStroke: "2px white" }}>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-bounce">
+              <span className="text-5xl sm:text-6xl font-black text-green-400 drop-shadow-lg" style={{ WebkitTextStroke: "2px white" }}>
                 +{floatingScoreValue}
               </span>
             </div>
@@ -114,8 +120,8 @@ export function GameScreen({
         </div>
       </div>
 
-      {/* Grid Pilihan Jawaban 2x2 dengan desain modern */}
-      <div className="grid grid-cols-2 gap-3 md:gap-4 shrink-0 pb-2 md:pb-4 animate-fade-up opacity-0" style={{ animationDelay: "0.2s" }}>
+      {/* GRID JAWABAN (Tetap di bawah) */}
+      <div className="flex-none grid grid-cols-2 gap-3 sm:gap-4 pb-2 sm:pb-4 z-20">
         {question.options.map((option, idx) => {
           let state = "idle";
           if (answerState !== "idle") {
@@ -132,17 +138,25 @@ export function GameScreen({
               onClick={() => onAnswer(idx)}
               disabled={answerState !== "idle"}
               className={clsx(
-                "relative w-full p-4 md:p-6 rounded-3xl flex flex-col items-center justify-center text-center transition-all duration-300 border-2",
-                state === "idle" ? "bg-white border-slate-200 text-slate-600 shadow-[0_6px_0_#e2e8f0] hover:-translate-y-1 hover:shadow-[0_8px_0_#cbd5e1] active:translate-y-2 active:shadow-none" : "",
-                state === "correct" ? "bg-green-100 border-green-500 text-green-700 shadow-none translate-y-2 ring-4 ring-green-200" : "",
-                state === "wrong" ? "bg-red-100 border-red-500 text-red-700 shadow-none translate-y-2 ring-4 ring-red-200" : "",
-                state === "disabled" ? "bg-slate-50 border-slate-200 text-slate-400 opacity-60 shadow-none translate-y-2" : ""
+                "relative w-full p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none rounded-2xl sm:rounded-3xl border-2",
+                
+                /* Efek 3D Standar (Idle) */
+                state === "idle" && "bg-white border-slate-200 border-b-[6px] text-slate-700 hover:bg-slate-50 hover:-translate-y-1 hover:border-b-[8px] active:border-b-[2px] active:translate-y-[4px]",
+                
+                /* Efek Benar (Correct) */
+                state === "correct" && "bg-green-100 border-green-500 border-b-[6px] text-green-700 z-10 scale-105 shadow-xl",
+                
+                /* Efek Salah (Wrong) */
+                state === "wrong" && "bg-red-50 border-red-500 border-b-[2px] text-red-700 translate-y-[4px]",
+                
+                /* Efek Disabled (Non-aktif saat jawaban sudah dipilih) */
+                state === "disabled" && "bg-slate-50 border-slate-200 border-b-[2px] text-slate-400 opacity-60 translate-y-[4px]"
               )}
             >
               <span 
                 className={clsx(
-                  "block font-black leading-tight mt-1",
-                  gameMode === "arti-to-kanji" ? "text-3xl md:text-4xl" : "text-lg md:text-xl"
+                  "block font-black leading-tight",
+                  gameMode === "arti-to-kanji" ? "text-3xl sm:text-4xl" : "text-lg sm:text-xl"
                 )}
                 style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-jp)" : "var(--font-body)" }}
               >
