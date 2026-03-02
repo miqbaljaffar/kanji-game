@@ -131,10 +131,6 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
               {/* Tempat Gambar QRIS */}
               <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-4 flex flex-col items-center justify-center aspect-square mb-6 relative overflow-hidden group">
                 <img src="/images/qris.jpeg" alt="QRIS" className="w-full h-full object-contain" />
-                <span className="text-6xl mb-3 drop-shadow-sm">📱</span>
-                <span className="text-sm font-black text-slate-400 text-center uppercase tracking-widest">
-                  Ganti Dengan<br/>Gambar QRIS
-                </span>
               </div>
 
               <button 
