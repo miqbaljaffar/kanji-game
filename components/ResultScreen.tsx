@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { GameStats, GameMode, Difficulty } from "@/types";
 import { Mascot } from "./Mascot";
 
@@ -130,7 +131,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
               
               {/* Tempat Gambar QRIS */}
               <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-4 flex flex-col items-center justify-center aspect-square mb-6 relative overflow-hidden group">
-                <img src="/images/qris.jpeg" alt="QRIS" className="w-full h-full object-contain" />
+                <Image src="/images/qris.jpeg" alt="QRIS" fill className="object-contain" />
               </div>
 
               <button 
