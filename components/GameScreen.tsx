@@ -33,6 +33,9 @@ function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
   const entry = question.kanjiQuestion!;
   if (gameMode === "kanji-to-arti") return { main: entry.kanji, prompt: "Apa arti dari kanji ini?" };
   if (gameMode === "hiragana-to-arti") return { main: entry.hiragana, prompt: "Apa arti kosakata ini?" };
+  // DITAMBAHKAN: Logika prompt untuk mode baca kanji
+  if (gameMode === "kanji-to-hiragana") return { main: entry.kanji, prompt: "Bagaimana cara bacanya?" };
+  
   return { main: entry.arti, prompt: "Pilih kanji yang tepat!" };
 }
 
@@ -42,6 +45,10 @@ export function GameScreen({
   showFloatingScore, floatingScoreValue, onAnswer, onHome,
 }: GameScreenProps) {
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
+
+  // Fungsi pengecekan font agar bahasa jepang menggunakan font jepang
+  const isJpFontForQuestion = gameMode === "kanji-to-arti" || gameMode === "kanji-to-hiragana" || gameMode === "hiragana-to-arti" || gameMode === "bunpou";
+  const isJpFontForOptions = gameMode === "arti-to-kanji" || gameMode === "kanji-to-hiragana" || gameMode === "bunpou";
 
   return (
     <div className="relative z-10 flex flex-col min-h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
@@ -113,12 +120,12 @@ export function GameScreen({
               gameMode === "arti-to-kanji" ? "text-4xl sm:text-5xl" : 
               gameMode === "bunpou" ? "text-2xl sm:text-3xl" : "text-6xl sm:text-8xl"
             )}
-            style={{ fontFamily: gameMode === "arti-to-kanji" ? "var(--font-body)" : "var(--font-jp)" }}
+            style={{ fontFamily: isJpFontForQuestion ? "var(--font-jp)" : "var(--font-body)" }}
           >
             {display.main}
           </h2>
 
-          {/* Terjemahan Khusus Bunpou - DIPERBAIKI */}
+          {/* Terjemahan Khusus Bunpou */}
           {display.sub && (
              <p className="text-sm sm:text-base font-bold text-slate-500 mt-4 px-2">
                {`"${display.sub}"`}
@@ -151,7 +158,14 @@ export function GameScreen({
             optionText = opt as string;
           } else {
             const option = opt as KanjiEntry;
-            optionText = gameMode === "arti-to-kanji" ? option.kanji : option.arti;
+            // DITAMBAHKAN: Logika penentuan teks jawaban untuk mode baru
+            if (gameMode === "arti-to-kanji") {
+              optionText = option.kanji;
+            } else if (gameMode === "kanji-to-hiragana") {
+              optionText = option.hiragana;
+            } else {
+              optionText = option.arti;
+            }
           }
 
           return (
@@ -170,9 +184,9 @@ export function GameScreen({
               <span 
                 className={clsx(
                   "block font-black leading-tight",
-                  (gameMode === "arti-to-kanji" || gameMode === "bunpou") ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
+                  isJpFontForOptions ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
                 )}
-                style={{ fontFamily: (gameMode === "arti-to-kanji" || gameMode === "bunpou") ? "var(--font-jp)" : "var(--font-body)" }}
+                style={{ fontFamily: isJpFontForOptions ? "var(--font-jp)" : "var(--font-body)" }}
               >
                 {optionText}
               </span>

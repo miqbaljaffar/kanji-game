@@ -12,6 +12,7 @@ interface HomeScreenProps {
 const MODES = [
   { id: "kanji-to-arti" as GameMode, label: "漢字 → Arti", desc: "Tebak Artinya", icon: "📖" },
   { id: "arti-to-kanji" as GameMode, label: "Arti → 漢字", desc: "Pilih Kanji", icon: "🎯" },
+  { id: "kanji-to-hiragana" as GameMode, label: "漢字 → ひら", desc: "Cara Baca", icon: "🗣️" },
   { id: "hiragana-to-arti" as GameMode, label: "ひら → Arti", desc: "Dari Hiragana", icon: "✨" },
   { id: "bunpou" as GameMode, label: "文法 (Bunpou)", desc: "Tata Bahasa JFT", icon: "📝" },
 ];
@@ -64,7 +65,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
         <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40">
           <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Mode Belajar</h2>
           <div className="grid grid-cols-2 gap-3">
-            {MODES.map((mode) => (
+            {MODES.map((mode, index) => (
               <button
                 key={mode.id}
                 onClick={() => setSelectedMode(mode.id)}
@@ -72,7 +73,9 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                   "relative p-3 sm:p-4 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 border-2",
                   selectedMode === mode.id 
                     ? "bg-blue-50 border-blue-400 shadow-[0_6px_0_#93c5fd] sm:shadow-[0_8px_0_#93c5fd] -translate-y-1 sm:-translate-y-2" 
-                    : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]"
+                    : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]",
+                  // DITAMBAHKAN: Jika jumlah mode ganjil, buat item terakhir memenuhi 2 kolom penuh agar rapi
+                  MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : ""
                 )}
               >
                 <span className="text-2xl">{mode.icon}</span>
