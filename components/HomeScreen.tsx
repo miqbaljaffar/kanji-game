@@ -28,7 +28,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
   const [selectedDiff, setSelectedDiff] = useState<Difficulty>("medium");
 
   return (
-    <div className="relative z-10 min-h-[100dvh] flex flex-col items-center justify-center px-4 sm:px-6 py-10">
+    <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-4 sm:px-6 py-10">
       
       {/* Judul Aplikasi */}
       <div className="text-center mb-8 animate-fade-up mt-4">
@@ -99,7 +99,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                 className={clsx(
                   "relative p-3 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border-2",
                   selectedDiff === diff.id 
-                    ? `${diff.bg} ${diff.border} ${diff.shadow} -translate-y-1 sm:-translate-y-2 !border-b-2` 
+                    ? `${diff.bg} ${diff.border} ${diff.shadow} -translate-y-1 sm:-translate-y-2 border-b-2!` 
                     : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]"
                 )}
               >
@@ -119,7 +119,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       <div className="mt-8 mb-4 w-full max-w-lg animate-fade-up" style={{ animationDelay: "0.3s" }}>
         <button
           onClick={() => onStart(selectedMode, selectedDiff)}
-          className="w-full bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-black py-4 sm:py-5 rounded-3xl text-xl tracking-wider shadow-[0_10px_0_#059669] hover:shadow-[0_8px_0_#059669] hover:translate-y-1 active:shadow-[0_0px_0_#059669] active:translate-y-3 transition-all flex items-center justify-center gap-3 uppercase"
+          className="w-full bg-linear-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-black py-4 sm:py-5 rounded-3xl text-xl tracking-wider shadow-[0_10px_0_#059669] hover:shadow-[0_8px_0_#059669] hover:translate-y-1 active:shadow-[0_0px_0_#059669] active:translate-y-3 transition-all flex items-center justify-center gap-3 uppercase"
         >
           AYO MULAI! 🚀
         </button>

@@ -4,7 +4,7 @@ export interface KanjiEntry {
   kanji: string;
   hiragana: string;
   arti: string;
-  category: string;
+  category: number; 
 }
 
 export interface BunpouEntry {
@@ -15,21 +15,38 @@ export interface BunpouEntry {
   correctOption: string;
 }
 
-export type GameMode = "kanji-to-arti" | "arti-to-kanji" | "hiragana-to-arti" | "kanji-to-hiragana" | "bunpou";
+/* ======================
+   GAME TYPES
+====================== */
+export type GameMode =
+  | "kanji-to-arti"
+  | "arti-to-kanji"
+  | "hiragana-to-arti"
+  | "kanji-to-hiragana"
+  | "bunpou";
+
 export type GameState = "home" | "playing" | "result";
 export type AnswerState = "idle" | "correct" | "wrong";
 export type Difficulty = "easy" | "medium" | "hard";
 
+/* ======================
+   QUIZ STRUCTURE
+====================== */
 export interface QuizQuestion {
   mode: "kanji" | "bunpou";
+
   kanjiQuestion?: KanjiEntry;
   kanjiOptions?: KanjiEntry[];
+
   bunpouQuestion?: BunpouEntry;
   stringOptions?: string[];
-  
+
   correctIndex: number;
 }
 
+/* ======================
+   STATS
+====================== */
 export interface GameStats {
   score: number;
   streak: number;

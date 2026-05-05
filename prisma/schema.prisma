@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Atau "mongodb" jika pakai MongoDB
+}
+
+model Kanji {
+  id        String   @id @default(cuid())
+  kanji     String
+  hiragana  String?
+  romaji    String?
+  arti      String
+  category  String   @default("A")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Bunpou {
+  id            String   @id @default(cuid())
+  sentence      String
+  translation   String?
+  options       String[]
+  correctOption String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

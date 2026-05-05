@@ -38,7 +38,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
 
   return (
     <>
-      <div className="relative z-10 min-h-[100dvh] flex flex-col items-center justify-center p-6 sm:p-8 max-w-lg mx-auto">
+      <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center p-6 sm:p-8 max-w-lg mx-auto">
         
         {/* Maskot dengan animasi bounce-soft */}
         <div className="mb-4 animate-bounce-soft">
@@ -49,7 +49,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
         <div className="w-full bg-white/90 backdrop-blur-lg border-2 border-slate-100 shadow-xl p-8 text-center animate-fade-up relative overflow-hidden rounded-[2.5rem]">
           
           {/* Dekorasi pita juara di atas */}
-          <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-yellow-400 to-orange-400"></div>
+          <div className="absolute top-0 left-0 w-full h-3 bg-linear-to-r from-yellow-400 to-orange-400"></div>
 
           <h2 className="text-sm font-black text-slate-400 uppercase tracking-widest mt-2">Pelajaran Selesai</h2>
           <h1 className={`text-4xl font-black mt-2 mb-3 ${rank.color}`}>
@@ -58,7 +58,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
           <p className="text-base font-bold text-slate-500 mb-8">{rank.desc}</p>
 
           {/* Skor Utama dengan gradient background */}
-          <div className="bg-gradient-to-b from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-3xl p-6 mb-8 shadow-inner">
+          <div className="bg-linear-to-b from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-3xl p-6 mb-8 shadow-inner">
             <div className="text-sm font-black text-yellow-600 uppercase mb-2">Total Skor Kamu</div>
             <div className="text-6xl font-black text-yellow-500 drop-shadow-sm">
               ⭐ {stats.score.toLocaleString()}
@@ -89,7 +89,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
           <div className="flex flex-col gap-3">
             <button
               onClick={onPlayAgain}
-              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-black py-5 rounded-2xl text-lg tracking-widest shadow-[0_6px_0_#2563eb] active:shadow-none active:translate-y-2 transition-all uppercase"
+              className="w-full bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-black py-5 rounded-2xl text-lg tracking-widest shadow-[0_6px_0_#2563eb] active:shadow-none active:translate-y-2 transition-all uppercase"
             >
               MAIN LAGI! 🔥
             </button>
@@ -114,7 +114,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
       {/* --- MODAL DONASI QRIS --- */}
       {isDonationOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
-          <div className="bg-white rounded-[2rem] p-6 max-w-sm w-full shadow-2xl animate-bounce-pop relative border-4 border-slate-100">
+          <div className="bg-white rounded-4xl p-6 max-w-sm w-full shadow-2xl animate-bounce-pop relative border-4 border-slate-100">
             {/* Tombol Silang (X) */}
             <button 
               onClick={handleCloseDonation} 
@@ -149,7 +149,7 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
       {showThankYou && (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-slide-up w-full px-4 max-w-md pointer-events-none">
           <div className="bg-green-500 text-white px-5 py-4 rounded-2xl shadow-xl shadow-green-500/30 flex items-center gap-3 border-2 border-green-400">
-            <div className="bg-white/20 rounded-full p-2 flex-shrink-0">
+            <div className="bg-white/20 rounded-full p-2 shrink-0">
               <span className="text-xl block">✨</span>
             </div>
             <p className="text-sm font-bold leading-tight">
