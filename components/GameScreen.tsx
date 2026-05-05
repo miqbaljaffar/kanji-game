@@ -51,7 +51,7 @@ export function GameScreen({
   const isJpFontForOptions = gameMode === "arti-to-kanji" || gameMode === "kanji-to-hiragana" || gameMode === "bunpou";
 
   return (
-    <div className="relative z-10 flex flex-col min-h-[100dvh] p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
+    <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
       
       {/* HEADER: Compact & Glassmorphism */}
       <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
@@ -68,7 +68,7 @@ export function GameScreen({
         <div className="flex-1 mx-3 sm:mx-5">
           <div className="h-3 w-full bg-slate-200/80 rounded-full overflow-hidden relative shadow-inner">
             <div 
-              className="h-full bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-500 rounded-full"
+              className="h-full bg-linear-to-r from-blue-400 to-indigo-500 transition-all duration-500 rounded-full"
               style={{ width: `${(questionIndex / totalQuestions) * 100}%` }}
             >
               <div className="h-1 w-full bg-white/30 mt-0.5 rounded-full mx-1"></div>
@@ -108,7 +108,7 @@ export function GameScreen({
         </div>
 
         {/* Card Utama */}
-        <div className="w-full h-full min-h-[180px] bg-white/95 backdrop-blur-xl border-4 border-white rounded-[2rem] shadow-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden transition-all duration-300">
+        <div className="w-full h-full min-h-45 bg-white/95 backdrop-blur-xl border-4 border-white rounded-4xl shadow-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden transition-all duration-300">
           
           <p className="text-xs sm:text-sm font-black text-blue-400/80 uppercase tracking-widest mb-3 mt-4">
             {display.prompt}
@@ -116,7 +116,7 @@ export function GameScreen({
 
           <h2 
             className={clsx(
-              "font-black leading-tight text-slate-800 break-words w-full",
+              "font-black leading-tight text-slate-800 wrap-break-word w-full",
               gameMode === "arti-to-kanji" ? "text-4xl sm:text-5xl" : 
               gameMode === "bunpou" ? "text-2xl sm:text-3xl" : "text-6xl sm:text-8xl"
             )}
@@ -175,10 +175,10 @@ export function GameScreen({
               disabled={answerState !== "idle"}
               className={clsx(
                 "relative w-full p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none rounded-2xl sm:rounded-3xl border-2",
-                state === "idle" && "bg-white border-slate-200 border-b-[6px] text-slate-700 hover:bg-slate-50 hover:-translate-y-1 hover:border-b-[8px] active:border-b-[2px] active:translate-y-[4px]",
+                state === "idle" && "bg-white border-slate-200 border-b-[6px] text-slate-700 hover:bg-slate-50 hover:-translate-y-1 hover:border-b-8 active:border-b-2 active:translate-y-1",
                 state === "correct" && "bg-green-100 border-green-500 border-b-[6px] text-green-700 z-10 scale-105 shadow-xl",
-                state === "wrong" && "bg-red-50 border-red-500 border-b-[2px] text-red-700 translate-y-[4px]",
-                state === "disabled" && "bg-slate-50 border-slate-200 border-b-[2px] text-slate-400 opacity-60 translate-y-[4px]"
+                state === "wrong" && "bg-red-50 border-red-500 border-b-2 text-red-700 translate-y-1",
+                state === "disabled" && "bg-slate-50 border-slate-200 border-b-2 text-slate-400 opacity-60 translate-y-1"
               )}
             >
               <span 

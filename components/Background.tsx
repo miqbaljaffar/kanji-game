@@ -2,7 +2,7 @@
 
 export function GameBackground() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-gradient-to-b from-[#87CEEB] to-[#e0f2fe]">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-linear-to-b from-[#87CEEB] to-[#e0f2fe]">
       <div className="absolute top-10 left-10 w-40 h-16 bg-white/60 backdrop-blur-md rounded-full shadow-sm animate-float-cloud">
          <div className="absolute -top-6 left-6 w-16 h-16 bg-white/60 rounded-full"></div>
          <div className="absolute -top-10 left-16 w-20 h-20 bg-white/60 rounded-full"></div>
