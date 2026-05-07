@@ -13,6 +13,7 @@ import {
 
 import { KanjiManager } from "../../components/dashboard/KanjiManager";
 import { BunpouManager } from "../../components/dashboard/BunpouManager";
+import { AIQuestionGenerator } from "../../components/dashboard/AIQuestionGenerator";
 
 // ✅ FIX: ambil dari satu sumber
 import { KanjiEntry, BunpouEntry } from "@/types";
@@ -27,31 +28,33 @@ export default function DashboardPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [resKanji, resBunpou] = await Promise.all([
-          fetch('/api/kanji'),
-          fetch('/api/bunpou')
-        ]);
+  // Pisahkan fetchData agar bisa dipanggil lagi dari AI Generator
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const [resKanji, resBunpou] = await Promise.all([
+        fetch('/api/kanji'),
+        fetch('/api/bunpou')
+      ]);
 
-        if (resKanji.ok) {
-          const data = await resKanji.json();
-          setKanjis(data);
-        }
-
-        if (resBunpou.ok) {
-          const data = await resBunpou.json();
-          setBunpous(data);
-        }
-
-      } catch (err) {
-        console.error("Gagal memuat data:", err);
-      } finally {
-        setLoading(false);
+      if (resKanji.ok) {
+        const data = await resKanji.json();
+        setKanjis(data);
       }
-    };
 
+      if (resBunpou.ok) {
+        const data = await resBunpou.json();
+        setBunpous(data);
+      }
+
+    } catch (err) {
+      console.error("Gagal memuat data:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -125,6 +128,9 @@ export default function DashboardPage() {
         </header>
 
         <section className="flex-1 p-4 md:p-8">
+          {/* ✅ Render AI Generator di sini */}
+          <AIQuestionGenerator onSuccess={fetchData} activeTab={activeTab} />
+
           {loading ? (
             <div className="text-center text-slate-400 mt-20">
               <Database size={48} className="mx-auto mb-4 animate-pulse" />
