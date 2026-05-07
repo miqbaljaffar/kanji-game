@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Search, Trash2, Edit2 } from "lucide-react";
+import { Plus, Search, Trash2, Edit2, ChevronLeft, ChevronRight } from "lucide-react";
 import { KanjiEntry } from "@/types";
-// Menggunakan path alias @/ agar resolusi modul lebih stabil di Next.js
 import { KanjiForm } from "@/components/dashboard/KanjiForm";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
 
@@ -12,15 +11,30 @@ interface KanjiManagerProps {
   setData: (d: KanjiEntry[]) => void;
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export function KanjiManager({ data, setData }: KanjiManagerProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<KanjiEntry | null>(null);
   const [search, setSearch] = useState('');
   const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+  
+  // State untuk Paginasi
+  const [currentPage, setCurrentPage] = useState(1);
 
+  // 1. Filter Data berdasarkan Search
   const filteredData = data.filter(k => 
     k.kanji.includes(search) || k.arti.toLowerCase().includes(search.toLowerCase())
   );
+
+  // 2. Logika Paginasi
+  const totalPages = Math.max(1, Math.ceil(filteredData.length / ITEMS_PER_PAGE));
+  
+  // Pastikan currentPage tidak melebihi totalPages (berguna jika data dihapus)
+  const validCurrentPage = Math.min(currentPage, totalPages);
+  
+  const startIndex = (validCurrentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedData = filteredData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handleSave = async (item: KanjiEntry) => {
     const isEdit = !!editingItem;
@@ -59,7 +73,7 @@ export function KanjiManager({ data, setData }: KanjiManagerProps) {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500 pb-10">
       {/* Header Kontrol: Pencarian & Tambah */}
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="relative w-full md:w-96 group">
@@ -68,7 +82,10 @@ export function KanjiManager({ data, setData }: KanjiManagerProps) {
             type="text" 
             placeholder="Cari kanji atau arti..." 
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1); // Reset halaman langsung dari event handler
+            }}
             className="w-full bg-white border-2 border-slate-100 rounded-3xl py-4 pl-14 pr-6 focus:ring-4 focus:ring-blue-100 focus:border-blue-200 outline-none transition-all font-bold shadow-sm"
           />
         </div>
@@ -82,8 +99,8 @@ export function KanjiManager({ data, setData }: KanjiManagerProps) {
 
       {/* Grid List Kanji */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {filteredData.length > 0 ? (
-          filteredData.map((item) => (
+        {paginatedData.length > 0 ? (
+          paginatedData.map((item) => (
             <div key={item.id} className="bg-white rounded-4xl p-6 flex items-center gap-6 border-2 border-transparent hover:border-blue-100 hover:shadow-xl hover:shadow-blue-200/10 transition-all group overflow-hidden relative">
               {/* Visual Kanji */}
               <div className="w-24 h-24 bg-slate-50 rounded-3xl flex items-center justify-center text-5xl font-black text-slate-800 shadow-inner group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors shrink-0">
@@ -102,7 +119,7 @@ export function KanjiManager({ data, setData }: KanjiManagerProps) {
               </div>
 
               {/* Tombol Aksi */}
-              <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                 <button 
                   onClick={() => { setEditingItem(item); setIsModalOpen(true); }} 
                   className="p-3 bg-blue-50 text-blue-500 rounded-2xl hover:bg-blue-100 transition-colors"
@@ -126,6 +143,34 @@ export function KanjiManager({ data, setData }: KanjiManagerProps) {
           </div>
         )}
       </div>
+
+      {/* Kontrol Paginasi */}
+      {filteredData.length > 0 && (
+        <div className="flex items-center justify-between bg-white px-6 py-4 rounded-3xl shadow-sm border border-slate-100 mt-6">
+          <p className="text-sm font-bold text-slate-500">
+            Menampilkan <span className="text-blue-600">{startIndex + 1}</span> - <span className="text-blue-600">{Math.min(startIndex + ITEMS_PER_PAGE, filteredData.length)}</span> dari <span className="text-slate-800">{filteredData.length}</span> Kanji
+          </p>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={validCurrentPage === 1}
+              className="p-2 bg-slate-100 text-slate-600 rounded-xl hover:bg-blue-100 hover:text-blue-600 disabled:opacity-50 disabled:hover:bg-slate-100 disabled:hover:text-slate-600 transition-colors"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="flex items-center px-4 font-black text-slate-700 bg-slate-50 rounded-xl">
+              {validCurrentPage} / {totalPages}
+            </div>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={validCurrentPage === totalPages}
+              className="p-2 bg-slate-100 text-slate-600 rounded-xl hover:bg-blue-100 hover:text-blue-600 disabled:opacity-50 disabled:hover:bg-slate-100 disabled:hover:text-slate-600 transition-colors"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Modals */}
       {isModalOpen && (
