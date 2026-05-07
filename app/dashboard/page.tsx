@@ -96,8 +96,9 @@ export default function DashboardPage() {
         </nav>
 
         <div className="p-6 mt-auto">
+          {/* ✅ Tombol kembali ini sudah ada (muncul di versi desktop) */}
           <Link href="/">
-            <div className="bg-slate-800 text-white py-4 rounded-2xl flex justify-center gap-2 cursor-pointer">
+            <div className="bg-slate-800 text-white py-4 rounded-2xl flex justify-center gap-2 cursor-pointer hover:bg-slate-700 transition-colors">
               <ArrowLeft size={20} />
               {isSidebarOpen && "KEMBALI"}
             </div>
@@ -106,19 +107,28 @@ export default function DashboardPage() {
       </aside>
 
       {/* MAIN */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col overflow-y-auto">
 
-        <header className="bg-white px-8 py-10 border-b">
-          <h2 className="text-4xl font-black">
+        {/* ✅ Tambahan flex justify-between untuk menempatkan tombol mobile */}
+        <header className="bg-white px-6 md:px-8 py-8 md:py-10 border-b flex justify-between items-center gap-4">
+          <h2 className="text-2xl md:text-4xl font-black">
             {activeTab === 'kanji' ? 'Katalog Kosakata' : 'Katalog Bunpou'}
           </h2>
+          
+          {/* ✅ Tombol kembali ekstra khusus mobile (hidden md:hidden) */}
+          <Link href="/" className="md:hidden">
+            <div className="bg-slate-800 text-white px-4 py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer hover:bg-slate-700">
+              <ArrowLeft size={18} />
+              <span className="font-semibold text-sm">Kembali</span>
+            </div>
+          </Link>
         </header>
 
-        <section className="flex-1 p-8">
+        <section className="flex-1 p-4 md:p-8">
           {loading ? (
-            <div className="text-center text-slate-400">
-              <Database size={48} className="mx-auto mb-4" />
-              Loading...
+            <div className="text-center text-slate-400 mt-20">
+              <Database size={48} className="mx-auto mb-4 animate-pulse" />
+              <p className="font-semibold">Loading data...</p>
             </div>
           ) : (
             activeTab === 'kanji' ? (
