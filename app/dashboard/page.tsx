@@ -28,7 +28,7 @@ export default function DashboardPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  // Pisahkan fetchData agar bisa dipanggil lagi dari AI Generator
+  // Fungsi untuk mengambil data MURNI dari database saja
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -40,11 +40,15 @@ export default function DashboardPage() {
       if (resKanji.ok) {
         const data = await resKanji.json();
         setKanjis(data);
+      } else {
+        console.error("Gagal memuat data Kanji dari DB");
       }
 
       if (resBunpou.ok) {
         const data = await resBunpou.json();
         setBunpous(data);
+      } else {
+         console.error("Gagal memuat data Bunpou dari DB");
       }
 
     } catch (err) {
@@ -134,7 +138,7 @@ export default function DashboardPage() {
           {loading ? (
             <div className="text-center text-slate-400 mt-20">
               <Database size={48} className="mx-auto mb-4 animate-pulse" />
-              <p className="font-semibold">Loading data...</p>
+              <p className="font-semibold">Loading data dari Database...</p>
             </div>
           ) : (
             activeTab === 'kanji' ? (
