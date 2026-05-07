@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 // PUT: Update Kanji berdasarkan ID
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const id = params.id;
     const body = await request.json();
     
@@ -25,8 +26,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 }
 
 // DELETE: Hapus Kanji berdasarkan ID
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const id = params.id;
     await prisma.kanji.delete({
       where: { id }

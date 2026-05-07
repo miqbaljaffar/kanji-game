@@ -4,7 +4,7 @@ export interface KanjiEntry {
   kanji: string;
   hiragana: string;
   arti: string;
-  category: number; 
+  category: string; // ✅ FIX: Diubah dari number menjadi string
 }
 
 export interface BunpouEntry {

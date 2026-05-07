@@ -19,7 +19,7 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
       hiragana: "",
       romaji: "",
       arti: "",
-      category: 1 // ✅ FIX: harus number
+      category: "A" // ✅ FIX: Diubah menjadi string sesuai dengan interface KanjiEntry
     }
   );
 
@@ -58,27 +58,27 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
                 setFormData({ ...formData, kanji: e.target.value })
               }
               placeholder="例: 水"
-              className="input"
+              className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none text-lg"
             />
 
             {/* Hiragana + Romaji */}
             <div className="grid grid-cols-2 gap-4">
               <input
-                value={formData.hiragana}
+                value={formData.hiragana || ""}
                 onChange={(e) =>
                   setFormData({ ...formData, hiragana: e.target.value })
                 }
                 placeholder="みず"
-                className="input"
+                className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
               />
 
               <input
-                value={formData.romaji}
+                value={formData.romaji || ""}
                 onChange={(e) =>
                   setFormData({ ...formData, romaji: e.target.value })
                 }
                 placeholder="mizu"
-                className="input"
+                className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
 
@@ -90,21 +90,21 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
                 setFormData({ ...formData, arti: e.target.value })
               }
               placeholder="Air"
-              className="input"
+              className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
             />
 
-            {/* ✅ BONUS: CATEGORY INPUT */}
+            {/* CATEGORY INPUT */}
             <input
-              type="number"
+              type="text" // ✅ FIX: Diubah menjadi text karena category bertipe string
               value={formData.category}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  category: Number(e.target.value),
+                  category: e.target.value, // ✅ FIX: Hapus Number()
                 })
               }
-              placeholder="Level (1-5)"
-              className="input"
+              placeholder="Kategori (Misal: A, B, N4, dst)"
+              className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
             />
 
           </div>
@@ -113,14 +113,14 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-slate-100 py-4 rounded-2xl"
+              className="flex-1 bg-slate-100 py-4 rounded-2xl font-bold text-slate-600 hover:bg-slate-200 transition-colors"
             >
               Batal
             </button>
 
             <button
               type="submit"
-              className="flex-1 bg-blue-500 text-white py-4 rounded-2xl"
+              className="flex-1 bg-blue-500 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-600 transition-colors"
             >
               Simpan
             </button>
