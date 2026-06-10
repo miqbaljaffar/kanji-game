@@ -25,7 +25,7 @@ export type GameMode =
   | "kanji-to-hiragana"
   | "bunpou";
 
-export type GameState = "home" | "playing" | "result";
+export type GameState = "home" | "playing" | "answer" | "result";
 export type AnswerState = "idle" | "correct" | "wrong";
 export type Difficulty = "easy" | "medium" | "hard";
 

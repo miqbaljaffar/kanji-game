@@ -3,6 +3,7 @@
 import { useGame } from "@/hooks/useGame";
 import { HomeScreen } from "@/components/HomeScreen";
 import { GameScreen } from "@/components/GameScreen";
+import { AnswerScreen } from "@/components/AnswerScreen";
 import { ResultScreen } from "@/components/ResultScreen";
 import { GameBackground } from "@/components/Background";
 import Link from "next/link"; // ✅ Tambahan import Link
@@ -24,6 +25,7 @@ export default function Home() {
     floatingScoreValue,
     startGame,
     handleAnswer,
+    nextQuestionFromAnswer,
     goHome,
   } = useGame();
 
@@ -66,6 +68,19 @@ export default function Home() {
           showFloatingScore={showFloatingScore}
           floatingScoreValue={floatingScoreValue}
           onAnswer={handleAnswer}
+          onHome={goHome}
+        />
+      )}
+
+      {gameState === "answer" && currentQuestion && selectedIndex !== null && (
+        <AnswerScreen
+          question={currentQuestion}
+          questionIndex={questionIndex}
+          totalQuestions={totalQuestions}
+          selectedIndex={selectedIndex}
+          stats={stats}
+          gameMode={gameMode}
+          onNext={nextQuestionFromAnswer}
           onHome={goHome}
         />
       )}

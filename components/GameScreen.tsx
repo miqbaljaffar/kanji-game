@@ -147,11 +147,6 @@ export function GameScreen({
       <div className="flex-none grid grid-cols-2 gap-3 sm:gap-4 pb-2 sm:pb-4 z-20">
         {(question.mode === "bunpou" ? question.stringOptions! : question.kanjiOptions!).map((opt, idx) => {
           let state = "idle";
-          if (answerState !== "idle") {
-            if (idx === question.correctIndex) state = "correct";
-            else if (idx === selectedIndex) state = "wrong";
-            else state = "disabled";
-          }
 
           let optionText = "";
           if (question.mode === "bunpou") {

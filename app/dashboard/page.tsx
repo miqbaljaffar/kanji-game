@@ -13,7 +13,6 @@ import {
 
 import { KanjiManager } from "../../components/dashboard/KanjiManager";
 import { BunpouManager } from "../../components/dashboard/BunpouManager";
-import { AIQuestionGenerator } from "../../components/dashboard/AIQuestionGenerator";
 
 // ✅ FIX: ambil dari satu sumber
 import { KanjiEntry, BunpouEntry } from "@/types";
@@ -132,9 +131,6 @@ export default function DashboardPage() {
         </header>
 
         <section className="flex-1 p-4 md:p-8">
-          {/* ✅ Render AI Generator di sini */}
-          <AIQuestionGenerator onSuccess={fetchData} activeTab={activeTab} />
-
           {loading ? (
             <div className="text-center text-slate-400 mt-20">
               <Database size={48} className="mx-auto mb-4 animate-pulse" />

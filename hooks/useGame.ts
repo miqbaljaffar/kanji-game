@@ -116,9 +116,9 @@ export function useGame() {
     });
 
     setTimeout(() => {
-      nextQuestion();
-    }, 1500);
-  }, [answerState, currentQuestion, timeLeft, clearTimer, nextQuestion]);
+      setGameState("answer");
+    }, 800);
+  }, [answerState, currentQuestion, timeLeft, clearTimer]);
 
   useEffect(() => {
     if (gameState !== "playing" || answerState !== "idle") return;
@@ -142,6 +142,20 @@ export function useGame() {
     setGameState("home");
   }, [clearTimer]);
 
+  const nextQuestionFromAnswer = useCallback(() => {
+    const nextIndex = questionIndex + 1;
+    if (nextIndex >= QUESTIONS_PER_GAME) {
+      setGameState("result");
+      return;
+    }
+    setQuestionIndex(nextIndex);
+    setAnswerState("idle");
+    setSelectedIndex(null);
+    setTimeLeft(QUESTION_TIME[difficulty]);
+    setCurrentQuestion(generateQuestion(questionPool, nextIndex, gameMode));
+    setGameState("playing");
+  }, [questionIndex, questionPool, difficulty, gameMode, generateQuestion]);
+
   const totalQuestions = Math.min(QUESTIONS_PER_GAME, questionPool.length);
   const timeRatio = timeLeft / QUESTION_TIME[difficulty];
 
@@ -161,6 +175,7 @@ export function useGame() {
     floatingScoreValue,
     startGame,
     handleAnswer,
+    nextQuestionFromAnswer,
     goHome,
   };
 }
