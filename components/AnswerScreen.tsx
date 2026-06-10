@@ -1,7 +1,8 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { QuizQuestion, GameMode, GameStats, KanjiEntry, KanaEntry } from "@/types";
 import { Mascot } from "./Mascot";
+import { ConfirmModal } from "./ui/ConfirmModal";
 import clsx from "clsx";
 import { ChevronRight, CheckCircle, XCircle, BarChart3 } from "lucide-react";
 
@@ -90,6 +91,7 @@ export function AnswerScreen({
   onNext,
   onHome,
 }: AnswerScreenProps) {
+  const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
   const isJpFontForQuestion = gameMode === "kanji-to-arti" || gameMode === "kanji-to-hiragana" || gameMode === "hiragana-to-arti" || gameMode === "bunpou";
   const isJpFontForOptions = [
@@ -112,13 +114,26 @@ export function AnswerScreen({
 
   return (
     <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
+      {isExitConfirmOpen && (
+        <ConfirmModal
+          title="Keluar permainan?"
+          message="Jika kamu keluar sekarang, permainan akan selesai dan hasil akan ditampilkan."
+          confirmText="Ya, selesai"
+          cancelText="Lanjutkan"
+          onConfirm={() => {
+            setIsExitConfirmOpen(false);
+            onHome();
+          }}
+          onCancel={() => setIsExitConfirmOpen(false)}
+        />
+      )}
       
       {/* HEADER: Compact & Glassmorphism */}
       <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
         
         {/* Tombol Keluar */}
         <button
-          onClick={onHome}
+          onClick={() => setIsExitConfirmOpen(true)}
           className="w-10 h-10 flex items-center justify-center bg-white shadow-sm hover:bg-slate-50 text-slate-400 hover:text-red-500 rounded-full font-black text-xl transition-all"
         >
           ✕
