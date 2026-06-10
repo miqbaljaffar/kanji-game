@@ -1,7 +1,8 @@
 "use client";
-import { useMemo } from "react";
-import { QuizQuestion, AnswerState, GameStats, GameMode, Difficulty, KanjiEntry } from "@/types";
+import { useMemo, useState } from "react";
+import { QuizQuestion, AnswerState, GameStats, GameMode, Difficulty, KanjiEntry, KanaEntry } from "@/types";
 import { Mascot } from "./Mascot";
+import { ConfirmModal } from "./ui/ConfirmModal";
 import clsx from "clsx";
 
 interface GameScreenProps {
@@ -18,7 +19,7 @@ interface GameScreenProps {
   showFloatingScore: boolean;
   floatingScoreValue: number;
   onAnswer: (idx: number) => void;
-  onHome: () => void;
+  onExit: () => void;
 }
 
 function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
@@ -30,10 +31,20 @@ function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
     };
   }
 
+  if (question.mode === "kana" && question.kanaQuestion) {
+    return {
+      main: question.kanaQuestion.romaji,
+      prompt: gameMode === "hiragana-to-romaji"
+        ? "Pilih huruf Hiragana yang tepat!"
+        : gameMode === "katakana-to-romaji"
+          ? "Pilih huruf Katakana yang tepat!"
+          : "Pilih huruf Kana yang tepat!",
+    };
+  }
+
   const entry = question.kanjiQuestion!;
   if (gameMode === "kanji-to-arti") return { main: entry.kanji, prompt: "Apa arti dari kanji ini?" };
   if (gameMode === "hiragana-to-arti") return { main: entry.hiragana, prompt: "Apa arti kosakata ini?" };
-  // DITAMBAHKAN: Logika prompt untuk mode baca kanji
   if (gameMode === "kanji-to-hiragana") return { main: entry.kanji, prompt: "Bagaimana cara bacanya?" };
   
   return { main: entry.arti, prompt: "Pilih kanji yang tepat!" };
@@ -42,13 +53,21 @@ function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
 export function GameScreen({
   question, questionIndex, totalQuestions, answerState, selectedIndex,
   stats, timeLeft, timeRatio, gameMode,
-  showFloatingScore, floatingScoreValue, onAnswer, onHome,
+  showFloatingScore, floatingScoreValue, onAnswer, onExit,
 }: GameScreenProps) {
+  const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
 
   // Fungsi pengecekan font agar bahasa jepang menggunakan font jepang
   const isJpFontForQuestion = gameMode === "kanji-to-arti" || gameMode === "kanji-to-hiragana" || gameMode === "hiragana-to-arti" || gameMode === "bunpou";
-  const isJpFontForOptions = gameMode === "arti-to-kanji" || gameMode === "kanji-to-hiragana" || gameMode === "bunpou";
+  const isJpFontForOptions = [
+    "arti-to-kanji",
+    "kanji-to-hiragana",
+    "bunpou",
+    "hiragana-to-romaji",
+    "katakana-to-romaji",
+    "mixed-kana",
+  ].includes(gameMode);
 
   return (
     <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
@@ -58,7 +77,7 @@ export function GameScreen({
         
         {/* Tombol Keluar */}
         <button
-          onClick={onHome}
+          onClick={() => setIsExitConfirmOpen(true)}
           className="w-10 h-10 flex items-center justify-center bg-white shadow-sm hover:bg-slate-50 text-slate-400 hover:text-red-500 rounded-full font-black text-xl transition-all"
         >
           ✕
@@ -99,6 +118,19 @@ export function GameScreen({
 
       {/* KARTU PERTANYAAN (Dynamic Flex) */}
       <div className="flex-1 flex flex-col justify-center relative mt-12 mb-6 sm:mb-8 z-10 min-h-0">
+        {isExitConfirmOpen && (
+          <ConfirmModal
+            title="Keluar permainan?"
+            message="Jika kamu keluar sekarang, permainan akan selesai dan hasil akan ditampilkan."
+            confirmText="Ya, selesai"
+            cancelText="Lanjutkan"
+            onConfirm={() => {
+              setIsExitConfirmOpen(false);
+              onExit();
+            }}
+            onCancel={() => setIsExitConfirmOpen(false)}
+          />
+        )}
         
         {/* Maskot */}
         <div className="absolute -top-14 left-1/2 -translate-x-1/2 z-20">
@@ -145,15 +177,24 @@ export function GameScreen({
 
       {/* GRID JAWABAN */}
       <div className="flex-none grid grid-cols-2 gap-3 sm:gap-4 pb-2 sm:pb-4 z-20">
-        {(question.mode === "bunpou" ? question.stringOptions! : question.kanjiOptions!).map((opt, idx) => {
+        {(
+          question.mode === "bunpou"
+            ? question.stringOptions!
+            : question.mode === "kana"
+              ? question.kanaOptions!
+              : question.kanjiOptions!
+        ).map((opt, idx) => {
           let state = "idle";
 
           let optionText = "";
           if (question.mode === "bunpou") {
             optionText = opt as string;
+          } else if (question.mode === "kana") {
+            const option = opt as KanaEntry;
+            const script = question.kanaScript ?? (gameMode === "hiragana-to-romaji" ? "hiragana" : "katakana");
+            optionText = option[script];
           } else {
             const option = opt as KanjiEntry;
-            // DITAMBAHKAN: Logika penentuan teks jawaban untuk mode baru
             if (gameMode === "arti-to-kanji") {
               optionText = option.kanji;
             } else if (gameMode === "kanji-to-hiragana") {

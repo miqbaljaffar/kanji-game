@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { KanjiEntry, BunpouEntry, GameMode, GameState, AnswerState, GameStats, QuizQuestion, Difficulty } from "@/types";
+import { KanjiEntry, KanaEntry, BunpouEntry, GameMode, GameState, AnswerState, GameStats, QuizQuestion, Difficulty } from "@/types";
 import { kanjiData, getRandomOptions, shuffleArray } from "@/data/kanji";
+import { kanaData, getRandomKanaOptions } from "@/data/kana";
 import { bunpouData } from "@/data/bunpou";
 
 const QUESTION_TIME = { easy: 20, medium: 12, hard: 7 };
@@ -20,7 +21,7 @@ export function useGame() {
     score: 0, streak: 0, maxStreak: 0, correct: 0, wrong: 0, total: 0, timeSpent: 0, accuracy: 0
   });
   const [timeLeft, setTimeLeft] = useState(QUESTION_TIME["medium"]);
-  const [questionPool, setQuestionPool] = useState<(KanjiEntry | BunpouEntry)[]>([]);
+  const [questionPool, setQuestionPool] = useState<(KanjiEntry | BunpouEntry | KanaEntry)[]>([]);
   const [showFloatingScore, setShowFloatingScore] = useState(false);
   const [floatingScoreValue, setFloatingScoreValue] = useState(0);
 
@@ -34,23 +35,38 @@ export function useGame() {
     }
   }, []);
 
-  const generateQuestion = useCallback((pool: (KanjiEntry | BunpouEntry)[], index: number, currentMode: GameMode): QuizQuestion => {
+  const generateQuestion = useCallback((pool: (KanjiEntry | BunpouEntry | KanaEntry)[], index: number, currentMode: GameMode): QuizQuestion => {
     if (currentMode === "bunpou") {
       const question = pool[index] as BunpouEntry;
       const options = shuffleArray([...question.options]);
       const correctIndex = options.indexOf(question.correctOption);
       return { mode: "bunpou", bunpouQuestion: question, stringOptions: options, correctIndex };
-    } else {
-      const question = pool[index] as KanjiEntry;
-      const options = getRandomOptions(question, kanjiData, 4);
-      const correctIndex = options.findIndex((o) => o.id === question.id);
-      return { mode: "kanji", kanjiQuestion: question, kanjiOptions: options, correctIndex };
     }
+
+    if (currentMode === "hiragana-to-romaji" || currentMode === "katakana-to-romaji" || currentMode === "mixed-kana") {
+      const question = pool[index] as KanaEntry;
+      const options = getRandomKanaOptions(question, kanaData, 4);
+      const correctIndex = options.findIndex((o) => o.id === question.id);
+      const kanaScript = currentMode === "mixed-kana"
+        ? Math.random() > 0.5 ? "hiragana" : "katakana"
+        : currentMode === "hiragana-to-romaji" ? "hiragana" : "katakana";
+      return { mode: "kana", kanaQuestion: question, kanaOptions: options, correctIndex, kanaScript };
+    }
+
+    const question = pool[index] as KanjiEntry;
+    const options = getRandomOptions(question, kanjiData, 4);
+    const correctIndex = options.findIndex((o) => o.id === question.id);
+    return { mode: "kanji", kanjiQuestion: question, kanjiOptions: options, correctIndex };
   }, []);
 
   const startGame = useCallback((mode: GameMode, diff: Difficulty) => {
     // FIX: Kita deklarasikan tipe dataSource sebagai array campuran secara eksplisit di sini
-    const dataSource: (KanjiEntry | BunpouEntry)[] = mode === "bunpou" ? bunpouData : kanjiData;
+    const dataSource: (KanjiEntry | BunpouEntry | KanaEntry)[] =
+      mode === "bunpou"
+        ? bunpouData
+        : mode === "hiragana-to-romaji" || mode === "katakana-to-romaji" || mode === "mixed-kana"
+          ? kanaData
+          : kanjiData;
     
     const pool = shuffleArray(dataSource).slice(0, QUESTIONS_PER_GAME);
     setQuestionPool(pool);
@@ -142,6 +158,11 @@ export function useGame() {
     setGameState("home");
   }, [clearTimer]);
 
+  const finishGame = useCallback(() => {
+    clearTimer();
+    setGameState("result");
+  }, [clearTimer]);
+
   const nextQuestionFromAnswer = useCallback(() => {
     const nextIndex = questionIndex + 1;
     if (nextIndex >= QUESTIONS_PER_GAME) {
@@ -177,5 +198,6 @@ export function useGame() {
     handleAnswer,
     nextQuestionFromAnswer,
     goHome,
+    finishGame,
   };
 }

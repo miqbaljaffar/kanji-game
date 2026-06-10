@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { GameMode, Difficulty } from "@/types";
 import { kanjiData } from "@/data/kanji";
+import { kanaData } from "@/data/kana";
 import { bunpouData } from "@/data/bunpou";
 import clsx from "clsx";
 
@@ -14,6 +15,9 @@ const MODES = [
   { id: "arti-to-kanji" as GameMode, label: "Arti → 漢字", desc: "Pilih Kanji", icon: "🎯" },
   { id: "kanji-to-hiragana" as GameMode, label: "漢字 → ひら", desc: "Cara Baca", icon: "🗣️" },
   { id: "hiragana-to-arti" as GameMode, label: "ひら → Arti", desc: "Dari Hiragana", icon: "✨" },
+  { id: "hiragana-to-romaji" as GameMode, label: "Romaji → ひら", desc: "Tebak huruf Hiragana", icon: "🟣" },
+  { id: "katakana-to-romaji" as GameMode, label: "Romaji → カタ", desc: "Tebak huruf Katakana", icon: "🔷" },
+  { id: "mixed-kana" as GameMode, label: "Romaji → ひら/カタ", desc: "Tebak campuran Kana", icon: "🔶" },
   { id: "bunpou" as GameMode, label: "文法 (Bunpou)", desc: "Tata Bahasa JFT", icon: "📝" },
 ];
 
@@ -26,6 +30,7 @@ const DIFFICULTIES = [
 export function HomeScreen({ onStart }: HomeScreenProps) {
   const [selectedMode, setSelectedMode] = useState<GameMode>("kanji-to-arti");
   const [selectedDiff, setSelectedDiff] = useState<Difficulty>("medium");
+  const difficultyRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-4 sm:px-6 py-10">
@@ -46,6 +51,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 animate-fade-up" style={{ animationDelay: "0.1s" }}>
         {[
           { val: kanjiData.length, label: "Kosakata", icon: "📚" },
+          { val: kanaData.length, label: "Huruf Kana", icon: "🔠" },
           { val: bunpouData.length, label: "Grammar", icon: "📝" },
         ].map((stat) => (
           <div key={stat.label} className="bg-white/80 backdrop-blur-md px-5 sm:px-6 py-3 rounded-2xl shadow-lg flex items-center gap-3 border border-white/40">
@@ -68,7 +74,12 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
             {MODES.map((mode, index) => (
               <button
                 key={mode.id}
-                onClick={() => setSelectedMode(mode.id)}
+                onClick={() => {
+                  setSelectedMode(mode.id);
+                  if (difficultyRef.current && selectedMode !== mode.id) {
+                    difficultyRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }
+                }}
                 className={clsx(
                   "relative p-3 sm:p-4 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 border-2",
                   selectedMode === mode.id 
@@ -89,7 +100,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
         </div>
 
         {/* Pilih Kesulitan */}
-        <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40">
+        <div ref={difficultyRef} className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40">
           <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Kecepatan</h2>
           <div className="grid grid-cols-3 gap-3">
             {DIFFICULTIES.map((diff) => (

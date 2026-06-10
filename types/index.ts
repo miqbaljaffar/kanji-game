@@ -7,6 +7,13 @@ export interface KanjiEntry {
   category: string; // ✅ FIX: Diubah dari number menjadi string
 }
 
+export interface KanaEntry {
+  id: string;
+  romaji: string;
+  hiragana: string;
+  katakana: string;
+}
+
 export interface BunpouEntry {
   id: string;
   sentence: string;
@@ -23,7 +30,10 @@ export type GameMode =
   | "arti-to-kanji"
   | "hiragana-to-arti"
   | "kanji-to-hiragana"
-  | "bunpou";
+  | "bunpou"
+  | "hiragana-to-romaji"
+  | "katakana-to-romaji"
+  | "mixed-kana";
 
 export type GameState = "home" | "playing" | "answer" | "result";
 export type AnswerState = "idle" | "correct" | "wrong";
@@ -33,10 +43,14 @@ export type Difficulty = "easy" | "medium" | "hard";
    QUIZ STRUCTURE
 ====================== */
 export interface QuizQuestion {
-  mode: "kanji" | "bunpou";
+  mode: "kanji" | "bunpou" | "kana";
 
   kanjiQuestion?: KanjiEntry;
   kanjiOptions?: KanjiEntry[];
+
+  kanaQuestion?: KanaEntry;
+  kanaOptions?: KanaEntry[];
+  kanaScript?: "hiragana" | "katakana";
 
   bunpouQuestion?: BunpouEntry;
   stringOptions?: string[];

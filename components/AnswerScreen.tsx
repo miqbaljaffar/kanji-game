@@ -1,6 +1,6 @@
 "use client";
 import { useMemo } from "react";
-import { QuizQuestion, GameMode, GameStats, KanjiEntry } from "@/types";
+import { QuizQuestion, GameMode, GameStats, KanjiEntry, KanaEntry } from "@/types";
 import { Mascot } from "./Mascot";
 import clsx from "clsx";
 import { ChevronRight, CheckCircle, XCircle, BarChart3 } from "lucide-react";
@@ -25,6 +25,17 @@ function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
     };
   }
 
+  if (question.mode === "kana" && question.kanaQuestion) {
+    return {
+      main: question.kanaQuestion.romaji,
+      prompt: gameMode === "hiragana-to-romaji"
+        ? "Pilih huruf Hiragana yang tepat!"
+        : gameMode === "katakana-to-romaji"
+          ? "Pilih huruf Katakana yang tepat!"
+          : "Pilih huruf Kana yang tepat!",
+    };
+  }
+
   const entry = question.kanjiQuestion!;
   if (gameMode === "kanji-to-arti") return { main: entry.kanji, prompt: "Apa arti dari kanji ini?" };
   if (gameMode === "hiragana-to-arti") return { main: entry.hiragana, prompt: "Apa arti kosakata ini?" };
@@ -33,18 +44,40 @@ function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
   return { main: entry.arti, prompt: "Pilih kanji yang tepat!" };
 }
 
-function getAnswerText(answer: string | KanjiEntry, gameMode: GameMode): string {
+function getAnswerText(answer: string | KanjiEntry | KanaEntry | null, gameMode: GameMode, kanaScript?: "hiragana" | "katakana"): string {
+  if (answer === null) {
+    return "Waktu habis";
+  }
+
   if (typeof answer === "string") {
     return answer;
   }
-  
+
   if (gameMode === "arti-to-kanji") {
-    return answer.kanji;
-  } else if (gameMode === "kanji-to-hiragana") {
-    return answer.hiragana;
-  } else {
-    return answer.arti;
+    return (answer as KanjiEntry).kanji;
   }
+
+  if (gameMode === "kanji-to-hiragana") {
+    return (answer as KanjiEntry).hiragana;
+  }
+
+  if (gameMode === "hiragana-to-arti" || gameMode === "kanji-to-arti") {
+    return (answer as KanjiEntry).arti;
+  }
+
+  if (gameMode === "hiragana-to-romaji") {
+    return (answer as KanaEntry).hiragana;
+  }
+
+  if (gameMode === "katakana-to-romaji") {
+    return (answer as KanaEntry).katakana;
+  }
+
+  if (gameMode === "mixed-kana") {
+    return (answer as KanaEntry)[kanaScript ?? "hiragana"];
+  }
+
+  return (answer as KanjiEntry).arti;
 }
 
 export function AnswerScreen({
@@ -59,15 +92,23 @@ export function AnswerScreen({
 }: AnswerScreenProps) {
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
   const isJpFontForQuestion = gameMode === "kanji-to-arti" || gameMode === "kanji-to-hiragana" || gameMode === "hiragana-to-arti" || gameMode === "bunpou";
-  const isJpFontForOptions = gameMode === "arti-to-kanji" || gameMode === "kanji-to-hiragana" || gameMode === "bunpou";
+  const isJpFontForOptions = [
+    "arti-to-kanji",
+    "kanji-to-hiragana",
+    "bunpou",
+    "hiragana-to-romaji",
+    "katakana-to-romaji",
+    "mixed-kana",
+  ].includes(gameMode);
   
-  const isCorrect = selectedIndex === question.correctIndex;
-  const allOptions = question.mode === "bunpou" ? question.stringOptions! : question.kanjiOptions!;
-  const selectedAnswer = allOptions[selectedIndex];
+  const isTimeout = selectedIndex < 0;
+  const isCorrect = !isTimeout && selectedIndex === question.correctIndex;
+  const allOptions = question.mode === "bunpou" ? question.stringOptions! : question.mode === "kana" ? question.kanaOptions! : question.kanjiOptions!;
+  const selectedAnswer = isTimeout ? null : allOptions[selectedIndex];
   const correctAnswer = allOptions[question.correctIndex];
 
-  const selectedAnswerText = getAnswerText(selectedAnswer, gameMode);
-  const correctAnswerText = getAnswerText(correctAnswer, gameMode);
+  const selectedAnswerText = getAnswerText(selectedAnswer, gameMode, question.kanaScript);
+  const correctAnswerText = getAnswerText(correctAnswer, gameMode, question.kanaScript);
 
   return (
     <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">

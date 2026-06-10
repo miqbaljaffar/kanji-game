@@ -27,6 +27,7 @@ export default function Home() {
     handleAnswer,
     nextQuestionFromAnswer,
     goHome,
+    finishGame,
   } = useGame();
 
   return (
@@ -68,7 +69,7 @@ export default function Home() {
           showFloatingScore={showFloatingScore}
           floatingScoreValue={floatingScoreValue}
           onAnswer={handleAnswer}
-          onHome={goHome}
+          onExit={finishGame}
         />
       )}
 
