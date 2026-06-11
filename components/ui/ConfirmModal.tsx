@@ -14,7 +14,7 @@ interface ConfirmModalProps {
 
 export function ConfirmModal({ message, onConfirm, onCancel }: ConfirmModalProps) {
   return (
-    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-100 p-4">
+    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
       <div className="bg-white rounded-4xl w-full max-w-sm shadow-2xl p-8 text-center animate-in zoom-in duration-300">
         <div className="w-20 h-20 bg-red-100 text-red-500 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-inner">
           <AlertTriangle size={40} />

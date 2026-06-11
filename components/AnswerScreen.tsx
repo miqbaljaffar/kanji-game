@@ -1,10 +1,9 @@
 "use client";
 import { useMemo, useState } from "react";
 import { QuizQuestion, GameMode, GameStats, KanjiEntry, KanaEntry } from "@/types";
-import { Mascot } from "./Mascot";
 import { ConfirmModal } from "./ui/ConfirmModal";
 import clsx from "clsx";
-import { ChevronRight, CheckCircle, XCircle, BarChart3 } from "lucide-react";
+import { ChevronRight, CheckCircle, XCircle } from "lucide-react";
 
 interface AnswerScreenProps {
   question: QuizQuestion;
@@ -14,7 +13,7 @@ interface AnswerScreenProps {
   stats: GameStats;
   gameMode: GameMode;
   onNext: () => void;
-  onHome: () => void;
+  onExit: () => void;
 }
 
 function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
@@ -89,7 +88,7 @@ export function AnswerScreen({
   stats,
   gameMode,
   onNext,
-  onHome,
+  onExit,
 }: AnswerScreenProps) {
   const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
@@ -122,7 +121,7 @@ export function AnswerScreen({
           cancelText="Lanjutkan"
           onConfirm={() => {
             setIsExitConfirmOpen(false);
-            onHome();
+            onExit();
           }}
           onCancel={() => setIsExitConfirmOpen(false)}
         />

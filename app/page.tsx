@@ -39,7 +39,7 @@ export default function Home() {
       {gameState === "home" && (
         <>
           {/* ✅ Tambahan tombol menuju Dashboard */}
-          <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50">
+          <div className="hidden absolute top-4 right-4 md:top-6 md:right-6 z-50">
             <Link 
               href="/dashboard" 
               className="bg-white/90 text-blue-600 hover:bg-white px-5 py-3 rounded-2xl font-black shadow-[0_4px_0_rgb(37,99,235)] active:shadow-[0_0px_0_rgb(37,99,235)] active:translate-y-1 transition-all flex items-center gap-2 border-2 border-blue-600"
@@ -82,7 +82,7 @@ export default function Home() {
           stats={stats}
           gameMode={gameMode}
           onNext={nextQuestionFromAnswer}
-          onHome={goHome}
+          onExit={finishGame}
         />
       )}
 

@@ -51,7 +51,7 @@ function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
 }
 
 export function GameScreen({
-  question, questionIndex, totalQuestions, answerState, selectedIndex,
+  question, questionIndex, totalQuestions, answerState,
   stats, timeLeft, timeRatio, gameMode,
   showFloatingScore, floatingScoreValue, onAnswer, onExit,
 }: GameScreenProps) {
@@ -71,6 +71,19 @@ export function GameScreen({
 
   return (
     <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
+      {isExitConfirmOpen && (
+        <ConfirmModal
+          title="Keluar permainan?"
+          message="Jika kamu keluar sekarang, permainan akan selesai dan hasil akan ditampilkan."
+          confirmText="Ya, selesai"
+          cancelText="Lanjutkan"
+          onConfirm={() => {
+            setIsExitConfirmOpen(false);
+            onExit();
+          }}
+          onCancel={() => setIsExitConfirmOpen(false)}
+        />
+      )}
       
       {/* HEADER: Compact & Glassmorphism */}
       <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
@@ -118,19 +131,6 @@ export function GameScreen({
 
       {/* KARTU PERTANYAAN (Dynamic Flex) */}
       <div className="flex-1 flex flex-col justify-center relative mt-12 mb-6 sm:mb-8 z-10 min-h-0">
-        {isExitConfirmOpen && (
-          <ConfirmModal
-            title="Keluar permainan?"
-            message="Jika kamu keluar sekarang, permainan akan selesai dan hasil akan ditampilkan."
-            confirmText="Ya, selesai"
-            cancelText="Lanjutkan"
-            onConfirm={() => {
-              setIsExitConfirmOpen(false);
-              onExit();
-            }}
-            onCancel={() => setIsExitConfirmOpen(false)}
-          />
-        )}
         
         {/* Maskot */}
         <div className="absolute -top-14 left-1/2 -translate-x-1/2 z-20">
@@ -184,7 +184,7 @@ export function GameScreen({
               ? question.kanaOptions!
               : question.kanjiOptions!
         ).map((opt, idx) => {
-          let state = "idle";
+          const state: string = "idle";
 
           let optionText = "";
           if (question.mode === "bunpou") {
