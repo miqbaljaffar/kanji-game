@@ -304,16 +304,50 @@ export function AnswerScreen({
           </div>
 
           {/* Penjelasan Tambahan */}
-          <div className="bg-blue-50/80 border-2 border-blue-200 rounded-2xl p-4 mb-6">
-            <p className="text-xs font-black text-blue-600 uppercase mb-2">Penjelasan:</p>
-            <p className="text-sm text-slate-700 font-semibold leading-relaxed">
-              {question.mode === "bunpou" 
-                ? `Kalimat: "${question.bunpouQuestion?.translation}"\nJawaban yang benar adalah: "${correctAnswerText}"`
-                : `${isCorrect 
-                    ? `Benar! "${correctAnswerText}" adalah jawaban yang tepat.` 
-                    : `"${correctAnswerText}" adalah jawaban yang benar. Coba perhatikan lebih detail untuk soal selanjutnya!`}`
-              }
-            </p>
+          <div className="bg-blue-50/80 border-2 border-blue-200 rounded-2xl p-4 mb-6 space-y-4">
+            <div>
+              <p className="text-xs font-black text-blue-600 uppercase mb-1">Status Jawaban:</p>
+              <p className="text-sm text-slate-700 font-semibold leading-relaxed">
+                {question.mode === "bunpou" 
+                  ? `Kalimat: "${question.bunpouQuestion?.translation}"\nJawaban yang benar adalah: "${correctAnswerText}"`
+                  : `${isCorrect 
+                      ? `Benar! "${correctAnswerText}" adalah jawaban yang tepat.` 
+                      : `"${correctAnswerText}" adalah jawaban yang benar. Coba perhatikan lebih detail untuk soal selanjutnya!`}`
+                }
+              </p>
+            </div>
+
+            {/* Cara Baca Kata Kanji Lengkap (Hiragana & Romaji) di Penjelasan */}
+            {question.mode === "kanji" && question.kanjiQuestion && (
+              <div className="pt-3 border-t border-blue-200/60 flex flex-col gap-2.5">
+                <div>
+                  <span className="text-[10px] font-black text-blue-500 uppercase tracking-wider block mb-0.5">Kata Lengkap</span>
+                  <div className="text-2xl font-black text-slate-800 font-jp">
+                    {question.kanjiQuestion.kanji}
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <span className="text-[10px] font-black text-blue-500 uppercase tracking-wider block mb-0.5">Cara Baca (Hiragana)</span>
+                    <div className="text-lg font-black text-blue-700 font-jp">
+                      {question.kanjiQuestion.hiragana}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black text-blue-500 uppercase tracking-wider block mb-0.5">Romaji</span>
+                    <div className="text-sm font-bold text-slate-600 italic">
+                      {question.kanjiQuestion.romaji}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[10px] font-black text-blue-500 uppercase tracking-wider block mb-0.5">Arti Kata</span>
+                  <div className="text-sm font-bold text-slate-700">
+                    {question.kanjiQuestion.arti}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Detail Kanji (Mnemonic & Detail) */}
