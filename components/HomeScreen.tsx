@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { GameMode, Difficulty } from "@/types";
 import { kanjiData } from "@/data/kanji";
 import { kanaData } from "@/data/kana";
@@ -28,9 +28,11 @@ const DIFFICULTIES = [
 ];
 
 export function HomeScreen({ onStart }: HomeScreenProps) {
-  const [selectedMode, setSelectedMode] = useState<GameMode>("kanji-to-arti");
-  const [selectedDiff, setSelectedDiff] = useState<Difficulty>("medium");
-  const difficultyRef = useRef<HTMLDivElement | null>(null);
+  const [selectedMode, setSelectedMode] = useState<GameMode | null>(null);
+  const [selectedDiff, setSelectedDiff] = useState<Difficulty | null>(null);
+  const [step, setStep] = useState<1 | 2>(1);
+
+  const selectedModeInfo = MODES.find((m) => m.id === selectedMode);
 
   return (
     <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-4 sm:px-6 py-10">
@@ -65,77 +67,101 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       </div>
 
       {/* Area Pemilihan */}
-      <div className="w-full max-w-lg space-y-5 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+      <div className="w-full max-w-lg space-y-5">
         
-        {/* Pilih Mode */}
-        <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40">
-          <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Mode Belajar</h2>
-          <div className="grid grid-cols-2 gap-3">
-            {MODES.map((mode, index) => (
-              <button
-                key={mode.id}
-                onClick={() => {
-                  setSelectedMode(mode.id);
-                  if (difficultyRef.current && selectedMode !== mode.id) {
-                    difficultyRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-                  }
-                }}
-                className={clsx(
-                  "relative p-3 sm:p-4 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 border-2",
-                  selectedMode === mode.id 
-                    ? "bg-blue-50 border-blue-400 shadow-[0_6px_0_#93c5fd] sm:shadow-[0_8px_0_#93c5fd] -translate-y-1 sm:-translate-y-2" 
-                    : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]",
-                  // DITAMBAHKAN: Jika jumlah mode ganjil, buat item terakhir memenuhi 2 kolom penuh agar rapi
-                  MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : ""
-                )}
-              >
-                <span className="text-2xl">{mode.icon}</span>
-                <div className="text-center">
-                  <div className={clsx("text-xs sm:text-sm font-black", selectedMode === mode.id ? "text-blue-700" : "text-slate-600")}>{mode.label}</div>
-                  <div className="text-[10px] text-slate-400 font-bold mt-1">{mode.desc}</div>
-                </div>
-              </button>
-            ))}
+        {step === 1 ? (
+          /* Pilih Mode */
+          <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40 animate-fade-up" style={{ animationDelay: "0.2s" }}>
+            <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Mode Belajar</h2>
+            <div className="grid grid-cols-2 gap-3">
+              {MODES.map((mode, index) => (
+                <button
+                  key={mode.id}
+                  onClick={() => {
+                    setSelectedMode(mode.id);
+                    setSelectedDiff(null); // Reset timer/kesulitan saat ganti mode agar alurnya klik timer lagi
+                    setStep(2);
+                  }}
+                  className={clsx(
+                    "relative p-3 sm:p-4 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 border-2 bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]",
+                    // Jika jumlah mode ganjil, buat item terakhir memenuhi 2 kolom penuh agar rapi
+                    MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : ""
+                  )}
+                >
+                  <span className="text-2xl">{mode.icon}</span>
+                  <div className="text-center">
+                    <div className="text-xs sm:text-sm font-black text-slate-600">{mode.label}</div>
+                    <div className="text-[10px] text-slate-400 font-bold mt-1">{mode.desc}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          /* Step 2: Pilih Kecepatan */
+          <div className="space-y-4">
+            {/* Header Mode Terpilih */}
+            {selectedModeInfo && (
+              <div className="bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/40 flex items-center justify-between animate-fade-up">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">{selectedModeInfo.icon}</span>
+                  <div className="text-left">
+                    <div className="text-sm font-black text-slate-800">{selectedModeInfo.label}</div>
+                    <div className="text-[10px] text-slate-400 font-bold">{selectedModeInfo.desc}</div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    setStep(1);
+                    setSelectedDiff(null);
+                  }}
+                  className="text-xs font-black text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-2 rounded-xl border border-blue-200 transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                >
+                  ✏️ Ubah Mode
+                </button>
+              </div>
+            )}
 
-        {/* Pilih Kesulitan */}
-        <div ref={difficultyRef} className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40">
-          <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Kecepatan</h2>
-          <div className="grid grid-cols-3 gap-3">
-            {DIFFICULTIES.map((diff) => (
-              <button
-                key={diff.id}
-                onClick={() => setSelectedDiff(diff.id)}
-                className={clsx(
-                  "relative p-3 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border-2",
-                  selectedDiff === diff.id 
-                    ? `${diff.bg} ${diff.border} ${diff.shadow} -translate-y-1 sm:-translate-y-2 border-b-2!` 
-                    : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]"
-                )}
-              >
-                <span className="text-2xl mb-1">{diff.icon}</span>
-                <div className={clsx("text-[11px] sm:text-sm font-black", selectedDiff === diff.id ? diff.color : "text-slate-600")}>
-                  {diff.label}
-                </div>
-                <div className="text-[9px] sm:text-[10px] text-slate-400 font-bold mt-1">{diff.desc}</div>
-              </button>
-            ))}
+            {/* Pilih Kesulitan */}
+            <div className="bg-white/80 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-white/40 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+              <h2 className="text-sm font-black text-slate-500 mb-4 uppercase tracking-wider text-center">Pilih Kecepatan</h2>
+              <div className="grid grid-cols-3 gap-3">
+                {DIFFICULTIES.map((diff) => (
+                  <button
+                    key={diff.id}
+                    onClick={() => setSelectedDiff(diff.id)}
+                    className={clsx(
+                      "relative p-3 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border-2",
+                      selectedDiff === diff.id 
+                        ? `${diff.bg} ${diff.border} ${diff.shadow} -translate-y-1 sm:-translate-y-2 border-b-2!` 
+                        : "bg-slate-50/80 border-slate-200 hover:bg-slate-100 hover:-translate-y-1 hover:shadow-[0_4px_0_#e2e8f0]"
+                    )}
+                  >
+                    <span className="text-2xl mb-1">{diff.icon}</span>
+                    <div className={clsx("text-[11px] sm:text-sm font-black", selectedDiff === diff.id ? diff.color : "text-slate-600")}>
+                      {diff.label}
+                    </div>
+                    <div className="text-[9px] sm:text-[10px] text-slate-400 font-bold mt-1">{diff.desc}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tombol Mulai */}
+            {selectedMode && selectedDiff && (
+              <div className="animate-bounce-pop w-full pt-2">
+                <button
+                  onClick={() => onStart(selectedMode, selectedDiff)}
+                  className="w-full bg-linear-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-black py-4 sm:py-5 rounded-3xl text-xl tracking-wider shadow-[0_10px_0_#059669] hover:shadow-[0_8px_0_#059669] hover:translate-y-1 active:shadow-[0_0px_0_#059669] active:translate-y-3 transition-all flex items-center justify-center gap-3 uppercase cursor-pointer"
+                >
+                  AYO MULAI! 🚀
+                </button>
+              </div>
+            )}
           </div>
-        </div>
+        )}
 
       </div>
-
-      {/* Tombol Mulai */}
-      <div className="mt-8 mb-4 w-full max-w-lg animate-fade-up" style={{ animationDelay: "0.3s" }}>
-        <button
-          onClick={() => onStart(selectedMode, selectedDiff)}
-          className="w-full bg-linear-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-white font-black py-4 sm:py-5 rounded-3xl text-xl tracking-wider shadow-[0_10px_0_#059669] hover:shadow-[0_8px_0_#059669] hover:translate-y-1 active:shadow-[0_0px_0_#059669] active:translate-y-3 transition-all flex items-center justify-center gap-3 uppercase"
-        >
-          AYO MULAI! 🚀
-        </button>
-      </div>
-
     </div>
   );
 }

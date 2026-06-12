@@ -1,11 +1,13 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { QuizQuestion, GameMode, GameStats, KanjiEntry, KanaEntry } from "@/types";
 import { ConfirmModal } from "./ui/ConfirmModal";
 import clsx from "clsx";
 import { ChevronRight, CheckCircle, XCircle } from "lucide-react";
+import { kanjiDetails } from "@/data/kanjiDetails";
 
 interface AnswerScreenProps {
+  onStart?: (mode: GameMode, difficulty: Difficulty) => void; // standard props just in case
   question: QuizQuestion;
   questionIndex: number;
   totalQuestions: number;
@@ -80,6 +82,8 @@ function getAnswerText(answer: string | KanjiEntry | KanaEntry | null, gameMode:
   return (answer as KanjiEntry).arti;
 }
 
+type Difficulty = "easy" | "medium" | "hard";
+
 export function AnswerScreen({
   question,
   questionIndex,
@@ -91,6 +95,8 @@ export function AnswerScreen({
   onExit,
 }: AnswerScreenProps) {
   const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
+  const [fetchedDetails, setFetchedDetails] = useState<Record<string, { onyomi: string; kunyomi: string; mnemonic: string }>>({});
+
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
   const isJpFontForQuestion = gameMode === "kanji-to-arti" || gameMode === "kanji-to-hiragana" || gameMode === "hiragana-to-arti" || gameMode === "bunpou";
   const isJpFontForOptions = [
@@ -110,6 +116,52 @@ export function AnswerScreen({
 
   const selectedAnswerText = getAnswerText(selectedAnswer, gameMode, question.kanaScript);
   const correctAnswerText = getAnswerText(correctAnswer, gameMode, question.kanaScript);
+
+  // Ekstrak karakter Kanji dari kata soal
+  const kanjiChars = useMemo(() => {
+    if (question.mode !== "kanji" || !question.kanjiQuestion) return [];
+    const matches = question.kanjiQuestion.kanji.match(/[\u4e00-\u9faf]/g) || [];
+    return Array.from(new Set(matches));
+  }, [question]);
+
+  // Fetch detail Kanji secara dinamis jika tidak ada di database lokal
+  useEffect(() => {
+    kanjiChars.forEach(async (char) => {
+      if (kanjiDetails[char] || fetchedDetails[char]) return;
+
+      try {
+        const res = await fetch(`https://kanjiapi.dev/v1/kanji/${encodeURIComponent(char)}`);
+        if (res.ok) {
+          const data = await res.json();
+          const onyomi = data.on_readings.join(", ") || "-";
+          const kunyomi = data.kun_readings.join(", ") || "-";
+          const meanings = data.meanings.slice(0, 3).join(", "); // Ambil maksimal 3 arti utama
+          const mnemonic = `Arti: ${meanings}. Jumlah coretan: ${data.stroke_count}.`;
+          
+          setFetchedDetails(prev => {
+            if (prev[char]) return prev;
+            return {
+              ...prev,
+              [char]: { onyomi, kunyomi, mnemonic }
+            };
+          });
+        }
+      } catch (err) {
+        console.error("Gagal mengambil detail kanji dari kanjiapi.dev:", err);
+      }
+    });
+  }, [kanjiChars]);
+
+  const matchedKanjiDetails = useMemo(() => {
+    return kanjiChars.map(char => {
+      const localDetail = kanjiDetails[char];
+      const remoteDetail = fetchedDetails[char];
+      return {
+        char,
+        detail: localDetail || remoteDetail || null
+      };
+    });
+  }, [kanjiChars, fetchedDetails]);
 
   return (
     <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
@@ -263,6 +315,61 @@ export function AnswerScreen({
               }
             </p>
           </div>
+
+          {/* Detail Kanji (Mnemonic & Detail) */}
+          {matchedKanjiDetails.length > 0 && (
+            <div className="space-y-4 mb-6 animate-fade-up">
+              <p className="text-xs font-black text-slate-500 uppercase pl-2 tracking-widest">
+                Detail Kanji ({matchedKanjiDetails.length}):
+              </p>
+              
+              <div className="space-y-4">
+                {matchedKanjiDetails.map(({ char, detail }) => (
+                  <div 
+                    key={char} 
+                    className="bg-white/95 backdrop-blur-xl border-2 border-slate-200 rounded-3xl p-5 shadow-lg relative overflow-hidden"
+                  >
+                    {/* Header: Huruf Kanji Gede & Onyomi/Kunyomi */}
+                    <div className="flex items-center gap-5 border-b border-slate-100 pb-4 mb-4">
+                      <div className="w-16 h-16 bg-linear-to-br from-blue-50 to-indigo-100 border border-blue-100 rounded-2xl flex items-center justify-center text-4xl font-black text-blue-600 font-jp shadow-inner shrink-0">
+                        {char}
+                      </div>
+                      <div>
+                        <h4 className="font-black text-slate-800 text-lg">
+                          {detail ? detail.kunyomi.split(" (")[0].split("・")[0].replace(/[a-zA-Z]/g, '') : "Kanji"}
+                        </h4>
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Karakter Kanji</p>
+                      </div>
+                    </div>
+
+                    {/* Bacaan: Onyomi & Kunyomi */}
+                    <div className="grid grid-cols-2 gap-3 mb-4 text-xs">
+                      <div className="bg-slate-50/80 rounded-2xl p-3 border border-slate-100">
+                        <span className="font-black text-purple-600 block mb-1">音読み (Onyomi)</span>
+                        <span className="font-bold text-slate-700 text-sm">
+                          {detail ? detail.onyomi : "-"}
+                        </span>
+                      </div>
+                      <div className="bg-slate-50/80 rounded-2xl p-3 border border-slate-100">
+                        <span className="font-black text-emerald-600 block mb-1">訓読み (Kunyomi)</span>
+                        <span className="font-bold text-slate-700 text-sm text-wrap break-all">
+                          {detail ? detail.kunyomi : "-"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Mnemonic / Jembatan Keledai */}
+                    <div className="bg-blue-50/50 rounded-2xl p-4 border border-blue-100 text-xs">
+                      <span className="font-black text-blue-600 block mb-1">💡 Tips Mengingat (Mnemonic):</span>
+                      <p className="text-slate-600 font-semibold leading-relaxed">
+                        {detail ? detail.mnemonic : "Gunakan imajinasi Anda untuk membayangkan visual kanji ini agar mudah diingat."}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* FOOTER: Tombol Lanjut */}

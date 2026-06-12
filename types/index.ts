@@ -5,6 +5,9 @@ export interface KanjiEntry {
   hiragana: string;
   arti: string;
   category: string; // ✅ FIX: Diubah dari number menjadi string
+  onyomi?: string;
+  kunyomi?: string;
+  mnemonic?: string;
 }
 
 export interface KanaEntry {
