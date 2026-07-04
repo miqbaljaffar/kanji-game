@@ -22,12 +22,11 @@ interface GameScreenProps {
   onExit: () => void;
 }
 
-function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
+function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode): { main: string; prompt: string; sub?: string } {
   if (question.mode === "bunpou" && question.bunpouQuestion) {
     return { 
       main: question.bunpouQuestion.sentence, 
-      prompt: "Lengkapi kalimat berikut!",
-      sub: question.bunpouQuestion.translation
+      prompt: "Lengkapi kalimat berikut!"
     };
   }
 
