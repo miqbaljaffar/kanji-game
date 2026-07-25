@@ -669,8 +669,8 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
 
     // Assign default N5 vs N4 based on category or length heuristic if not set
     if (!level) {
-      level = ["b8", "b10", "b11", "b13", "c6", "c9", "c13", "d3", "d11", "d14", "d20", "f1", "f2", "f7", "f12", "g6", "g7", "g15", "h28", "j5", "j9", "k9", "k20", "s13", "s28", "s30", "t12", "t16", "t21", "u4", "u5", "y11", "y12", "y15"].includes(item.id) 
-        ? "N4" 
+      level = ["b8", "b10", "b11", "b13", "c6", "c9", "c13", "d3", "d11", "d14", "d20", "f1", "f2", "f7", "f12", "g6", "g7", "g15", "h28", "j5", "j9", "k9", "k20", "s13", "s28", "s30", "t12", "t16", "t21", "u4", "u5", "y11", "y12", "y15"].includes(item.id)
+        ? "N4"
         : "N5";
     }
 

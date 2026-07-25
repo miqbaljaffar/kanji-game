@@ -57,6 +57,33 @@ export interface BunpouEntry {
   correctOption: string;
 }
 
+export type BunpouCategory =
+  | "Partikel"
+  | "Bentuk Kata Kerja"
+  | "Ungkapan & Keinginan"
+  | "Syarat & Perbandingan"
+  | "Sopan & Kehormatan";
+
+export interface BunpouExampleSentence {
+  japanese: string;
+  hiragana: string;
+  translation: string;
+}
+
+export interface BunpouDictionaryEntry {
+  id: string;
+  pattern: string;
+  romajiPattern: string;
+  meaning: string;
+  formula: string;
+  level: "N5" | "N4";
+  category: BunpouCategory;
+  explanation: string;
+  exampleSentences: BunpouExampleSentence[];
+  notes?: string;
+  tags?: string[];
+}
+
 /* ======================
    GAME TYPES
 ====================== */

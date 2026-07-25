@@ -70,32 +70,38 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       {/* Area Pemilihan */}
       <div className="w-full max-w-lg space-y-5">
         
-        {/* Banner Tombol Ensiklopedia & Kamus Kanji N5-N4 */}
-        <Link
-          href="/kanji"
-          className="group block bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 p-4 sm:p-5 rounded-3xl shadow-xl border-2 border-white/60 text-white transition-all hover:-translate-y-1 hover:shadow-2xl animate-fade-up cursor-pointer overflow-hidden relative"
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none -mr-8 -mt-8" />
-          <div className="flex items-center justify-between relative z-10">
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl border border-white/30 shrink-0 group-hover:scale-110 transition-transform">
+        {/* Banners Ensiklopedia Kanji & Bunpou */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 animate-fade-up">
+          <Link
+            href="/kanji"
+            className="group block bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 p-3.5 sm:p-4 rounded-3xl shadow-lg border-2 border-white/60 text-white transition-all hover:-translate-y-1 hover:shadow-xl cursor-pointer overflow-hidden relative active:scale-98 touch-manipulation"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-xl border border-white/30 shrink-0 group-hover:scale-110 transition-transform">
                 📚
               </div>
-              <div className="text-left">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm sm:text-base font-black tracking-tight">Ensiklopedia Kanji N5-N4</span>
-                  <span className="bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Fitur Baru ✨
-                  </span>
-                </div>
-                <div className="text-[11px] sm:text-xs text-white/90 font-bold mt-0.5">
-                  Bedah Kanji 1 Karakter & Majemuk (2+ Kanji) Lengkap
-                </div>
+              <div className="text-left min-w-0">
+                <div className="text-xs sm:text-sm font-black tracking-tight truncate">Ensiklopedia Kanji</div>
+                <div className="text-[10px] text-white/90 font-bold truncate">1 & 2+ Kanji Majemuk</div>
               </div>
             </div>
-            <span className="text-xl group-hover:translate-x-1 transition-transform">➡️</span>
-          </div>
-        </Link>
+          </Link>
+
+          <Link
+            href="/bunpou"
+            className="group block bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 p-3.5 sm:p-4 rounded-3xl shadow-lg border-2 border-white/60 text-white transition-all hover:-translate-y-1 hover:shadow-xl cursor-pointer overflow-hidden relative active:scale-98 touch-manipulation"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-xl border border-white/30 shrink-0 group-hover:scale-110 transition-transform">
+                📝
+              </div>
+              <div className="text-left min-w-0">
+                <div className="text-xs sm:text-sm font-black tracking-tight truncate">Ensiklopedia Bunpou</div>
+                <div className="text-[10px] text-white/90 font-bold truncate">Rumus & Tata Bahasa</div>
+              </div>
+            </div>
+          </Link>
+        </div>
         
         {step === 1 ? (
           /* Pilih Mode */
