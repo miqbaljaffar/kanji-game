@@ -41,18 +41,21 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
   const isSingle = entry.kanjiCount === 1;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-hidden animate-fade-in">
       {/* Backdrop overlay */}
       <div
         className="fixed inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity"
         onClick={onClose}
       />
 
-      {/* Modal Container */}
-      <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border-4 border-white/80 overflow-hidden z-10 flex flex-col my-auto max-h-[90vh]">
+      {/* Modal Container (Bottom Sheet on Mobile, Centered Modal on Desktop) */}
+      <div className="relative w-full max-w-2xl bg-white rounded-t-[32px] sm:rounded-3xl shadow-2xl border-t-4 sm:border-4 border-white/80 overflow-hidden z-10 flex flex-col max-h-[92vh] sm:max-h-[90vh] animate-slide-up sm:animate-fade-in">
         
+        {/* Mobile Handle Drag Indicator */}
+        <div className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto my-2 sm:hidden shrink-0" />
+
         {/* Modal Header Banner */}
-        <div className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-6 text-white overflow-hidden shrink-0">
+        <div className="relative bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-4 sm:p-6 text-white overflow-hidden shrink-0">
           
           {/* Decorative shapes */}
           <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none -mr-16 -mt-16" />
@@ -60,7 +63,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center font-black transition-all cursor-pointer border border-white/30 z-10"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center font-black transition-all cursor-pointer border border-white/30 z-10 active:scale-90 touch-manipulation"
           >
             ✕
           </button>
@@ -130,23 +133,23 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
         </div>
 
         {/* Modal Tab Navigation */}
-        <div className="flex border-b border-slate-200 bg-slate-50 px-4 pt-3 shrink-0">
+        <div className="flex border-b border-slate-200 bg-slate-50 px-2 sm:px-4 pt-2 sm:pt-3 shrink-0 overflow-x-auto no-scrollbar touch-pan-x">
           <button
             onClick={() => setActiveTab("breakdown")}
             className={clsx(
-              "px-4 py-3 font-black text-xs sm:text-sm transition-all border-b-2 cursor-pointer flex items-center gap-1.5",
+              "px-3.5 sm:px-4 py-2.5 sm:py-3 font-black text-xs sm:text-sm transition-all border-b-2 cursor-pointer flex items-center gap-1.5 shrink-0 active:scale-95 touch-manipulation",
               activeTab === "breakdown"
                 ? "border-blue-600 text-blue-600 bg-white rounded-t-xl"
                 : "border-transparent text-slate-400 hover:text-slate-600"
             )}
           >
-            <span>🧩</span> {isSingle ? "Bedah Karaktek" : "Bedah Kanji Majemuk"}
+            <span>🧩</span> {isSingle ? "Bedah Karakter" : "Bedah Kanji Majemuk"}
           </button>
 
           <button
             onClick={() => setActiveTab("readings")}
             className={clsx(
-              "px-4 py-3 font-black text-xs sm:text-sm transition-all border-b-2 cursor-pointer flex items-center gap-1.5",
+              "px-3.5 sm:px-4 py-2.5 sm:py-3 font-black text-xs sm:text-sm transition-all border-b-2 cursor-pointer flex items-center gap-1.5 shrink-0 active:scale-95 touch-manipulation",
               activeTab === "readings"
                 ? "border-blue-600 text-blue-600 bg-white rounded-t-xl"
                 : "border-transparent text-slate-400 hover:text-slate-600"
@@ -158,7 +161,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
           <button
             onClick={() => setActiveTab("sentence")}
             className={clsx(
-              "px-4 py-3 font-black text-xs sm:text-sm transition-all border-b-2 cursor-pointer flex items-center gap-1.5",
+              "px-3.5 sm:px-4 py-2.5 sm:py-3 font-black text-xs sm:text-sm transition-all border-b-2 cursor-pointer flex items-center gap-1.5 shrink-0 active:scale-95 touch-manipulation",
               activeTab === "sentence"
                 ? "border-blue-600 text-blue-600 bg-white rounded-t-xl"
                 : "border-transparent text-slate-400 hover:text-slate-600"

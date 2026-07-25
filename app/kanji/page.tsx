@@ -91,29 +91,29 @@ export default function KanjiDictionaryPage() {
       {/* Background awan ceria */}
       <GameBackground />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-6">
         
         {/* Navigation Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 bg-white/80 backdrop-blur-md p-4 rounded-3xl shadow-lg border-2 border-white/60">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-6 bg-white/80 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl shadow-lg border-2 border-white/60">
           <Link
             href="/"
-            className="bg-white hover:bg-slate-100 text-blue-600 px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm shadow-[0_4px_0_#93c5fd] active:shadow-none active:translate-y-1 transition-all border-2 border-blue-200 flex items-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto bg-white hover:bg-slate-100 text-blue-600 px-4 py-2.5 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm shadow-[0_4px_0_#93c5fd] active:shadow-none active:translate-y-1 transition-all border-2 border-blue-200 flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
           >
             ⬅️ Kembali ke Home
           </Link>
 
           <div className="text-center sm:text-right">
-            <h1 className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight font-jp">
+            <h1 className="text-lg sm:text-2xl font-black text-slate-800 tracking-tight font-jp">
               📚 Ensiklopedia & Kamus Kanji N5-N4
             </h1>
-            <p className="text-xs font-bold text-slate-500">
+            <p className="text-[11px] sm:text-xs font-bold text-slate-500">
               Penjelasan Lengkap Kanji 1 Karakter & Kanji Majemuk (2+ Karakter)
             </p>
           </div>
         </div>
 
         {/* Quick Stats Header Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 mb-4 sm:mb-6">
           {[
             { label: "Total Kanji", val: stats.total, icon: "📚", color: "text-blue-600", bg: "bg-blue-50" },
             { label: "Level N5", val: stats.n5Count, icon: "🟢", color: "text-emerald-600", bg: "bg-emerald-50" },
@@ -122,14 +122,14 @@ export default function KanjiDictionaryPage() {
           ].map((item) => (
             <div
               key={item.label}
-              className="bg-white/85 backdrop-blur-md rounded-2xl p-4 shadow-md border-2 border-white/60 flex items-center gap-3"
+              className="bg-white/85 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-md border-2 border-white/60 flex items-center gap-2.5 sm:gap-3"
             >
-              <span className="text-2xl sm:text-3xl">{item.icon}</span>
-              <div>
-                <div className={`text-lg sm:text-2xl font-black ${item.color} leading-none`}>
+              <span className="text-xl sm:text-3xl shrink-0">{item.icon}</span>
+              <div className="min-w-0">
+                <div className={`text-base sm:text-2xl font-black ${item.color} leading-none truncate`}>
                   {item.val}
                 </div>
-                <div className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
+                <div className="text-[9px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-0.5 truncate">
                   {item.label}
                 </div>
               </div>
@@ -148,10 +148,10 @@ export default function KanjiDictionaryPage() {
           totalResults={filteredKanji.length}
         />
 
-        {/* Kanji Cards Grid */}
+        {/* Kanji Cards Grid (2-column on mobile, 4-column on desktop) */}
         {paginatedKanji.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
               {paginatedKanji.map((entry) => (
                 <KanjiCard
                   key={entry.id}
