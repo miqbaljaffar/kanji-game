@@ -46,13 +46,6 @@ export default function Home() {
             >
               📚 Ensiklopedia Kanji
             </Link>
-            
-            <Link 
-              href="/dashboard" 
-              className="hidden md:flex bg-white/90 text-blue-600 hover:bg-white px-4 py-2.5 rounded-2xl font-black shadow-[0_4px_0_rgb(37,99,235)] active:shadow-none active:translate-y-1 transition-all items-center gap-2 border-2 border-blue-600 text-xs md:text-sm cursor-pointer"
-            >
-              Dashboard Admin
-            </Link>
           </div>
 
           <HomeScreen 
