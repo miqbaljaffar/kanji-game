@@ -15,8 +15,9 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "漢字マスター | Kanji Master JFT Basic A2",
-  description: "Game tebak kanji JFT Basic A2 yang seru dan interaktif!",
+  title: "漢字マスター — KanjiMocha | Belajar Kanji & Bunpou N5-N4 Interaktif",
+  description: "Platform belajar Bahasa Jepang interaktif JLPT N5, N4 & JFT Basic A2. Dilengkapi Game Kuis, Ensiklopedia Kanji 1 & 2+ Karakter, serta Kamus Tata Bahasa Bunpou Lengkap!",
+  keywords: ["Kanji", "Bunpou", "Tata Bahasa Jepang", "JLPT N5", "JLPT N4", "JFT Basic A2", "Belajar Bahasa Jepang", "KanjiMocha"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

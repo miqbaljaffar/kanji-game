@@ -1,52 +1,84 @@
-# 🀄 漢字マスター — Kanji Master JFT Basic A2
+# 🀄 KanjiMocha — Game Belajar & Ensiklopedia Kanji & Bunpou N5-N4 (JFT Basic A2)
 
-Game tebak kanji interaktif berbasis web untuk persiapan ujian **JFT Basic A2**, dibangun dengan **Next.js 14 + TypeScript**.
+![KanjiMocha Banner](https://img.shields.io/badge/JLPT-N5%20%7C%20N4-blue?style=for-the-badge)
+![JFT Basic A2](https://img.shields.io/badge/JFT-Basic%20A2-emerald?style=for-the-badge)
+![Next.js 15](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-cyan?style=for-the-badge)
 
----
-
-## 🎮 Fitur Game
-
-### Mode Permainan
-| Mode | Deskripsi |
-|---|---|
-| **漢字 → Arti** | Lihat kanji, pilih artinya dalam Bahasa Indonesia |
-| **Arti → 漢字** | Lihat arti Indonesia, pilih kanji yang tepat |
-| **ひら → Arti** | Lihat hiragana, pilih artinya |
-
-### Tingkat Kesulitan
-| Level | Waktu/Soal |
-|---|---|
-| Santai 🌸 | 20 detik |
-| Normal ⚡ | 12 detik |
-| Sulit 🔥 | 7 detik |
-
-### Sistem Poin
-- ✅ Jawaban benar: **+100 poin**
-- 🔥 Streak bonus: **+10 poin per streak** (maks +100)
-- ⏱ Time bonus: **sisa waktu × 5 poin**
-
-### Fitur Lainnya
-- 📊 20 soal acak per ronde dari **250+ kosakata**
-- 🏆 Ranking: Master / Hebat / Bagus / Cukup / Belajar
-- ⭐ Rating bintang berdasarkan akurasi
-- 🌸 Animasi sakura & efek neon
+Platform pembelajaran Bahasa Jepang interaktif modern berbasis web yang dirancang khusus untuk persiapan ujian **JLPT N5, JLPT N4, dan JFT Basic A2**. Menghadirkan kombinasi **Game Kuis Interaktif**, **Ensiklopedia & Kamus Kanji N5-N4 Lengkap**, serta **Ensiklopedia Tata Bahasa (Bunpou) N5-N4 Komprehensif**.
 
 ---
 
-## 🚀 Cara Menjalankan
+## 🌟 Fitur Utama Aplikasi
 
+### 1. 📚 Ensiklopedia & Kamus Kanji N5-N4 (`/kanji`)
+- **Bedah Kanji 1 Karakter (Tanka) & Kanji Majemuk (2+ Kanji / Jukugo)**: Penjelasan mendalam untuk ratusan karakter Kanji N5 dan N4.
+- **Visual Mnemonic & Asal-Usul**: Cerita hafalan dan gambar konsep pembentukan huruf.
+- **Detail Lengkap**: Jumlah goresan (*strokes*), Cara baca **Onyomi (音読み)** & **Kunyomi (訓読み)**, serta bedah elemen penyusun (*components*).
+- **Contoh Kalimat Nyata & Audio TTS 🔊**: Contoh kalimat percakapan lengkap dengan Furigana/Hiragana, terjemahan Indonesia, dan tombol pelafalan suara otomatis.
+- **Pencarian Real-Time & Paginasi Mobile**: Cari instan berdasarkan Kanji, Hiragana, Romaji, atau Arti dengan paginasi mulus per 12 item.
+
+---
+
+### 2. 📝 Ensiklopedia & Kamus Bunpou (Tata Bahasa N5-N4) (`/bunpou`)
+- **Rumus Pembentukan (Formula)**: Penjelasan gabungan kelas kata (misal: `Kata Kerja [Bentuk て] + ください`, `Kata Kerja [Bentuk た] + ほうがいい`).
+- **Fungsi Detail & Catatan (Notes & Pitfalls)**: Penjelasan fungsi kontekstual Bahasa Indonesia serta catatan membedakan tata bahasa serupa (misal `で` vs `に`, `～から` vs `～ので`).
+- **Minimal 5 Contoh Kalimat Interaktif Per Entri**: Setiap poin tata bahasa (N5 maupun N4) dilengkapi minimal 5 contoh kalimat percakapan nyata.
+- **Pelafalan Suara TTS 🔊**: Tombol speaker suara individual untuk setiap contoh kalimat tata bahasa.
+- **Filter Chips**: Filter berdasarkan Level (*N5/N4*) dan Kategori (*Partikel*, *Bentuk Kata Kerja*, *Ungkapan & Keinginan*, *Syarat & Perbandingan*, *Sopan & Kehormatan*).
+
+---
+
+### 3. 🎮 Game Kuis Kanji & Kana Interaktif (`/`)
+- **4 Mode Permainan**:
+  - `漢字 → Arti`: Tebak arti Indonesia dari karakter Kanji.
+  - `Arti → 漢字`: Pilih Kanji yang tepat berdasarkan arti Indonesia.
+  - `ひら → Arti`: Latihan membaca Hiragana dan artinya.
+  - `文法 (Bunpou)`: Kuis tata bahasa melengkapi kalimat berjarak.
+- **3 Tingkat Kesulitan**:
+  - 🌸 **Santai** (20 detik per soal)
+  - ⚡ **Normal** (12 detik per soal)
+  - 🔥 **Sulit** (7 detik per soal)
+- **Sistem Poin & Combo Streak**: Bonus streak beruntun (+10 poin/streak) dan bonus sisa waktu (*time bonus*).
+- **Layar Hasil & Ranking Evaluasi**: Penilaian rating bintang (⭐ 1-3) dan ranking kompetensi (*Master / Hebat / Bagus / Cukup / Belajar*).
+
+---
+
+## 🎨 UI/UX & Aesthetics
+
+- **Mobile-First Responsive Design**: Tampilan dan gesture dioptimalkan 100% untuk layar smartphone maupun desktop.
+- **Native Bottom Sheet Modal**: Modal detail yang meluncur mulus dari bawah layar di smartphone.
+- **Design System Modern**: Efek glassmorphism, warna tajam Tailwind v4, animasi sakura falling, dan typo Jepang `Noto Sans JP`.
+- **Audio Web Speech API**: Pelafalan TTS bawaan browser tanpa perlu dependensi eksternal yang berat.
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **State & Logic**: React 19 Hooks (`useState`, `useMemo`, `useEffect`, `useRef`)
+- **Fonts**: `Noto Sans JP` (Japanese), `Fredoka` (Display), `Nunito` (Body)
+- **Audio Engine**: Web Speech API (TTS `ja-JP`)
+
+---
+
+## 🚀 Cara Menjalankan Proyek
+
+### 1. Install Dependencies
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Jalankan development server
-npm run dev
-
-# 3. Buka browser
-# http://localhost:3000
 ```
 
-### Build Production
+### 2. Jalankan Development Server
+```bash
+npm run dev
+```
+Buka [http://localhost:3000](http://localhost:3000) pada browser Anda.
+
+### 3. Build Production
 ```bash
 npm run build
 npm start
@@ -54,59 +86,46 @@ npm start
 
 ---
 
-## 📁 Struktur Proyek
+## 📁 Struktur Direktori Proyek
 
 ```
-src/
+kanji-game/
 ├── app/
-│   ├── layout.tsx        # Root layout + metadata
-│   ├── page.tsx          # Main page (state router)
-│   └── globals.css       # Global styles & animations
+│   ├── layout.tsx             # Root layout & font metadata
+│   ├── page.tsx               # Main page (Game & Navigation router)
+│   ├── globals.css            # Custom CSS animations & Tailwind styles
+│   ├── kanji/
+│   │   └── page.tsx           # Halaman Ensiklopedia Kanji N5-N4
+│   └── bunpou/
+│       └── page.tsx           # Halaman Ensiklopedia Bunpou N5-N4
 ├── components/
-│   ├── Background.tsx    # Sakura, shooting stars, grid
-│   ├── HomeScreen.tsx    # Layar utama & pilihan mode
-│   ├── GameScreen.tsx    # Layar permainan aktif
-│   └── ResultScreen.tsx  # Layar hasil akhir
+│   ├── Background.tsx         # Awan ceria & animasi sakura background
+│   ├── HomeScreen.tsx         # Layar utama & banner navigasi ensiklopedia
+│   ├── GameScreen.tsx         # Layar permainan kuis aktif
+│   ├── ResultScreen.tsx       # Layar hasil skor & statistik game
+│   ├── kanji/
+│   │   ├── KanjiCard.tsx          # Card komponen Kanji
+│   │   ├── KanjiFilterBar.tsx     # Search & Filter bar Kanji
+│   │   ├── KanjiDetailModal.tsx   # Bottom sheet / Modal detail Kanji
+│   │   └── KanjiPagination.tsx    # Paginasi Kanji
+│   └── bunpou/
+│       ├── BunpouCard.tsx         # Card komponen Bunpou
+│       ├── BunpouFilterBar.tsx    # Search & Filter bar Bunpou
+│       ├── BunpouDetailModal.tsx  # Bottom sheet / Modal detail Bunpou
+│       └── BunpouPagination.tsx   # Paginasi Bunpou
 ├── data/
-│   └── kanji.ts          # 250+ data kosakata JFT Basic A2
-├── hooks/
-│   └── useGame.ts        # Game logic & state management
-└── types/
-    └── index.ts          # TypeScript interfaces
+│   ├── kanji.ts               # Database kosakata dasar JFT Basic A2
+│   ├── kanjiDetails.ts        # Database detail Onyomi/Kunyomi
+│   ├── kanjiDictionary.ts     # Master Database Ensiklopedia Kanji N5-N4
+│   ├── bunpou.ts              # Database soal kuis Tata Bahasa
+│   └── bunpouDictionary.ts    # Master Database Ensiklopedia Bunpou N5-N4
+├── types/
+│   └── index.ts               # TypeScript interfaces & types definition
+└── README.md
 ```
 
 ---
 
-## 🛠 Tech Stack
+## 🌸 頑張ってください！ (Ganbatte Kudasai!)
 
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **Tailwind CSS** (custom theme, animations)
-- **Noto Sans JP** (Japanese font)
-- **Fredoka One** (display font)
-- **Nunito** (body font)
-
----
-
-## 🎨 Design System
-
-- **Aesthetic**: Neon arcade + Japanese motif
-- **Colors**: Dark background (#0a0010) + neon accents (pink, cyan, yellow, green)
-- **Animations**: Sakura falling, shooting stars, bounce-in, neon glow
-- **Responsive**: Mobile-first, optimal di HP & desktop
-
----
-
-## 📝 Data Kosakata
-
-Mencakup semua kategori dari PDF **DAFTAR KANJI JFT BASIC A2**:
-- Kata kerja (Verbs)
-- Kata sifat (Adjectives)  
-- Kata benda (Nouns)
-- Tempat, waktu, keluarga, tubuh, alam, dll.
-
----
-
-## 🌸 頑張ってください！
-
-Semangat belajar dan sukses ujian JFT Basic A2! 🎌
+Semangat belajar dan sukses lulus ujian **JLPT N5, JLPT N4, maupun JFT Basic A2**! 🎌✨
