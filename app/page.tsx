@@ -38,11 +38,18 @@ export default function Home() {
       {/* Game States */}
       {gameState === "home" && (
         <>
-          {/* ✅ Tambahan tombol menuju Dashboard */}
-          <div className="hidden absolute top-4 right-4 md:top-6 md:right-6 z-50">
+          {/* ✅ Tombol Navigasi Header Top-Right */}
+          <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center gap-3">
+            <Link 
+              href="/kanji" 
+              className="bg-white/90 hover:bg-white text-indigo-600 px-4 py-2.5 rounded-2xl font-black shadow-[0_4px_0_rgb(79,70,229)] active:shadow-none active:translate-y-1 transition-all flex items-center gap-2 border-2 border-indigo-600 text-xs md:text-sm cursor-pointer"
+            >
+              📚 Ensiklopedia Kanji
+            </Link>
+            
             <Link 
               href="/dashboard" 
-              className="bg-white/90 text-blue-600 hover:bg-white px-5 py-3 rounded-2xl font-black shadow-[0_4px_0_rgb(37,99,235)] active:shadow-[0_0px_0_rgb(37,99,235)] active:translate-y-1 transition-all flex items-center gap-2 border-2 border-blue-600"
+              className="hidden md:flex bg-white/90 text-blue-600 hover:bg-white px-4 py-2.5 rounded-2xl font-black shadow-[0_4px_0_rgb(37,99,235)] active:shadow-none active:translate-y-1 transition-all items-center gap-2 border-2 border-blue-600 text-xs md:text-sm cursor-pointer"
             >
               Dashboard Admin
             </Link>

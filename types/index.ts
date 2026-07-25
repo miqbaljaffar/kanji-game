@@ -10,6 +10,38 @@ export interface KanjiEntry {
   mnemonic?: string;
 }
 
+export interface KanjiComponent {
+  char: string;
+  meaning: string;
+  onyomi?: string;
+  kunyomi?: string;
+  strokes?: number;
+}
+
+export interface KanjiExampleSentence {
+  japanese: string;
+  hiragana: string;
+  translation: string;
+}
+
+export interface KanjiDictionaryEntry {
+  id: string;
+  kanji: string;
+  hiragana: string;
+  romaji: string;
+  arti: string;
+  level: "N5" | "N4";
+  kanjiCount: number; // 1 for single, 2+ for compound
+  category: string;
+  onyomi?: string;
+  kunyomi?: string;
+  mnemonic?: string;
+  strokes?: number;
+  components?: KanjiComponent[];
+  exampleSentence?: KanjiExampleSentence;
+  tags?: string[];
+}
+
 export interface KanaEntry {
   id: string;
   romaji: string;
