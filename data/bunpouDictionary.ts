@@ -218,7 +218,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     formula: "Kata Benda + しか + Kata Kerja Negatif",
     level: "N4",
     category: "Partikel",
-    explanation: "Menyatakan bahwa hanya ada sedikit atau terbatas pada hal tersebut, dan selalu diikuti oleh bentuka negatif di akhir kalimat.",
+    explanation: "Menyatakan bahwa hanya ada sedikit atau terbatas pada hal tersebut, dan selalu diikuti oleh bentuk negatif di akhir kalimat.",
     exampleSentences: [
       {
         japanese: "財布の中に100円しかありません。",
@@ -249,28 +249,23 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     tags: ["N5", "Partikel", "Batasan"]
   },
   {
-    id: "bp_kara_made",
-    pattern: "～から ～まで (Dari ... Sampai ...)",
-    romajiPattern: "~kara ~made (from ... to ...)",
-    meaning: "Dari (titik awal) sampai (titik akhir / tujuan)",
-    formula: "Titik Awal (Waktu/Tempat) + から + Titik Akhir + まで",
-    level: "N5",
+    id: "bp_madeni",
+    pattern: "～までに (Paling Lambat)",
+    romajiPattern: "~made ni (by / no later than)",
+    meaning: "Paling lambat sebelum / sampai pada waktu...",
+    formula: "Kata Benda (Waktu) + までに",
+    level: "N4",
     category: "Partikel",
-    explanation: "Digunakan untuk menyatakan rentang waktu (misal: jam 9 sampai jam 5) atau jangkauan tempat (dari rumah sampai stasiun).",
+    explanation: "Menyatakan batas waktu maksimal di mana suatu tindakan harus sudah diselesaikan tuntas.",
     exampleSentences: [
       {
-        japanese: "9時から5時まで働きます。",
-        hiragana: "くじ から ごじ まで はたらきます。",
-        translation: "Saya bekerja dari jam 9 sampai jam 5."
-      },
-      {
-        japanese: "家から駅まで歩いて10分です。",
-        hiragana: "いえ から えき まで あるいて じゅっぷん です。",
-        translation: "Dari rumah sampai stasiun berjalan kaki 10 menit."
+        japanese: "5時までにレポートを出してください。",
+        hiragana: "ごじ までに レポート を だして ください。",
+        translation: "Tolong kumpulkan laporan paling lambat jam 5."
       }
     ],
-    notes: "Dapat digunakan secara terpisah (hanya から saja atau hanya まで saja).",
-    tags: ["N5", "Partikel", "Rentang"]
+    notes: "Berbeda dengan まで (sampai terus-menerus), までに menyatakan batas akhir penyelesaian.",
+    tags: ["N4", "Partikel", "Batas Waktu"]
   },
 
   // ==========================================
@@ -488,84 +483,70 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     tags: ["N4", "Bentuk て", "Mencoba"]
   },
   {
-    id: "bp_koto_ga_dekiru",
-    pattern: "～ことができる / ～できます",
-    romajiPattern: "~koto ga dekiru",
-    meaning: "Bisa / Mampu melakukan... (Potensial)",
-    formula: "Kata Kerja [Bentuk Kamus] + ことができる / Kata Benda + ができる",
-    level: "N5",
+    id: "bp_tokoro",
+    pattern: "～ところです (Fase Waktu)",
+    romajiPattern: "~tokoro desu",
+    meaning: "Baru saja... / Sedang... / Baru hendak...",
+    formula: "Kata Kerja [Bentuk Kamus / ている / た] + ところです",
+    level: "N4",
     category: "Bentuk Kata Kerja",
-    explanation: "Menyatakan potensi atau kemampuan seseorang dalam melakukan suatu tindakan.",
+    explanation: "Menandai fase spesifik aksi: (1) Bentuk Kamus = baru mau mulai, (2) ている = tepat sedang berlangsung, (3) Bentuk た = baru saja tuntas terjadi.",
     exampleSentences: [
       {
-        japanese: "私はピアノを弾くことができます。",
-        hiragana: "わたし は ピアノ を ひく こと が できます。",
-        translation: "Saya bisa bermain piano."
+        japanese: "今からご飯を食べるところです。",
+        hiragana: "いま から ごはん を たべる ところ です。",
+        translation: "Saya baru mau mulai makan nasi sekarang."
+      },
+      {
+        japanese: "たった今家に着いたところです。",
+        hiragana: "たった いま いえ に ついた ところ です。",
+        translation: "Saya baru saja tepat sampai di rumah."
       }
     ],
-    notes: "Dapat dipendekkan menggunakan Kata Kerja Bentuk Potensial (misal: 読める, 書ける).",
-    tags: ["N5", "Kemampuan"]
+    notes: "Sangat berguna untuk menjelaskan momen tepat terjadinya aksi.",
+    tags: ["N4", "Fase Waktu"]
   },
   {
-    id: "bp_koto_ga_aru",
-    pattern: "～たことがあります",
-    romajiPattern: "~ta koto ga arimasu",
-    meaning: "Pernah... (Pengalaman Masa Lalu)",
-    formula: "Kata Kerja [Bentuk た] + ことがあります",
-    level: "N5",
+    id: "bp_passive_ukemi",
+    pattern: "～れる / ～られる (Pasif / Ukemi)",
+    romajiPattern: "~reru / ~rareru (passive)",
+    meaning: "Di-... / Dikenai aksi oleh orang lain",
+    formula: "Kata Kerja G1: あ-line + れる / G2: + られる / G3: される, 来られる",
+    level: "N4",
     category: "Bentuk Kata Kerja",
-    explanation: "Menyatakan pengalaman hidup bahwa seseorang pernah melakukan suatu hal di masa lalu.",
+    explanation: "Menyatakan bahwa subjek dikenai tindakan atau disusahkan oleh perbuatan orang lain.",
     exampleSentences: [
       {
-        japanese: "すしを食べたことがありますか。",
-        hiragana: "すし を たべた こと が ありますか。",
-        translation: "Apakah kamu pernah makan sushi?"
+        japanese: "知らない人に足をふまれました。",
+        hiragana: "しらない ひと に あし を ふまれました。",
+        translation: "Kaki saya terinjak oleh orang yang tidak dikenal."
       }
     ],
-    notes: "Selalu gunakan kata kerja Bentuk-TA (lampau).",
-    tags: ["N5", "Pengalaman"]
+    notes: "Subjek utama adalah korban/orang yang mengalami dampak aksi.",
+    tags: ["N4", "Pasif"]
   },
   {
-    id: "bp_mae_ni",
-    pattern: "～まえに (Sebelum)",
-    romajiPattern: "~mae ni",
-    meaning: "Sebelum melakukan...",
-    formula: "Kata Kerja [Bentuk Kamus] + まえに / Kata Benda + の + まえに",
-    level: "N5",
+    id: "bp_causative_shieki",
+    pattern: "～させる (Menyuruh / Membiarkan)",
+    romajiPattern: "~saseru (causative)",
+    meaning: "Menyuruh / Membiarkan seseorang melakukan...",
+    formula: "Kata Kerja G1: あ-line + せる / G2: + させる / G3: させる, 来させる",
+    level: "N4",
     category: "Bentuk Kata Kerja",
-    explanation: "Menyatakan urutan tindakan di mana aksi A dilakukan sebelum aksi B.",
+    explanation: "Menyatakan bahwa seseorang memerintahkan, menyuruh, atau memberikan izin kepada orang lain untuk beraksi.",
     exampleSentences: [
       {
-        japanese: "ご飯を食べる前に、手を洗います。",
-        hiragana: "ごはん を たべる まえ に、て を あらいます。",
-        translation: "Sebelum makan nasi, saya mencuci tangan."
+        japanese: "母は子どもに野菜を食べさせます。",
+        hiragana: "はは は こども に やさい を たべさせます。",
+        translation: "Ibu menyuruh anaknya makan sayur."
       }
     ],
-    notes: "Kata kerja sebelum まえに selalu dalam Bentuk Kamus (bukan bentuk lampau).",
-    tags: ["N5", "Urutan"]
-  },
-  {
-    id: "bp_ato_de",
-    pattern: "～あとで (Setelah)",
-    romajiPattern: "~ato de",
-    meaning: "Setelah melakukan...",
-    formula: "Kata Kerja [Bentuk た] + あとで / Kata Benda + の + あとで",
-    level: "N5",
-    category: "Bentuk Kata Kerja",
-    explanation: "Menyatakan bahwa suatu tindakan dilakukan setelah tindakan lain selesai tuntas.",
-    exampleSentences: [
-      {
-        japanese: "テストが終わったあとで、遊びに行きます。",
-        hiragana: "テスト が おわった あと で、あそび に いきます。",
-        translation: "Setelah ujian selesai, saya akan pergi bermain."
-      }
-    ],
-    notes: "Kata kerja sebelum あとで selalu dalam Bentuk-TA (lampau).",
-    tags: ["N5", "Urutan"]
+    notes: "Bentuk kombinasi pasif-kausatif: ～させられる (Dipaksa melakukan...).",
+    tags: ["N4", "Perintah"]
   },
 
   // ==========================================
-  // UNGKAPAN & KEINGINAN (N5 & N4)
+  // UNGKAPAN, KEINGINAN, & DUGAAN (N5 & N4)
   // ==========================================
   {
     id: "bp_tai_desu",
@@ -640,148 +621,85 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     tags: ["N5", "Rencana", "Niat"]
   },
   {
-    id: "bp_sugi_ru",
-    pattern: "～すぎる / ～すぎます",
-    romajiPattern: "~sugiru",
-    meaning: "Terlalu... / Berlebihan",
-    formula: "Kata Kerja Stem / Kata Sifat (buang い/な) + すぎる",
+    id: "bp_sou_desu_look",
+    pattern: "～そうです (Kelihatannya / Tampaknya)",
+    romajiPattern: "~sou desu (visual appearance)",
+    meaning: "Kelihatannya... / Tampaknya akan...",
+    formula: "Kata Kerja Stem / Sifat (buang い/な) + そうです",
     level: "N4",
     category: "Ungkapan & Keinginan",
-    explanation: "Menyatakan kondisi atau tindakan yang sudah melebihi batas wajar dan berkonotasi negatif/keluhan.",
+    explanation: "Dugaan berdasarkan pengamatan mata secara langsung (misal: kue kelihatannya lezat, hujan kelihatannya mau turun).",
     exampleSentences: [
       {
-        japanese: "この料理は辛すぎます。",
-        hiragana: "この りょうり は からすぎます。",
-        translation: "Masakan ini terlalu pedas."
+        japanese: "このケーキは美味しそうです。",
+        hiragana: "この ケーキ は おいしそうです。",
+        translation: "Kue ini kelihatannya enak."
       },
       {
-        japanese: "昨晩、お酒を飲みすぎました。",
-        hiragana: "さくばん、おさけ を のみすぎました。",
-        translation: "Semalam saya terlalu banyak minum alkohol."
+        japanese: "今にも雨が降りそうです。",
+        hiragana: "いま に も あめ が ふりそうです。",
+        translation: "Sekarang pun kelihatan seperti akan turun hujan."
       }
     ],
-    notes: "Kata sifat-i dihilangkan い-nya (辛い -> 辛すぎます). Kata sifat-na dihilangkan な-nya.",
-    tags: ["N4", "Berlebihan"]
+    notes: "Bentuk negatif: ～なさそうです / ～そうにない.",
+    tags: ["N4", "Dugaan Visual"]
   },
   {
-    id: "bp_yasui_nikui",
-    pattern: "～やすい / ～にくい",
-    romajiPattern: "~yasui / ~nikui",
-    meaning: "Mudah di-... / Sulit di-...",
-    formula: "Kata Kerja [Masu-Stem] + やすい / にくい",
+    id: "bp_sou_desu_hearsay",
+    pattern: "～そうです (Dengarnya / Katanya)",
+    romajiPattern: "~sou desu (hearsay)",
+    meaning: "Katanya... / Dengarnya bahwa...",
+    formula: "Bentuk Kasual Kalimat Lengkap + そうです",
     level: "N4",
     category: "Ungkapan & Keinginan",
-    explanation: "Menyatakan sifat atau karakteristik suatu benda/tindakan yang mudah atau sulit untuk dilakukan.",
+    explanation: "Menyampaikan kabar burung atau informasi yang didengar dari sumber lain tanpa mengubah isinya.",
     exampleSentences: [
       {
-        japanese: "このペンはとても書きやすいです。",
-        hiragana: "この ペン は とても かきやすい です。",
-        translation: "Pena ini sangat mudah digunakan untuk menulis."
-      },
-      {
-        japanese: "この字は小さくて読みにくいです。",
-        hiragana: "この じ は ちいさくて よみにくい です。",
-        translation: "Huruf ini kecil sehingga sulit dibaca."
+        japanese: "天気予報によると、明日は雨が降るそうです。",
+        hiragana: "てんきよほう に によると、あした は あめ が ふる そうです。",
+        translation: "Menurut ramalan cuaca, katanya besok akan hujan."
       }
     ],
-    notes: "Bentuk gabungan ini berubah sifat menjadi Kata Sifat-i.",
-    tags: ["N4", "Kemudahan"]
+    notes: "Sering diawali dengan ～によると (menurut...).",
+    tags: ["N4", "Kabar Burung"]
   },
   {
-    id: "bp_nagara",
-    pattern: "～ながら",
-    romajiPattern: "~nagara",
-    meaning: "Sambil melakukan... (Dua aksi bersamaan)",
-    formula: "Kata Kerja A [Masu-Stem] + ながら、Kata Kerja B",
-    level: "N5",
-    category: "Ungkapan & Keinginan",
-    explanation: "Digunakan ketika satu orang melakukan dua kegiatan secara bersamaan dalam satu waktu.",
-    exampleSentences: [
-      {
-        japanese: "音楽を聞きながら勉強をします。",
-        hiragana: "おんがく を ききながら べんきょう を します。",
-        translation: "Saya belajar sambil mendengarkan musik."
-      },
-      {
-        japanese: "テレビを見ながらご飯を食べます。",
-        hiragana: "テレビ を みながら ごはん を たべます。",
-        translation: "Saya makan sambil menonton TV."
-      }
-    ],
-    notes: "Fokus aksi utama berada pada kata kerja kedua (Kata Kerja B).",
-    tags: ["N5", "Bersamaan"]
-  },
-  {
-    id: "bp_tame_ni",
-    pattern: "～ために",
-    romajiPattern: "~tame ni",
-    meaning: "Demi... / Untuk...",
-    formula: "Kata Kerja [Bentuk Kamus] / Kata Benda + の + ために",
+    id: "bp_hazu_desu",
+    pattern: "～はずです (Seharusnya / Pasti)",
+    romajiPattern: "~hazu desu",
+    meaning: "Seharusnya... / Dipastikan bahwa...",
+    formula: "Bentuk Kasual + はずです (Kata Sifat-na + な / Benda + の)",
     level: "N4",
     category: "Ungkapan & Keinginan",
-    explanation: "Menyatakan tujuan utama atau alasan pengorbanan demi mencapai suatu target.",
+    explanation: "Keyakinan kuat pembicara berdasarkan alasan logis atau bukti yang pasti.",
     exampleSentences: [
       {
-        japanese: "車を買うために、お金を貯めています。",
-        hiragana: "くるま を かう ため に、おかね を ためています。",
-        translation: "Saya mengumpulkan uang untuk membeli mobil."
-      },
-      {
-        japanese: "家族のために頑張って働きます。",
-        hiragana: "かぞく の ため に がんばって はたらきます。",
-        translation: "Saya berjuang bekerja demi keluarga."
+        japanese: "彼は日本に3年も住んでいたから、日本語が上手なはずです。",
+        hiragana: "かれ は にほん に さんねん も すんでいた から、にほんご が じょうずな はずです。",
+        translation: "Karena dia sudah tinggal di Jepang selama 3 tahun, bahasa mepangnya pasti / seharusnya pandai."
       }
     ],
-    notes: "Jika disambungkan dengan Kata Benda, wajib tambahkan partikel の (misal: 家族のために).",
-    tags: ["N4", "Tujuan"]
+    notes: "Keyakinan hampir 90-100% berdasarkan logika logis.",
+    tags: ["N4", "Keyakinan"]
   },
   {
-    id: "bp_kamo_shirenai",
-    pattern: "～かもしれない / ～かもしれません",
-    romajiPattern: "~kamo shirenai",
-    meaning: "Mungkin... / Kemungkinan...",
-    formula: "Bentuk Kasual (Biasa) + かもしれません",
-    level: "N5",
+    id: "bp_youni_nararu",
+    pattern: "～ようになります (Perubahan Kemampuan)",
+    romajiPattern: "~you ni narimasu",
+    meaning: "Menjadi bisa... (Kondisi bertahap)",
+    formula: "Kata Kerja Potensial / Kamus + ようになります",
+    level: "N4",
     category: "Ungkapan & Keinginan",
-    explanation: "Digunakan untuk menyatakan dugaan atau kemungkinan dengan tingkat kepastian sekitar 50%.",
+    explanation: "Menyatakan perubahan kondisi dari tidak bisa menjadi mampu/bisa melakukan sesuatu secara bertahap.",
     exampleSentences: [
       {
-        japanese: "明日、雨が降るかもしれません。",
-        hiragana: "あした、あめ が ふる かもしれません。",
-        translation: "Besok mungkin akan turun hujan."
-      },
-      {
-        japanese: "田中さんは病気かもしれません。",
-        hiragana: "たなかさん は びょうき かもしれません。",
-        translation: "Tanaka-san mungkin sedang sakit."
+        japanese: "毎日練習して、日本語が話せるようになりました。",
+        hiragana: "まいにち れんしゅう して、にほんご が はなせる よう に なりました。",
+        translation: "Berlatih setiap hari, hingga akhirnya menjadi bisa berbicara bahasa Jepang."
       }
     ],
-    notes: "Dalam bahasa percakapan santai sehari-hari sering disingkat menjadi かも (kamo).",
-    tags: ["N5", "Dugaan", "Kemungkinan"]
-  },
-  {
-    id: "bp_to_omou",
-    pattern: "～と思います",
-    romajiPattern: "~to omoimasu",
-    meaning: "Saya kira... / Saya pikir...",
-    formula: "Bentuk Kasual (Biasa) + と思います",
-    level: "N5",
-    category: "Ungkapan & Keinginan",
-    explanation: "Digunakan untuk menyampaikan pendapat, opini, atau perkiraan pribadi pembicara.",
-    exampleSentences: [
-      {
-        japanese: "明日は雨が降ると思います。",
-        hiragana: "あした は あめ が ふる と おもいます。",
-        translation: "Saya kira besok akan turun hujan."
-      },
-      {
-        japanese: "この映画はとても面白いと思います。",
-        hiragana: "この えいが は とても おもしろい と おもいます。",
-        translation: "Saya pikir film ini sangat menarik."
-      }
-    ],
-    notes: "Sebelum と思います selalu gunakan bentuk kasual/biasa.",
-    tags: ["N5", "Pendapat"]
+    notes: "Sering digunakan dengan kata kerja potensial.",
+    tags: ["N4", "Perubahan"]
   },
 
   // ==========================================
@@ -812,166 +730,66 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     tags: ["N5", "Pengandaian", "Syarat"]
   },
   {
-    id: "bp_ba_form",
-    pattern: "～ば (Pengandaian Syarat)",
-    romajiPattern: "~ba",
-    meaning: "Jika... / Seandainya...",
-    formula: "Kata Kerja [Bentuk-Ba] / Sifat-i (buang い + ければ)",
+    id: "bp_noni",
+    pattern: "～のに (Padahal / Meskipun)",
+    romajiPattern: "~noni (even though / despite)",
+    meaning: "Padahal... / Meskipun... (Nuansa Kecewa)",
+    formula: "Bentuk Kasual + のに (Kata Sifat-na / Benda + なのに)",
     level: "N4",
     category: "Syarat & Perbandingan",
-    explanation: "Menyatakan syarat logis yang diperlukan agar suatu hasil dapat tercapai.",
+    explanation: "Menyatakan kekecewaan, kejutan, atau rasa penyesalan karena hasil yang terjadi bertolak belakang dengan harapan.",
     exampleSentences: [
       {
-        japanese: "安ければ買います。",
-        hiragana: "やすければ かいます。",
-        translation: "Jika murah, saya beli."
+        japanese: "一生懸命勉強したのに、試験に落ちてしまいました。",
+        hiragana: "いっしょうけんめい べんきょう した のに、しけん に おちて しまいました。",
+        translation: "Padahal sudah belajar bersungguh-sungguh, tetapi malah tidak lulus ujian."
       }
     ],
-    notes: "Merupakan syarat pengandaian formal dan logis.",
-    tags: ["N4", "Syarat"]
+    notes: "Mengandung emosi ketidakpuasan atau penyesalan dari pembicara.",
+    tags: ["N4", "Kontras", "Kecewa"]
   },
   {
-    id: "bp_yori",
-    pattern: "～より",
-    romajiPattern: "~yori",
-    meaning: "Daripada... (Perbandingan)",
-    formula: "Kata Benda A + は + Kata Benda B + より + Kata Sifat",
-    level: "N5",
-    category: "Syarat & Perbandingan",
-    explanation: "Digunakan untuk membandingkan dua hal di mana A lebih memiliki sifat tertentu dibanding B.",
-    exampleSentences: [
-      {
-        japanese: "東京は大阪より人が多いです。",
-        hiragana: "とうきょう は おおさか より ひと が おおい です。",
-        translation: "Tokyo penduduknya lebih banyak daripada Osaka."
-      },
-      {
-        japanese: "飛行機は電車より速いです。",
-        hiragana: "ひこうき は でんしゃ より はやい です。",
-        translation: "Pesawat terbang lebih cepat daripada kereta."
-      }
-    ],
-    notes: "Pola komplit: A は B より ~ です (A lebih ~ daripada B).",
-    tags: ["N5", "Perbandingan"]
-  },
-  {
-    id: "bp_tari_tari",
-    pattern: "～たり ～たりします",
-    romajiPattern: "~tari ~tari shimasu",
-    meaning: "Melakukan A, B, dan lain-lain (Contoh Kegiatan)",
-    formula: "Kata Kerja A [Bentuk た] + り、Kata Kerja B [Bentuk た] + りします",
-    level: "N5",
-    category: "Syarat & Perbandingan",
-    explanation: "Digunakan untuk menyebutkan beberapa contoh kegiatan tidak berurutan yang dilakukan secara acak.",
-    exampleSentences: [
-      {
-        japanese: "休みの日は本を読んだり、音楽を聞いたりします。",
-        hiragana: "やすみ の ひ は ほん を よんだり、おんがく を きいたり します。",
-        translation: "Pada hari libur saya membaca buku, mendengarkan musik, dan kegiatan lainnya."
-      }
-    ],
-    notes: "Selalu diakhiri dengan kata kerja します di bagian akhir.",
-    tags: ["N5", "Contoh Aksi"]
-  },
-  {
-    id: "bp_kara_reason",
-    pattern: "～から (Sebab / Alasan)",
-    romajiPattern: "~kara (because)",
-    meaning: "Karena... / Oleh karena itu...",
-    formula: "Kalimat Alasan + から、Kalimat Hasil",
-    level: "N5",
-    category: "Syarat & Perbandingan",
-    explanation: "Menyatakan alasan subjektif dari pembicara mengapa suatu hal terjadi.",
-    exampleSentences: [
-      {
-        japanese: "時間がなかったから、朝ご飯を食べませんでした。",
-        hiragana: "じかん が なかった から、あさごはん を たべませんでした。",
-        translation: "Karena tidak ada waktu, saya tidak makan sarapan."
-      }
-    ],
-    notes: "Bersifat lebih kasual dan subjektif dibanding ので (node).",
-    tags: ["N5", "Alasan"]
-  },
-  {
-    id: "bp_node_reason",
-    pattern: "～ので (Alasan Sopan)",
-    romajiPattern: "~node (because / since)",
-    meaning: "Karena... / Oleh sebab...",
-    formula: "Bentuk Kasual + ので (Kata Sifat-na/Benda + なので)",
+    id: "bp_temo",
+    pattern: "～ても / ～でも (Walaupun / Meskipun)",
+    romajiPattern: "~te mo / ~de mo",
+    meaning: "Walaupun... / Meskipun...",
+    formula: "Kata Kerja [Bentuk て] + も / Kata Sifat-i (buang い + くても) / Benda + でも",
     level: "N4",
     category: "Syarat & Perbandingan",
-    explanation: "Menyatakan alasan yang sopan, objektif, dan halus. Sangat disarankan digunakan pada situasi bisnis dan formal.",
+    explanation: "Pengandaian bertolak belakang di mana aksi B tetap akan terjadi terlepas dari kondisi A.",
     exampleSentences: [
       {
-        japanese: "風邪をひいたので、会社を休んでいます。",
-        hiragana: "かぜ を ひいた ので、かいしゃ を やすんでいます。",
-        translation: "Karena terkena flu, saya tidak masuk kerja."
+        japanese: "雨が降っても、出かけます。",
+        hiragana: "あめ が ふっても、でかけます。",
+        translation: "Walaupun hujan turun, saya tetap akan pergi."
       }
     ],
-    notes: "Lebih halus dan sopan dibanding から (kara).",
-    tags: ["N4", "Alasan Sopan"]
+    notes: "Dapat digunakan untuk kondisi hipotetis maupun nyata.",
+    tags: ["N4", "Meskipun"]
+  },
+  {
+    id: "bp_shi_shi",
+    pattern: "～し ～し (Selain itu... dan juga...)",
+    romajiPattern: "~shi ~shi",
+    meaning: "Selain... juga... (Menyebutkan beberapa alasan)",
+    formula: "Bentuk Kasual + し",
+    level: "N4",
+    category: "Syarat & Perbandingan",
+    explanation: "Menyebutkan lebih dari satu alasan yang mendukung suatu kesimpulan atau keputusan.",
+    exampleSentences: [
+      {
+        japanese: "あの店は美味しいし、安いし、いつもいっぱいです。",
+        hiragana: "あの みせ は おいしい し、やすい し、いつも いっぱい です。",
+        translation: "Toko itu selain enak, harganya juga murah, makanya selalu ramai."
+      }
+    ],
+    notes: "Memberikan kesan bahwa masih ada alasan pendukung lainnya.",
+    tags: ["N4", "Alasan Alasan"]
   },
 
   // ==========================================
-  // SOPAN & KEHORMATAN (N5 & N4)
+  // SOPAN & KEHORMATAN (N4)
   // ==========================================
-  {
-    id: "bp_te_ageru",
-    pattern: "～てあげます / ～てあげる",
-    romajiPattern: "~te agemasu",
-    meaning: "Melakukan sesuatu untuk orang lain (Bantuan/Kebaikan)",
-    formula: "Kata Kerja [Bentuk て] + あげます",
-    level: "N5",
-    category: "Sopan & Kehormatan",
-    explanation: "Digunakan saat pembicara melakukan suatu kebaikan atau bantuan untuk orang lain.",
-    exampleSentences: [
-      {
-        japanese: "私は妹に宿題を教えてあげました。",
-        hiragana: "わたし は いもうと に しゅくだい を おしえて あげました。",
-        translation: "Saya mengajari adik perempuan saya mengerjakan PR."
-      }
-    ],
-    notes: "Jangan gunakan kepada atasan/senior karena bisa terdengar menyombongkan kebaikan.",
-    tags: ["N5", "Sopan", "Bantuan"]
-  },
-  {
-    id: "bp_te_kureru",
-    pattern: "～てくれます / ～てくれる",
-    romajiPattern: "~te kuremasu",
-    meaning: "Orang lain melakukan sesuatu untuk saya",
-    formula: "Orang Lain + が + Kata Kerja [Bentuk て] + くれます",
-    level: "N5",
-    category: "Sopan & Kehormatan",
-    explanation: "Digunakan ketika orang lain dengan sukarela melakukan tindakan kebaikan yang menguntungkan pembicara.",
-    exampleSentences: [
-      {
-        japanese: "鈴木さんが自転車を直してくれました。",
-        hiragana: "すずきさん が じてんしゃ を なおして くれました。",
-        translation: "Suzuki-san memperbaiki sepeda untuk saya."
-      }
-    ],
-    notes: "Subjek utama adalah orang yang memberikan kebaikan.",
-    tags: ["N5", "Sopan", "Kebaikan"]
-  },
-  {
-    id: "bp_te_morau",
-    pattern: "～てもらいます / ～てもら",
-    romajiPattern: "~te moraimasu",
-    meaning: "Menerima bantuan/tindakan dari orang lain",
-    formula: "Pembicara + は + Orang Lain + に + Kata Kerja [Bentuk て] + もらいます",
-    level: "N5",
-    category: "Sopan & Kehormatan",
-    explanation: "Menyatakan bahwa pembicara menerima kebaikan atas permohonan atau bantuan orang lain.",
-    exampleSentences: [
-      {
-        japanese: "私は木村さんに英語を教えてもらいました。",
-        hiragana: "わたし は きむらさん に えいご を おしえて もらいました。",
-        translation: "Saya diajari bahasa Inggris oleh Kimura-san."
-      }
-    ],
-    notes: "Subjek utama adalah pembicara yang menerima kebaikan.",
-    tags: ["N5", "Sopan", "Menerima"]
-  },
   {
     id: "bp_keigo_respect",
     pattern: "お / ご ～ ください (Permintaan Sangat Sopan)",
@@ -995,5 +813,43 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     ],
     notes: "Gunakan お untuk kata asli Jepang (Wago) dan ご untuk kata serapan Cina (Kango).",
     tags: ["N4", "Keigo", "Sangat Sopan"]
+  },
+  {
+    id: "bp_sonkeigo_form",
+    pattern: "尊敬語 (Sonkeigo - Penghormatan Atasan)",
+    romajiPattern: "Sonkeigo (respectful language)",
+    meaning: "Bentuk Penghormatan (Meninggikan derajat posisi atasan/tamu)",
+    formula: "Kata Kerja Khusus: いらっしゃる (pergi/datang/ada), おっしゃる (berkata), 召し上がる (makan/minum)",
+    level: "N4",
+    category: "Sopan & Kehormatan",
+    explanation: "Digunakan saat membicarakan atau menanyakan aksi yang dilakukan oleh atasan, guru, atau pelanggan.",
+    exampleSentences: [
+      {
+        japanese: "社長はもうお帰りになりました。",
+        hiragana: "しゃちょう は もう おかえり に なりました。",
+        translation: "Direktur sudah pulang (bentuk sangat hormat)."
+      }
+    ],
+    notes: "Jangan pernah gunakan Sonkeigo untuk menyebutkan aksi diri sendiri.",
+    tags: ["N4", "Sonkeigo", "Hormat"]
+  },
+  {
+    id: "bp_kenjougo_form",
+    pattern: "謙譲語 (Kenjougo - Bahasa Merendahkan Diri)",
+    romajiPattern: "Kenjougo (humble language)",
+    meaning: "Bentuk Merendah Diri (Menghormati lawan bicara dengan merendahkan aksi diri)",
+    formula: "Kata Kerja Khusus: 参ります (pergi/datang), 申します (berkata), いただきます (makan/minum)",
+    level: "N4",
+    category: "Sopan & Kehormatan",
+    explanation: "Digunakan ketika pembicara menceritakan aksinya sendiri di hadapan atasan atau pelanggan.",
+    exampleSentences: [
+      {
+        japanese: "明日、社長の宅へ参ります。",
+        hiragana: "あした、しゃちょう の たく へ まいります。",
+        translation: "Besok saya akan berkunjung (merendah) ke kediaman Direktur."
+      }
+    ],
+    notes: "Selalu digunakan untuk aksi diri sendiri/pihak internal kelompok.",
+    tags: ["N4", "Kenjougo", "Merendah"]
   }
 ];
