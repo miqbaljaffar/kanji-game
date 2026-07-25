@@ -73,8 +73,6 @@ html, body {
   background-color: #87CEEB !important;
   color: #1e293b;
   overflow-x: hidden;
-  /* Mencegah scroll mental di HP */
-  overscroll-behavior-y: none;
   /* Hilangkan highlight tap di HP */
   -webkit-tap-highlight-color: transparent;
 }

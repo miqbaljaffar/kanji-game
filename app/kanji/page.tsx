@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { kanjiDictionaryData } from "@/data/kanjiDictionary";
 import { KanjiDictionaryEntry } from "@/types";
@@ -15,6 +15,9 @@ export default function KanjiDictionaryPage() {
   const [selectedLevel, setSelectedLevel] = useState<"ALL" | "N5" | "N4">("ALL");
   const [selectedType, setSelectedType] = useState<"ALL" | "SINGLE" | "COMPOUND">("ALL");
   const [activeEntry, setActiveEntry] = useState<KanjiDictionaryEntry | null>(null);
+
+  // Scroll Container Ref
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,13 +84,13 @@ export default function KanjiDictionaryPage() {
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 120, behavior: "smooth" });
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   return (
-    <div className="relative min-h-dvh w-full overflow-y-auto overflow-x-hidden bg-[#87CEEB] text-slate-800 font-body pb-16">
+    <div ref={containerRef} className="relative h-dvh w-full overflow-y-auto overflow-x-hidden bg-[#87CEEB] text-slate-800 font-body pb-16">
       {/* Background awan ceria */}
       <GameBackground />
 
