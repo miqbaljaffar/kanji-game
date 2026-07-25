@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { kanjiDictionaryData } from "@/data/kanjiDictionary";
 import { KanjiDictionaryEntry } from "@/types";
 import { KanjiCard } from "@/components/kanji/KanjiCard";
 import { KanjiFilterBar } from "@/components/kanji/KanjiFilterBar";
 import { KanjiDetailModal } from "@/components/kanji/KanjiDetailModal";
+import { KanjiPagination } from "@/components/kanji/KanjiPagination";
 import { GameBackground } from "@/components/Background";
 
 export default function KanjiDictionaryPage() {
@@ -14,6 +15,15 @@ export default function KanjiDictionaryPage() {
   const [selectedLevel, setSelectedLevel] = useState<"ALL" | "N5" | "N4">("ALL");
   const [selectedType, setSelectedType] = useState<"ALL" | "SINGLE" | "COMPOUND">("ALL");
   const [activeEntry, setActiveEntry] = useState<KanjiDictionaryEntry | null>(null);
+
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
+
+  // Reset to page 1 whenever filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedLevel, selectedType, itemsPerPage]);
 
   // Statistics calculation
   const stats = useMemo(() => {
@@ -61,6 +71,20 @@ export default function KanjiDictionaryPage() {
       return true;
     });
   }, [searchQuery, selectedLevel, selectedType]);
+
+  // Paginated data slice
+  const totalPages = Math.ceil(filteredKanji.length / itemsPerPage);
+  const paginatedKanji = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredKanji.slice(start, start + itemsPerPage);
+  }, [filteredKanji, currentPage, itemsPerPage]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 120, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="relative min-h-dvh w-full overflow-y-auto overflow-x-hidden bg-[#87CEEB] text-slate-800 font-body pb-16">
@@ -125,16 +149,28 @@ export default function KanjiDictionaryPage() {
         />
 
         {/* Kanji Cards Grid */}
-        {filteredKanji.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {filteredKanji.map((entry) => (
-              <KanjiCard
-                key={entry.id}
-                entry={entry}
-                onSelect={(selected) => setActiveEntry(selected)}
-              />
-            ))}
-          </div>
+        {paginatedKanji.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {paginatedKanji.map((entry) => (
+                <KanjiCard
+                  key={entry.id}
+                  entry={entry}
+                  onSelect={(selected) => setActiveEntry(selected)}
+                />
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            <KanjiPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              totalItems={filteredKanji.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={handlePageChange}
+              onItemsPerPageChange={(size) => setItemsPerPage(size)}
+            />
+          </>
         ) : (
           /* Empty Search State */
           <div className="bg-white/85 backdrop-blur-md rounded-3xl p-10 text-center shadow-lg border-2 border-white/60 my-10 space-y-4 max-w-md mx-auto">
