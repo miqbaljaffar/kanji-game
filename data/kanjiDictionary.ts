@@ -12,65 +12,87 @@ export const singleKanjiMaster: Record<string, {
   strokes: number;
   level: "N5" | "N4";
   meaning: string;
+  hiragana: string;
+  romaji: string;
 }> = {
-  "水": { onyomi: "スイ (sui)", kunyomi: "みず (mizu)", mnemonic: "Air yang mengalir ke bawah membentuk aliran sungai kecil.", strokes: 4, level: "N5", meaning: "Air" },
-  "学": { onyomi: "ガク (gaku)", kunyomi: "まな・ぶ (mana-bu)", mnemonic: "Anak kecil (子) di bawah atap sekolah sedang belajar dengan giat.", strokes: 8, level: "N5", meaning: "Belajar / Ilmu" },
-  "生": { onyomi: "セイ (sei), ショウ (shou)", kunyomi: "い・きる (i-kiru), う・まれる (u-mareru), なま (nama)", mnemonic: "Tunas tanaman baru yang tumbuh tegak dari tanah (hidup/lahir).", strokes: 5, level: "N5", meaning: "Hidup / Lahir" },
-  "車": { onyomi: "シャ (sha)", kunyomi: "くるま (kuruma)", mnemonic: "Tampak atas dari sebuah kereta dorong tradisional beroda.", strokes: 7, level: "N5", meaning: "Mobil / Kendaraan / Roda" },
-  "電": { onyomi: "デン (den)", kunyomi: "-", mnemonic: "Awan hujan (雨) di atas sawah (田) yang memancarkan kilatan petir (listrik).", strokes: 13, level: "N5", meaning: "Listrik / Petir" },
-  "気": { onyomi: "キ (ki), ケ (ke)", kunyomi: "-", mnemonic: "Uap air hangat yang membubung ke udara (energi/perasaan).", strokes: 6, level: "N5", meaning: "Energi / Udara / Perasaan" },
-  "入": { onyomi: "ニュウ (nyuu)", kunyomi: "はい・る (hai-ru), い・れる (i-reru)", mnemonic: "Dua garis bersilangan menunjukkan jalan masuk.", strokes: 2, level: "N5", meaning: "Masuk" },
-  "出": { onyomi: "シュツ (shutsu)", kunyomi: "で・る (de-ru), だ・す (da-su)", mnemonic: "Dua gunung (山) yang bertumpuk mencuat keluar.", strokes: 5, level: "N5", meaning: "Keluar" },
-  "買": { onyomi: "バイ (bai)", kunyomi: "か・う (ka-u)", mnemonic: "Membawa kantong (𠔿) berisi kulit kerang (貝 - uang kuno) untuk membeli.", strokes: 12, level: "N5", meaning: "Membeli" },
-  "売": { onyomi: "バイ (bai)", kunyomi: "う・る (u-ru)", mnemonic: "Seseorang melangkah membawa barang dagangan di atas kerang (貝) untuk menjual.", strokes: 7, level: "N5", meaning: "Menjual" },
-  "食": { onyomi: "ショク (shoku)", kunyomi: "た・べる (tabe-ru)", mnemonic: "Atap rumah dengan wadah makanan di bawahnya untuk makan.", strokes: 9, level: "N5", meaning: "Makan / Makanan" },
-  "飲": { onyomi: "イン (in)", kunyomi: "の・む (no-mu)", mnemonic: "Membuka mulut lebar-lebar di dekat makanan/minuman (食) untuk minum.", strokes: 12, level: "N5", meaning: "Minum" },
-  "山": { onyomi: "サン (san)", kunyomi: "やま (yama)", mnemonic: "Tiga puncak gunung berjejer yang menjulang tinggi.", strokes: 3, level: "N5", meaning: "Gunung" },
-  "川": { onyomi: "セン (sen)", kunyomi: "かわ (kawa)", mnemonic: "Tiga garis aliran air sungai yang mengalir sejajar.", strokes: 3, level: "N5", meaning: "Sungai" },
-  "日": { onyomi: "ニチ (nichi), ジツ (jitsu)", kunyomi: "ひ (hi), び (bi), か (ka)", mnemonic: "Matahari berbentuk lingkaran dengan garis di tengahnya.", strokes: 4, level: "N5", meaning: "Matahari / Hari" },
-  "本": { onyomi: "ホン (hon)", kunyomi: "もと (moto)", mnemonic: "Pohon (木) yang diberi garis penanda di bagian akar/batangnya (buku/asal).", strokes: 5, level: "N5", meaning: "Buku / Asal" },
-  "先": { onyomi: "セン (sen)", kunyomi: "さき (saki)", mnemonic: "Seseorang yang berjalan melangkah mendahului orang lain.", strokes: 6, level: "N5", meaning: "Dulu / Terlebih Dahulu" },
-  "週": { onyomi: "シュウ (shuu)", kunyomi: "-", mnemonic: "Perjalanan (辶) mengelilingi daerah (周) selama satu minggu.", strokes: 11, level: "N5", meaning: "Minggu / Pekan" },
-  "年": { onyomi: "ネン (nen)", kunyomi: "とし (toshi)", mnemonic: "Seseorang memikul seikat padi hasil panen raya tahunan.", strokes: 6, level: "N5", meaning: "Tahun" },
-  "時": { onyomi: "ジ (ji)", kunyomi: "とき (toki)", mnemonic: "Matahari (日) di atas kuil (寺) yang dulu digunakan penunjuk waktu.", strokes: 10, level: "N5", meaning: "Waktu / Jam" },
-  "間": { onyomi: "カン (kan), ゲン (gen)", kunyomi: "あいだ (aida), ま (ma)", mnemonic: "Sinar matahari (日) menerobos celah pintu gerbang (門).", strokes: 12, level: "N5", meaning: "Di Antara / Ruang / Jeda" },
-  "駅": { onyomi: "エキ (eki)", kunyomi: "-", mnemonic: "Kuda (馬) yang ditambatkan di tempat pemberhentian stasiun (尺).", strokes: 14, level: "N5", meaning: "Stasiun" },
-  "雨": { onyomi: "ウ (u)", kunyomi: "あめ (ame)", mnemonic: "Langit berawan yang menjatuhkan titik-titik air hujan ke bumi.", strokes: 8, level: "N5", meaning: "Hujan" },
-  "男": { onyomi: "ダン (dan), ナン (nan)", kunyomi: "おとこ (otoko)", mnemonic: "Orang bekerja di sawah (田) menggunakan kekuatan fisik (力).", strokes: 7, level: "N5", meaning: "Laki-laki" },
-  "女": { onyomi: "ジョ (jo)", kunyomi: "おんな (onna)", mnemonic: "Gambar siluet seorang wanita yang sedang duduk bersimpuh.", strokes: 3, level: "N5", meaning: "Perempuan" },
-  "友": { onyomi: "ユウ (yuu)", kunyomi: "とも (tomo)", mnemonic: "Dua buah tangan kanan yang saling berpegangan erat (sahabat).", strokes: 4, level: "N5", meaning: "Teman / Sahabat" },
-  "校": { onyomi: "コウ (kou)", kunyomi: "-", mnemonic: "Bangunan kayu (木) tempat anak berkumpul (交) belajar.", strokes: 10, level: "N5", meaning: "Sekolah" },
-  "語": { onyomi: "ゴ (go)", kunyomi: "かた・る (kata-ru)", mnemonic: "Kata-kata (言) yang diucapkan oleh lima (五) mulut (口).", strokes: 14, level: "N5", meaning: "Bahasa / Kata" },
-  "話": { onyomi: "ワ (wa)", kunyomi: "はな・す (hana-su), はなし (hanashi)", mnemonic: "Kata-kata (言) yang keluar dengan bantuan lidah (舌).", strokes: 13, level: "N5", meaning: "Bicara / Cerita" },
-  "会": { onyomi: "カイ (kai), エ (e)", kunyomi: "あ・う (a-u)", mnemonic: "Orang-orang berkumpul bersama di bawah satu atap.", strokes: 6, level: "N5", meaning: "Bertemu / Perkumpulan" },
-  "社": { onyomi: "シャ (sha)", kunyomi: "やしろ (yashiro)", mnemonic: "Altar persembahan (礻) di atas tanah (土) tempat masyarakat berkumpul.", strokes: 7, level: "N5", meaning: "Perusahaan / Masyarakat" },
-  "見": { onyomi: "ケン (ken)", kunyomi: "み・る (mi-ru)", mnemonic: "Mata besar (目) di atas kaki manusia untuk melihat.", strokes: 7, level: "N5", meaning: "Melihat" },
-  "書": { onyomi: "ショ (sho)", kunyomi: "か・く (ka-ku)", mnemonic: "Tangan memegang kuas di atas wadah tinta untuk menulis.", strokes: 10, level: "N5", meaning: "Menulis / Buku" },
-  "休": { onyomi: "キュウ (kyuu)", kunyomi: "やす・む (yasu-mu)", mnemonic: "Seseorang (人) bersandar di bawah pohon (木) untuk istirahat.", strokes: 6, level: "N5", meaning: "Istirahat" },
-  "行": { onyomi: "コウ (kou)", kunyomi: "い・く (i-ku), おこな・う (okona-u)", mnemonic: "Persimpangan jalan tempat orang berjalan pergi.", strokes: 6, level: "N5", meaning: "Pergi / Melakukan" },
-  "来": { onyomi: "ライ (rai)", kunyomi: "く・る (ku-ru)", mnemonic: "Gandum matang yang datang tumbuh kembali untuk dipanen.", strokes: 7, level: "N5", meaning: "Datang" },
-  "国": { onyomi: "コク (koku)", kunyomi: "くに (kuni)", mnemonic: "Wilayah kekuasaan raja yang dipagari tembok keliling.", strokes: 8, level: "N5", meaning: "Negara" },
-  "道": { onyomi: "ドウ (dou)", kunyomi: "みち (michi)", mnemonic: "Kepala/pemikiran (首) yang memandu kaki melangkah (辶) di jalan.", strokes: 12, level: "N5", meaning: "Jalan / Cara" },
-  "名": { onyomi: "メイ (mei)", kunyomi: "な (na)", mnemonic: "Di malam hari (夕), sebutkan nama dengan mulut (口).", strokes: 6, level: "N5", meaning: "Nama / Terkenal" },
-  "前": { onyomi: "ゼン (zen)", kunyomi: "まえ (mae)", mnemonic: "Berdiri di depan perahu mengarahkan gunting potong.", strokes: 9, level: "N5", meaning: "Depan / Sebelum" },
-  "後": { onyomi: "ゴ (go)", kunyomi: "あと (ato), うし・ろ (ushi-ro)", mnemonic: "Orang berjalan lambat di belakang karena kakinya terikat.", strokes: 9, level: "N5", meaning: "Belakang / Setelah" },
-  "左": { onyomi: "サ (sa)", kunyomi: "ひだり (hidari)", mnemonic: "Tangan kiri memegang penggaris pertukangan.", strokes: 5, level: "N5", meaning: "Kiri" },
-  "右": { onyomi: "ウ (u), ユウ (yuu)", kunyomi: "みぎ (migi)", mnemonic: "Tangan kanan menyuapkan makanan ke mulut (口).", strokes: 5, level: "N5", meaning: "Kanan" },
-  "大": { onyomi: "ダイ (dai), タイ (tai)", kunyomi: "おお・きい (oo-kii)", mnemonic: "Orang merentangkan tangan dan kaki lebar-lebar.", strokes: 3, level: "N5", meaning: "Besar" },
-  "小": { onyomi: "ショウ (shou)", kunyomi: "ちい・さい (chii-sai)", mnemonic: "Satu benda dibelah menjadi tiga bagian kecil.", strokes: 3, level: "N5", meaning: "Kecil" },
-  "病": { onyomi: "ビョウ (byou)", kunyomi: "やまい (yamai)", mnemonic: "Orang berbaring di atas ranjang sakit (疒) dengan rasa perih.", strokes: 10, level: "N4", meaning: "Sakit / Penyakit" },
-  "院": { onyomi: "イン (in)", kunyomi: "-", mnemonic: "Bangunan besar dengan tembok pagar tempat institusi resmi.", strokes: 10, level: "N4", meaning: "Institusi / Gedung" },
-  "強": { onyomi: "キョウ (kyou)", kunyomi: "つよ・い (tsuyo-i)", mnemonic: "Busur panah (弓) yang mampu menembus cangkang serangga kuat.", strokes: 11, level: "N4", meaning: "Kuat / Paksaan" },
-  "勉": { onyomi: "ベン (ben)", kunyomi: "つと・める (tsuto-meru)", mnemonic: "Melahirkan/berusaha keras (免) menggunakan tenaga fisik (力).", strokes: 10, level: "N4", meaning: "Berusaha / Giat" },
-  "暗": { onyomi: "アン (an)", kunyomi: "くら・い (kura-i)", mnemonic: "Matahari (日) tertutup suara berbisik di malam hari (音) sehingga gelap.", strokes: 13, level: "N4", meaning: "Gelap / Rahasia" },
-  "証": { onyomi: "ショウ (shou)", kunyomi: "あかし (akashi)", mnemonic: "Kata-kata (言) yang benar dan tepat (正) sebagai bukti sah.", strokes: 12, level: "N4", meaning: "Bukti / Verifikasi" },
-  "番": { onyomi: "バン (ban)", kunyomi: "-", mnemonic: "Tanaman di sawah (田) yang diberi nomor urut dan dijaga.", strokes: 12, level: "N4", meaning: "Nomor / Giliran" },
-  "号": { onyomi: "ゴウ (gou)", kunyomi: "-", mnemonic: "Mulut (口) yang meneriakkan perintah kode nomor.", strokes: 5, level: "N4", meaning: "Kode / Tanda / Angka" },
-  "飛": { onyomi: "ヒ (hi)", kunyomi: "と・ぶ (to-bu)", mnemonic: "Burung mengepakkan sayap lebar-lebar melayang di udara.", strokes: 9, level: "N4", meaning: "Terbang" },
-  "機": { onyomi: "キ (ki)", kunyomi: "hata (hata)", mnemonic: "Mesin kayu (木) kompleks dengan benang dan komponen bergerak.", strokes: 16, level: "N4", meaning: "Mesin / Kesempatan" },
-  "急": { onyomi: "キュウ (kyuu)", kunyomi: "iso・gu (iso-gu)", mnemonic: "Hati (心) yang berdegup kencang karena harus bergegas.", strokes: 9, level: "N4", meaning: "Cepat / Darurat" },
-  "救": { onyomi: "キュウ (kyuu)", kunyomi: "suku・u (suku-u)", mnemonic: "Memukul mundur bahaya (攵) untuk menyelamatkan orang.", strokes: 11, level: "N4", meaning: "Selamatkan / Pertolongan" },
-  "忘": { onyomi: "ボウ (bou)", kunyomi: "wasu・reru (wasu-reru)", mnemonic: "Hati (心) yang hilang lenyap (亡) menyebabkan lupa.", strokes: 7, level: "N4", meaning: "Lupa" },
+  // Alam & Elemen Dasar (N5)
+  "水": { onyomi: "スイ (sui)", kunyomi: "みず (mizu)", mnemonic: "Air yang mengalir ke bawah membentuk aliran sungai kecil.", strokes: 4, level: "N5", meaning: "Air", hiragana: "みず", romaji: "mizu" },
+  "火": { onyomi: "カ (ka)", kunyomi: "ひ (hi)", mnemonic: "Kobaran api yang membumbung tinggi menjilat udara.", strokes: 4, level: "N5", meaning: "Api", hiragana: "ひ", romaji: "hi" },
+  "木": { onyomi: "モク (moku), ボク (boku)", kunyomi: "き (ki)", mnemonic: "Pohon lebat dengan batang utama dan dahan bercabang.", strokes: 4, level: "N5", meaning: "Pohon / Kayu", hiragana: "き", romaji: "ki" },
+  "土": { onyomi: "ト (to), ド (do)", kunyomi: "つち (tsuchi)", mnemonic: "Tumpukan tanah yang subur di atas permukaan bumi.", strokes: 3, level: "N5", meaning: "Tanah", hiragana: "つち", romaji: "tsuchi" },
+  "金": { onyomi: "キン (kin), コン (kon)", kunyomi: "かね (kane)", mnemonic: "Atap tambang dengan butiran emas murni berkilau di bawahnya.", strokes: 8, level: "N5", meaning: "Emas / Uang", hiragana: "かね", romaji: "kane" },
+  "日": { onyomi: "ニチ (nichi), ジツ (jitsu)", kunyomi: "ひ (hi), び (bi), か (ka)", mnemonic: "Matahari berbentuk lingkaran dengan garis horizontal di tengahnya.", strokes: 4, level: "N5", meaning: "Matahari / Hari", hiragana: "ひ", romaji: "hi" },
+  "月": { onyomi: "ゲツ (getsu), ガツ (gatsu)", kunyomi: "つき (tsuki)", mnemonic: "Bentuk bulan sabit yang bersinar di langit malam.", strokes: 4, level: "N5", meaning: "Bulan", hiragana: "つき", romaji: "tsuki" },
+  "山": { onyomi: "サン (san)", kunyomi: "やま (yama)", mnemonic: "Tiga puncak gunung berjejer yang menjulang tinggi.", strokes: 3, level: "N5", meaning: "Gunung", hiragana: "やま", romaji: "yama" },
+  "川": { onyomi: "セン (sen)", kunyomi: "かわ (kawa)", mnemonic: "Tiga garis aliran air sungai yang mengalir sejajar.", strokes: 3, level: "N5", meaning: "Sungai", hiragana: "かわ", romaji: "kawa" },
+  "天": { onyomi: "テン (ten)", kunyomi: "あまつ (amatsu)", mnemonic: "Seseorang yang berdiri di atas permukaan tanah menatap langit luas.", strokes: 4, level: "N5", meaning: "Langit / Surga", hiragana: "てん", romaji: "ten" },
+  "雨": { onyomi: "ウ (u)", kunyomi: "あめ (ame)", mnemonic: "Langit berawan yang menjatuhkan titik-titik air hujan ke bumi.", strokes: 8, level: "N5", meaning: "Hujan", hiragana: "あめ", romaji: "ame" },
+  "空": { onyomi: "クウ (kuu)", kunyomi: "そら (sora), あ・く (a-ku)", mnemonic: "Atap goa (穴) dengan ruang kosong (工) membumbung tinggi.", strokes: 8, level: "N5", meaning: "Langit / Kosong", hiragana: "そら", romaji: "sora" },
+  "風": { onyomi: "フウ (fuu)", kunyomi: "かぜ (kaze)", mnemonic: "Hembusan angin cepat membawa serangga melayang di udara.", strokes: 9, level: "N5", meaning: "Angin", hiragana: "かぜ", romaji: "kaze" },
+  "花": { onyomi: "カ (ka)", kunyomi: "はな (hana)", mnemonic: "Tanaman (艹) yang mengalami perubahan (化) mekar menjadi bunga indah.", strokes: 7, level: "N5", meaning: "Bunga", hiragana: "はな", romaji: "hana" },
+  "魚": { onyomi: "ギョ (gyo)", kunyomi: "さかな (sakana)", mnemonic: "Bentuk seekor ikan berenang lengkap dengan kepala, sisik, dan ekor.", strokes: 11, level: "N5", meaning: "Ikan", hiragana: "さかな", romaji: "sakana" },
+
+  // Manusia & Tubuh (N5)
+  "人": { onyomi: "ジン (jin), ニン (nin)", kunyomi: "ひと (hito)", mnemonic: "Gambar siluet dua kaki manusia yang melangkah berjalan tegak.", strokes: 2, level: "N5", meaning: "Orang / Manusia", hiragana: "ひと", romaji: "hito" },
+  "子": { onyomi: "シ (shi), ス (su)", kunyomi: "こ (ko)", mnemonic: "Bayi/anak kecil yang merentangkan kedua tangannya dengan gembira.", strokes: 3, level: "N5", meaning: "Anak", hiragana: "こ", romaji: "ko" },
+  "男": { onyomi: "ダン (dan), ナン (nan)", kunyomi: "おとこ (otoko)", mnemonic: "Orang bekerja di sawah (田) menggunakan kekuatan fisik (力).", strokes: 7, level: "N5", meaning: "Laki-laki", hiragana: "おとこ", romaji: "otoko" },
+  "女": { onyomi: "ジョ (jo), ニョ (nyo)", kunyomi: "おんな (onna)", mnemonic: "Gambar siluet seorang wanita yang sedang duduk bersimpuh sopan.", strokes: 3, level: "N5", meaning: "Perempuan", hiragana: "おんな", romaji: "onna" },
+  "父": { onyomi: "フ (fu)", kunyomi: "ちち (chichi)", mnemonic: "Tangan memegang kapak kayu melambangkan kepala keluarga/ayah.", strokes: 4, level: "N5", meaning: "Ayah", hiragana: "ちち", romaji: "chichi" },
+  "母": { onyomi: "ボ (bo)", kunyomi: "はは (haha)", mnemonic: "Gambar dada seorang ibu yang sedang memeluk dan menyusui bayinya.", strokes: 5, level: "N5", meaning: "Ibu", hiragana: "はは", romaji: "haha" },
+  "目": { onyomi: "モク (moku), ボク (boku)", kunyomi: "め (me)", mnemonic: "Bentuk organ mata manusia beserta iris di tengahnya.", strokes: 5, level: "N5", meaning: "Mata", hiragana: "め", romaji: "me" },
+  "耳": { onyomi: "ジ (ji)", kunyomi: "みみ (mimi)", mnemonic: "Siluet bentuk daun telinga manusia untuk mendengarkan.", strokes: 6, level: "N5", meaning: "Telinga", hiragana: "みみ", romaji: "mimi" },
+  "口": { onyomi: "コウ (kou), ク (ku)", kunyomi: "くち (kuchi)", mnemonic: "Bentuk rongga mulut yang terbuka lebar saat berbicara.", strokes: 3, level: "N5", meaning: "Mulut / Pintu", hiragana: "くち", romaji: "kuchi" },
+  "手": { onyomi: "シュ (shu)", kunyomi: "て (te)", mnemonic: "Bentuk lima jemari tangan manusia yang siap menggenggam.", strokes: 4, level: "N5", meaning: "Tangan", hiragana: "て", romaji: "te" },
+  "足": { onyomi: "ソク (soku)", kunyomi: "あし (ashi)", mnemonic: "Paha hingga telapak kaki manusia yang siap melangkah.", strokes: 7, level: "N5", meaning: "Kaki / Cukup", hiragana: "あし", romaji: "ashi" },
+  "力": { onyomi: "リョク (ryoku), リキ (riki)", kunyomi: "ちから (chikara)", mnemonic: "Otot lengan yang ditekuk melambangkan kekuatan fisik.", strokes: 2, level: "N5", meaning: "Kekuatan / Tenaga", hiragana: "ちから", romaji: "chikara" },
+
+  // Angka & Petunjuk (N5)
+  "一": { onyomi: "イチ (ichi)", kunyomi: "ひと・つ (hito-tsu)", mnemonic: "Satu garis horizontal tegak lurus melambangkan angka 1.", strokes: 1, level: "N5", meaning: "Satu", hiragana: "いち", romaji: "ichi" },
+  "二": { onyomi: "ニ (ni)", kunyomi: "ふた・つ (futa-tsu)", mnemonic: "Dua garis horizontal sejajar melambangkan angka 2.", strokes: 2, level: "N5", meaning: "Dua", hiragana: "に", romaji: "ni" },
+  "三": { onyomi: "サン (san)", kunyomi: "みっ・つ (mit-tsu)", mnemonic: "Tiga garis horizontal sejajar melambangkan angka 3.", strokes: 3, level: "N5", meaning: "Tiga", hiragana: "さん", romaji: "san" },
+  "四": { onyomi: "シ (shi)", kunyomi: "よん (yon), よっ・つ (yot-tsu)", mnemonic: "Kotak berpagar dengan dua tirai melambangkan angka 4.", strokes: 5, level: "N5", meaning: "Empat", hiragana: "よん", romaji: "yon" },
+  "五": { onyomi: "ゴ (go)", kunyomi: "いつ・つ (itsu-tsu)", mnemonic: "Simbol lima jari bersilangan melambangkan angka 5.", strokes: 4, level: "N5", meaning: "Lima", hiragana: "ご", romaji: "go" },
+  "六": { onyomi: "ロク (roku)", kunyomi: "むっ・つ (mut-tsu)", mnemonic: "Topi di atas kaki bercabang melambangkan angka 6.", strokes: 4, level: "N5", meaning: "Enam", hiragana: "ろく", romaji: "roku" },
+  "七": { onyomi: "シチ (shichi)", kunyomi: "なな (nana), なな・つ (nana-tsu)", mnemonic: "Garis horizontal dipotong garis melengkung melambangkan angka 7.", strokes: 2, level: "N5", meaning: "Tujuh", hiragana: "なな", romaji: "nana" },
+  "八": { onyomi: "ハチ (hachi)", kunyomi: "やっ・つ (yat-tsu)", mnemonic: "Dua garis terbuka melebar ke bawah melambangkan angka 8.", strokes: 2, level: "N5", meaning: "Delapan", hiragana: "はち", romaji: "hachi" },
+  "九": { onyomi: "キュウ (kyuu), ク (ku)", kunyomi: "ここの・つ (kokono-tsu)", mnemonic: "Lengan membengkok melambangkan angka 9.", strokes: 2, level: "N5", meaning: "Sembilan", hiragana: "きゅう", romaji: "kyuu" },
+  "十": { onyomi: "ジュウ (juu)", kunyomi: "とお (too)", mnemonic: "Simbol salib positif (+) melambangkan sepuluh.", strokes: 2, level: "N5", meaning: "Sepuluh", hiragana: "じゅう", romaji: "juu" },
+  "百": { onyomi: "ヒャク (hyaku)", kunyomi: "もも (momo)", mnemonic: "Matahari (日) dengan satu garis di atasnya melambangkan seratus.", strokes: 6, level: "N5", meaning: "Ratus", hiragana: "ひゃく", romaji: "hyaku" },
+  "千": { onyomi: "セン (sen)", kunyomi: "ち (chi)", mnemonic: "Angka seribu melambangkan pasukan seribu orang (人).", strokes: 3, level: "N5", meaning: "Ribu", hiragana: "せん", romaji: "sen" },
+  "万": { onyomi: "マン (man), バン (ban)", kunyomi: "-", mnemonic: "Bendera berkibar melambangkan sepuluh ribu.", strokes: 3, level: "N5", meaning: "Puluh Ribu (10.000)", hiragana: "まん", romaji: "man" },
+  "円": { onyomi: "エン (en)", kunyomi: "まる・い (maru-i)", mnemonic: "Koin lingkaran mata uang Yen Jepang.", strokes: 4, level: "N5", meaning: "Yen / Lingkaran", hiragana: "えん", romaji: "en" },
+
+  // Kata Kerja & Aksi Utama (N5/N4)
+  "行": { onyomi: "コウ (kou), ギョウ (gyou)", kunyomi: "い・く (i-ku), おこな・う (okona-u)", mnemonic: "Persimpangan jalan tempat orang berjalan pergi.", strokes: 6, level: "N5", meaning: "Pergi / Melakukan", hiragana: "いく", romaji: "iku" },
+  "来": { onyomi: "ライ (rai)", kunyomi: "く・る (ku-ru)", mnemonic: "Gandum matang yang datang tumbuh kembali untuk dipanen.", strokes: 7, level: "N5", meaning: "Datang", hiragana: "くる", romaji: "kuru" },
+  "食": { onyomi: "ショク (shoku)", kunyomi: "た・べる (tabe-ru)", mnemonic: "Atap rumah dengan wadah makanan di bawahnya untuk makan.", strokes: 9, level: "N5", meaning: "Makan / Makanan", hiragana: "たべる", romaji: "taberu" },
+  "飲": { onyomi: "イン (in)", kunyomi: "の・む (no-mu)", mnemonic: "Membuka mulut lebar-lebar di dekat makanan/minuman (食) untuk minum.", strokes: 12, level: "N5", meaning: "Minum", hiragana: "のむ", romaji: "nomu" },
+  "見": { onyomi: "ケン (ken)", kunyomi: "み・る (mi-ru)", mnemonic: "Mata besar (目) di atas kaki manusia untuk melihat.", strokes: 7, level: "N5", meaning: "Melihat", hiragana: "みる", romaji: "miru" },
+  "聞": { onyomi: "ブン (bun), モン (mon)", kunyomi: "き・く (ki-ku)", mnemonic: "Telinga (耳) ditaruh di dekat celah pintu (門) untuk mendengarkan.", strokes: 14, level: "N5", meaning: "Mendengar / Bertanya", hiragana: "きく", romaji: "kiku" },
+  "書": { onyomi: "ショ (sho)", kunyomi: "か・く (ka-ku)", mnemonic: "Tangan memegang kuas di atas wadah tinta untuk menulis.", strokes: 10, level: "N5", meaning: "Menulis", hiragana: "かく", romaji: "kaku" },
+  "読": { onyomi: "ドク (doku)", kunyomi: "よ・む (yo-mu)", mnemonic: "Kata-kata (言) yang dijual (売) ditiupkan untuk dibaca.", strokes: 14, level: "N5", meaning: "Membaca", hiragana: "よむ", romaji: "yomu" },
+  "話": { onyomi: "ワ (wa)", kunyomi: "はな・す (hana-su)", mnemonic: "Kata-kata (言) keluar bantuan lidah (舌) saat berbicara.", strokes: 13, level: "N5", meaning: "Bicara / Cerita", hiragana: "はなす", romaji: "hanasu" },
+  "買": { onyomi: "バイ (bai)", kunyomi: "か・う (ka-u)", mnemonic: "Membawa kantong berisi kerang uang (貝) untuk membeli.", strokes: 12, level: "N5", meaning: "Membeli", hiragana: "かう", romaji: "kau" },
+  "売": { onyomi: "バイ (bai)", kunyomi: "う・る (u-ru)", mnemonic: "Melangkah membawa barang kerang (貝) untuk menjual.", strokes: 7, level: "N5", meaning: "Menjual", hiragana: "うる", romaji: "uru" },
+  "立": { onyomi: "リツ (ritsu)", kunyomi: "た・つ (ta-tsu)", mnemonic: "Seseorang berdiri tegak di atas permukaan tanah.", strokes: 5, level: "N5", meaning: "Berdiri", hiragana: "たつ", romaji: "tatsu" },
+  "休": { onyomi: "キュウ (kyuu)", kunyomi: "やす・む (yasu-mu)", mnemonic: "Seseorang (人) bersandar di bawah pohon (木) untuk istirahat.", strokes: 6, level: "N5", meaning: "Istirahat", hiragana: "やすむ", romaji: "yasumu" },
+
+  // Kata Sifat (N5/N4)
+  "大": { onyomi: "ダイ (dai), タイ (tai)", kunyomi: "おお・きい (oo-kii)", mnemonic: "Orang merentangkan tangan dan kaki lebar-lebar.", strokes: 3, level: "N5", meaning: "Besar", hiragana: "おおきい", romaji: "ookii" },
+  "小": { onyomi: "ショウ (shou)", kunyomi: "ちい・さい (chii-sai)", mnemonic: "Satu benda dibelah menjadi tiga bagian kecil.", strokes: 3, level: "N5", meaning: "Kecil", hiragana: "ちいさい", romaji: "chiisai" },
+  "高": { onyomi: "コウ (kou)", kunyomi: "たか・い (taka-i)", mnemonic: "Menara tinggi dengan jendela atap bertingkat.", strokes: 10, level: "N5", meaning: "Tinggi / Mahal", hiragana: "たかい", romaji: "takai" },
+  "安": { onyomi: "アン (an)", kunyomi: "やす・い (yasu-i)", mnemonic: "Seorang wanita (女) aman tenteram di bawah atap rumah (宀).", strokes: 6, level: "N5", meaning: "Murah / Aman", hiragana: "やすい", romaji: "yasui" },
+  "新": { onyomi: "シン (shin)", kunyomi: "あたら・しい (atara-shii)", mnemonic: "Memotong kayu pohon baru (木) dengan kapak tajam (斤).", strokes: 13, level: "N5", meaning: "Baru", hiragana: "あたらしい", romaji: "atarashii" },
+  "古": { onyomi: "コ (ko)", kunyomi: "ふる・い (furu-i)", mnemonic: "Cerita kuno yang diwariskan sepuluh (十) mulut (口).", strokes: 5, level: "N5", meaning: "Lama / Kuno", hiragana: "ふるい", romaji: "furui" },
+  "長": { onyomi: "チョウ (chou)", kunyomi: "なが・い (naga-i)", mnemonic: "Rambut panjang seorang tetua suku.", strokes: 8, level: "N5", meaning: "Panjang / Pemimpin", hiragana: "ながい", romaji: "nagai" },
+  "多": { onyomi: "タ (ta)", kunyomi: "おお・い (oo-i)", mnemonic: "Tumpukan dua bulan malam (夕) melambangkan banyak.", strokes: 6, level: "N5", meaning: "Banyak", hiragana: "おおい", romaji: "ooi" },
+  "少": { onyomi: "ショウ (shou)", kunyomi: "すく・ない (suku-nai), ちい・さい (chii-sai)", mnemonic: "Potongan kecil yang diiris lagi menjadi sedikit.", strokes: 4, level: "N5", meaning: "Sedikit", hiragana: "すくない", romaji: "sukunai" },
+  "近": { onyomi: "キン (kin)", kunyomi: "ちか・い (chika-i)", mnemonic: "Berjalan (辶) dekat dengan mengukur jarak penggaris.", strokes: 7, level: "N5", meaning: "Dekat", hiragana: "ちかい", romaji: "chikai" },
+  "遠": { onyomi: "エン (en)", kunyomi: "とお・い (too-i)", mnemonic: "Perjalanan melangkah (辶) jauh ke kota terpencil.", strokes: 13, level: "N5", meaning: "Jauh", hiragana: "とおい", romaji: "tooi" },
+  "白": { onyomi: "ハク (haku)", kunyomi: "しろ・い (shiro-i)", mnemonic: "Satu pancaran sinar matahari putih bersinar murni.", strokes: 5, level: "N5", meaning: "Putih", hiragana: "しろい", romaji: "shiroi" },
+  "黒": { onyomi: "コク (koku)", kunyomi: "くろ・い (kuro-i)", mnemonic: "Cerobong asap jelaga gelap berjelaga hitam.", strokes: 11, level: "N5", meaning: "Hitam", hiragana: "くろい", romaji: "kuroi" },
+  "赤": { onyomi: "セキ (seki)", kunyomi: "あか・い (aka-i)", mnemonic: "Kobaran api merah membakar tanah liat.", strokes: 7, level: "N5", meaning: "Merah", hiragana: "あかい", romaji: "akai" },
+  "青": { onyomi: "セイ (sei), ショウ (shou)", kunyomi: "あお・い (ao-i)", mnemonic: "Warna biru samudra jernih yang memancar murni.", strokes: 8, level: "N5", meaning: "Biru", hiragana: "あおい", romaji: "aoi" },
 };
 
 /**
@@ -82,6 +104,285 @@ export const compoundBreakdowns: Record<string, {
   mnemonic?: string;
   exampleSentence?: { japanese: string; hiragana: string; translation: string };
 }> = {
+  // Hari dalam seminggu
+  "月曜日": {
+    level: "N5",
+    components: [
+      { char: "月", meaning: "Bulan", onyomi: "ゲツ (getsu)", kunyomi: "つき (tsuki)" },
+      { char: "曜", meaning: "Hari dalam seminggu", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari / Matahari", onyomi: "ビ (bi)", kunyomi: "ひ (hi)" }
+    ],
+    mnemonic: "Hari (曜日) yang didedikasikan untuk Bulan (月) = Hari Senin.",
+    exampleSentence: {
+      japanese: "月曜日に yang / ujian があります。",
+      hiragana: "げつようび に しけん が あります。",
+      translation: "Ada ujian pada hari Senin."
+    }
+  },
+  "火曜日": {
+    level: "N5",
+    components: [
+      { char: "火", meaning: "Api", onyomi: "カ (ka)", kunyomi: "ひ (hi)" },
+      { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari", onyomi: "ビ (bi)" }
+    ],
+    mnemonic: "Hari (曜日) elemen Api (火) = Hari Selasa.",
+    exampleSentence: {
+      japanese: "火曜日は休みです。",
+      hiragana: "かようび は やすみ です。",
+      translation: "Hari Selasa adalah hari libur."
+    }
+  },
+  "水曜日": {
+    level: "N5",
+    components: [
+      { char: "水", meaning: "Air", onyomi: "スイ (sui)", kunyomi: "みず (mizu)" },
+      { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari", onyomi: "ビ (bi)" }
+    ],
+    mnemonic: "Hari (曜日) elemen Air (水) = Hari Rabu.",
+    exampleSentence: {
+      japanese: "水曜日に泳ぎに行きます。",
+      hiragana: "すいようび に およぎ に いきます。",
+      translation: "Hari Rabu saya pergi berenang."
+    }
+  },
+  "木曜日": {
+    level: "N5",
+    components: [
+      { char: "木", meaning: "Pohon", onyomi: "モク (moku)", kunyomi: "き (ki)" },
+      { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari", onyomi: "ビ (bi)" }
+    ],
+    mnemonic: "Hari (曜日) elemen Pohon/Kayu (木) = Hari Kamis.",
+    exampleSentence: {
+      japanese: "木曜日に会議があります。",
+      hiragana: "もくようび に かいぎ が あります。",
+      translation: "Ada rapat pada hari Kamis."
+    }
+  },
+  "金曜日": {
+    level: "N5",
+    components: [
+      { char: "金", meaning: "Emas / Uang", onyomi: "キン (kin)", kunyomi: "かね (kane)" },
+      { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari", onyomi: "ビ (bi)" }
+    ],
+    mnemonic: "Hari (曜日) elemen Emas (金) = Hari Jumat.",
+    exampleSentence: {
+      japanese: "金曜日の夜に友達と会います。",
+      hiragana: "きんようび の よる に ともだち と あいます。",
+      translation: "Jumat malam saya bertemu dengan teman."
+    }
+  },
+  "土曜日": {
+    level: "N5",
+    components: [
+      { char: "土", meaning: "Tanah", onyomi: "ド (do)", kunyomi: "つち (tsuchi)" },
+      { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari", onyomi: "ビ (bi)" }
+    ],
+    mnemonic: "Hari (曜日) elemen Tanah (土) = Hari Sabtu.",
+    exampleSentence: {
+      japanese: "土曜日に買い物します。",
+      hiragana: "どようび に かいもの します。",
+      translation: "Hari Sabtu saya berbelanja."
+    }
+  },
+  "日曜日": {
+    level: "N5",
+    components: [
+      { char: "日", meaning: "Matahari", onyomi: "ニチ (nichi)", kunyomi: "ひ (hi)" },
+      { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
+      { char: "日", meaning: "Hari", onyomi: "ビ (bi)" }
+    ],
+    mnemonic: "Hari (曜日) elemen Matahari (日) = Hari Minggu.",
+    exampleSentence: {
+      japanese: "日曜日は家で休 tambahkan/istirahat します。",
+      hiragana: "にちようび は いえ で やすみます。",
+      translation: "Hari Minggu istirahat di rumah."
+    }
+  },
+
+  // Tempat & Fasilitas
+  "図書館": {
+    level: "N5",
+    components: [
+      { char: "図", meaning: "Peta / Gambar", onyomi: "ト (to)", kunyomi: "はかる (hakaru)" },
+      { char: "書", meaning: "Buku / Menulis", onyomi: "ショ (sho)", kunyomi: "かく (kaku)" },
+      { char: "館", meaning: "Gedung / Hall", onyomi: "カン (kan)" }
+    ],
+    mnemonic: "Gedung (館) penyimpanan koleksi peta (図) dan buku (書) = Perpustakaan.",
+    exampleSentence: {
+      japanese: "図書館で本を借ります。",
+      hiragana: "としょかん で ほん を かります。",
+      translation: "Meminjam buku di perpustakaan."
+    }
+  },
+  "美術館": {
+    level: "N4",
+    components: [
+      { char: "美", meaning: "Indah", onyomi: "ビ (bi)", kunyomi: "utsukushii" },
+      { char: "術", meaning: "Seni / Teknik", onyomi: "ジュツ (jutsu)" },
+      { char: "館", meaning: "Gedung", onyomi: "カン (kan)" }
+    ],
+    mnemonic: "Gedung (館) pemamer karya seni (術) yang indah (美) = Museum Seni.",
+    exampleSentence: {
+      japanese: "美術館で絵を見ます。",
+      hiragana: "びじゅつかん で え を みます。",
+      translation: "Melihat lukisan di museum seni."
+    }
+  },
+  "大使館": {
+    level: "N4",
+    components: [
+      { char: "大", meaning: "Besar", onyomi: "タイ (tai)" },
+      { char: "使", meaning: "Utusan / Menggunakan", onyomi: "シ (shi)" },
+      { char: "館", meaning: "Gedung", onyomi: "カン (kan)" }
+    ],
+    mnemonic: "Gedung (館) tempat kediaman utusan besar (大使) negara = Kedutaan Besar.",
+    exampleSentence: {
+      japanese: "大使館でビザを申請します。",
+      hiragana: "たいしかん で ビザ を しんせい します。",
+      translation: "Mengajukan visa di kedutaan besar."
+    }
+  },
+  "地下鉄": {
+    level: "N5",
+    components: [
+      { char: "地", meaning: "Bumi / Tanah", onyomi: "チ (chi)" },
+      { char: "下", meaning: "Bawah", onyomi: "カ (ka)", kunyomi: "した (shita)" },
+      { char: "鉄", meaning: "Besi", onyomi: "テツ (tetsu)" }
+    ],
+    mnemonic: "Jalur besi kereta (鉄) di bawah (下) tanah (地) = Kereta Bawah Tanah (Subway).",
+    exampleSentence: {
+      japanese: "地下鉄に乗って行きます。",
+      hiragana: "ちかてつ に のって いきます。",
+      translation: "Pergi dengan naik kereta bawah tanah."
+    }
+  },
+  "新幹線": {
+    level: "N4",
+    components: [
+      { char: "新", meaning: "Baru", onyomi: "シン (shin)" },
+      { char: "幹", meaning: "Jalur Batang Utama", onyomi: "カン (kan)" },
+      { char: "線", meaning: "Jalur / Garis", onyomi: "セン (sen)" }
+    ],
+    mnemonic: "Jalur rel baru (新) utama (幹線) untuk kereta super cepat = Shinkansen.",
+    exampleSentence: {
+      japanese: "新幹線で東京から大阪へ行きます。",
+      hiragana: "しんかんせん で とうきょう から おおさか へ いきます。",
+      translation: "Pergi dari Tokyo ke Osaka naik Shinkansen."
+    }
+  },
+  "郵便局": {
+    level: "N4",
+    components: [
+      { char: "郵", meaning: "Pos / Surat", onyomi: "ユウ (yuu)" },
+      { char: "便", meaning: "Kemudahan / Berita", onyomi: "ビン (bin)" },
+      { char: "局", meaning: "Biro / Kantor", onyomi: "キョク (kyoku)" }
+    ],
+    mnemonic: "Kantor biro (局) pengiriman surat pos (郵) dan berita (便) = Kantor Pos.",
+    exampleSentence: {
+      japanese: "郵便局で手紙を出します。",
+      hiragana: "ゆうびんきょく で てがみ を だします。",
+      translation: "Mengirim surat di kantor pos."
+    }
+  },
+  "交番": {
+    level: "N5",
+    components: [
+      { char: "交", meaning: "Saling / Lalu Lintas", onyomi: "コウ (kou)" },
+      { char: "番", meaning: "Nomor / Tugas Jaga", onyomi: "バン (ban)" }
+    ],
+    mnemonic: "Pos tempat polisi bersiaga menjaga (番) ketertiban lalu lintas (交) = Pos Polisi.",
+    exampleSentence: {
+      japanese: "交番で道を尋ねます。",
+      hiragana: "こうばん で みち を たずねます。",
+      translation: "Bertanya jalan di pos polisi."
+    }
+  },
+  "会社員": {
+    level: "N5",
+    components: [
+      { char: "会", meaning: "Perkumpulan", onyomi: "カイ (kai)" },
+      { char: "社", meaning: "Perusahaan", onyomi: "シャ (sha)" },
+      { char: "員", meaning: "Anggota / Pegawai", onyomi: "イン (in)" }
+    ],
+    mnemonic: "Anggota (員) pegawai yang bekerja di kantor perusahaan (会社) = Karyawan Perusahaan.",
+    exampleSentence: {
+      japanese: "兄は会社員です。",
+      hiragana: "あに は かいしゃいん です。",
+      translation: "Kakak laki-laki saya adalah karyawan perusahaan."
+    }
+  },
+  "銀行員": {
+    level: "N5",
+    components: [
+      { char: "銀", meaning: "Perak", onyomi: "ギン (gin)" },
+      { char: "行", meaning: "Bank / Pergi", onyomi: "コウ (kou)" },
+      { char: "員", meaning: "Anggota", onyomi: "イン (in)" }
+    ],
+    mnemonic: "Pegawai anggota (員) institusi keuangan bank (銀行) = Pegawai Bank.",
+    exampleSentence: {
+      japanese: "彼女は銀行員として働いています。",
+      hiragana: "かのじょ は ぎんこういん とし て はたらいています。",
+      translation: "Dia bekerja sebagai pegawai bank."
+    }
+  },
+  "医者": {
+    level: "N5",
+    components: [
+      { char: "医", meaning: "Medis / Pengobatan", onyomi: "イ (i)" },
+      { char: "者", meaning: "Orang / Ahli", onyomi: "シャ (sha)", kunyomi: "もの (mono)" }
+    ],
+    mnemonic: "Orang (者) ahli dalam bidang pengobatan medis (医) = Dokter.",
+    exampleSentence: {
+      japanese: "将来医者になりたいです。",
+      hiragana: "しょうらい いしゃ に なりたい です。",
+      translation: "Saya ingin menjadi dokter di masa depan."
+    }
+  },
+  "研究者": {
+    level: "N4",
+    components: [
+      { char: "研", meaning: "Meneliti", onyomi: "ケン (ken)" },
+      { char: "究", meaning: "Mendalami", onyomi: "キュウ (kyuu)" },
+      { char: "者", meaning: "Orang", onyomi: "シャ (sha)" }
+    ],
+    mnemonic: "Orang (者) yang mendedikasikan hidup meneliti (研) dan mendalami sains (究) = Peneliti.",
+    exampleSentence: {
+      japanese: "大学で研究者として働きます。",
+      hiragana: "だいがく で けんきゅうしゃ とし て はたらきます。",
+      translation: "Bekerja sebagai peneliti di universitas."
+    }
+  },
+  "手紙": {
+    level: "N5",
+    components: [
+      { char: "手", meaning: "Tangan", onyomi: "シュ (shu)", kunyomi: "て (te)" },
+      { char: "紙", meaning: "Kertas", onyomi: "シ (shi)", kunyomi: "かみ (kami)" }
+    ],
+    mnemonic: "Lembaran kertas (紙) yang ditulis oleh genggaman tangan (手) = Surat.",
+    exampleSentence: {
+      japanese: "国のお母さんに手紙を書きます。",
+      hiragana: "くに の おかあさん に てがみ を かきます。",
+      translation: "Menulis surat untuk ibu di kampung halaman."
+    }
+  },
+  "新聞": {
+    level: "N5",
+    components: [
+      { char: "新", meaning: "Baru", onyomi: "シン (shin)" },
+      { char: "聞", meaning: "Mendengar / Berita", onyomi: "ブン (bun)", kunyomi: "きく (kiku)" }
+    ],
+    mnemonic: "Kabar berita (聞) terbaru (新) yang dicetak = Koran.",
+    exampleSentence: {
+      japanese: "毎朝新聞を読みます。",
+      hiragana: "まいあさ しんぶん を よみます。",
+      translation: "Setiap pagi membaca koran."
+    }
+  },
   "電車": {
     level: "N5",
     components: [
@@ -314,6 +615,7 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
   const dictionary: KanjiDictionaryEntry[] = [];
   const seenKanjiWords = new Set<string>();
 
+  // 1. Process all kanjiData items
   kanjiData.forEach((item) => {
     if (seenKanjiWords.has(item.kanji)) return;
     seenKanjiWords.add(item.kanji);
@@ -388,6 +690,51 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
       components,
       exampleSentence,
       tags: [level, isSingle ? "1 Kanji" : `${kCount} Kanji`, `Kategori ${item.category}`]
+    });
+  });
+
+  // 2. Add single kanjis from singleKanjiMaster that were not in kanjiData
+  Object.entries(singleKanjiMaster).forEach(([char, info]) => {
+    if (seenKanjiWords.has(char)) return;
+    seenKanjiWords.add(char);
+
+    dictionary.push({
+      id: `sk_${char}`,
+      kanji: char,
+      hiragana: info.hiragana,
+      romaji: info.romaji,
+      arti: info.meaning,
+      level: info.level,
+      kanjiCount: 1,
+      category: char,
+      onyomi: info.onyomi,
+      kunyomi: info.kunyomi,
+      mnemonic: info.mnemonic,
+      strokes: info.strokes,
+      tags: [info.level, "1 Kanji", "Tunggal Dasar"]
+    });
+  });
+
+  // 3. Add compound kanjis from compoundBreakdowns that were not in kanjiData
+  Object.entries(compoundBreakdowns).forEach(([word, info]) => {
+    if (seenKanjiWords.has(word)) return;
+    seenKanjiWords.add(word);
+
+    const kChars = getKanjiChars(word);
+
+    dictionary.push({
+      id: `cb_${word}`,
+      kanji: word,
+      hiragana: info.exampleSentence?.hiragana || word,
+      romaji: word,
+      arti: info.mnemonic || word,
+      level: info.level,
+      kanjiCount: kChars.length > 0 ? kChars.length : 2,
+      category: "Majemuk",
+      components: info.components,
+      mnemonic: info.mnemonic,
+      exampleSentence: info.exampleSentence,
+      tags: [info.level, `${kChars.length} Kanji`, "Majemuk Jukugo"]
     });
   });
 
