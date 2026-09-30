@@ -59,7 +59,7 @@ export function BunpouCard({ entry, onSelect }: BunpouCardProps) {
             type="button"
             onClick={playTTS}
             className={clsx(
-              "w-8 h-8 flex items-center justify-center text-xs transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
+              "w-10 h-10 flex items-center justify-center text-xs transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
               isPlayingAudio ? "rpg-btn-gold animate-pulse scale-110" : "rpg-btn"
             )}
           >
@@ -85,7 +85,7 @@ export function BunpouCard({ entry, onSelect }: BunpouCardProps) {
       {/* Formula & Meaning */}
       <div className="mt-3 pt-2.5 border-t border-purple-800/60 space-y-2">
         <div
-          className="rpg-box-dark px-2.5 py-1 text-[9px] font-mono font-bold text-yellow-400 truncate"
+          className="rpg-box-dark px-2.5 py-1.5 text-[9px] font-mono font-bold text-yellow-400 line-clamp-2"
           style={{ borderRadius: "2px" }}
         >
           📐 {entry.formula}

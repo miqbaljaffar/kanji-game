@@ -99,9 +99,9 @@ export default function KanjiDictionaryPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
           {[
             { label: "Total Kanji",     val: stats.total,         icon: "📚", border: "#7c3aed" },
-            { label: "Level N5",        val: stats.n5Count,       icon: "🟢", border: "#4ade80" },
-            { label: "Level N4",        val: stats.n4Count,       icon: "🔵", border: "#60a5fa" },
-            { label: "Majemuk (2+)",    val: stats.compoundCount, icon: "🧩", border: "#a78bfa" },
+            { label: "N5",              val: stats.n5Count,       icon: "🟢", border: "#4ade80" },
+            { label: "N4",              val: stats.n4Count,       icon: "🔵", border: "#60a5fa" },
+            { label: "Majemuk",         val: stats.compoundCount, icon: "🧩", border: "#a78bfa" },
           ].map((item) => (
             <div
               key={item.label}
@@ -116,7 +116,7 @@ export default function KanjiDictionaryPage() {
                 >
                   {item.val}
                 </div>
-                <div className="text-[8px] sm:text-[9px] font-bold text-purple-400 uppercase tracking-wider mt-0.5 truncate">
+                <div className="text-[8px] sm:text-[9px] font-bold text-purple-400 uppercase tracking-wider mt-0.5 leading-tight">
                   {item.label}
                 </div>
               </div>

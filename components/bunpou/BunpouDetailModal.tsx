@@ -39,7 +39,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl rounded-t-2xl sm:rounded-sm overflow-hidden z-10 flex flex-col max-h-[92vh] sm:max-h-[90vh] animate-slide-up sm:animate-fade-up rpg-scroll"
+        className="relative w-full max-w-2xl rounded-t-2xl sm:rounded-sm overflow-hidden z-10 flex flex-col max-h-[92svh] sm:max-h-[90svh] animate-slide-up sm:animate-fade-up rpg-scroll"
         style={{
           background: "#1e1040",
           border: "3px solid #7c3aed",
@@ -184,7 +184,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
                     <button
                       onClick={() => playTTS(example.japanese, idx)}
                       className={clsx(
-                        "w-9 h-9 flex items-center justify-center text-sm transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
+                        "w-11 h-11 flex items-center justify-center text-sm transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
                         playingIndex === idx ? "rpg-btn-gold animate-pulse scale-105" : "rpg-btn"
                       )}
                     >🔊</button>

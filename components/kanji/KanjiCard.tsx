@@ -66,7 +66,7 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
           type="button"
           onClick={playTTS}
           className={clsx(
-            "w-8 h-8 flex items-center justify-center text-sm transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
+            "w-10 h-10 flex items-center justify-center text-sm transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
             isPlayingAudio
               ? "rpg-btn-gold animate-pulse scale-110"
               : "rpg-btn"
@@ -79,7 +79,7 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
       {/* Main Kanji */}
       <div className="my-1 text-center">
         <div
-          className="text-4xl sm:text-5xl font-black text-white group-hover:text-yellow-300 transition-colors"
+          className="text-3xl sm:text-4xl md:text-5xl font-black text-white group-hover:text-yellow-300 transition-colors break-all"
           style={{
             fontFamily: "var(--font-jp)",
             textShadow: "0 0 16px rgba(167,139,250,0.5)",

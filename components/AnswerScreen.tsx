@@ -168,7 +168,7 @@ export function AnswerScreen({
 
         <button
           onClick={() => setIsExitConfirmOpen(true)}
-          className="rpg-btn-red w-9 h-9 flex items-center justify-center text-sm font-black touch-manipulation"
+          className="rpg-btn-red w-11 h-11 flex items-center justify-center text-sm font-black touch-manipulation"
           style={{ fontFamily: "var(--font-pixel)" }}
         >✕</button>
 

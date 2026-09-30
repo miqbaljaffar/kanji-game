@@ -22,8 +22,11 @@ export function ConfirmModal({
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
       <div
-        className="rpg-box-gold relative w-full max-w-sm p-6 text-center animate-bounce-pop"
-        style={{ boxShadow: "0 0 0 1px #0f0a1e, 0 0 40px rgba(251,191,36,0.3)" }}
+        className="rpg-box-gold relative w-full p-4 sm:p-6 text-center animate-bounce-pop"
+        style={{
+          boxShadow: "0 0 0 1px #0f0a1e, 0 0 40px rgba(251,191,36,0.3)",
+          maxWidth: "min(384px, calc(100vw - 32px))",
+        }}
       >
         <span className="rpg-corner rpg-corner-tl" />
         <span className="rpg-corner rpg-corner-tr" />

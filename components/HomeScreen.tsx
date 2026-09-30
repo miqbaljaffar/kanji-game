@@ -148,7 +148,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                   key={mode.id}
                   onClick={() => { setSelectedMode(mode.id); setSelectedDiff(null); setStep(2); }}
                   className={clsx(
-                    "rpg-btn card-enter relative p-2.5 sm:p-3.5 flex flex-col items-center justify-center gap-1.5 text-center touch-manipulation",
+                    "rpg-btn card-enter relative p-2.5 sm:p-3.5 flex flex-col items-center justify-center gap-1.5 text-center touch-manipulation min-h-[64px] sm:min-h-[72px]",
                     `stagger-${Math.min(index + 1, 12)}`,
                     MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : "",
                   )}
@@ -204,7 +204,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     key={diff.id}
                     onClick={() => setSelectedDiff(diff.id)}
                     className={clsx(
-                      "rpg-btn card-enter relative p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-200 touch-manipulation",
+                      "rpg-btn card-enter relative p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-200 touch-manipulation min-h-[72px] sm:min-h-[80px]",
                       `stagger-${i + 1}`,
                       selectedDiff === diff.id
                         ? `${diff.activeBg} border-2 ${diff.border} ${diff.activeShadow} -translate-y-1`

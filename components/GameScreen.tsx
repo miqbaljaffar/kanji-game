@@ -128,7 +128,7 @@ export function GameScreen({
 
         <button
           onClick={() => setIsExitConfirmOpen(true)}
-          className="rpg-btn-red w-9 h-9 flex items-center justify-center text-sm font-black shrink-0 touch-manipulation"
+          className="rpg-btn-red w-11 h-11 flex items-center justify-center text-sm font-black shrink-0 touch-manipulation"
           style={{ fontFamily: "var(--font-pixel)" }}
         >✕</button>
 
@@ -260,7 +260,7 @@ export function GameScreen({
               onClick={() => handleAnswerClick(idx)}
               disabled={answerState !== "idle"}
               className={clsx(
-                "rpg-btn relative w-full p-3.5 sm:p-4 flex flex-col items-center justify-center",
+                "rpg-btn relative w-full p-3.5 sm:p-4 flex flex-col items-center justify-center min-h-[56px] sm:min-h-[64px]",
                 "text-center transition-all duration-150 outline-none touch-manipulation overflow-hidden",
                 stateClass,
                 !revealed && "hover:-translate-y-0.5",

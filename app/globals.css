@@ -317,6 +317,7 @@ button {
     border-radius: 4px;
     color: #e9d5ff;
     font-weight: 800;
+    min-height: 36px;
     transition: transform 0.08s ease, border-bottom-width 0.08s ease, background 0.1s ease;
     cursor: pointer;
   }
@@ -337,6 +338,7 @@ button {
     border-radius: 4px;
     color: #1c1917;
     font-weight: 900;
+    min-height: 36px;
     transition: transform 0.08s ease, border-bottom-width 0.08s ease;
     cursor: pointer;
   }
@@ -355,6 +357,7 @@ button {
     border-radius: 4px;
     color: #fef2f2;
     font-weight: 800;
+    min-height: 36px;
     transition: transform 0.08s ease, border-bottom-width 0.08s ease;
     cursor: pointer;
   }
@@ -370,6 +373,7 @@ button {
     border-radius: 4px;
     color: #dcfce7;
     font-weight: 800;
+    min-height: 36px;
     transition: transform 0.08s ease, border-bottom-width 0.08s ease;
     cursor: pointer;
   }

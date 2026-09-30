@@ -198,7 +198,7 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
       {isDonationOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
           <div
-            className="rpg-box-gold relative p-5 max-w-sm w-full animate-bounce-pop"
+            className="rpg-box-gold relative p-4 sm:p-5 max-w-sm w-full max-h-[90svh] overflow-y-auto animate-bounce-pop rpg-scroll"
             style={{ boxShadow: "0 0 0 1px #0f0a1e, 0 0 40px rgba(251,191,36,0.3)" }}
           >
             <span className="rpg-corner rpg-corner-tl" />
@@ -220,8 +220,14 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
                 Scan QRIS di bawah untuk donasi seikhlasnya. Dukunganmu sangat berarti!
               </p>
               <div
-                className="relative aspect-square mb-4 overflow-hidden"
-                style={{ border: "3px solid #fbbf24", background: "#fff" }}
+                className="relative mb-4 overflow-hidden"
+                style={{
+                  border: "3px solid #fbbf24",
+                  background: "#fff",
+                  aspectRatio: "1",
+                  maxHeight: "clamp(140px, 40vh, 260px)",
+                  width: "100%",
+                }}
               >
                 <Image src="/images/qris.jpeg" alt="QRIS" fill className="object-contain" />
               </div>
@@ -237,8 +243,10 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
 
       {/* ── TOAST TERIMA KASIH ── */}
       {showThankYou && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-slide-up w-full px-4 max-w-md pointer-events-none">
-          <div className="rpg-box-gold flex items-center gap-3 px-5 py-4"
+        <div
+          className="fixed left-1/2 -translate-x-1/2 z-50 animate-slide-up w-full px-4 max-w-md pointer-events-none"
+          style={{ bottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
+        >          <div className="rpg-box-gold flex items-center gap-3 px-5 py-4"
             style={{ boxShadow: "0 0 20px rgba(251,191,36,0.4)" }}>
             <span className="text-xl shrink-0">✨</span>
             <p className="text-xs font-bold text-yellow-200 leading-tight">

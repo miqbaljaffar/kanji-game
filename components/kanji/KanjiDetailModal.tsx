@@ -47,7 +47,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-2xl rounded-t-2xl sm:rounded-sm overflow-hidden z-10 flex flex-col max-h-[92vh] sm:max-h-[90vh] animate-slide-up sm:animate-fade-up rpg-scroll"
+        className="relative w-full max-w-2xl rounded-t-2xl sm:rounded-sm overflow-hidden z-10 flex flex-col max-h-[92svh] sm:max-h-[90svh] animate-slide-up sm:animate-fade-up rpg-scroll"
         style={{
           background: "#1e1040",
           border: "3px solid #7c3aed",
@@ -91,7 +91,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
               </div>
               <button
                 onClick={playTTS}
-                className={clsx("rpg-btn px-3 py-1.5 text-[8px] touch-manipulation", isPlayingAudio && "animate-pulse rpg-btn-gold")}
+                className={clsx("rpg-btn px-3 py-2 text-[8px] min-h-[36px] touch-manipulation", isPlayingAudio && "animate-pulse rpg-btn-gold")}
                 style={{ fontFamily: "var(--font-pixel)" }}
               >
                 🔊 {isPlayingAudio ? "MEMUTAR..." : "PUTAR"}
@@ -248,7 +248,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                           window.speechSynthesis.speak(u);
                         }
                       }}
-                      className="rpg-btn px-2.5 py-1.5 text-[8px] touch-manipulation"
+                      className="rpg-btn px-2.5 py-2 text-[8px] min-h-[36px] touch-manipulation"
                       style={{ fontFamily: "var(--font-pixel)" }}
                     >🔊 PUTAR</button>
                   </div>

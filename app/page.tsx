@@ -108,14 +108,14 @@ export default function Home() {
         <div className="absolute top-3 right-3 sm:top-4 sm:right-6 z-50 flex items-center gap-2 screen-enter">
           <Link
             href="/kanji"
-            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 text-[9px] sm:text-[10px] touch-manipulation"
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             📚 Kanji
           </Link>
           <Link
             href="/bunpou"
-            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 text-[9px] sm:text-[10px] touch-manipulation"
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             📝 Bunpou
