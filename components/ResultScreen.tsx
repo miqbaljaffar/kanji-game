@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import { GameStats, GameMode, Difficulty } from "@/types";
 import { Mascot } from "./Mascot";
@@ -13,19 +13,42 @@ interface ResultScreenProps {
 }
 
 function getRankDetail(accuracy: number) {
-  if (accuracy >= 90)
-    return { title: "LEGENDARY!", rank: "S", emoji: "👑", color: "text-yellow-300", borderColor: "#fbbf24", glow: "rgba(251,191,36,0.4)" };
-  if (accuracy >= 70)
-    return { title: "GREAT JOB!", rank: "A", emoji: "🔥", color: "text-orange-300", borderColor: "#fb923c", glow: "rgba(251,146,60,0.4)" };
-  if (accuracy >= 50)
-    return { title: "NICE WORK!", rank: "B", emoji: "👍", color: "text-blue-300", borderColor: "#60a5fa", glow: "rgba(96,165,250,0.4)" };
-  return { title: "TRY AGAIN!", rank: "C", emoji: "💀", color: "text-purple-300", borderColor: "#a78bfa", glow: "rgba(167,139,250,0.3)" };
+  if (accuracy >= 90) return { title: "LEGENDARY!", rank: "S", emoji: "👑", color: "text-yellow-300", borderColor: "#fbbf24", glow: "rgba(251,191,36,0.4)" };
+  if (accuracy >= 70) return { title: "GREAT JOB!", rank: "A", emoji: "🔥", color: "text-orange-300", borderColor: "#fb923c", glow: "rgba(251,146,60,0.4)" };
+  if (accuracy >= 50) return { title: "NICE WORK!", rank: "B", emoji: "👍", color: "text-blue-300",   borderColor: "#60a5fa", glow: "rgba(96,165,250,0.4)" };
+  return               { title: "TRY AGAIN!", rank: "C", emoji: "💀", color: "text-purple-300", borderColor: "#a78bfa", glow: "rgba(167,139,250,0.3)" };
 }
 
-export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) {
+/* Konfeti deterministik — tidak pakai random() agar tidak hydration mismatch */
+const CONFETTI_COUNT = 28;
+const CONFETTI_COLORS = ["#fbbf24","#a78bfa","#4ade80","#f472b6","#60a5fa","#fb923c","#34d399"];
+const CONFETTI_SHAPES = ["rect","circle","diamond"] as const;
+
+function makeConfetti() {
+  return Array.from({ length: CONFETTI_COUNT }, (_, i) => {
+    const seed  = (i * 2654435761) >>> 0;
+    const left  = ((seed * 1664525 + 1013904223) >>> 0) % 10000 / 100;
+    const size  = 6 + (i % 5) * 2;
+    const dur   = 1.0 + (i % 8) * 0.15;
+    const delay = (i * 0.04) % 0.8;
+    const color = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
+    const shape = CONFETTI_SHAPES[i % CONFETTI_SHAPES.length];
+    return { left, size, dur, delay, color, shape };
+  });
+}
+
+const CONFETTI_ITEMS = makeConfetti();
+
+function c(...args: (string | boolean | undefined)[]) {
+  return args.filter(Boolean).join(" ");
+}
+
+export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome }: ResultScreenProps) {
   const rank = getRankDetail(stats.accuracy);
   const [isDonationOpen, setIsDonationOpen] = useState(false);
   const [showThankYou,   setShowThankYou]   = useState(false);
+
+  const showConfetti = stats.accuracy >= 70; // rank S atau A
 
   const handleCloseDonation = () => {
     setIsDonationOpen(false);
@@ -35,6 +58,28 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
 
   return (
     <>
+      {/* ── CONFETTI (rank S / A) ── */}
+      {showConfetti && (
+        <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
+          {CONFETTI_ITEMS.map((p, i) => (
+            <div
+              key={i}
+              className="absolute top-0"
+              style={{
+                left: `${p.left}%`,
+                width:  p.size,
+                height: p.shape === "rect" ? p.size * 0.5 : p.size,
+                backgroundColor: p.color,
+                borderRadius: p.shape === "circle" ? "50%" : p.shape === "diamond" ? "2px" : "1px",
+                transform: p.shape === "diamond" ? "rotate(45deg)" : undefined,
+                animation: `confettiFall ${p.dur}s ease-in ${p.delay}s both, confettiSpin ${p.dur}s linear ${p.delay}s both`,
+                opacity: 0.9,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
       <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center p-4 sm:p-6 max-w-lg mx-auto">
 
         {/* Maskot */}
@@ -44,28 +89,26 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
 
         {/* ── RESULT CARD ── */}
         <div
-          className="w-full rpg-box relative p-5 sm:p-7 text-center animate-fade-up overflow-hidden"
+          className="w-full rpg-box screen-enter relative p-5 sm:p-7 text-center overflow-hidden"
           style={{
             borderColor: rank.borderColor,
             boxShadow: `0 0 0 1px #0f0a1e, 0 0 40px ${rank.glow}`,
           }}
         >
-          {/* Corner decorations pakai warna rank */}
           <span className="rpg-corner rpg-corner-tl" style={{ borderColor: rank.borderColor }} />
           <span className="rpg-corner rpg-corner-tr" style={{ borderColor: rank.borderColor }} />
           <span className="rpg-corner rpg-corner-bl" style={{ borderColor: rank.borderColor }} />
           <span className="rpg-corner rpg-corner-br" style={{ borderColor: rank.borderColor }} />
 
-          {/* Garis atas dekoratif */}
           <div
             className="absolute top-0 left-0 right-0 h-1"
             style={{ background: `linear-gradient(90deg, transparent, ${rank.borderColor}, transparent)` }}
           />
 
-          {/* Badge Rank */}
+          {/* Rank badge — bounce pop */}
           <div className="flex items-center justify-center gap-3 mb-2">
             <div
-              className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center font-black text-2xl sm:text-3xl"
+              className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center font-black text-2xl sm:text-3xl animate-bounce-pop"
               style={{
                 fontFamily: "var(--font-pixel)",
                 background: "#0f0a1e",
@@ -73,21 +116,13 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
                 color: rank.borderColor,
                 boxShadow: `0 0 12px ${rank.glow}`,
               }}
-            >
-              {rank.rank}
-            </div>
+            >{rank.rank}</div>
           </div>
 
-          <p
-            className="text-[8px] sm:text-[9px] text-purple-400 uppercase tracking-[0.2em] mb-1"
-            style={{ fontFamily: "var(--font-pixel)" }}
-          >
-            PELAJARAN SELESAI
-          </p>
-          <h1
-            className={clsx_result("text-xl sm:text-2xl font-black mb-1", rank.color)}
-            style={{ fontFamily: "var(--font-pixel)" }}
-          >
+          <p className="text-[8px] sm:text-[9px] text-purple-400 uppercase tracking-[0.2em] mb-1"
+            style={{ fontFamily: "var(--font-pixel)" }}>PELAJARAN SELESAI</p>
+          <h1 className={c("text-xl sm:text-2xl font-black mb-1", rank.color)}
+            style={{ fontFamily: "var(--font-pixel)" }}>
             {rank.emoji} {rank.title}
           </h1>
 
@@ -95,54 +130,40 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
 
           {/* Skor utama */}
           <div
-            className="rpg-box-gold relative p-4 mb-5 text-center"
+            className="rpg-box-gold card-enter stagger-1 relative p-4 mb-5 text-center"
             style={{ boxShadow: "0 0 20px rgba(251,191,36,0.2)" }}
           >
             <span className="rpg-corner rpg-corner-tl" />
             <span className="rpg-corner rpg-corner-br" />
-            <p
-              className="text-[8px] font-black text-yellow-500 uppercase tracking-[0.2em] mb-1"
-              style={{ fontFamily: "var(--font-pixel)" }}
-            >
-              TOTAL SKOR
-            </p>
+            <p className="text-[8px] font-black text-yellow-500 uppercase tracking-[0.2em] mb-1"
+              style={{ fontFamily: "var(--font-pixel)" }}>TOTAL SKOR</p>
             <div
               className="text-4xl sm:text-5xl font-black text-yellow-300"
               style={{
                 fontFamily: "var(--font-pixel)",
                 textShadow: "0 0 20px rgba(251,191,36,0.7)",
               }}
-            >
-              ⭐ {stats.score.toLocaleString()}
-            </div>
+            >⭐ {stats.score.toLocaleString()}</div>
           </div>
 
-          {/* Grid stat 2×2 */}
+          {/* Grid stat 2x2 — stagger */}
           <div className="grid grid-cols-2 gap-2.5 mb-5">
             {[
-              { val: stats.correct,   label: "Benar",   icon: "✅", color: "text-emerald-300", border: "#4ade80" },
-              { val: stats.wrong,     label: "Salah",   icon: "❌", color: "text-red-300",     border: "#f87171" },
-              { val: `${stats.accuracy}%`, label: "Akurasi", icon: "🎯", color: "text-blue-300", border: "#60a5fa" },
-              { val: stats.maxStreak, label: "Combo",   icon: "⚡", color: "text-purple-300",  border: "#a78bfa" },
-            ].map((s) => (
+              { val: stats.correct,         label: "Benar",   icon: "✅", color: "text-emerald-300", border: "#4ade80", s: 2 },
+              { val: stats.wrong,           label: "Salah",   icon: "❌", color: "text-red-300",     border: "#f87171", s: 3 },
+              { val: `${stats.accuracy}%`,  label: "Akurasi", icon: "🎯", color: "text-blue-300",   border: "#60a5fa", s: 4 },
+              { val: stats.maxStreak,       label: "Combo",   icon: "⚡", color: "text-purple-300", border: "#a78bfa", s: 5 },
+            ].map((st) => (
               <div
-                key={s.label}
-                className="rpg-box relative p-3 sm:p-4 text-center"
-                style={{ borderColor: s.border }}
+                key={st.label}
+                className={`rpg-box card-enter stagger-${st.s} relative p-3 sm:p-4 text-center`}
+                style={{ borderColor: st.border }}
               >
-                <div className="text-xl mb-1">{s.icon}</div>
-                <div
-                  className={clsx_result("text-xl sm:text-2xl font-black", s.color)}
-                  style={{ fontFamily: "var(--font-pixel)" }}
-                >
-                  {s.val}
-                </div>
-                <div
-                  className="text-[7px] sm:text-[8px] text-purple-400 font-black uppercase tracking-widest mt-0.5"
-                  style={{ fontFamily: "var(--font-pixel)" }}
-                >
-                  {s.label}
-                </div>
+                <div className="text-xl mb-1">{st.icon}</div>
+                <div className={c("text-xl sm:text-2xl font-black", st.color)}
+                  style={{ fontFamily: "var(--font-pixel)" }}>{st.val}</div>
+                <div className="text-[7px] sm:text-[8px] text-purple-400 font-black uppercase tracking-widest mt-0.5"
+                  style={{ fontFamily: "var(--font-pixel)" }}>{st.label}</div>
               </div>
             ))}
           </div>
@@ -153,30 +174,21 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
               onClick={onPlayAgain}
               className="rpg-btn-gold w-full py-4 sm:py-5 touch-manipulation rpg-glow-gold"
               style={{ fontFamily: "var(--font-pixel)", fontSize: "11px", letterSpacing: "0.1em" }}
-            >
-              ⚔ MAIN LAGI!
-            </button>
+            >⚔ MAIN LAGI!</button>
             <div className="grid grid-cols-2 gap-2.5">
               <button
                 onClick={onHome}
                 className="rpg-btn py-3.5 sm:py-4 touch-manipulation"
                 style={{ fontFamily: "var(--font-pixel)", fontSize: "9px", letterSpacing: "0.05em" }}
-              >
-                🏠 MENU
-              </button>
+              >🏠 MENU</button>
               <button
                 onClick={() => setIsDonationOpen(true)}
                 className="rpg-btn py-3.5 sm:py-4 touch-manipulation"
                 style={{
-                  fontFamily: "var(--font-pixel)",
-                  fontSize: "9px",
-                  letterSpacing: "0.05em",
-                  borderColor: "#f472b6",
-                  color: "#f9a8d4",
+                  fontFamily: "var(--font-pixel)", fontSize: "9px", letterSpacing: "0.05em",
+                  borderColor: "#f472b6", color: "#f9a8d4",
                 }}
-              >
-                💖 DUKUNG
-              </button>
+              >💖 DUKUNG</button>
             </div>
           </div>
         </div>
@@ -198,36 +210,26 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
               onClick={handleCloseDonation}
               className="rpg-btn-red absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-xs font-black"
               style={{ fontFamily: "var(--font-pixel)" }}
-            >
-              ✕
-            </button>
+            >✕</button>
 
             <div className="text-center mt-2">
-              <h3
-                className="text-sm sm:text-base font-black text-yellow-300 mb-1"
-                style={{ fontFamily: "var(--font-pixel)" }}
-              >
-                💖 DUKUNG KAMI!
-              </h3>
+              <h3 className="text-sm sm:text-base font-black text-yellow-300 mb-1"
+                style={{ fontFamily: "var(--font-pixel)" }}>💖 DUKUNG KAMI!</h3>
               <div className="rpg-divider my-2" />
               <p className="text-xs font-bold text-purple-200 mb-4 leading-relaxed">
                 Scan QRIS di bawah untuk donasi seikhlasnya. Dukunganmu sangat berarti!
               </p>
-
               <div
                 className="relative aspect-square mb-4 overflow-hidden"
                 style={{ border: "3px solid #fbbf24", background: "#fff" }}
               >
                 <Image src="/images/qris.jpeg" alt="QRIS" fill className="object-contain" />
               </div>
-
               <button
                 onClick={handleCloseDonation}
                 className="rpg-btn-gold w-full py-3.5 touch-manipulation"
                 style={{ fontFamily: "var(--font-pixel)", fontSize: "9px", letterSpacing: "0.05em" }}
-              >
-                TUTUP &amp; SELESAI
-              </button>
+              >TUTUP &amp; SELESAI</button>
             </div>
           </div>
         </div>
@@ -236,10 +238,8 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
       {/* ── TOAST TERIMA KASIH ── */}
       {showThankYou && (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-slide-up w-full px-4 max-w-md pointer-events-none">
-          <div
-            className="rpg-box-gold flex items-center gap-3 px-5 py-4"
-            style={{ boxShadow: "0 0 20px rgba(251,191,36,0.4)" }}
-          >
+          <div className="rpg-box-gold flex items-center gap-3 px-5 py-4"
+            style={{ boxShadow: "0 0 20px rgba(251,191,36,0.4)" }}>
             <span className="text-xl shrink-0">✨</span>
             <p className="text-xs font-bold text-yellow-200 leading-tight">
               Terima kasih telah mendukung pengembangan game ini!
@@ -249,9 +249,4 @@ export function ResultScreen({ stats, onPlayAgain, onHome }: ResultScreenProps) 
       )}
     </>
   );
-}
-
-/* helper kecil agar tidak import cn/clsx */
-function clsx_result(...args: (string | boolean | undefined)[]) {
-  return args.filter(Boolean).join(" ");
 }

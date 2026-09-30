@@ -20,25 +20,64 @@
   --color-rpg-red:      #f87171;
   --color-rpg-purple:   #a78bfa;
 
-  /* Animasi */
-  --animate-slide-up:            slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-slide-down:          slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-fade-up:             fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-bounce-slow:         bounceSlow 2s ease-in-out infinite;
-  --animate-bounce-soft:         bounceSoft 3s ease-in-out infinite;
-  --animate-bounce-pop:          bouncePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  --animate-shake:               shake 0.4s ease-in-out;
-  --animate-float-score:         floatScore 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-twinkle:             twinkle 2s ease-in-out infinite alternate;
-  --animate-twinkle-slow:        twinkle 3.5s ease-in-out infinite alternate;
-  --animate-twinkle-fast:        twinkle 1.2s ease-in-out infinite alternate;
-  --animate-float-pixel:         floatPixel 4s ease-in-out infinite alternate;
-  --animate-cursor-blink:        cursorBlink 1s step-end infinite;
-  --animate-hp-bar:              hpBar 1s ease-out forwards;
-  --animate-glow-pulse:          glowPulse 2s ease-in-out infinite;
-  --animate-victory-flash:       victoryFlash 0.4s ease-in-out 3;
+  /* ── Existing Animations ── */
+  --animate-slide-up:             slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-down:           slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-up:              fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-bounce-slow:          bounceSlow 2s ease-in-out infinite;
+  --animate-bounce-soft:          bounceSoft 3s ease-in-out infinite;
+  --animate-bounce-pop:           bouncePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  --animate-shake:                shake 0.4s ease-in-out;
+  --animate-float-score:          floatScore 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-twinkle:              twinkle 2s ease-in-out infinite alternate;
+  --animate-twinkle-slow:         twinkle 3.5s ease-in-out infinite alternate;
+  --animate-twinkle-fast:         twinkle 1.2s ease-in-out infinite alternate;
+  --animate-float-pixel:          floatPixel 4s ease-in-out infinite alternate;
+  --animate-cursor-blink:         cursorBlink 1s step-end infinite;
+  --animate-hp-bar:               hpBar 1s ease-out forwards;
+  --animate-glow-pulse:           glowPulse 2s ease-in-out infinite;
+  --animate-victory-flash:        victoryFlash 0.4s ease-in-out 3;
 
-  /* Keyframes */
+  /* ── NEW: Screen Transition ── */
+  --animate-screen-enter:         screenEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-screen-exit:          screenExit 0.25s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+  --animate-fade-in:              fadeIn 0.3s ease forwards;
+  --animate-fade-out:             fadeOut 0.2s ease forwards;
+
+  /* ── NEW: Button Feedback ── */
+  --animate-answer-correct:       answerCorrect 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  --animate-answer-wrong:         answerWrong 0.4s ease-in-out forwards;
+  --animate-glow-burst:           glowBurst 0.5s ease-out forwards;
+
+  /* ── NEW: HP Bar fill ── */
+  --animate-hp-fill:              hpFill 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  /* ── NEW: Combo ── */
+  --animate-combo-pop:            comboPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  --animate-combo-fade:           comboFade 0.8s ease-out forwards;
+
+  /* ── NEW: Confetti particle ── */
+  --animate-confetti-fall:        confettiFall 1.2s ease-in forwards;
+  --animate-confetti-spin:        confettiSpin 1.2s linear forwards;
+
+  /* ── NEW: Card stagger ── */
+  --animate-card-enter:           cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  /* ── NEW: Torch flicker ── */
+  --animate-torch:                torchFlicker 1.8s ease-in-out infinite alternate;
+  --animate-torch-glow:           torchGlow 1.8s ease-in-out infinite alternate;
+
+  /* ── NEW: Mascot attack ── */
+  --animate-mascot-attack:        mascotAttack 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+  /* ── NEW: Parallax (done via JS) placeholder ── */
+  --animate-float-bg:             floatBg 8s ease-in-out infinite alternate;
+
+  /* ══════════════════════════════════
+     KEYFRAMES
+  ══════════════════════════════════ */
+
+  /* Existing */
   @keyframes slideUp {
     from { transform: translateY(20px); opacity: 0; }
     to   { transform: translateY(0);    opacity: 1; }
@@ -57,22 +96,24 @@
   }
   @keyframes shake {
     0%, 100% { transform: translateX(0) rotate(0); }
-    25%       { transform: translateX(-6px) rotate(-6deg); }
-    75%       { transform: translateX(6px) rotate(6deg); }
+    20%       { transform: translateX(-8px) rotate(-5deg); }
+    40%       { transform: translateX(8px)  rotate(5deg); }
+    60%       { transform: translateX(-5px) rotate(-3deg); }
+    80%       { transform: translateX(5px)  rotate(3deg); }
   }
   @keyframes bounceSoft {
     0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-10px); }
   }
   @keyframes bouncePop {
-    0%   { transform: scale(0.8); }
-    50%  { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0%   { transform: scale(0.8); opacity: 0; }
+    60%  { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
   }
   @keyframes floatScore {
     0%   { transform: translateY(0)    scale(0.8); opacity: 0; }
     20%  { transform: translateY(-10px) scale(1.2); opacity: 1; }
-    100% { transform: translateY(-50px) scale(1);   opacity: 0; }
+    100% { transform: translateY(-55px) scale(1);   opacity: 0; }
   }
   @keyframes twinkle {
     0%   { opacity: 0.2; transform: scale(0.8); }
@@ -97,8 +138,112 @@
     0%, 100% { background-color: #1e1040; }
     50%       { background-color: #2d1b4e; }
   }
+
+  /* ── Screen Transition ── */
+  @keyframes screenEnter {
+    0%   { opacity: 0; transform: translateY(18px) scale(0.98); }
+    100% { opacity: 1; transform: translateY(0)    scale(1); }
+  }
+  @keyframes screenExit {
+    0%   { opacity: 1; transform: translateY(0)    scale(1); }
+    100% { opacity: 0; transform: translateY(-14px) scale(0.98); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+
+  /* ── Button Feedback ── */
+  @keyframes answerCorrect {
+    0%   { transform: scale(1);    box-shadow: 0 0 0px rgba(74,222,128,0); }
+    30%  { transform: scale(1.06); box-shadow: 0 0 24px rgba(74,222,128,0.7); }
+    60%  { transform: scale(0.97); }
+    100% { transform: scale(1.02); box-shadow: 0 0 12px rgba(74,222,128,0.4); }
+  }
+  @keyframes answerWrong {
+    0%   { transform: translateX(0)    scale(1);    box-shadow: 0 0 0px rgba(248,113,113,0); }
+    15%  { transform: translateX(-9px) scale(0.97); box-shadow: 0 0 16px rgba(248,113,113,0.6); }
+    35%  { transform: translateX(8px)  scale(0.97); }
+    55%  { transform: translateX(-5px) scale(0.98); }
+    75%  { transform: translateX(4px)  scale(0.99); }
+    100% { transform: translateX(0)    scale(1);    box-shadow: 0 0 8px rgba(248,113,113,0.3); }
+  }
+  @keyframes glowBurst {
+    0%   { opacity: 1; transform: scale(0.5); }
+    60%  { opacity: 0.6; transform: scale(1.8); }
+    100% { opacity: 0; transform: scale(2.4); }
+  }
+
+  /* ── HP Bar fill ── */
+  @keyframes hpFill {
+    from { width: 0%; opacity: 0.6; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Combo Pop ── */
+  @keyframes comboPop {
+    0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+    50%  { transform: scale(1.2) rotate(5deg);  opacity: 1; }
+    100% { transform: scale(1) rotate(0deg);   opacity: 1; }
+  }
+  @keyframes comboFade {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    70%  { opacity: 1; transform: translateY(-8px) scale(1.05); }
+    100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+  }
+
+  /* ── Confetti ── */
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; }
+  }
+  @keyframes confettiSpin {
+    from { transform: rotate(0deg) scale(1); }
+    to   { transform: rotate(360deg) scale(0.5); }
+  }
+
+  /* ── Card Stagger Enter ── */
+  @keyframes cardEnter {
+    0%   { opacity: 0; transform: translateY(20px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0)    scale(1); }
+  }
+
+  /* ── Torch Flicker ── */
+  @keyframes torchFlicker {
+    0%   { opacity: 0.5; transform: scaleY(1); }
+    25%  { opacity: 0.9; transform: scaleY(1.1) skewX(3deg); }
+    50%  { opacity: 0.6; transform: scaleY(0.9) skewX(-2deg); }
+    75%  { opacity: 1;   transform: scaleY(1.15) skewX(1deg); }
+    100% { opacity: 0.7; transform: scaleY(0.95); }
+  }
+  @keyframes torchGlow {
+    0%   { box-shadow: 0 0 6px  3px rgba(251,146,60,0.4); }
+    50%  { box-shadow: 0 0 14px 6px rgba(251,191,36,0.7); }
+    100% { box-shadow: 0 0 8px  4px rgba(251,146,60,0.5); }
+  }
+
+  /* ── Mascot Attack ── */
+  @keyframes mascotAttack {
+    0%   { transform: translateX(0)   scale(1); }
+    30%  { transform: translateX(8px) scale(1.08); }
+    60%  { transform: translateX(-3px) scale(0.97); }
+    100% { transform: translateX(0)   scale(1); }
+  }
+
+  /* ── Background float ── */
+  @keyframes floatBg {
+    0%   { transform: translateY(0px); }
+    100% { transform: translateY(-6px); }
+  }
 }
 
+/* ─────────────────────────────────────────
+   BASE
+───────────────────────────────────────── */
 * { box-sizing: border-box; }
 
 html, body {
@@ -116,12 +261,28 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────
+   UTILITY: stagger delay helpers
+───────────────────────────────────────── */
+.stagger-1  { animation-delay: 0.05s !important; }
+.stagger-2  { animation-delay: 0.10s !important; }
+.stagger-3  { animation-delay: 0.15s !important; }
+.stagger-4  { animation-delay: 0.20s !important; }
+.stagger-5  { animation-delay: 0.25s !important; }
+.stagger-6  { animation-delay: 0.30s !important; }
+.stagger-7  { animation-delay: 0.35s !important; }
+.stagger-8  { animation-delay: 0.40s !important; }
+.stagger-9  { animation-delay: 0.45s !important; }
+.stagger-10 { animation-delay: 0.50s !important; }
+.stagger-11 { animation-delay: 0.55s !important; }
+.stagger-12 { animation-delay: 0.60s !important; }
+
+/* ─────────────────────────────────────────
    RPG COMPONENT CLASSES
-───────────────────────────────────────────── */
+───────────────────────────────────────── */
 @layer components {
 
-  /* Dialog box utama ala JRPG — border double */
+  /* Dialog box utama ala JRPG */
   .rpg-box {
     background: linear-gradient(135deg, #1e1040 0%, #2d1b4e 100%);
     border: 3px solid #7c3aed;
@@ -132,7 +293,6 @@ button {
     border-radius: 4px;
   }
 
-  /* Box dengan aksen gold */
   .rpg-box-gold {
     background: linear-gradient(135deg, #1e1040 0%, #2d1b4e 100%);
     border: 3px solid #fbbf24;
@@ -143,14 +303,13 @@ button {
     border-radius: 4px;
   }
 
-  /* Box dark tipis */
   .rpg-box-dark {
     background: rgba(15, 10, 30, 0.85);
     border: 2px solid #4c1d95;
     border-radius: 4px;
   }
 
-  /* Tombol RPG — style 3D pixelated */
+  /* Tombol RPG */
   .rpg-btn {
     background: linear-gradient(180deg, #3b1d6e 0%, #2d1b4e 100%);
     border: 2px solid #7c3aed;
@@ -158,9 +317,8 @@ button {
     border-radius: 4px;
     color: #e9d5ff;
     font-weight: 800;
-    transition: transform 0.08s ease, border-bottom-width 0.08s ease;
+    transition: transform 0.08s ease, border-bottom-width 0.08s ease, background 0.1s ease;
     cursor: pointer;
-    image-rendering: pixelated;
   }
   .rpg-btn:hover:not(:disabled) {
     background: linear-gradient(180deg, #4c2a8a 0%, #3b1d6e 100%);
@@ -170,12 +328,8 @@ button {
     transform: translateY(5px);
     border-bottom-width: 0px;
   }
-  .rpg-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
+  .rpg-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* Tombol RPG gold (aksi utama) */
   .rpg-btn-gold {
     background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
     border: 2px solid #fbbf24;
@@ -194,7 +348,6 @@ button {
     border-bottom-width: 0px;
   }
 
-  /* Tombol RPG merah (bahaya/keluar) */
   .rpg-btn-red {
     background: linear-gradient(180deg, #991b1b 0%, #7f1d1d 100%);
     border: 2px solid #ef4444;
@@ -210,7 +363,6 @@ button {
     border-bottom-width: 0px;
   }
 
-  /* Tombol RPG hijau (benar/lanjut) */
   .rpg-btn-green {
     background: linear-gradient(180deg, #166534 0%, #14532d 100%);
     border: 2px solid #4ade80;
@@ -226,25 +378,26 @@ button {
     border-bottom-width: 0px;
   }
 
-  /* Jawaban: benar */
+  /* ── Answer states ── */
   .rpg-answer-correct {
     background: linear-gradient(135deg, #052e16, #166534) !important;
     border-color: #4ade80 !important;
     border-bottom-color: #052e16 !important;
     color: #bbf7d0 !important;
     box-shadow: 0 0 16px rgba(74, 222, 128, 0.4) !important;
+    animation: answerCorrect 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
   }
 
-  /* Jawaban: salah */
   .rpg-answer-wrong {
     background: linear-gradient(135deg, #450a0a, #7f1d1d) !important;
     border-color: #f87171 !important;
     border-bottom-color: #450a0a !important;
     color: #fecaca !important;
     box-shadow: 0 0 16px rgba(248, 113, 113, 0.4) !important;
+    animation: answerWrong 0.4s ease-in-out forwards !important;
   }
 
-  /* HP Bar (progress) */
+  /* ── HP Bar ── */
   .rpg-hp-bar {
     height: 14px;
     background: #0f0a1e;
@@ -269,8 +422,26 @@ button {
     background: rgba(255,255,255,0.3);
     border-radius: 1px;
   }
+  /* fill animation saat soal baru */
+  .rpg-hp-fill-new {
+    animation: hpFill 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 
-  /* Cursor blinking ▶ */
+  /* ── Screen transition wrapper ── */
+  .screen-enter {
+    animation: screenEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .screen-exit {
+    animation: screenExit 0.25s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+  }
+
+  /* ── Card stagger ── */
+  .card-enter {
+    opacity: 0;
+    animation: cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* ── Cursor blinking ── */
   .rpg-cursor::after {
     content: '▶';
     display: inline-block;
@@ -280,7 +451,7 @@ button {
     font-size: 0.75em;
   }
 
-  /* Label badge level */
+  /* ── Badges ── */
   .rpg-badge {
     background: #1e1040;
     border: 2px solid #7c3aed;
@@ -304,32 +475,38 @@ button {
     text-transform: uppercase;
   }
 
-  /* Divider pixel horizontal */
+  /* ── Divider ── */
   .rpg-divider {
     height: 2px;
     background: linear-gradient(90deg, transparent, #7c3aed 20%, #fbbf24 50%, #7c3aed 80%, transparent);
     margin: 12px 0;
   }
 
-  /* Glow gold */
+  /* ── Glow gold ── */
   .rpg-glow-gold {
     animation: glowPulse 2s ease-in-out infinite;
   }
 
-  /* Corner decoration untuk dialog box */
+  /* ── Torch glow ── */
+  .rpg-torch-glow {
+    animation: torchGlow 1.8s ease-in-out infinite alternate;
+  }
+
+  /* ── Corner decorations ── */
   .rpg-corner {
     position: absolute;
     width: 10px;
     height: 10px;
     border-color: #fbbf24;
     border-style: solid;
+    pointer-events: none;
   }
   .rpg-corner-tl { top: 2px; left: 2px;  border-width: 2px 0 0 2px; }
   .rpg-corner-tr { top: 2px; right: 2px; border-width: 2px 2px 0 0; }
   .rpg-corner-bl { bottom: 2px; left: 2px;  border-width: 0 0 2px 2px; }
   .rpg-corner-br { bottom: 2px; right: 2px; border-width: 0 2px 2px 0; }
 
-  /* Scrollbar custom */
+  /* ── Scrollbar ── */
   .rpg-scroll::-webkit-scrollbar { width: 6px; }
   .rpg-scroll::-webkit-scrollbar-track { background: #0f0a1e; }
   .rpg-scroll::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 2px; }

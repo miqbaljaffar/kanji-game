@@ -29,7 +29,7 @@ export function BunpouCard({ entry, onSelect }: BunpouCardProps) {
   return (
     <div
       onClick={() => onSelect(entry)}
-      className="rpg-box group relative flex flex-col justify-between p-4 sm:p-5 cursor-pointer hover:-translate-y-1 transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden"
+      className="rpg-box group relative flex flex-col justify-between p-4 sm:p-5 cursor-pointer hover:-translate-y-1 transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden card-enter"
       style={{ borderColor: entry.level === "N5" ? "#4ade80" : "#818cf8" }}
     >
       <span className="rpg-corner rpg-corner-tl" style={{ borderColor: entry.level === "N5" ? "#4ade80" : "#818cf8" }} />

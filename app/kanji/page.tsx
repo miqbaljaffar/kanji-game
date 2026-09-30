@@ -139,8 +139,10 @@ export default function KanjiDictionaryPage() {
         {paginatedKanji.length > 0 ? (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
-              {paginatedKanji.map((entry) => (
-                <KanjiCard key={entry.id} entry={entry} onSelect={setActiveEntry} />
+              {paginatedKanji.map((entry, idx) => (
+                <div key={entry.id} className={`stagger-${Math.min((idx % 12) + 1, 12)}`}>
+                  <KanjiCard entry={entry} onSelect={setActiveEntry} />
+                </div>
               ))}
             </div>
             <KanjiPagination

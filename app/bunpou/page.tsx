@@ -137,8 +137,10 @@ export default function BunpouDictionaryPage() {
         {paginatedBunpou.length > 0 ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
-              {paginatedBunpou.map((entry) => (
-                <BunpouCard key={entry.id} entry={entry} onSelect={setActiveEntry} />
+              {paginatedBunpou.map((entry, idx) => (
+                <div key={entry.id} className={`stagger-${Math.min((idx % 12) + 1, 12)}`}>
+                  <BunpouCard entry={entry} onSelect={setActiveEntry} />
+                </div>
               ))}
             </div>
             <BunpouPagination

@@ -30,7 +30,7 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
   return (
     <div
       onClick={() => onSelect(entry)}
-      className="rpg-box group relative flex flex-col justify-between p-3 sm:p-4 cursor-pointer hover:-translate-y-1 transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden"
+      className="rpg-box group relative flex flex-col justify-between p-3 sm:p-4 cursor-pointer hover:-translate-y-1 transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden card-enter"
       style={{ borderColor: entry.level === "N5" ? "#4ade80" : "#818cf8" }}
     >
       {/* Corner decorations */}
