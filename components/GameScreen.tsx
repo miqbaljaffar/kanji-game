@@ -1,6 +1,14 @@
 "use client";
 import { useMemo, useState } from "react";
-import { QuizQuestion, AnswerState, GameStats, GameMode, Difficulty, KanjiEntry, KanaEntry } from "@/types";
+import {
+  QuizQuestion,
+  AnswerState,
+  GameStats,
+  GameMode,
+  Difficulty,
+  KanjiEntry,
+  KanaEntry,
+} from "@/types";
 import { Mascot } from "./Mascot";
 import { ConfirmModal } from "./ui/ConfirmModal";
 import clsx from "clsx";
@@ -22,151 +30,230 @@ interface GameScreenProps {
   onExit: () => void;
 }
 
-function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode): { main: string; prompt: string; sub?: string } {
+function getQuestionDisplay(
+  question: QuizQuestion,
+  gameMode: GameMode
+): { main: string; prompt: string; sub?: string } {
   if (question.mode === "bunpou" && question.bunpouQuestion) {
-    return { 
-      main: question.bunpouQuestion.sentence, 
-      prompt: "Lengkapi kalimat berikut!"
-    };
+    return { main: question.bunpouQuestion.sentence, prompt: "Lengkapi kalimat berikut!" };
   }
-
   if (question.mode === "kana" && question.kanaQuestion) {
     return {
       main: question.kanaQuestion.romaji,
-      prompt: gameMode === "hiragana-to-romaji"
-        ? "Pilih huruf Hiragana yang tepat!"
-        : gameMode === "katakana-to-romaji"
+      prompt:
+        gameMode === "hiragana-to-romaji"
+          ? "Pilih huruf Hiragana yang tepat!"
+          : gameMode === "katakana-to-romaji"
           ? "Pilih huruf Katakana yang tepat!"
           : "Pilih huruf Kana yang tepat!",
     };
   }
-
   const entry = question.kanjiQuestion!;
-  if (gameMode === "kanji-to-arti") return { main: entry.kanji, prompt: "Apa arti dari kanji ini?" };
-  if (gameMode === "hiragana-to-arti") return { main: entry.hiragana, prompt: "Apa arti kosakata ini?" };
-  if (gameMode === "kanji-to-hiragana") return { main: entry.kanji, prompt: "Bagaimana cara bacanya?" };
-  
+  if (gameMode === "kanji-to-arti")     return { main: entry.kanji,    prompt: "Apa arti dari kanji ini?" };
+  if (gameMode === "hiragana-to-arti")  return { main: entry.hiragana, prompt: "Apa arti kosakata ini?" };
+  if (gameMode === "kanji-to-hiragana") return { main: entry.kanji,    prompt: "Bagaimana cara bacanya?" };
   return { main: entry.arti, prompt: "Pilih kanji yang tepat!" };
 }
 
+/** Warna HP bar berdasarkan rasio waktu */
+function hpBarColor(ratio: number) {
+  if (ratio > 0.5) return "from-emerald-400 to-green-500";
+  if (ratio > 0.25) return "from-yellow-400 to-amber-500";
+  return "from-red-500 to-rose-600";
+}
+
 export function GameScreen({
-  question, questionIndex, totalQuestions, answerState,
-  stats, timeLeft, timeRatio, gameMode,
-  showFloatingScore, floatingScoreValue, onAnswer, onExit,
+  question,
+  questionIndex,
+  totalQuestions,
+  answerState,
+  selectedIndex,
+  stats,
+  timeLeft,
+  timeRatio,
+  gameMode,
+  showFloatingScore,
+  floatingScoreValue,
+  onAnswer,
+  onExit,
 }: GameScreenProps) {
   const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
   const display = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
 
-  // Fungsi pengecekan font agar bahasa jepang menggunakan font jepang
-  const isJpFontForQuestion = gameMode === "kanji-to-arti" || gameMode === "kanji-to-hiragana" || gameMode === "hiragana-to-arti" || gameMode === "bunpou";
-  const isJpFontForOptions = [
-    "arti-to-kanji",
-    "kanji-to-hiragana",
-    "bunpou",
-    "hiragana-to-romaji",
-    "katakana-to-romaji",
-    "mixed-kana",
+  const isJpFontForQuestion = [
+    "kanji-to-arti","kanji-to-hiragana","hiragana-to-arti","bunpou",
   ].includes(gameMode);
 
+  const isJpFontForOptions = [
+    "arti-to-kanji","kanji-to-hiragana","bunpou",
+    "hiragana-to-romaji","katakana-to-romaji","mixed-kana",
+  ].includes(gameMode);
+
+  const allOptions =
+    question.mode === "bunpou"
+      ? question.stringOptions!
+      : question.mode === "kana"
+      ? question.kanaOptions!
+      : question.kanjiOptions!;
+
+  function getOptionText(opt: string | KanjiEntry | KanaEntry): string {
+    if (question.mode === "bunpou") return opt as string;
+    if (question.mode === "kana") {
+      const o = opt as KanaEntry;
+      const script = question.kanaScript ?? (gameMode === "hiragana-to-romaji" ? "hiragana" : "katakana");
+      return o[script];
+    }
+    const o = opt as KanjiEntry;
+    if (gameMode === "arti-to-kanji")   return o.kanji;
+    if (gameMode === "kanji-to-hiragana") return o.hiragana;
+    return o.arti;
+  }
+
   return (
-    <div className="relative z-10 flex flex-col min-h-dvh p-4 sm:p-6 max-w-lg mx-auto overflow-x-hidden">
+    <div className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 max-w-lg mx-auto overflow-x-hidden">
       {isExitConfirmOpen && (
         <ConfirmModal
           title="Keluar permainan?"
           message="Jika kamu keluar sekarang, permainan akan selesai dan hasil akan ditampilkan."
           confirmText="Ya, selesai"
           cancelText="Lanjutkan"
-          onConfirm={() => {
-            setIsExitConfirmOpen(false);
-            onExit();
-          }}
+          onConfirm={() => { setIsExitConfirmOpen(false); onExit(); }}
           onCancel={() => setIsExitConfirmOpen(false)}
         />
       )}
-      
-      {/* HEADER: Compact & Glassmorphism */}
-      <div className="flex-none flex items-center justify-between bg-white/70 backdrop-blur-xl p-3 sm:p-4 rounded-3xl shadow-sm border border-white/50 mb-2">
-        
-        {/* Tombol Keluar */}
+
+      {/* ── HEADER BAR ── */}
+      <div className="flex-none rpg-box flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 mb-3 relative">
+        <span className="rpg-corner rpg-corner-tl" />
+        <span className="rpg-corner rpg-corner-br" />
+
+        {/* Tombol keluar */}
         <button
           onClick={() => setIsExitConfirmOpen(true)}
-          className="w-10 h-10 flex items-center justify-center bg-white shadow-sm hover:bg-slate-50 text-slate-400 hover:text-red-500 rounded-full font-black text-xl transition-all"
+          className="rpg-btn-red w-9 h-9 flex items-center justify-center text-sm font-black shrink-0 touch-manipulation"
+          style={{ fontFamily: "var(--font-pixel)" }}
         >
           ✕
         </button>
 
-        {/* Progress Bar Soal */}
-        <div className="flex-1 mx-3 sm:mx-5">
-          <div className="h-3 w-full bg-slate-200/80 rounded-full overflow-hidden relative shadow-inner">
-            <div 
-              className="h-full bg-linear-to-r from-blue-400 to-indigo-500 transition-all duration-500 rounded-full"
-              style={{ width: `${(questionIndex / totalQuestions) * 100}%` }}
+        {/* Progress + Timer section */}
+        <div className="flex-1 min-w-0 space-y-1.5">
+          {/* Soal ke-X / Total */}
+          <div className="flex justify-between items-center">
+            <span
+              className="text-[8px] text-purple-300 font-black uppercase tracking-widest"
+              style={{ fontFamily: "var(--font-pixel)" }}
             >
-              <div className="h-1 w-full bg-white/30 mt-0.5 rounded-full mx-1"></div>
+              QUEST {questionIndex + 1}/{totalQuestions}
+            </span>
+            {/* Timer */}
+            <div className="flex items-center gap-1">
+              <span className="text-[9px] text-purple-300">⏱</span>
+              <span
+                className={clsx(
+                  "text-[10px] font-black w-5 text-right",
+                  timeRatio <= 0.3 ? "text-red-400 animate-pulse" : "text-yellow-300"
+                )}
+                style={{ fontFamily: "var(--font-pixel)" }}
+              >
+                {timeLeft}
+              </span>
             </div>
           </div>
-        </div>
 
-        {/* Indikator Skor dan Timer */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <div className="flex items-center bg-yellow-100/80 px-2.5 py-1.5 rounded-2xl border border-yellow-200/50">
-            <span className="text-sm sm:text-base mr-1">⭐</span>
-            <span className="font-black text-yellow-600 text-sm sm:text-base">
-              {stats.score}
-            </span>
+          {/* HP Bar (progres soal) */}
+          <div className="rpg-hp-bar">
+            <div
+              className={clsx("rpg-hp-fill bg-gradient-to-r", hpBarColor(timeRatio))}
+              style={{ width: `${timeRatio * 100}%` }}
+            />
           </div>
-          <div className="flex items-center bg-white/80 px-2.5 py-1.5 rounded-2xl border border-slate-200/50 shadow-sm">
-            <span className="text-sm sm:text-base mr-1">⏱</span>
-            <span className={clsx(
-              "font-black text-sm sm:text-base w-5 text-center", 
-              timeRatio <= 0.3 ? "text-red-500 animate-pulse" : "text-blue-500"
-            )}>
-              {timeLeft}
-            </span>
+
+          {/* EXP / Progress soal */}
+          <div className="rpg-hp-bar" style={{ height: "8px" }}>
+            <div
+              className="rpg-hp-fill bg-gradient-to-r from-purple-500 to-violet-400"
+              style={{ width: `${(questionIndex / totalQuestions) * 100}%` }}
+            />
           </div>
         </div>
 
+        {/* Skor */}
+        <div className="rpg-box-gold px-2.5 py-1.5 flex items-center gap-1 shrink-0">
+          <span className="text-sm">⭐</span>
+          <span
+            className="font-black text-yellow-300 text-xs sm:text-sm"
+            style={{ fontFamily: "var(--font-pixel)" }}
+          >
+            {stats.score}
+          </span>
+        </div>
       </div>
 
-      {/* KARTU PERTANYAAN (Dynamic Flex) */}
-      <div className="flex-1 flex flex-col justify-center relative mt-12 mb-6 sm:mb-8 z-10 min-h-0">
-        
-        {/* Maskot */}
-        <div className="absolute -top-14 left-1/2 -translate-x-1/2 z-20">
-          <div className="bg-white/80 backdrop-blur-md p-2 rounded-full shadow-lg border-4 border-white">
-             <Mascot state={answerState} />
+      {/* ── BATTLE AREA ── */}
+      <div className="flex-1 flex flex-col justify-center relative mt-10 mb-4 z-10 min-h-0">
+
+        {/* Maskot (sprite karakter) */}
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
+          <div
+            className="p-2 rounded-sm"
+            style={{
+              background: "#1e1040",
+              border: "3px solid #7c3aed",
+              boxShadow: "0 0 0 1px #0f0a1e, 0 4px 16px rgba(124,58,237,0.4)",
+            }}
+          >
+            <Mascot state={answerState} />
           </div>
         </div>
 
-        {/* Card Utama */}
-        <div className="w-full h-full min-h-45 bg-white/95 backdrop-blur-xl border-4 border-white rounded-4xl shadow-xl flex flex-col items-center justify-center p-6 text-center relative overflow-hidden transition-all duration-300">
-          
-          <p className="text-xs sm:text-sm font-black text-blue-400/80 uppercase tracking-widest mb-3 mt-4">
+        {/* Dialog box pertanyaan */}
+        <div className="rpg-box w-full relative flex flex-col items-center justify-center p-5 sm:p-7 text-center min-h-40">
+          <span className="rpg-corner rpg-corner-tl" />
+          <span className="rpg-corner rpg-corner-tr" />
+          <span className="rpg-corner rpg-corner-bl" />
+          <span className="rpg-corner rpg-corner-br" />
+
+          <p
+            className="text-[8px] sm:text-[9px] font-black text-yellow-400 uppercase tracking-[0.2em] mb-3 mt-3"
+            style={{ fontFamily: "var(--font-pixel)" }}
+          >
             {display.prompt}
           </p>
 
-          <h2 
+          <h2
             className={clsx(
-              "font-black leading-tight text-slate-800 wrap-break-word w-full",
-              gameMode === "arti-to-kanji" ? "text-4xl sm:text-5xl" : 
-              gameMode === "bunpou" ? "text-2xl sm:text-3xl" : "text-6xl sm:text-8xl"
+              "font-black leading-tight text-white break-words w-full",
+              gameMode === "arti-to-kanji"
+                ? "text-3xl sm:text-4xl"
+                : gameMode === "bunpou"
+                ? "text-xl sm:text-2xl"
+                : "text-5xl sm:text-7xl"
             )}
-            style={{ fontFamily: isJpFontForQuestion ? "var(--font-jp)" : "var(--font-body)" }}
+            style={{
+              fontFamily: isJpFontForQuestion ? "var(--font-jp)" : "var(--font-body)",
+              textShadow: "0 0 20px rgba(167,139,250,0.6)",
+            }}
           >
             {display.main}
           </h2>
 
-          {/* Terjemahan Khusus Bunpou */}
           {display.sub && (
-             <p className="text-sm sm:text-base font-bold text-slate-500 mt-4 px-2">
-               {`"${display.sub}"`}
-             </p>
+            <p className="text-xs sm:text-sm font-bold text-purple-300 mt-3 px-2">
+              &ldquo;{display.sub}&rdquo;
+            </p>
           )}
 
-          {/* Skor Melayang saat benar */}
+          {/* Floating score */}
           {showFloatingScore && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-bounce">
-              <span className="text-5xl sm:text-6xl font-black text-green-400 drop-shadow-lg" style={{ WebkitTextStroke: "2px white" }}>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-float-score">
+              <span
+                className="text-4xl sm:text-5xl font-black text-yellow-300"
+                style={{
+                  fontFamily: "var(--font-pixel)",
+                  textShadow: "0 0 12px rgba(251,191,36,0.8)",
+                }}
+              >
                 +{floatingScoreValue}
               </span>
             </div>
@@ -174,34 +261,18 @@ export function GameScreen({
         </div>
       </div>
 
-      {/* GRID JAWABAN */}
-      <div className="flex-none grid grid-cols-2 gap-3 sm:gap-4 pb-2 sm:pb-4 z-20">
-        {(
-          question.mode === "bunpou"
-            ? question.stringOptions!
-            : question.mode === "kana"
-              ? question.kanaOptions!
-              : question.kanjiOptions!
-        ).map((opt, idx) => {
-          const state: string = "idle";
+      {/* ── GRID JAWABAN ── */}
+      <div className="flex-none grid grid-cols-2 gap-2.5 sm:gap-3 pb-3 z-20">
+        {allOptions.map((opt, idx) => {
+          const optionText = getOptionText(opt);
 
-          let optionText = "";
-          if (question.mode === "bunpou") {
-            optionText = opt as string;
-          } else if (question.mode === "kana") {
-            const option = opt as KanaEntry;
-            const script = question.kanaScript ?? (gameMode === "hiragana-to-romaji" ? "hiragana" : "katakana");
-            optionText = option[script];
-          } else {
-            const option = opt as KanjiEntry;
-            if (gameMode === "arti-to-kanji") {
-              optionText = option.kanji;
-            } else if (gameMode === "kanji-to-hiragana") {
-              optionText = option.hiragana;
-            } else {
-              optionText = option.arti;
-            }
-          }
+          const isSelected = selectedIndex === idx;
+          const isCorrectOpt = idx === question.correctIndex;
+          const revealed = answerState !== "idle";
+
+          let stateClass = "";
+          if (revealed && isCorrectOpt) stateClass = "rpg-answer-correct";
+          else if (revealed && isSelected && !isCorrectOpt) stateClass = "rpg-answer-wrong";
 
           return (
             <button
@@ -209,22 +280,33 @@ export function GameScreen({
               onClick={() => onAnswer(idx)}
               disabled={answerState !== "idle"}
               className={clsx(
-                "relative w-full p-4 sm:p-5 flex flex-col items-center justify-center text-center transition-all duration-200 outline-none rounded-2xl sm:rounded-3xl border-2",
-                state === "idle" && "bg-white border-slate-200 border-b-[6px] text-slate-700 hover:bg-slate-50 hover:-translate-y-1 hover:border-b-8 active:border-b-2 active:translate-y-1",
-                state === "correct" && "bg-green-100 border-green-500 border-b-[6px] text-green-700 z-10 scale-105 shadow-xl",
-                state === "wrong" && "bg-red-50 border-red-500 border-b-2 text-red-700 translate-y-1",
-                state === "disabled" && "bg-slate-50 border-slate-200 border-b-2 text-slate-400 opacity-60 translate-y-1"
+                "rpg-btn relative w-full p-3.5 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-150 outline-none touch-manipulation",
+                stateClass,
+                !revealed && "hover:-translate-y-0.5"
               )}
             >
-              <span 
+              <span
                 className={clsx(
                   "block font-black leading-tight",
-                  isJpFontForOptions ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
+                  isJpFontForOptions ? "text-xl sm:text-2xl" : "text-sm sm:text-base"
                 )}
-                style={{ fontFamily: isJpFontForOptions ? "var(--font-jp)" : "var(--font-body)" }}
+                style={{
+                  fontFamily: isJpFontForOptions ? "var(--font-jp)" : "var(--font-body)",
+                }}
               >
                 {optionText}
               </span>
+              {/* Indikator benar/salah */}
+              {revealed && isCorrectOpt && (
+                <span className="text-xs mt-1 text-emerald-300" style={{ fontFamily: "var(--font-pixel)" }}>
+                  ✓ BENAR
+                </span>
+              )}
+              {revealed && isSelected && !isCorrectOpt && (
+                <span className="text-xs mt-1 text-red-300" style={{ fontFamily: "var(--font-pixel)" }}>
+                  ✗ SALAH
+                </span>
+              )}
             </button>
           );
         })}

@@ -14,124 +14,106 @@ interface BunpouFilterBarProps {
 }
 
 const CATEGORIES: ("ALL" | BunpouCategory)[] = [
-  "ALL",
-  "Partikel",
-  "Bentuk Kata Kerja",
-  "Ungkapan & Keinginan",
-  "Syarat & Perbandingan",
-  "Sopan & Kehormatan",
+  "ALL", "Partikel", "Bentuk Kata Kerja", "Ungkapan & Keinginan",
+  "Syarat & Perbandingan", "Sopan & Kehormatan",
 ];
 
 export function BunpouFilterBar({
-  searchQuery,
-  onSearchChange,
-  selectedLevel,
-  onLevelChange,
-  selectedCategory,
-  onCategoryChange,
+  searchQuery, onSearchChange,
+  selectedLevel, onLevelChange,
+  selectedCategory, onCategoryChange,
   totalResults,
 }: BunpouFilterBarProps) {
   const hasActiveFilters = searchQuery !== "" || selectedLevel !== "ALL" || selectedCategory !== "ALL";
 
   return (
-    <div className="bg-white/85 backdrop-blur-md rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-lg border-2 border-white/60 mb-4 sm:mb-8 space-y-3 sm:space-y-4">
-      {/* Search Input Bar */}
+    <div className="rpg-box relative p-3.5 sm:p-5 mb-4 sm:mb-6 space-y-3">
+      <span className="rpg-corner rpg-corner-tl" />
+      <span className="rpg-corner rpg-corner-br" />
+
+      {/* Search */}
       <div className="relative">
-        <span className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-lg sm:text-xl text-slate-400">
-          🔍
-        </span>
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-base text-purple-400">🔍</span>
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Cari Tata Bahasa, Rumus, atau Fungsi (misal: ～てください, tolong, kudasai)..."
-          className="w-full bg-slate-50 border-2 border-slate-200 focus:border-blue-500 rounded-xl sm:rounded-2xl pl-10 sm:pl-12 pr-9 sm:pr-10 py-2.5 sm:py-3.5 text-xs sm:text-base font-bold text-slate-800 placeholder-slate-400 outline-none transition-all"
+          placeholder="Cari Tata Bahasa, Rumus, Fungsi (cth: ～てください)..."
+          className="w-full pl-9 pr-9 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-purple-100 placeholder-purple-600 outline-none transition-all"
+          style={{
+            background: "#0f0a1e",
+            border: "2px solid #4c1d95",
+            borderRadius: "4px",
+          }}
+          onFocus={(e) => (e.currentTarget.style.borderColor = "#7c3aed")}
+          onBlur={(e)  => (e.currentTarget.style.borderColor = "#4c1d95")}
         />
         {searchQuery && (
           <button
             onClick={() => onSearchChange("")}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs font-black flex items-center justify-center cursor-pointer transition-all active:scale-90 touch-manipulation"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rpg-btn text-purple-300 text-xs flex items-center justify-center cursor-pointer touch-manipulation"
           >
             ✕
           </button>
         )}
       </div>
 
-      {/* Filter Chips Horizontal Scroll Container */}
+      {/* Filters row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-0.5">
-        
         <div className="flex items-center gap-3 overflow-x-auto no-scrollbar touch-pan-x pb-1 sm:pb-0">
-          
-          {/* Level Filter */}
+
+          {/* Level */}
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-[11px] sm:text-xs font-black text-slate-400 uppercase tracking-wider mr-0.5">
-              Level:
-            </span>
-            {[
-              { id: "ALL", label: "Semua" },
-              { id: "N5", label: "N5" },
-              { id: "N4", label: "N4" },
-            ].map((lvl) => (
+            <span className="text-[8px] font-black text-purple-400 uppercase tracking-widest mr-0.5"
+              style={{ fontFamily: "var(--font-pixel)" }}>LV:</span>
+            {(["ALL", "N5", "N4"] as const).map((lvl) => (
               <button
-                key={lvl.id}
-                onClick={() => onLevelChange(lvl.id as "ALL" | "N5" | "N4")}
-                className={clsx(
-                  "px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-black transition-all cursor-pointer border active:scale-95 touch-manipulation",
-                  selectedLevel === lvl.id
-                    ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-200"
-                )}
+                key={lvl}
+                onClick={() => onLevelChange(lvl)}
+                className={clsx("px-2.5 py-1 text-[9px] font-black transition-all cursor-pointer touch-manipulation",
+                  selectedLevel === lvl ? "rpg-btn-gold" : "rpg-btn")}
+                style={{ fontFamily: "var(--font-pixel)", borderRadius: "3px" }}
               >
-                {lvl.label}
+                {lvl}
               </button>
             ))}
           </div>
 
-          <div className="h-4 w-px bg-slate-200 shrink-0 hidden sm:block" />
+          <div className="h-4 w-px bg-purple-800 shrink-0 hidden sm:block" />
 
-          {/* Category Filter */}
+          {/* Category */}
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-[11px] sm:text-xs font-black text-slate-400 uppercase tracking-wider mr-0.5">
-              Kategori:
-            </span>
+            <span className="text-[8px] font-black text-purple-400 uppercase tracking-widest mr-0.5"
+              style={{ fontFamily: "var(--font-pixel)" }}>KAT:</span>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => onCategoryChange(cat)}
-                className={clsx(
-                  "px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-black transition-all cursor-pointer border shrink-0 active:scale-95 touch-manipulation",
-                  selectedCategory === cat
-                    ? "bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-500/20"
-                    : "bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-200"
-                )}
+                className={clsx("px-2.5 py-1 text-[8px] font-black transition-all cursor-pointer shrink-0 touch-manipulation",
+                  selectedCategory === cat ? "rpg-btn-gold" : "rpg-btn")}
+                style={{ fontFamily: "var(--font-pixel)", borderRadius: "3px" }}
               >
-                {cat === "ALL" ? "Semua Kategori" : cat}
+                {cat === "ALL" ? "ALL" : cat.slice(0, 8)}
               </button>
             ))}
           </div>
-
         </div>
 
         {/* Counter & Reset */}
-        <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
-          <span className="text-[11px] sm:text-xs font-black text-slate-500 bg-slate-100 px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-slate-200">
-            Hasil: <strong className="text-blue-600">{totalResults}</strong> Tata Bahasa
+        <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 border-t sm:border-t-0 border-purple-800/40 pt-2 sm:pt-0">
+          <span className="rpg-badge text-[8px]" style={{ fontFamily: "var(--font-pixel)" }}>
+            {totalResults} POLA
           </span>
-
           {hasActiveFilters && (
             <button
-              onClick={() => {
-                onSearchChange("");
-                onLevelChange("ALL");
-                onCategoryChange("ALL");
-              }}
-              className="text-[11px] sm:text-xs font-black text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl border border-red-200 transition-all cursor-pointer active:scale-95 touch-manipulation"
+              onClick={() => { onSearchChange(""); onLevelChange("ALL"); onCategoryChange("ALL"); }}
+              className="rpg-btn-red px-2.5 py-1 text-[8px] touch-manipulation"
+              style={{ fontFamily: "var(--font-pixel)", borderRadius: "3px" }}
             >
-              Reset
+              RESET
             </button>
           )}
         </div>
-
       </div>
     </div>
   );
