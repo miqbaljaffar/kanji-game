@@ -11,8 +11,8 @@ import {
   Database
 } from "lucide-react";
 
-import { KanjiManager } from "../../components/dashboard/KanjiManager";
-import { BunpouManager } from "../../components/dashboard/BunpouManager";
+import { KanjiManager } from "./KanjiManager";
+import { BunpouManager } from "./BunpouManager";
 
 // ✅ FIX: ambil dari satu sumber
 import { KanjiEntry, BunpouEntry } from "@/types";

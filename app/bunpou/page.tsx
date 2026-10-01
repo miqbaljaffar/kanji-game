@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BunpouDictionaryPage } from "./BunpouPageClient";
+import { BunpouDictionaryPage } from "../../components/bunpou/BunpouPageClient";
 
 export const metadata: Metadata = {
   title: "Ensiklopedia Bunpou",

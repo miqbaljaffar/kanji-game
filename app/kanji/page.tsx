@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { KanjiDictionaryPage } from "./KanjiPageClient";
+import { KanjiDictionaryPage } from "../../components/kanji/KanjiPageClient";
 
 export const metadata: Metadata = {
   title: "Ensiklopedia Kanji",
