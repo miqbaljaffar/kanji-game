@@ -58,6 +58,7 @@ export function KanjiPagination({
           <button
             onClick={() => onPageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
+            aria-label="Halaman sebelumnya"
             className={clsx(
               "rpg-btn px-3.5 py-2.5 text-[9px] touch-manipulation min-h-[40px] font-black",
               currentPage === 1 && "opacity-40 cursor-not-allowed"
@@ -71,6 +72,8 @@ export function KanjiPagination({
               <button
                 key={page}
                 onClick={() => onPageChange(page)}
+                aria-label={`Halaman ${page}`}
+                aria-current={currentPage === page ? "page" : undefined}
                 className="w-10 h-10 text-[9px] font-black transition-all cursor-pointer touch-manipulation flex items-center justify-center"
                 style={currentPage === page ? {
                   background: "#58cc02",
@@ -95,6 +98,7 @@ export function KanjiPagination({
           <button
             onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage === totalPages}
+            aria-label="Halaman berikutnya"
             className={clsx(
               "rpg-btn px-3.5 py-2.5 text-[9px] touch-manipulation min-h-[40px] font-black",
               currentPage === totalPages && "opacity-40 cursor-not-allowed"
@@ -109,6 +113,7 @@ export function KanjiPagination({
         <select
           value={itemsPerPage}
           onChange={(e) => onItemsPerPageChange(Number(e.target.value))}
+          aria-label="Jumlah kanji per halaman"
           className="px-3 py-2 text-[9px] font-black text-slate-600 outline-none cursor-pointer min-h-[36px]"
           style={{
             background: "#f9fafb",

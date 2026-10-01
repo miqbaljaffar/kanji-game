@@ -179,6 +179,7 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
           <div className="flex flex-col gap-2.5">
             <button
               onClick={onPlayAgain}
+              aria-label="Main lagi dari awal"
               className="rpg-btn-gold w-full py-4 sm:py-5 touch-manipulation rpg-glow-gold rounded-xl font-black text-base"
             >
               🚀 Main Lagi!
@@ -186,10 +187,12 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
             <div className="grid grid-cols-2 gap-2.5">
               <button
                 onClick={onHome}
+                aria-label="Kembali ke menu utama"
                 className="rpg-btn py-3.5 sm:py-4 touch-manipulation font-black text-slate-600 text-sm"
               >🏠 Menu</button>
               <button
                 onClick={() => setIsDonationOpen(true)}
+                aria-label="Buka halaman donasi"
                 className="rpg-btn py-3.5 sm:py-4 touch-manipulation font-black text-sm"
                 style={{ borderColor: "#ff9600", borderBottomColor: "#cc7800", color: "#cc7800" }}
               >💖 Dukung</button>
@@ -213,6 +216,7 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
           >
             <button
               onClick={handleCloseDonation}
+              aria-label="Tutup modal donasi"
               className="rpg-btn-red absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-xs font-black rounded-lg"
             >✕</button>
 

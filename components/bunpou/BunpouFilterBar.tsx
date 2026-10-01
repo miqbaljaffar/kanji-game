@@ -63,6 +63,7 @@ export function BunpouFilterBar({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Cari Tata Bahasa, Rumus, Fungsi (cth: ～てください)..."
+          aria-label="Cari pola bunpou"
           className="w-full pl-9 pr-10 py-3 text-xs sm:text-sm font-bold text-slate-700 placeholder-slate-300 outline-none transition-all"
           style={{
             background: "#f9fafb",

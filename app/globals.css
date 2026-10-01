@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: var(--font-display);
+  /* Hapus --font-display circular reference — tidak dipakai */
   --font-body: var(--font-body);
   --font-jp: var(--font-jp);
   --font-pixel: var(--font-pixel);
@@ -498,4 +498,44 @@ button {
   .rpg-scroll::-webkit-scrollbar-track { background: #f3f4f6; }
   .rpg-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 999px; }
   .rpg-scroll::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+}
+
+/* ─────────────────────────────────────────
+   ACCESSIBILITY: prefers-reduced-motion
+   Matikan semua animasi CSS bagi user yang
+   mengaktifkan "Reduce Motion" di OS mereka.
+───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Tetap izinkan transition kritis (button press, progress bar) */
+  .rpg-btn,
+  .rpg-btn-gold,
+  .rpg-btn-red,
+  .rpg-btn-green {
+    transition: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   FOCUS VISIBLE — keyboard navigation
+───────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid #1cb0f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #1cb0f6;
+  outline-offset: 3px;
 }

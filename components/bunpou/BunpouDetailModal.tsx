@@ -259,6 +259,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
           </span>
           <button
             onClick={onClose}
+            aria-label="Tutup detail bunpou"
             className="rpg-btn px-5 py-2.5 text-[9px] touch-manipulation font-black"
           >Tutup</button>
         </div>

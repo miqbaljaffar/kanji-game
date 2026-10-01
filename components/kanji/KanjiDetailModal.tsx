@@ -330,6 +330,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                         }
                       }}
                       className="rpg-btn px-2.5 py-2 text-[8px] min-h-[36px] touch-manipulation font-black"
+                      aria-label="Putar contoh kalimat"
                     >🔊 Putar</button>
                   </div>
                   <div className="h-px bg-blue-200 rounded" />
