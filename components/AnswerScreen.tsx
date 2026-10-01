@@ -17,8 +17,6 @@ interface AnswerScreenProps {
   onExit: () => void;
 }
 
-type Difficulty = "easy" | "medium" | "hard";
-
 function getQuestionDisplay(question: QuizQuestion, gameMode: GameMode) {
   if (question.mode === "bunpou" && question.bunpouQuestion)
     return { main: question.bunpouQuestion.sentence, prompt: "Lengkapi kalimat berikut!", sub: question.bunpouQuestion.translation };
@@ -52,14 +50,13 @@ function getAnswerText(
   return (answer as KanjiEntry).arti;
 }
 
-/** Teks combo berdasar streak */
 function getComboLabel(streak: number): { text: string; color: string } | null {
   if (streak < 2) return null;
-  if (streak >= 10) return { text: `🔥 ${streak}x LEGENDARY!!`, color: "#fbbf24" };
-  if (streak >= 7)  return { text: `⚡ ${streak}x AMAZING!`,    color: "#f472b6" };
-  if (streak >= 5)  return { text: `✨ ${streak}x GREAT!`,       color: "#a78bfa" };
-  if (streak >= 3)  return { text: `💥 ${streak}x COMBO!`,      color: "#4ade80" };
-  return               { text: `⚔ ${streak}x NICE!`,            color: "#60a5fa" };
+  if (streak >= 10) return { text: `🔥 ${streak}x LEGENDARY!!`, color: "#ff9600" };
+  if (streak >= 7)  return { text: `⚡ ${streak}x AMAZING!`,    color: "#ce82ff" };
+  if (streak >= 5)  return { text: `✨ ${streak}x GREAT!`,       color: "#1cb0f6" };
+  if (streak >= 3)  return { text: `💥 ${streak}x COMBO!`,      color: "#58cc02" };
+  return               { text: `⭐ ${streak}x NICE!`,            color: "#ffc800" };
 }
 
 export function AnswerScreen({
@@ -70,7 +67,6 @@ export function AnswerScreen({
   const [fetchedDetails, setFetchedDetails] = useState<
     Record<string, { onyomi: string; kunyomi: string; mnemonic: string }>
   >({});
-  /** Kontrol animasi combo — munculkan sekali lalu fade */
   const [showCombo, setShowCombo] = useState(false);
   const comboTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -83,23 +79,23 @@ export function AnswerScreen({
     return () => { if (comboTimerRef.current) clearTimeout(comboTimerRef.current); };
   }, [stats.streak]);
 
-  const display     = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
-  const isJpQ       = ["kanji-to-arti","kanji-to-hiragana","hiragana-to-arti","bunpou"].includes(gameMode);
-  const isJpOpt     = ["arti-to-kanji","kanji-to-hiragana","bunpou","hiragana-to-romaji","katakana-to-romaji","mixed-kana"].includes(gameMode);
-  const isTimeout   = selectedIndex < 0;
-  const isCorrect   = !isTimeout && selectedIndex === question.correctIndex;
-  const allOptions  =
+  const display   = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
+  const isJpQ     = ["kanji-to-arti","kanji-to-hiragana","hiragana-to-arti","bunpou"].includes(gameMode);
+  const isJpOpt   = ["arti-to-kanji","kanji-to-hiragana","bunpou","hiragana-to-romaji","katakana-to-romaji","mixed-kana"].includes(gameMode);
+  const isTimeout = selectedIndex < 0;
+  const isCorrect = !isTimeout && selectedIndex === question.correctIndex;
+
+  const allOptions =
     question.mode === "bunpou" ? question.stringOptions!
     : question.mode === "kana" ? question.kanaOptions!
     : question.kanjiOptions!;
-  const selectedAnswer  = isTimeout ? null : allOptions[selectedIndex];
-  const correctAnswer   = allOptions[question.correctIndex];
-  const selectedText    = getAnswerText(selectedAnswer, gameMode, question.kanaScript);
-  const correctText     = getAnswerText(correctAnswer,  gameMode, question.kanaScript);
+  const selectedAnswer = isTimeout ? null : allOptions[selectedIndex];
+  const correctAnswer  = allOptions[question.correctIndex];
+  const selectedText   = getAnswerText(selectedAnswer, gameMode, question.kanaScript);
+  const correctText    = getAnswerText(correctAnswer,  gameMode, question.kanaScript);
 
   const comboLabel = getComboLabel(stats.streak);
 
-  /* Ekstrak karakter kanji */
   const kanjiChars = useMemo(() => {
     if (question.mode !== "kanji" || !question.kanjiQuestion) return [];
     const matches = question.kanjiQuestion.kanji.match(/[\u4e00-\u9faf]/g) || [];
@@ -128,6 +124,11 @@ export function AnswerScreen({
     [kanjiChars, fetchedDetails],
   );
 
+  /* colors */
+  const statusBg     = isCorrect ? "#d7ffb8" : isTimeout ? "#fff8d6" : "#ffe0e0";
+  const statusBorder = isCorrect ? "#58cc02" : isTimeout ? "#ffc800" : "#ff4b4b";
+  const statusText   = isCorrect ? "#2a7000" : isTimeout ? "#7a5a00" : "#880000";
+
   return (
     <div className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 max-w-lg mx-auto overflow-x-hidden">
       {isExitConfirmOpen && (
@@ -141,20 +142,23 @@ export function AnswerScreen({
         />
       )}
 
-      {/* ── COMBO STREAK POPUP ── */}
+      {/* ── COMBO POPUP ── */}
       {showCombo && comboLabel && isCorrect && (
         <div
           className="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
           style={{ animation: "comboPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards, comboFade 0.8s ease-out 1s forwards" }}
         >
           <div
-            className="rpg-box px-5 py-3 text-center whitespace-nowrap"
-            style={{ borderColor: comboLabel.color, boxShadow: `0 0 20px ${comboLabel.color}60` }}
+            className="px-5 py-3 text-center whitespace-nowrap"
+            style={{
+              background: "#ffffff",
+              border: `2px solid ${comboLabel.color}`,
+              borderBottom: `4px solid ${comboLabel.color}`,
+              borderRadius: 14,
+              boxShadow: `0 4px 20px ${comboLabel.color}40`,
+            }}
           >
-            <span
-              className="font-black text-sm sm:text-base"
-              style={{ fontFamily: "var(--font-pixel)", color: comboLabel.color }}
-            >
+            <span className="font-black text-sm sm:text-base" style={{ color: comboLabel.color }}>
               {comboLabel.text}
             </span>
           </div>
@@ -162,33 +166,45 @@ export function AnswerScreen({
       )}
 
       {/* ── HEADER ── */}
-      <div className="flex-none rpg-box flex items-center justify-between p-2.5 sm:p-3 mb-3 relative">
-        <span className="rpg-corner rpg-corner-tl" />
-        <span className="rpg-corner rpg-corner-br" />
-
+      <div
+        className="flex-none flex items-center justify-between p-2.5 sm:p-3 mb-3"
+        style={{
+          background: "#ffffff",
+          border: "2px solid #e5e7eb",
+          borderBottom: "4px solid #d1d5db",
+          borderRadius: 16,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+        }}
+      >
         <button
           onClick={() => setIsExitConfirmOpen(true)}
-          className="rpg-btn-red w-11 h-11 flex items-center justify-center text-sm font-black touch-manipulation"
-          style={{ fontFamily: "var(--font-pixel)" }}
+          aria-label="Keluar dari permainan"
+          className="rpg-btn-red w-11 h-11 flex items-center justify-center text-sm font-black touch-manipulation rounded-xl"
         >✕</button>
 
         <div className="flex-1 mx-3">
           <div className="rpg-hp-bar">
             <div
-              className="rpg-hp-fill bg-gradient-to-r from-purple-500 to-violet-400"
+              className="rpg-hp-fill bg-gradient-to-r from-blue-400 to-cyan-400"
               style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%`, transition: "width 0.5s ease" }}
             />
           </div>
-          <p className="text-[8px] text-purple-400 text-center mt-1"
-            style={{ fontFamily: "var(--font-pixel)" }}>
+          <p className="text-[9px] text-slate-400 font-black text-center mt-1 uppercase tracking-widest">
             {questionIndex + 1} / {totalQuestions}
           </p>
         </div>
 
-        <div className="rpg-box-gold px-2.5 py-1.5 flex items-center gap-1">
+        <div
+          className="px-2.5 py-1.5 flex items-center gap-1"
+          style={{
+            background: "#fff8d6",
+            border: "2px solid #ffc800",
+            borderBottom: "3px solid #c49800",
+            borderRadius: 10,
+          }}
+        >
           <span className="text-sm">⭐</span>
-          <span className="font-black text-yellow-300 text-xs"
-            style={{ fontFamily: "var(--font-pixel)" }}>{stats.score}</span>
+          <span className="font-black text-amber-600 text-xs">{stats.score}</span>
         </div>
       </div>
 
@@ -197,73 +213,89 @@ export function AnswerScreen({
 
         {/* Status Benar / Salah */}
         <div
-          className="rpg-box screen-enter relative p-3 sm:p-4 text-center"
+          className="screen-enter relative p-3 sm:p-4 text-center"
           style={{
-            borderColor: isCorrect ? "#4ade80" : "#f87171",
-            boxShadow: isCorrect
-              ? "0 0 0 1px #0f0a1e, 0 8px 24px rgba(74,222,128,0.25)"
-              : "0 0 0 1px #0f0a1e, 0 8px 24px rgba(248,113,113,0.25)",
+            background: statusBg,
+            border: `2px solid ${statusBorder}`,
+            borderBottom: `4px solid ${statusBorder}`,
+            borderRadius: 16,
+            boxShadow: `0 4px 16px ${statusBorder}30`,
           }}
         >
-          <span className="rpg-corner rpg-corner-tl" style={{ borderColor: isCorrect ? "#4ade80" : "#f87171" }} />
-          <span className="rpg-corner rpg-corner-tr" style={{ borderColor: isCorrect ? "#4ade80" : "#f87171" }} />
-          <span className="rpg-corner rpg-corner-bl" style={{ borderColor: isCorrect ? "#4ade80" : "#f87171" }} />
-          <span className="rpg-corner rpg-corner-br" style={{ borderColor: isCorrect ? "#4ade80" : "#f87171" }} />
-
-          <div className="text-3xl mb-1">{isCorrect ? "🎉" : isTimeout ? "⏰" : "💀"}</div>
-          <p
-            className={clsx("text-sm sm:text-base font-black", isCorrect ? "text-emerald-300" : "text-red-300")}
-            style={{ fontFamily: "var(--font-pixel)" }}
-          >
-            {isCorrect ? "BENAR!" : isTimeout ? "WAKTU HABIS!" : "SALAH!"}
+          <div className="text-3xl mb-1">{isCorrect ? "🎉" : isTimeout ? "⏰" : "💔"}</div>
+          <p className="text-sm sm:text-base font-black" style={{ color: statusText }}>
+            {isCorrect ? "BENAR! Keren!" : isTimeout ? "WAKTU HABIS!" : "SALAH! Coba lagi!"}
           </p>
 
-          {/* Mini streak indicator */}
+          {/* Streak dots */}
           {stats.streak >= 2 && isCorrect && (
             <div className="mt-2 flex items-center justify-center gap-1">
               {Array.from({ length: Math.min(stats.streak, 10) }).map((_, i) => (
                 <span
                   key={i}
-                  className="inline-block w-2 h-2 rounded-sm bg-yellow-400"
+                  className="inline-block w-2.5 h-2.5 rounded-full bg-green-500"
                   style={{
                     animation: `bouncePop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) ${i * 0.05}s both`,
-                    opacity: 0.7 + i * 0.03,
+                    opacity: 0.6 + i * 0.04,
                   }}
                 />
               ))}
+              <span className="text-[9px] font-black text-green-700 ml-1">{stats.streak} STREAK! 🔥</span>
             </div>
           )}
         </div>
 
         {/* Soal */}
-        <div className="rpg-box relative p-4 text-center card-enter stagger-1">
-          <span className="rpg-corner rpg-corner-tl" />
-          <span className="rpg-corner rpg-corner-br" />
-          <p className="text-[8px] font-black text-yellow-400 uppercase tracking-[0.2em] mb-2"
-            style={{ fontFamily: "var(--font-pixel)" }}>SOAL</p>
+        <div
+          className="relative p-4 text-center card-enter stagger-1"
+          style={{
+            background: "#ffffff",
+            border: "2px solid #e5e7eb",
+            borderBottom: "4px solid #d1d5db",
+            borderRadius: 16,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+          }}
+        >
+          <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.18em] mb-2">SOAL</p>
           <h2
             className={clsx(
-              "font-black leading-tight text-white break-words",
+              "font-black leading-tight text-slate-800 break-words",
               gameMode === "arti-to-kanji" ? "text-2xl sm:text-3xl"
               : gameMode === "bunpou" ? "text-lg sm:text-xl" : "text-4xl sm:text-5xl",
             )}
-            style={{
-              fontFamily: isJpQ ? "var(--font-jp)" : "var(--font-body)",
-              textShadow: "0 0 16px rgba(167,139,250,0.5)",
-            }}
+            style={{ fontFamily: isJpQ ? "var(--font-jp)" : "var(--font-body)" }}
           >{display.main}</h2>
           {display.sub && (
-            <p className="text-xs font-bold text-purple-300 mt-2">&ldquo;{display.sub}&rdquo;</p>
+            <p className="text-xs font-bold text-slate-500 mt-2">&ldquo;{display.sub}&rdquo;</p>
           )}
         </div>
 
         {/* Jawaban User */}
         <div className="card-enter stagger-2">
-          <p className="text-[8px] font-black text-purple-400 uppercase tracking-widest mb-1.5 pl-1"
-            style={{ fontFamily: "var(--font-pixel)" }}>▸ JAWABAN KAMU</p>
-          <div className={clsx("rpg-box relative p-4 text-center", isCorrect ? "rpg-answer-correct" : "rpg-answer-wrong")}>
-            <span className="block font-black text-xl sm:text-2xl"
-              style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}>
+          <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5 pl-1">
+            › Jawaban kamu
+          </p>
+          <div
+            className="relative p-4 text-center rpg-answer-correct"
+            style={!isCorrect ? {
+              background: "#ffe0e0",
+              border: "2px solid #ff4b4b",
+              borderBottom: "4px solid #cc0000",
+              borderRadius: 14,
+            } : {
+              background: "#d7ffb8",
+              border: "2px solid #58cc02",
+              borderBottom: "4px solid #46a302",
+              borderRadius: 14,
+            }}
+          >
+            <span
+              className="block font-black text-xl sm:text-2xl"
+              style={{
+                fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)",
+                color: isCorrect ? "#2a7000" : "#880000",
+              }}
+            >
               {selectedText}
             </span>
           </div>
@@ -272,13 +304,22 @@ export function AnswerScreen({
         {/* Jawaban Benar (jika salah) */}
         {!isCorrect && (
           <div className="card-enter stagger-3">
-            <p className="text-[8px] font-black text-purple-400 uppercase tracking-widest mb-1.5 pl-1"
-              style={{ fontFamily: "var(--font-pixel)" }}>▸ JAWABAN BENAR</p>
-            <div className="rpg-box relative p-4 text-center rpg-answer-correct">
-              <span className="rpg-corner rpg-corner-tl" style={{ borderColor: "#4ade80" }} />
-              <span className="rpg-corner rpg-corner-br" style={{ borderColor: "#4ade80" }} />
-              <span className="block font-black text-xl sm:text-2xl"
-                style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}>
+            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5 pl-1">
+              › Jawaban yang benar
+            </p>
+            <div
+              className="relative p-4 text-center"
+              style={{
+                background: "#d7ffb8",
+                border: "2px solid #58cc02",
+                borderBottom: "4px solid #46a302",
+                borderRadius: 14,
+              }}
+            >
+              <span
+                className="block font-black text-xl sm:text-2xl text-green-800"
+                style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}
+              >
                 {correctText}
               </span>
             </div>
@@ -287,30 +328,37 @@ export function AnswerScreen({
 
         {/* Detail kata (kanji mode) */}
         {question.mode === "kanji" && question.kanjiQuestion && (
-          <div className="rpg-box-dark card-enter stagger-4 p-4 space-y-2 text-xs">
-            <p className="text-[8px] font-black text-yellow-400 uppercase tracking-[0.2em]"
-              style={{ fontFamily: "var(--font-pixel)" }}>▸ INFO KATA</p>
-            <div className="rpg-divider" />
+          <div
+            className="card-enter stagger-4 p-4 space-y-2 text-xs"
+            style={{
+              background: "#f0fdf4",
+              border: "2px solid #bbf7d0",
+              borderBottom: "4px solid #86efac",
+              borderRadius: 14,
+            }}
+          >
+            <p className="text-[9px] font-black text-green-700 uppercase tracking-[0.15em]">📖 Info Kata</p>
+            <div className="h-px bg-green-200 rounded" />
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
               <div>
-                <span className="text-purple-400 font-black block text-[9px] uppercase">Kanji</span>
-                <span className="text-white font-black text-lg" style={{ fontFamily: "var(--font-jp)" }}>
+                <span className="text-green-600 font-black block text-[9px] uppercase">Kanji</span>
+                <span className="text-slate-800 font-black text-lg" style={{ fontFamily: "var(--font-jp)" }}>
                   {question.kanjiQuestion.kanji}
                 </span>
               </div>
               <div>
-                <span className="text-purple-400 font-black block text-[9px] uppercase">Hiragana</span>
-                <span className="text-purple-200 font-bold text-base" style={{ fontFamily: "var(--font-jp)" }}>
+                <span className="text-green-600 font-black block text-[9px] uppercase">Hiragana</span>
+                <span className="text-slate-700 font-bold text-base" style={{ fontFamily: "var(--font-jp)" }}>
                   {question.kanjiQuestion.hiragana}
                 </span>
               </div>
               <div>
-                <span className="text-purple-400 font-black block text-[9px] uppercase">Romaji</span>
-                <span className="text-purple-200 font-bold italic">{question.kanjiQuestion.romaji}</span>
+                <span className="text-green-600 font-black block text-[9px] uppercase">Romaji</span>
+                <span className="text-slate-600 font-bold italic">{question.kanjiQuestion.romaji}</span>
               </div>
               <div>
-                <span className="text-purple-400 font-black block text-[9px] uppercase">Arti</span>
-                <span className="text-yellow-200 font-bold">{question.kanjiQuestion.arti}</span>
+                <span className="text-green-600 font-black block text-[9px] uppercase">Arti</span>
+                <span className="text-amber-700 font-bold">{question.kanjiQuestion.arti}</span>
               </div>
             </div>
           </div>
@@ -319,51 +367,62 @@ export function AnswerScreen({
         {/* Detail per karakter kanji */}
         {matchedKanjiDetails.length > 0 && (
           <div className="space-y-2">
-            <p className="text-[8px] font-black text-purple-400 uppercase pl-1 tracking-widest"
-              style={{ fontFamily: "var(--font-pixel)" }}>
-              ▸ DETAIL KANJI ({matchedKanjiDetails.length})
+            <p className="text-[9px] font-black text-slate-500 uppercase pl-1 tracking-widest">
+              🔍 Detail Kanji ({matchedKanjiDetails.length})
             </p>
             {matchedKanjiDetails.map(({ char, detail }, di) => (
               <div
                 key={char}
-                className={`rpg-box card-enter stagger-${Math.min(di + 5, 12)} relative p-4`}
+                className={`card-enter stagger-${Math.min(di + 5, 12)} p-4`}
+                style={{
+                  background: "#ffffff",
+                  border: "2px solid #e5e7eb",
+                  borderBottom: "4px solid #d1d5db",
+                  borderRadius: 14,
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+                }}
               >
-                <span className="rpg-corner rpg-corner-tl" />
-                <span className="rpg-corner rpg-corner-br" />
-
                 <div className="flex items-center gap-4 mb-3">
                   <div
-                    className="w-14 h-14 flex items-center justify-center text-3xl font-black text-yellow-300 shrink-0"
+                    className="w-14 h-14 flex items-center justify-center text-3xl font-black shrink-0"
                     style={{
-                      fontFamily: "var(--font-jp)", background: "#0f0a1e",
-                      border: "2px solid #fbbf24", textShadow: "0 0 12px rgba(251,191,36,0.6)",
+                      fontFamily: "var(--font-jp)",
+                      background: "#fff8d6",
+                      border: "2px solid #ffc800",
+                      borderRadius: 10,
+                      color: "#7a5a00",
                     }}
                   >{char}</div>
-                  <div>
-                    <p className="text-[8px] text-purple-400 font-black uppercase tracking-widest"
-                      style={{ fontFamily: "var(--font-pixel)" }}>Karakter Kanji</p>
+                  <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest">
+                    Karakter Kanji
+                  </p>
+                </div>
+
+                <div className="h-px bg-gray-100 mb-3 rounded" />
+
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div
+                    className="p-2"
+                    style={{ background: "#f5e6ff", border: "1px solid #ce82ff", borderRadius: 8 }}
+                  >
+                    <span className="block text-[8px] font-black text-purple-600 uppercase mb-1">音読み (On)</span>
+                    <span className="text-slate-700 font-bold">{detail?.onyomi ?? "–"}</span>
+                  </div>
+                  <div
+                    className="p-2"
+                    style={{ background: "#d7ffb8", border: "1px solid #58cc02", borderRadius: 8 }}
+                  >
+                    <span className="block text-[8px] font-black text-green-700 uppercase mb-1">訓読み (Kun)</span>
+                    <span className="text-slate-700 font-bold break-all">{detail?.kunyomi ?? "–"}</span>
                   </div>
                 </div>
 
-                <div className="rpg-divider" />
-
-                <div className="grid grid-cols-2 gap-2 mt-2 text-xs">
-                  <div className="rpg-box-dark p-2">
-                    <span className="block text-[8px] font-black text-purple-400 uppercase mb-1"
-                      style={{ fontFamily: "var(--font-pixel)" }}>音読み (On)</span>
-                    <span className="text-purple-200 font-bold">{detail?.onyomi ?? "–"}</span>
-                  </div>
-                  <div className="rpg-box-dark p-2">
-                    <span className="block text-[8px] font-black text-emerald-400 uppercase mb-1"
-                      style={{ fontFamily: "var(--font-pixel)" }}>訓読み (Kun)</span>
-                    <span className="text-purple-200 font-bold break-all">{detail?.kunyomi ?? "–"}</span>
-                  </div>
-                </div>
-
-                <div className="rpg-box-dark p-3 mt-2 text-xs">
-                  <span className="block text-[8px] font-black text-yellow-400 uppercase mb-1"
-                    style={{ fontFamily: "var(--font-pixel)" }}>💡 Mnemonic</span>
-                  <p className="text-purple-200 font-semibold leading-relaxed">
+                <div
+                  className="p-3 mt-2 text-xs"
+                  style={{ background: "#fffef0", border: "1px solid #ffc800", borderRadius: 8 }}
+                >
+                  <span className="block text-[8px] font-black text-amber-600 uppercase mb-1">💡 Mnemonic</span>
+                  <p className="text-slate-600 font-semibold leading-relaxed">
                     {detail?.mnemonic ?? "Bayangkan visual kanji ini agar mudah diingat."}
                   </p>
                 </div>
@@ -377,10 +436,10 @@ export function AnswerScreen({
       <div className="flex-none pt-3">
         <button
           onClick={onNext}
-          className="rpg-btn-gold w-full py-4 sm:py-5 flex items-center justify-center gap-3 touch-manipulation rpg-glow-gold"
-          style={{ fontFamily: "var(--font-pixel)", fontSize: "11px" }}
+          aria-label={questionIndex + 1 >= totalQuestions ? "Lihat hasil akhir" : "Lanjut ke soal berikutnya"}
+          className="rpg-btn-gold w-full py-4 sm:py-5 flex items-center justify-center gap-3 touch-manipulation rpg-glow-gold rounded-xl text-sm font-black"
         >
-          {questionIndex + 1 >= totalQuestions ? "⚔ LIHAT HASIL" : "SOAL BERIKUTNYA"}
+          {questionIndex + 1 >= totalQuestions ? "🏆 Lihat Hasil" : "Soal Berikutnya"}
           <ChevronRight size={18} />
         </button>
       </div>

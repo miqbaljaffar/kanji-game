@@ -9,9 +9,15 @@ interface KanjiCardProps {
   onSelect: (entry: KanjiDictionaryEntry) => void;
 }
 
+const LEVEL_STYLE = {
+  N5: { bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000", badge: "#2a7000" },
+  N4: { bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e", badge: "#0c6b9e" },
+} as const;
+
 export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const isSingle = entry.kanjiCount === 1;
+  const lv = LEVEL_STYLE[entry.level as "N5" | "N4"] ?? LEVEL_STYLE.N5;
 
   const playTTS = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -21,7 +27,7 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
       utterance.lang = "ja-JP";
       utterance.rate = 0.85;
       setIsPlayingAudio(true);
-      utterance.onend  = () => setIsPlayingAudio(false);
+      utterance.onend   = () => setIsPlayingAudio(false);
       utterance.onerror = () => setIsPlayingAudio(false);
       window.speechSynthesis.speak(utterance);
     }
@@ -30,47 +36,62 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
   return (
     <div
       onClick={() => onSelect(entry)}
-      className="rpg-box group relative flex flex-col justify-between p-3 sm:p-4 cursor-pointer hover:-translate-y-1 transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden card-enter"
-      style={{ borderColor: entry.level === "N5" ? "#4ade80" : "#818cf8" }}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(entry); } }}
+      aria-label={`Lihat detail kanji ${entry.kanji} — ${entry.arti}`}
+      className="group relative flex flex-col justify-between p-3 sm:p-4 cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0.5 touch-manipulation overflow-hidden card-enter"
+      style={{
+        background: "#ffffff",
+        border: `2px solid ${lv.border}`,
+        borderBottom: `4px solid ${lv.bottom}`,
+        borderRadius: 16,
+        boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+      }}
     >
-      {/* Corner decorations */}
-      <span className="rpg-corner rpg-corner-tl" style={{ borderColor: entry.level === "N5" ? "#4ade80" : "#818cf8" }} />
-      <span className="rpg-corner rpg-corner-br" style={{ borderColor: entry.level === "N5" ? "#4ade80" : "#818cf8" }} />
-
       {/* Top badges */}
       <div className="flex items-center justify-between gap-1 mb-2">
         <div className="flex items-center gap-1 flex-wrap">
+          {/* Level badge */}
           <span
-            className={clsx(
-              "rpg-badge text-[8px]",
-              entry.level === "N5" ? "border-emerald-500 text-emerald-300" : "border-indigo-400 text-indigo-300"
-            )}
-            style={{ fontFamily: "var(--font-pixel)" }}
+            className="text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide"
+            style={{ background: lv.bg, color: lv.text, border: `1px solid ${lv.border}` }}
           >
             {entry.level}
           </span>
+          {/* Type badge */}
           <span
-            className="rpg-badge text-[8px]"
+            className="text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-wide"
             style={{
-              fontFamily: "var(--font-pixel)",
-              borderColor: isSingle ? "#fbbf24" : "#a78bfa",
-              color:       isSingle ? "#fbbf24" : "#a78bfa",
+              background: isSingle ? "#fff8d6" : "#f5e6ff",
+              color:       isSingle ? "#7a5a00" : "#6b21a8",
+              border:      isSingle ? "1px solid #ffc800" : "1px solid #ce82ff",
             }}
           >
             {isSingle ? "1字" : `${entry.kanjiCount}字`}
           </span>
         </div>
 
-        {/* Audio button */}
+        {/* TTS button */}
         <button
           type="button"
           onClick={playTTS}
+          aria-label={isPlayingAudio ? `Sedang memutar pengucapan ${entry.kanji}` : `Putar pengucapan ${entry.kanji}`}
           className={clsx(
-            "w-10 h-10 flex items-center justify-center text-sm transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation",
+            "w-9 h-9 flex items-center justify-center text-sm transition-all cursor-pointer shrink-0 active:scale-90 touch-manipulation rounded-xl",
             isPlayingAudio
-              ? "rpg-btn-gold animate-pulse scale-110"
-              : "rpg-btn"
+              ? "scale-110"
+              : ""
           )}
+          style={isPlayingAudio ? {
+            background: "#fff8d6",
+            border: "2px solid #ffc800",
+            borderBottom: "3px solid #c49800",
+          } : {
+            background: "#f3f4f6",
+            border: "2px solid #e5e7eb",
+            borderBottom: "3px solid #d1d5db",
+          }}
         >
           🔊
         </button>
@@ -79,47 +100,44 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
       {/* Main Kanji */}
       <div className="my-1 text-center">
         <div
-          className="text-3xl sm:text-4xl md:text-5xl font-black text-white group-hover:text-yellow-300 transition-colors break-all"
-          style={{
-            fontFamily: "var(--font-jp)",
-            textShadow: "0 0 16px rgba(167,139,250,0.5)",
-          }}
+          className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 group-hover:text-green-600 transition-colors break-all"
+          style={{ fontFamily: "var(--font-jp)" }}
         >
           {entry.kanji}
         </div>
         <div
-          className="text-[10px] sm:text-xs font-black text-purple-300 mt-1"
+          className="text-[10px] sm:text-xs font-black text-slate-500 mt-1"
           style={{ fontFamily: "var(--font-jp)" }}
         >
           {entry.hiragana}
         </div>
-        <div className="text-[9px] sm:text-[10px] font-bold text-purple-500 italic">
+        <div className="text-[9px] sm:text-[10px] font-bold text-slate-400 italic">
           {entry.romaji}
         </div>
       </div>
 
       {/* Meaning & hint */}
-      <div className="mt-2 pt-2 border-t border-purple-800/60">
-        <div className="text-xs sm:text-sm font-black text-yellow-200 line-clamp-1 text-center">
+      <div className="mt-2 pt-2 border-t border-gray-100">
+        <div className="text-xs sm:text-sm font-black text-slate-700 line-clamp-1 text-center">
           {entry.arti}
         </div>
         <div className="mt-1.5 flex items-center justify-center gap-1 flex-wrap">
           {entry.components && entry.components.length > 0 ? (
             <span
-              className="rpg-badge text-[7px]"
-              style={{ fontFamily: "var(--font-pixel)", borderColor: "#a78bfa", color: "#a78bfa" }}
+              className="text-[7px] font-black px-2 py-0.5 rounded-full"
+              style={{ background: "#f5e6ff", color: "#6b21a8", border: "1px solid #ce82ff" }}
             >
               BEDAH ✨
             </span>
           ) : entry.mnemonic ? (
             <span
-              className="rpg-badge-gold text-[7px]"
-              style={{ fontFamily: "var(--font-pixel)" }}
+              className="text-[7px] font-black px-2 py-0.5 rounded-full"
+              style={{ background: "#fff8d6", color: "#7a5a00", border: "1px solid #ffc800" }}
             >
               TIPS 💡
             </span>
           ) : (
-            <span className="text-[8px] font-bold text-purple-500">INFO 🔍</span>
+            <span className="text-[8px] font-bold text-slate-400">INFO 🔍</span>
           )}
         </div>
       </div>

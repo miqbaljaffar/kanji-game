@@ -98,7 +98,7 @@ export default function Home() {
 
   return (
     <div className="relative h-dvh w-full overflow-y-auto overflow-x-hidden text-slate-800 font-body"
-      style={{ background: "#0f0a1e" }}>
+      style={{ background: "#f7f7f7" }}>
 
       {/* Background JRPG malam */}
       <GameBackground />
@@ -108,15 +108,13 @@ export default function Home() {
         <div className="absolute top-3 right-3 sm:top-4 sm:right-6 z-50 flex items-center gap-2 screen-enter">
           <Link
             href="/kanji"
-            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation"
-            style={{ fontFamily: "var(--font-pixel)" }}
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation font-black"
           >
             📚 Kanji
           </Link>
           <Link
             href="/bunpou"
-            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation"
-            style={{ fontFamily: "var(--font-pixel)" }}
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation font-black"
           >
             📝 Bunpou
           </Link>

@@ -60,34 +60,36 @@ export default function BunpouDictionaryPage() {
   return (
     <div
       ref={containerRef}
-      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden text-purple-100 font-body pb-16 rpg-scroll"
-      style={{ background: "#0f0a1e" }}
+      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden text-slate-800 font-body pb-16 rpg-scroll"
+      style={{ background: "#f7f7f7" }}
     >
       <GameBackground />
 
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-6">
 
         {/* ── Navigation Bar ── */}
-        <div className="rpg-box flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-5 p-3.5 sm:p-4 relative">
-          <span className="rpg-corner rpg-corner-tl" />
-          <span className="rpg-corner rpg-corner-br" />
-
+        <div
+          className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-5 p-3.5 sm:p-4"
+          style={{
+            background: "#ffffff",
+            border: "2px solid #e5e7eb",
+            borderBottom: "4px solid #d1d5db",
+            borderRadius: 16,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+          }}
+        >
           <Link
             href="/"
-            className="rpg-btn w-full sm:w-auto px-4 py-2.5 flex items-center justify-center gap-2 touch-manipulation"
-            style={{ fontFamily: "var(--font-pixel)", fontSize: "9px" }}
+            className="rpg-btn w-full sm:w-auto px-4 py-2.5 flex items-center justify-center gap-2 touch-manipulation font-black text-xs"
           >
-            ◀ KEMBALI
+            ◀ Kembali
           </Link>
 
           <div className="text-center sm:text-right">
-            <h1
-              className="text-sm sm:text-lg font-black text-yellow-300 tracking-tight"
-              style={{ fontFamily: "var(--font-pixel)" }}
-            >
-              📝 ENSIKLOPEDIA BUNPOU
+            <h1 className="text-sm sm:text-lg font-black text-slate-800 tracking-tight">
+              📝 Ensiklopedia Bunpou
             </h1>
-            <p className="text-[9px] sm:text-[10px] font-bold text-purple-400">
+            <p className="text-[9px] sm:text-[10px] font-bold text-slate-500">
               Rumus &amp; Tata Bahasa · N5 / N4 · JFT Basic A2
             </p>
           </div>
@@ -96,25 +98,28 @@ export default function BunpouDictionaryPage() {
         {/* ── Quick Stats ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
           {[
-            { label: "Total Grammar",  val: stats.total,         icon: "📝", border: "#7c3aed" },
-            { label: "N5",             val: stats.n5Count,       icon: "🟢", border: "#4ade80" },
-            { label: "N4",             val: stats.n4Count,       icon: "🔵", border: "#60a5fa" },
-            { label: "Partikel",       val: stats.particleCount, icon: "🔖", border: "#a78bfa" },
+            { label: "Total Grammar",  val: stats.total,         icon: "📝", bg: "#ffffff", border: "#e5e7eb",  bottom: "#d1d5db",  text: "#3c3c3c" },
+            { label: "N5",             val: stats.n5Count,       icon: "🟢", bg: "#d7ffb8", border: "#58cc02",  bottom: "#46a302",  text: "#2a7000" },
+            { label: "N4",             val: stats.n4Count,       icon: "🔵", bg: "#ddf4ff", border: "#1cb0f6",  bottom: "#0490c8",  text: "#0c6b9e" },
+            { label: "Partikel",       val: stats.particleCount, icon: "🔖", bg: "#f5e6ff", border: "#ce82ff",  bottom: "#9333ea",  text: "#6b21a8" },
           ].map((item) => (
             <div
               key={item.label}
-              className="rpg-box relative flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4"
-              style={{ borderColor: item.border }}
+              className="relative flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4"
+              style={{
+                background: item.bg,
+                border: `2px solid ${item.border}`,
+                borderBottom: `4px solid ${item.bottom}`,
+                borderRadius: 14,
+                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+              }}
             >
               <span className="text-xl sm:text-2xl shrink-0">{item.icon}</span>
               <div className="min-w-0">
-                <div
-                  className="text-base sm:text-xl font-black text-yellow-300 leading-none"
-                  style={{ fontFamily: "var(--font-pixel)" }}
-                >
+                <div className="text-base sm:text-xl font-black leading-none" style={{ color: item.text }}>
                   {item.val}
                 </div>
-                <div className="text-[8px] sm:text-[9px] font-bold text-purple-400 uppercase tracking-wider mt-0.5 leading-tight">
+                <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider mt-0.5 leading-tight" style={{ color: item.text, opacity: 0.7 }}>
                   {item.label}
                 </div>
               </div>
@@ -153,22 +158,26 @@ export default function BunpouDictionaryPage() {
             />
           </>
         ) : (
-          <div className="rpg-box relative p-10 text-center my-10 max-w-md mx-auto space-y-4">
-            <span className="rpg-corner rpg-corner-tl" />
-            <span className="rpg-corner rpg-corner-br" />
+          <div
+            className="relative p-10 text-center my-10 max-w-md mx-auto space-y-4"
+            style={{
+              background: "#ffffff",
+              border: "2px solid #e5e7eb",
+              borderBottom: "4px solid #d1d5db",
+              borderRadius: 16,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+            }}
+          >
             <div className="text-4xl">🔍</div>
-            <h3 className="text-sm font-black text-yellow-300" style={{ fontFamily: "var(--font-pixel)" }}>
-              BUNPOU NOT FOUND
-            </h3>
-            <p className="text-xs font-bold text-purple-300">
+            <h3 className="text-sm font-black text-slate-700">Bunpou Tidak Ditemukan</h3>
+            <p className="text-xs font-bold text-slate-400">
               Coba kata kunci lain atau sesuaikan filter.
             </p>
             <button
               onClick={() => { setSearchQuery(""); setSelectedLevel("ALL"); setSelectedCategory("ALL"); }}
-              className="rpg-btn-gold px-5 py-2.5 touch-manipulation"
-              style={{ fontFamily: "var(--font-pixel)", fontSize: "9px" }}
+              className="rpg-btn-gold px-5 py-2.5 touch-manipulation font-black text-xs"
             >
-              RESET FILTER
+              Reset Filter
             </button>
           </div>
         )}

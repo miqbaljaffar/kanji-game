@@ -13,15 +13,26 @@ interface ResultScreenProps {
 }
 
 function getRankDetail(accuracy: number) {
-  if (accuracy >= 90) return { title: "LEGENDARY!", rank: "S", emoji: "👑", color: "text-yellow-300", borderColor: "#fbbf24", glow: "rgba(251,191,36,0.4)" };
-  if (accuracy >= 70) return { title: "GREAT JOB!", rank: "A", emoji: "🔥", color: "text-orange-300", borderColor: "#fb923c", glow: "rgba(251,146,60,0.4)" };
-  if (accuracy >= 50) return { title: "NICE WORK!", rank: "B", emoji: "👍", color: "text-blue-300",   borderColor: "#60a5fa", glow: "rgba(96,165,250,0.4)" };
-  return               { title: "TRY AGAIN!", rank: "C", emoji: "💀", color: "text-purple-300", borderColor: "#a78bfa", glow: "rgba(167,139,250,0.3)" };
+  if (accuracy >= 90) return {
+    title: "LEGENDARY!",  rank: "S", emoji: "👑",
+    color: "#7a5a00",     bg: "#fff8d6", border: "#ffc800", bottom: "#c49800",
+  };
+  if (accuracy >= 70) return {
+    title: "GREAT JOB!",  rank: "A", emoji: "🔥",
+    color: "#7a3200",     bg: "#fff3e0", border: "#ff9600", bottom: "#cc7800",
+  };
+  if (accuracy >= 50) return {
+    title: "NICE WORK!",  rank: "B", emoji: "👍",
+    color: "#0c6b9e",     bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8",
+  };
+  return {
+    title: "TRY AGAIN!",  rank: "C", emoji: "💪",
+    color: "#880000",     bg: "#ffe0e0", border: "#ff4b4b", bottom: "#cc0000",
+  };
 }
 
-/* Konfeti deterministik — tidak pakai random() agar tidak hydration mismatch */
-const CONFETTI_COUNT = 28;
-const CONFETTI_COLORS = ["#fbbf24","#a78bfa","#4ade80","#f472b6","#60a5fa","#fb923c","#34d399"];
+const CONFETTI_COUNT  = 28;
+const CONFETTI_COLORS = ["#ffc800","#ce82ff","#58cc02","#ff4b4b","#1cb0f6","#ff9600","#34d399"];
 const CONFETTI_SHAPES = ["rect","circle","diamond"] as const;
 
 function makeConfetti() {
@@ -39,16 +50,12 @@ function makeConfetti() {
 
 const CONFETTI_ITEMS = makeConfetti();
 
-function c(...args: (string | boolean | undefined)[]) {
-  return args.filter(Boolean).join(" ");
-}
-
 export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome }: ResultScreenProps) {
   const rank = getRankDetail(stats.accuracy);
   const [isDonationOpen, setIsDonationOpen] = useState(false);
   const [showThankYou,   setShowThankYou]   = useState(false);
 
-  const showConfetti = stats.accuracy >= 70; // rank S atau A
+  const showConfetti = stats.accuracy >= 70;
 
   const handleCloseDonation = () => {
     setIsDonationOpen(false);
@@ -66,14 +73,13 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
               key={i}
               className="absolute top-0"
               style={{
-                left: `${p.left}%`,
+                left:   `${p.left}%`,
                 width:  p.size,
                 height: p.shape === "rect" ? p.size * 0.5 : p.size,
                 backgroundColor: p.color,
-                borderRadius: p.shape === "circle" ? "50%" : p.shape === "diamond" ? "2px" : "1px",
+                borderRadius: p.shape === "circle" ? "50%" : "2px",
                 transform: p.shape === "diamond" ? "rotate(45deg)" : undefined,
                 animation: `confettiFall ${p.dur}s ease-in ${p.delay}s both, confettiSpin ${p.dur}s linear ${p.delay}s both`,
-                opacity: 0.9,
               }}
             />
           ))}
@@ -89,81 +95,82 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
 
         {/* ── RESULT CARD ── */}
         <div
-          className="w-full rpg-box screen-enter relative p-5 sm:p-7 text-center overflow-hidden"
+          className="w-full screen-enter p-5 sm:p-7 text-center overflow-hidden"
           style={{
-            borderColor: rank.borderColor,
-            boxShadow: `0 0 0 1px #0f0a1e, 0 0 40px ${rank.glow}`,
+            background: "#ffffff",
+            border: `2px solid ${rank.border}`,
+            borderBottom: `6px solid ${rank.bottom}`,
+            borderRadius: 24,
+            boxShadow: `0 8px 32px ${rank.border}30`,
           }}
         >
-          <span className="rpg-corner rpg-corner-tl" style={{ borderColor: rank.borderColor }} />
-          <span className="rpg-corner rpg-corner-tr" style={{ borderColor: rank.borderColor }} />
-          <span className="rpg-corner rpg-corner-bl" style={{ borderColor: rank.borderColor }} />
-          <span className="rpg-corner rpg-corner-br" style={{ borderColor: rank.borderColor }} />
-
+          {/* Stripe atas dekoratif */}
           <div
-            className="absolute top-0 left-0 right-0 h-1"
-            style={{ background: `linear-gradient(90deg, transparent, ${rank.borderColor}, transparent)` }}
+            className="absolute top-0 left-0 right-0 h-1.5 rounded-t-3xl"
+            style={{ background: `linear-gradient(90deg, ${rank.border}, ${rank.bottom})` }}
           />
 
-          {/* Rank badge — bounce pop */}
-          <div className="flex items-center justify-center gap-3 mb-2">
+          {/* Rank badge */}
+          <div className="flex flex-col items-center gap-2 mb-4 mt-2">
             <div
-              className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center font-black text-2xl sm:text-3xl animate-bounce-pop"
+              className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center font-black text-3xl sm:text-4xl animate-bounce-pop"
               style={{
-                fontFamily: "var(--font-pixel)",
-                background: "#0f0a1e",
-                border: `3px solid ${rank.borderColor}`,
-                color: rank.borderColor,
-                boxShadow: `0 0 12px ${rank.glow}`,
+                background: rank.bg,
+                border: `3px solid ${rank.border}`,
+                borderRadius: 16,
+                color: rank.color,
+                boxShadow: `0 4px 0 ${rank.bottom}`,
               }}
             >{rank.rank}</div>
+            <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em] font-black">
+              Pelajaran Selesai!
+            </p>
+            <h1 className="text-xl sm:text-2xl font-black" style={{ color: rank.color }}>
+              {rank.emoji} {rank.title}
+            </h1>
           </div>
-
-          <p className="text-[8px] sm:text-[9px] text-purple-400 uppercase tracking-[0.2em] mb-1"
-            style={{ fontFamily: "var(--font-pixel)" }}>PELAJARAN SELESAI</p>
-          <h1 className={c("text-xl sm:text-2xl font-black mb-1", rank.color)}
-            style={{ fontFamily: "var(--font-pixel)" }}>
-            {rank.emoji} {rank.title}
-          </h1>
 
           <div className="rpg-divider my-3" />
 
-          {/* Skor utama */}
+          {/* Total skor */}
           <div
-            className="rpg-box-gold card-enter stagger-1 relative p-4 mb-5 text-center"
-            style={{ boxShadow: "0 0 20px rgba(251,191,36,0.2)" }}
+            className="card-enter stagger-1 p-4 mb-5 text-center"
+            style={{
+              background: "#fff8d6",
+              border: "2px solid #ffc800",
+              borderBottom: "4px solid #c49800",
+              borderRadius: 14,
+            }}
           >
-            <span className="rpg-corner rpg-corner-tl" />
-            <span className="rpg-corner rpg-corner-br" />
-            <p className="text-[8px] font-black text-yellow-500 uppercase tracking-[0.2em] mb-1"
-              style={{ fontFamily: "var(--font-pixel)" }}>TOTAL SKOR</p>
-            <div
-              className="text-4xl sm:text-5xl font-black text-yellow-300"
-              style={{
-                fontFamily: "var(--font-pixel)",
-                textShadow: "0 0 20px rgba(251,191,36,0.7)",
-              }}
-            >⭐ {stats.score.toLocaleString()}</div>
+            <p className="text-[9px] font-black text-amber-600 uppercase tracking-[0.18em] mb-1">Total Skor</p>
+            <div className="text-4xl sm:text-5xl font-black text-amber-600">
+              ⭐ {stats.score.toLocaleString()}
+            </div>
           </div>
 
-          {/* Grid stat 2x2 — stagger */}
+          {/* Grid stat 2×2 */}
           <div className="grid grid-cols-2 gap-2.5 mb-5">
             {[
-              { val: stats.correct,         label: "Benar",   icon: "✅", color: "text-emerald-300", border: "#4ade80", s: 2 },
-              { val: stats.wrong,           label: "Salah",   icon: "❌", color: "text-red-300",     border: "#f87171", s: 3 },
-              { val: `${stats.accuracy}%`,  label: "Akurasi", icon: "🎯", color: "text-blue-300",   border: "#60a5fa", s: 4 },
-              { val: stats.maxStreak,       label: "Combo",   icon: "⚡", color: "text-purple-300", border: "#a78bfa", s: 5 },
+              { val: stats.correct,        label: "Benar",   icon: "✅", bg: "#d7ffb8", border: "#58cc02",  text: "#2a7000", s: 2 },
+              { val: stats.wrong,          label: "Salah",   icon: "❌", bg: "#ffe0e0", border: "#ff4b4b",  text: "#880000", s: 3 },
+              { val: `${stats.accuracy}%`, label: "Akurasi", icon: "🎯", bg: "#ddf4ff", border: "#1cb0f6",  text: "#0c6b9e", s: 4 },
+              { val: stats.maxStreak,      label: "Combo",   icon: "⚡", bg: "#f5e6ff", border: "#ce82ff",  text: "#6b21a8", s: 5 },
             ].map((st) => (
               <div
                 key={st.label}
-                className={`rpg-box card-enter stagger-${st.s} relative p-3 sm:p-4 text-center`}
-                style={{ borderColor: st.border }}
+                className={`card-enter stagger-${st.s} p-3 sm:p-4 text-center`}
+                style={{
+                  background: st.bg,
+                  border: `2px solid ${st.border}`,
+                  borderBottom: `4px solid ${st.border}`,
+                  borderRadius: 14,
+                }}
               >
                 <div className="text-xl mb-1">{st.icon}</div>
-                <div className={c("text-xl sm:text-2xl font-black", st.color)}
-                  style={{ fontFamily: "var(--font-pixel)" }}>{st.val}</div>
-                <div className="text-[7px] sm:text-[8px] text-purple-400 font-black uppercase tracking-widest mt-0.5"
-                  style={{ fontFamily: "var(--font-pixel)" }}>{st.label}</div>
+                <div className="text-xl sm:text-2xl font-black" style={{ color: st.text }}>{st.val}</div>
+                <div className="text-[8px] font-black uppercase tracking-widest mt-0.5" style={{ color: st.text, opacity: 0.7 }}>
+                  {st.label}
+                </div>
               </div>
             ))}
           </div>
@@ -172,23 +179,20 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
           <div className="flex flex-col gap-2.5">
             <button
               onClick={onPlayAgain}
-              className="rpg-btn-gold w-full py-4 sm:py-5 touch-manipulation rpg-glow-gold"
-              style={{ fontFamily: "var(--font-pixel)", fontSize: "11px", letterSpacing: "0.1em" }}
-            >⚔ MAIN LAGI!</button>
+              className="rpg-btn-gold w-full py-4 sm:py-5 touch-manipulation rpg-glow-gold rounded-xl font-black text-base"
+            >
+              🚀 Main Lagi!
+            </button>
             <div className="grid grid-cols-2 gap-2.5">
               <button
                 onClick={onHome}
-                className="rpg-btn py-3.5 sm:py-4 touch-manipulation"
-                style={{ fontFamily: "var(--font-pixel)", fontSize: "9px", letterSpacing: "0.05em" }}
-              >🏠 MENU</button>
+                className="rpg-btn py-3.5 sm:py-4 touch-manipulation font-black text-slate-600 text-sm"
+              >🏠 Menu</button>
               <button
                 onClick={() => setIsDonationOpen(true)}
-                className="rpg-btn py-3.5 sm:py-4 touch-manipulation"
-                style={{
-                  fontFamily: "var(--font-pixel)", fontSize: "9px", letterSpacing: "0.05em",
-                  borderColor: "#f472b6", color: "#f9a8d4",
-                }}
-              >💖 DUKUNG</button>
+                className="rpg-btn py-3.5 sm:py-4 touch-manipulation font-black text-sm"
+                style={{ borderColor: "#ff9600", borderBottomColor: "#cc7800", color: "#cc7800" }}
+              >💖 Dukung</button>
             </div>
           </div>
         </div>
@@ -196,34 +200,34 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
 
       {/* ── MODAL DONASI ── */}
       {isDonationOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
           <div
-            className="rpg-box-gold relative p-4 sm:p-5 max-w-sm w-full max-h-[90svh] overflow-y-auto animate-bounce-pop rpg-scroll"
-            style={{ boxShadow: "0 0 0 1px #0f0a1e, 0 0 40px rgba(251,191,36,0.3)" }}
+            className="relative p-4 sm:p-5 max-w-sm w-full max-h-[90svh] overflow-y-auto animate-bounce-pop rpg-scroll"
+            style={{
+              background: "#fffef0",
+              border: "2px solid #ffc800",
+              borderBottom: "6px solid #c49800",
+              borderRadius: 20,
+              boxShadow: "0 8px 40px rgba(255,200,0,0.25)",
+            }}
           >
-            <span className="rpg-corner rpg-corner-tl" />
-            <span className="rpg-corner rpg-corner-tr" />
-            <span className="rpg-corner rpg-corner-bl" />
-            <span className="rpg-corner rpg-corner-br" />
-
             <button
               onClick={handleCloseDonation}
-              className="rpg-btn-red absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-xs font-black"
-              style={{ fontFamily: "var(--font-pixel)" }}
+              className="rpg-btn-red absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-xs font-black rounded-lg"
             >✕</button>
 
             <div className="text-center mt-2">
-              <h3 className="text-sm sm:text-base font-black text-yellow-300 mb-1"
-                style={{ fontFamily: "var(--font-pixel)" }}>💖 DUKUNG KAMI!</h3>
+              <h3 className="text-sm sm:text-base font-black text-amber-700 mb-1">💖 Dukung Kami!</h3>
               <div className="rpg-divider my-2" />
-              <p className="text-xs font-bold text-purple-200 mb-4 leading-relaxed">
+              <p className="text-xs font-bold text-slate-600 mb-4 leading-relaxed">
                 Scan QRIS di bawah untuk donasi seikhlasnya. Dukunganmu sangat berarti!
               </p>
               <div
                 className="relative mb-4 overflow-hidden"
                 style={{
-                  border: "3px solid #fbbf24",
+                  border: "3px solid #ffc800",
                   background: "#fff",
+                  borderRadius: 12,
                   aspectRatio: "1",
                   maxHeight: "clamp(140px, 40vh, 260px)",
                   width: "100%",
@@ -233,9 +237,8 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
               </div>
               <button
                 onClick={handleCloseDonation}
-                className="rpg-btn-gold w-full py-3.5 touch-manipulation"
-                style={{ fontFamily: "var(--font-pixel)", fontSize: "9px", letterSpacing: "0.05em" }}
-              >TUTUP &amp; SELESAI</button>
+                className="rpg-btn-gold w-full py-3.5 touch-manipulation font-black text-sm rounded-xl"
+              >Tutup &amp; Selesai</button>
             </div>
           </div>
         </div>
@@ -246,10 +249,19 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
         <div
           className="fixed left-1/2 -translate-x-1/2 z-50 animate-slide-up w-full px-4 max-w-md pointer-events-none"
           style={{ bottom: "max(2rem, env(safe-area-inset-bottom, 2rem))" }}
-        >          <div className="rpg-box-gold flex items-center gap-3 px-5 py-4"
-            style={{ boxShadow: "0 0 20px rgba(251,191,36,0.4)" }}>
+        >
+          <div
+            className="flex items-center gap-3 px-5 py-4"
+            style={{
+              background: "#fffef0",
+              border: "2px solid #ffc800",
+              borderBottom: "4px solid #c49800",
+              borderRadius: 14,
+              boxShadow: "0 4px 20px rgba(255,200,0,0.3)",
+            }}
+          >
             <span className="text-xl shrink-0">✨</span>
-            <p className="text-xs font-bold text-yellow-200 leading-tight">
+            <p className="text-xs font-bold text-amber-700 leading-tight">
               Terima kasih telah mendukung pengembangan game ini!
             </p>
           </div>

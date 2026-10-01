@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block admin dashboard from indexing
+Disallow: /dashboard
+
+Sitemap: https://kanjimocha.vercel.app/sitemap.xml
