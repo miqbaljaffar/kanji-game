@@ -980,5 +980,288 @@ export const bunpouData: BunpouEntry[] = [
     translation: "Karena dia pulang ke Jepang kemarin, tidak mungkin dia ada di sini hari ini.",
     options: ["はず", "つもり", "予定", "こと"],
     correctOption: "はず", level: "N4"
-  }
+  },
+  // ============================================================
+  // JLPT N3 — Pola Tata Bahasa Umum (Kurikulum Resmi JLPT, 40 entry)
+  // ============================================================
+  {
+    id: "n3-bp1",
+    sentence: "この工場では、安全 ___ 最優先です。",
+    translation: "Di pabrik ini, keselamatan adalah prioritas utama.",
+    options: ["をもって", "をこめて", "にわたって", "とすれば"],
+    correctOption: "をもって", level: "N3"
+  },
+  {
+    id: "n3-bp2",
+    sentence: "新しい法律は 来年 ___ 実施される予定です。",
+    translation: "Undang-undang baru rencananya akan diberlakukan mulai tahun depan.",
+    options: ["にかけて", "にさきだち", "よりみち", "によって"],
+    correctOption: "にさきだち", level: "N3"
+  },
+  {
+    id: "n3-bp3",
+    sentence: "電気 ___ いなくなって、真っ暗になった。",
+    translation: "Listrik mati, menjadi gelap gulita.",
+    options: ["がちで", "がすると", "がきれて", "がわりに"],
+    correctOption: "がきれて", level: "N3"
+  },
+  {
+    id: "n3-bp4",
+    sentence: "彼は 友達 ___ 、いつも 悩み事を ___ いる。",
+    translation: "Dia selalu membicarakan masalahnya kepada teman.",
+    options: ["にむかって/ぶちまけて", "にかえって/からかって", "にともなって/くらべて", "にくらべて/ならんで"],
+    correctOption: "にむかって/ぶちまけて", level: "N3"
+  },
+  {
+    id: "n3-bp5",
+    sentence: "この 靴は サイズが 合わない上に、色 ___ 悪い。",
+    translation: "Sepatu ini selain ukurannya tidak pas, warnanya juga jelek.",
+    options: ["にきれても", "もさらに", "もうしろで", "のみならず"],
+    correctOption: "もさらに", level: "N3"
+  },
+  {
+    id: "n3-bp6",
+    sentence: "あの 店 ___ 、田中さんを見たことがある。",
+    translation: "Saya pernah melihat Tanaka-san sekitar area toko itu.",
+    options: ["のあたりに", "のたびに", "のからに", "のもとに"],
+    correctOption: "のあたりに", level: "N3"
+  },
+  {
+    id: "n3-bp7",
+    sentence: "学生 ___ 、まず 第一に 学業が 大切だ。",
+    translation: "Bagi seorang pelajar, yang paling utama adalah sekolah.",
+    options: ["としては", "にむしろ", "にしては", "どころか"],
+    correctOption: "としては", level: "N3"
+  },
+  {
+    id: "n3-bp8",
+    sentence: "彼は 結婚 ___ 、急に しっかりしてきた。",
+    translation: "Setelah menikah, dia tiba-tiba menjadi dewasa.",
+    options: ["をきっかけに", "を通じて", "をめぐって", "をぬきにして"],
+    correctOption: "をきっかけに", level: "N3"
+  },
+  {
+    id: "n3-bp9",
+    sentence: "この 本は 、週末 ___ 読みきれないだろう。",
+    translation: "Buku ini mungkin tidak akan selesai dibaca bahkan sampai akhir pekan.",
+    options: ["までして", "までかかって", "までもなく", "までしか"],
+    correctOption: "までかかって", level: "N3"
+  },
+  {
+    id: "n3-bp10",
+    sentence: "雨が 降る ___ 、早く 家に帰ろう。",
+    translation: "Sebelum hujan turun, ayo pulang cepat-cepat.",
+    options: ["までに", "うちに", "ところに", "かたわら"],
+    correctOption: "うちに", level: "N3"
+  },
+  {
+    id: "n3-bp11",
+    sentence: "ピアノを弾く ___ 、歌も 上手です。",
+    translation: "Di samping bisa bermain piano, dia juga pandai bernyanyi.",
+    options: ["かたわら", "うえに", "すえに", "ばかりか"],
+    correctOption: "かたわら", level: "N3"
+  },
+  {
+    id: "n3-bp12",
+    sentence: "説明書を よく読んだ ___ 、組み立ててください。",
+    translation: "Tolong baca buku panduan dulu baru dirakit setelahnya.",
+    options: ["うえで", "もとで", "うちに", "なかに"],
+    correctOption: "うえで", level: "N3"
+  },
+  {
+    id: "n3-bp13",
+    sentence: "何度 練習しても、上手にならない。 ___ 、やる気は あるんだから、続けよう。",
+    translation: "Berapa kali latihan pun tidak jago. Tapi karena ada kemauan, ayo lanjutkan.",
+    options: ["それでも", "それなのに", "それどころか", "それにしては"],
+    correctOption: "それでも", level: "N3"
+  },
+  {
+    id: "n3-bp14",
+    sentence: "この 仕事は 私 ___ 、彼には とても できない。",
+    translation: "Pekerjaan ini sungguh tidak bisa saya lakukan.",
+    options: ["にしたって", "にしては", "にしろ", "になったら"],
+    correctOption: "にしたって", level: "N3"
+  },
+  {
+    id: "n3-bp15",
+    sentence: "子供の ___ 分かるような 、 易しい 本を 選んでください。",
+    translation: "Tolong pilih buku mudah yang bisa dimengerti bahkan oleh anak-anak.",
+    options: ["にでも", "にすら", "だに", "でさえ"],
+    correctOption: "にでも", level: "N3"
+  },
+  {
+    id: "n3-bp16",
+    sentence: "彼は 男らしく ___ 、困難に 立ち向かった。",
+    translation: "Dia selayaknya seorang pria, dia menghadapi kesulitan.",
+    options: ["げに", "ばかりに", "どおりに", "ながらに"],
+    correctOption: "どおりに", level: "N3"
+  },
+  {
+    id: "n3-bp17",
+    sentence: "朝 走ってきた ___ 、息が 切れている。",
+    translation: "Karena tadi berlari, dia sampai terengah-engah.",
+    options: ["せいで", "おかげで", "ことから", "ものだから"],
+    correctOption: "ものだから", level: "N3"
+  },
+  {
+    id: "n3-bp18",
+    sentence: "この 町は 昔 ___ 、静かでいい 所です。",
+    translation: "Kota ini karena masih seperti dulu, tenang dan tempat yang bagus.",
+    options: ["ながらも", "のままで", "どころで", "ばかりで"],
+    correctOption: "のままで", level: "N3"
+  },
+  {
+    id: "n3-bp19",
+    sentence: "いくら 説明した ___ 、彼は 分かってくれなかった。",
+    translation: "Betapapun saya jelaskan, dia tidak mau mengerti.",
+    options: ["ところで", "ところが", "にもかかわらず", "としたところで"],
+    correctOption: "としたところで", level: "N3"
+  },
+  {
+    id: "n3-bp20",
+    sentence: "今日は 用事があるので、これ ___ 失礼します。",
+    translation: "Karena hari ini ada urusan, saya pamit.",
+    options: ["をさきに", "をぬきに", "をもちまして", "をこめて"],
+    correctOption: "をもちまして", level: "N3"
+  },
+  {
+    id: "n3-bp21",
+    sentence: "年 ___ 、季節の 移ろい ___ 感じられる。",
+    translation: "Seseorang bisa merasakan perubahan musim di tahun berubahnya pergantian musim.",
+    options: ["をつうじて/が", "をめぐって/が", "とおりに/を", "にしたがって/を"],
+    correctOption: "をつうじて/が", level: "N3"
+  },
+  {
+    id: "n3-bp22",
+    sentence: "忙しい ___ 、休み ___ 取って いる 暇も ありません。",
+    translation: "Saking sibuknya, bahkan tidak ada waktu luang untuk mengambil cuti.",
+    options: ["あまり/をも", "あまり/すら", "ばかりに/さえ", "どころか/さえ"],
+    correctOption: "あまり/をも", level: "N3"
+  },
+  {
+    id: "n3-bp23",
+    sentence: "田中 ___ 、このプロジェクトは 成功しなかっただろう。",
+    translation: "Andai saja tanpa bantuan Tanaka-san, proyek ini tidak mungkin berhasil.",
+    options: ["さんの助けがなかったら", "さんにしてみれば", "さんのことだから", "さんにかぎって"],
+    correctOption: "さんの助けがなかったら", level: "N3"
+  },
+  {
+    id: "n3-bp24",
+    sentence: "努力 ___ 、成功は ない。",
+    translation: "Tanpa usaha, tidak ada kesuksesan.",
+    options: ["なしには", "にもまして", "にひきかえ", "にそくして"],
+    correctOption: "なしには", level: "N3"
+  },
+  {
+    id: "n3-bp25",
+    sentence: "会議は 2時間 ___ 行われた。",
+    translation: "Rapat berlangsung selama 2 jam.",
+    options: ["にわたって", "にたいして", "にかけては", "にともない"],
+    correctOption: "にわたって", level: "N3"
+  },
+  {
+    id: "n3-bp26",
+    sentence: "どうしても 必要なら、明日 ___ 手伝いに 行こう。",
+    translation: "Jika benar-benar diperlukan, besok saya akan pergi membantu.",
+    options: ["までに", "にまで", "までして", "くらいなら"],
+    correctOption: "までして", level: "N3"
+  },
+  {
+    id: "n3-bp27",
+    sentence: "社長が 急に 変わった ___ 、社内は ずいぶん 変わった。",
+    translation: "Seiring dengan bergantinya presiden direktur mendadak, keadaan dalam perusahaan banyak berubah.",
+    options: ["にともなって", "にむけて", "にさきだち", "にくわえて"],
+    correctOption: "にともなって", level: "N3"
+  },
+  {
+    id: "n3-bp28",
+    sentence: "今回の 事故は 不注意 ___ 起きたものだ。",
+    translation: "Kecelakaan kali ini disebabkan oleh kelalaian.",
+    options: ["による", "によって", "にたいする", "にとって"],
+    correctOption: "によって", level: "N3"
+  },
+  {
+    id: "n3-bp29",
+    sentence: "彼女は 先生 ___ 、とても 厳しいです。",
+    translation: "Walau dia seorang guru, dia sangat galak.",
+    options: ["にしては", "わりには", "どころか", "ばかりか"],
+    correctOption: "わりには", level: "N3"
+  },
+  {
+    id: "n3-bp30",
+    sentence: "あの 2人は 喧嘩していた ___ 、結婚した。",
+    translation: "Meskipun mereka berdua sering bertengkar, akhirnya mereka menikah.",
+    options: ["あげくに", "すえに", "ばかりに", "とたんに"],
+    correctOption: "すえに", level: "N3"
+  },
+  {
+    id: "n3-bp31",
+    sentence: "あしたは 雨が 降る ___ が 高い。",
+    translation: "Kemungkinan besok hujan tinggi.",
+    options: ["見込み", "おそれ", "気味", "がち"],
+    correctOption: "見込み", level: "N3"
+  },
+  {
+    id: "n3-bp32",
+    sentence: "彼は 勉強も ___ 、スポーツも できる 優等生だ。",
+    translation: "Dia adalah siswa teladan yang bisa belajar maupun olahraga.",
+    options: ["言わずもがな", "いうまでもなく", "どころではなく", "しまつが悪く"],
+    correctOption: "いうまでもなく", level: "N3"
+  },
+  {
+    id: "n3-bp33",
+    sentence: "ニュース ___ 、今年の 冬は 暖かい らしい。",
+    translation: "Kabarnya menurut berita, musim dingin tahun ini sepertinya hangat.",
+    options: ["によると", "にとって", "にたいして", "にむけて"],
+    correctOption: "によると", level: "N3"
+  },
+  {
+    id: "n3-bp34",
+    sentence: "ボタンを 押した ___ 、電源が 切れてしまった。",
+    translation: "Tepat saat menekan tombol, listriknya malah mati.",
+    options: ["とたんに", "ばかりに", "どころか", "ついでに"],
+    correctOption: "とたんに", level: "N3"
+  },
+  {
+    id: "n3-bp35",
+    sentence: "食事 ___ タバコは やめなさい。",
+    translation: "Berhentilah merokok sambil makan.",
+    options: ["中での", "うちの", "最中の", "あいだの"],
+    correctOption: "最中の", level: "N3"
+  },
+  {
+    id: "n3-bp36",
+    sentence: "彼は 時間 ___ 、いつも 早く 来る 彼 ___ 、今日は 遅いですね。",
+    translation: "Padahal dia biasanya selalu datang cepat, tapi hari ini lambat ya.",
+    options: ["だったら/ものを", "である/ばかりに", "のに/ながら", "としたら/のに"],
+    correctOption: "だったら/ものを", level: "N3"
+  },
+  {
+    id: "n3-bp37",
+    sentence: "この マンションは 駅 ___ 、便利です。",
+    translation: "Apartemen ini dekat stasiun, jadi praktis.",
+    options: ["にちかいので", "によると", "をとおりに", "はもちろん"],
+    correctOption: "にちかいので", level: "N3"
+  },
+  {
+    id: "n3-bp38",
+    sentence: "この 仕事を 一人 ___ 、任せられる 人は 彼 ___ いない。",
+    translation: "Tidak ada orang selain dia yang bisa dipercaya untuk pekerjaan ini selain dia.",
+    options: ["を/しか", "と/以外に", "に/さえ", "も/かぎり"],
+    correctOption: "と/以外に", level: "N3"
+  },
+  {
+    id: "n3-bp39",
+    sentence: "日が 沈む ___ 、景色が だんだん 暗くなってきた。",
+    translation: "Saat matahari terbenam, pemandangan perlahan menjadi gelap.",
+    options: ["につれて", "にしたがって", "ともなうと", "のうちに"],
+    correctOption: "につれて", level: "N3"
+  },
+  {
+    id: "n3-bp40",
+    sentence: "台風 ___ 、明日は 家に いた ___ 無事でした。",
+    translation: "Saat topan kemarin, karena saya di rumah jadi tetap aman.",
+    options: ["だったけど/まま", "ので/さえ", "さなかったら/ので", "だから/ので"],
+    correctOption: "だったけど/まま", level: "N3"
+  },
 ];
