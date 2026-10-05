@@ -1739,5 +1739,701 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     ],
     notes: "Selalu digunakan untuk aksi diri sendiri/pihak internal kelompok.",
     tags: ["N4", "Kenjougo", "Merendah"]
+  },
+  // ============================================================
+  // JLPT N3 — POLA TATA BAHASA LANJUT (40 Entry Resmi)
+  // ============================================================
+  {
+    id: "n3bp_wo_motte",
+    pattern: "～をもって",
+    romajiPattern: "~ wo motte",
+    meaning: "Dengan / Melalui / Atas dasar (menyatakan sarana formal, batas waktu, atau alasan)",
+    formula: "Kata Benda + をもって + Kalimat",
+    level: "N3",
+    category: "Partikel Formal",
+    explanation: "Pola formal yang berarti 'dengan (menggunakan)', 'dengan dasar', atau 'pada (batas waktu)'. Digunakan dalam situasi resmi, tertulis, atau perpisahan.",
+    exampleSentences: [
+      { japanese: "この工場では、安全をもって最優先です。", hiragana: "この こうじょう では、あんぜん をもって さいゆうせん です。", translation: "Di pabrik ini, keselamatan adalah prioritas utama." },
+      { japanese: "本日をもって退社いたします。", hiragana: "ほんじつ をもって たいしゃ いたします。", translation: "Dengan ini (hari ini) saya mundur dari perusahaan." },
+      { japanese: "書類をもって結果をお知らせします。", hiragana: "しょるい をもって けっか を おしらせ します。", translation: "Saya akan mengumumkan hasil melalui dokumen." },
+      { japanese: "誠意をもって対応いたします。", hiragana: "せいい をもって たいおう いたします。", translation: "Kami akan menangani dengan itikad baik." }
+    ],
+    notes: "Lebih formal dari で. Digunakan dalam surat resmi, pidato, atau perjanjian.",
+    tags: ["N3", "Formal", "Sarana"]
+  },
+  {
+    id: "n3bp_ni_sakidachi",
+    pattern: "～に先立ち / に先立って",
+    romajiPattern: "~ ni sakidachi / ni sakatatte",
+    meaning: "Sebelum / Di awal (menyatakan sesuatu yang dilakukan lebih dahulu dari event utama)",
+    formula: "Kata Benda (Acara) / Kata Kerja bentuk kamus + に先立ち / に先立って",
+    level: "N3",
+    category: "Urutan Waktu",
+    explanation: "Menyatakan bahwa suatu aksi persiapan dilakukan sebelum event besar dimulai. Biasanya untuk acara, rapat, proyek, peluncuran.",
+    exampleSentences: [
+      { japanese: "新しい法律は来年に先立ち実施される予定です。", hiragana: "あたらしい ほうりつ は らいねん にさきだち じっし される よてい です。", translation: "Undang-undang baru rencananya akan diberlakukan mulai tahun depan." },
+      { japanese: "試験に先立って説明会が行われます。", hiragana: "しけん にさきだって せつめいかい が おこなわれます。", translation: "Sebelum ujian, akan diadakan sesi penjelasan." },
+      { japanese: "出発に先立ち、パスポートの確認をしてください。", hiragana: "しゅっぱつ にさきだち、パスポート の かくにん を してください。", translation: "Sebelum berangkat, tolong periksa paspor Anda." }
+    ],
+    notes: "Lebih formal dari 前に (mae ni).",
+    tags: ["N3", "Waktu", "Sebelum"]
+  },
+  {
+    id: "n3bp_ga_kireru",
+    pattern: "～がきれる / が切れる",
+    romajiPattern: "~ ga kireru",
+    meaning: "Habis / Putus / Mati total (menyatakan pasokan/tenaga yang habis sama sekali)",
+    formula: "Kata Benda (pasokan: 電気, ガス, 水, お金, ネット) + が切れる",
+    level: "N3",
+    category: "Kondisi",
+    explanation: "「切れる」berarti 'terpotong / habis total'. Digunakan untuk listrik, gas, air, pulsa, kuota internet, dompet kosong dll yang benar-benar berhenti.",
+    exampleSentences: [
+      { japanese: "電気がきれて、真っ暗になった。", hiragana: "でんき がきれて、まっくら に なった。", translation: "Listrik mati, jadi gelap gulita." },
+      { japanese: "途中でガスが切れて、料理ができなかった。", hiragana: "とちゅう で ガス が きれて、りょうり が できなかった。", translation: "Di tengah jalan gas habis, jadi tidak bisa masak." },
+      { japanese: "旅行でお金が切れて、困った。", hiragana: "りょこう で おかね が きれて、こまった。", translation: "Uang habis saat liburan, jadi bingung." },
+      { japanese: "この電池はもう切れている。", hiragana: "この でんち は もう きれている。", translation: "Baterai ini sudah habis total." }
+    ],
+    notes: "Beda dengan なくなる (hilang): きれる menekankan 'aliran/suplai yang terputus'.",
+    tags: ["N3", "Kondisi", "Habis"]
+  },
+  {
+    id: "n3bp_ni_mukatte",
+    pattern: "～に向かって / ～ぶちまける",
+    romajiPattern: "~ ni mukatte / buchimakeru",
+    meaning: "Menuju / Ke arah (mengarahkan aksi); ぶちまける = mengeluarkan isi hati/meluapkan",
+    formula: "Kata Benda (arah) + に向かって + Kata Kerja; （悩みなどを）ぶちまける",
+    level: "N3",
+    category: "Arah & Ekspresi",
+    explanation: "に向かって: bergerak/berbicara menuju arah tertentu. ぶちまける (kata kerja N3): meluapkan perasaan (keluh kesah, rahasia, dll) sepenuhnya kepada orang.",
+    exampleSentences: [
+      { japanese: "彼は友達に向かって、いつも悩み事をぶちまけている。", hiragana: "かれ は ともだち にむかって、いつも なやみごと を ぶちまけて いる。", translation: "Dia selalu meluapkan masalahnya kepada temannya." },
+      { japanese: "東京駅に向かって走った。", hiragana: "とうきょうえき にむかって はしった。", translation: "Saya berlari menuju Stasiun Tokyo." },
+      { japanese: "会議で社長に向かって意見を言った。", hiragana: "かいぎ で しゃちょう にむかって いけん を いった。", translation: "Saya berpendapat kepada presiden direktur dalam rapat." }
+    ],
+    notes: "ぶちまける nuansanya: 'mengeluarkan semua isi' (seperti tumpah).",
+    tags: ["N3", "Arah", "Perasaan"]
+  },
+  {
+    id: "n3bp_mo_sara_ni",
+    pattern: "～上に（うえに） / ～もさらに",
+    romajiPattern: "~ ue ni / mo sara ni",
+    meaning: "Selain itu / Terlebih lagi / Di atas itu (menambah poin buruk atau baik)",
+    formula: "Klausa 1 (普通形) + 上に + Klausa 2; Kata Benda + もさらに",
+    level: "N3",
+    category: "Penambahan",
+    explanation: "Digunakan untuk menambahkan fakta kedua (biasanya memperparah atau memperbaiki) ke fakta pertama. Mirip だけでなく tapi penekanannya bertubi-tubi.",
+    exampleSentences: [
+      { japanese: "この靴はサイズが合わない上に、色もさらに悪い。", hiragana: "この くつ は サイズ が あわない うえに、いろ もさらに わるい。", translation: "Sepatu ini selain ukurannya tidak pas, warnanya juga jelek." },
+      { japanese: "彼は頭がいい上に、スポーツもできる。", hiragana: "かれ は あたま が いい うえに、スポーツ も できる。", translation: "Dia selain pintar, juga jago olahraga." },
+      { japanese: "風邪をひいた上に、財布もなくした。", hiragana: "かぜ を ひいた うえに、さいふ も なくした。", translation: "Selain sakit flu, dompet saya hilang lagi." }
+    ],
+    notes: "Pola ini sering dalam 'kesialan bertubi-tubi' — N3 favorite!",
+    tags: ["N3", "Penambahan", "Urutan"]
+  },
+  {
+    id: "n3bp_no_atari_ni",
+    pattern: "～のあたりに / ～の辺りに",
+    romajiPattern: "~ no atari ni",
+    meaning: "Sekitar / Di sekitar (area tertentu yang tidak pasti tepatnya)",
+    formula: "Kata Benda (tempat/waktu) + のあたりに",
+    level: "N3",
+    category: "Lokasi & Waktu",
+    explanation: "Menyatakan area sekitar yang tidak spesifik persis. Bisa tempat (sekitar stasiun) atau waktu (sekitar jam 3). Mirip ごろ tapi nuansa lebih 'sekitar area'",
+    exampleSentences: [
+      { japanese: "あの店のあたりに、田中さんを見たことがある。", hiragana: "あの みせ のあたりに、たなか さん を みた こと が ある。", translation: "Saya pernah melihat Tanaka-san sekitar area toko itu." },
+      { japanese: "5時のあたりに電話してください。", hiragana: "ごじ のあたりに でんわ してください。", translation: "Tolong telepon saya sekitar jam 5." },
+      { japanese: "銀座のあたりに美味しいそば屋があるらしい。", hiragana: "ぎんざ のあたりに おいしい そばや が ある らしい。", translation: "Sepertinya ada warung soba enak di sekitar Ginza." }
+    ],
+    notes: "あたり juga bisa berarti 'orang-orang sekitar' (misal: 周りのあたり).",
+    tags: ["N3", "Tempat", "Waktu"]
+  },
+  {
+    id: "n3bp_toshitewa",
+    pattern: "～としては",
+    romajiPattern: "~ toshitewa",
+    meaning: "Sebagai (X) / Menurut standar X (menilai dari standar suatu kategori)",
+    formula: "Kata Benda (Profesi / Status / Tingkat) + としては + Penilaian",
+    level: "N3",
+    category: "Sudut Pandang",
+    explanation: "Menghubungkan 'kategori/identitas' dengan 'evaluasi penilaian'. Nuansa: 'menurut standar seorang X (dia bagus / kurang)'.",
+    exampleSentences: [
+      { japanese: "学生としては、まず第一に学業が大切だ。", hiragana: "がくせい としては、まず だいいち に がくぎょう が たいせつ だ。", translation: "Bagi seorang pelajar, yang utama adalah pendidikan." },
+      { japanese: "このレストランは値段の割には、美味しいとしては人気だ。", hiragana: "この レストラン は ねだん の わりには、おいしい としては にんき だ。", translation: "Restoran ini menurut ukuran harganya, rasanya enak jadi populer." },
+      { japanese: "彼は日本人としては英語が上手だ。", hiragana: "かれ は にほんじん としては えいご が じょうず だ。", translation: "Dia sebagai orang Jepang, bahasa Inggrisnya jago." }
+    ],
+    notes: "Beda dengan にしては (nanti) — にしては = 'padahal seharusnya' (negatif/kejutan), としては = 'menurut standar' (netral).",
+    tags: ["N3", "Perbandingan", "SudutPandang"]
+  },
+  {
+    id: "n3bp_wo_kikkake_ni",
+    pattern: "～をきっかけに / ～を契機に",
+    romajiPattern: "~ wo kikkake ni",
+    meaning: "Dipicu oleh / Berawal dari / Akibat peristiwa (menyatakan pemicu perubahan besar)",
+    formula: "Kata Benda (Peristiwa) + をきっかけに + Perubahan",
+    level: "N3",
+    category: "Pemicu",
+    explanation: "Menyatakan suatu peristiwa (nikah, kecelakaan, pindah, hamil, bergabung komunitas) menjadi titik balik perubahan besar dalam hidup.",
+    exampleSentences: [
+      { japanese: "彼は結婚をきっかけに、急にしっかりしてきた。", hiragana: "かれ は けっこん をきっかけに、きゅうに しっかり してきた。", translation: "Setelah menikah, dia tiba-tiba jadi dewasa." },
+      { japanese: "フランス旅行をきっかけに、フランス語の勉強を始めた。", hiragana: "フランス りょこう をきっかけに、フランスご の べんきょう を はじめた。", translation: "Berawal dari liburan ke Prancis, saya mulai belajar bahasa Prancis." },
+      { japanese: "この歌をきっかけに彼女は有名になった。", hiragana: "この うた をきっかけに かのじょ は ゆうめい に なった。", translation: "Lewat lagu ini dia menjadi terkenal." }
+    ],
+    notes: "Lebih kuat 'perubahan drastis' daripada ～をはじめに.",
+    tags: ["N3", "Waktu", "Perubahan"]
+  },
+  {
+    id: "n3bp_made_kakatte",
+    pattern: "～までかかる",
+    romajiPattern: "~ made kakaru",
+    meaning: "Perlu waktu sampai titik X (menghabiskan waktu/biaya sampai batas tertentu)",
+    formula: "Kata Benda (waktu/tujuan) + までかかる / までかかって + Klausa",
+    level: "N3",
+    category: "Waktu & Usaha",
+    explanation: "かかる = butuh (waktu/biaya/tenaga). Digunakan untuk menyatakan 'sampai sejauh itu pun usaha tetap tidak selesai' atau 'perlu sampai titik itu'.",
+    exampleSentences: [
+      { japanese: "この本は、週末までかかっても読みきれないだろう。", hiragana: "この ほん は、しゅうまつ までかかっても よみきれない だろう。", translation: "Buku ini bahkan sampai akhir pekan mungkin tidak akan selesai dibaca." },
+      { japanese: "この仕事を仕上げるのに3日までかかります。", hiragana: "この しごと を しあげる のに みっか までかかります。", translation: "Perlu waktu sampai 3 hari untuk menyelesaikan pekerjaan ini." },
+      { japanese: "家を買うのに30年までかかった。", hiragana: "いえ を かう のに さんじゅうねん までかかった。", translation: "Perlu sampai 30 tahun agar bisa beli rumah." }
+    ],
+    notes: "まで disini artinya 'sampai titik maksimum', bukan 'sebelum'.",
+    tags: ["N3", "Waktu", "Usaha"]
+  },
+  {
+    id: "n3bp_uchi_ni",
+    pattern: "～うちに",
+    romajiPattern: "~ uchi ni",
+    meaning: "Selagi / Sebelum sempat / Di saat (melakukan dalam masa kesempatan masih ada)",
+    formula: "Kata Kerja (ない形 / ている形) + うちに; い Adj い / な Adj な + うちに",
+    level: "N3",
+    category: "Kesempatan Waktu",
+    explanation: "Sangat penting N3. Digunakan untuk melakukan aksi 'sebelum keadaan berubah dan kesempatan hilang'",
+    exampleSentences: [
+      { japanese: "雨が降るうちに、早く家に帰ろう。", hiragana: "あめ が ふる うちに、はやく いえ に かえろう。", translation: "Sebelum hujan turun, ayo pulang cepat." },
+      { japanese: "温かいうちに食べてください。", hiragana: "あたたかい うちに たべてください。", translation: "Tolong dimakan selagi masih hangat." },
+      { japanese: "日本にいるうちに、たくさん思い出を作りたい。", hiragana: "にほん に いる うちに、たくさん おもいで を つくりたい。", translation: "Selagi masih di Jepang, ingin banyak buat kenangan." },
+      { japanese: "忘れないうちにメモをしよう。", hiragana: "わすれない うちに メモ を しよう。", translation: "Selagi belum lupa, ayo dicatat." }
+    ],
+    notes: "Kebalikan: ～あいだに (selama periode tertentu). うちに nuansa 'sebelum terlambat'",
+    tags: ["N3", "Waktu", "Kesempatan"]
+  },
+  {
+    id: "n3bp_katakara",
+    pattern: "～かたわら",
+    romajiPattern: "~ katakara / katawara",
+    meaning: "Di samping / Sambil (melakukan kegiatan utama + kegiatan sampingan yang serius)",
+    formula: "Kata Kerja (Kamus形) / Kata Benda の + かたわら + Kegiatan kedua",
+    level: "N3",
+    category: "Kegiatan Bersamaan",
+    explanation: "Bedakan dengan ながら! ながら: sambil santai (makan sambil nonton TV). かたわら: kegiatan utama + side job/hobi yang serius & berlangsung lama.",
+    exampleSentences: [
+      { japanese: "ピアノを弾くかたわら、歌も上手です。", hiragana: "ピアノ を ひく かたわら、うた も じょうず です。", translation: "Selain main piano, dia juga pandai bernyanyi." },
+      { japanese: "会社員のかたわら、夜は小説を書いています。", hiragana: "かいしゃいん のかたわら、よる は しょうせつ を かいて います。", translation: "Sambil bekerja jadi karyawan, malamnya menulis novel." },
+      { japanese: "勉強するかたわら、アルバイトもしている。", hiragana: "べんきょう する かたわら、アルバイト も して いる。", translation: "Di samping belajar, dia juga kerja part-time." }
+    ],
+    notes: "かたわら = 2 kegiatan serius yang berjalan lama (bulanan/tahunan).",
+    tags: ["N3", "Waktu", "Paralel"]
+  },
+  {
+    id: "n3bp_ue_de",
+    pattern: "～うえで / ～上で",
+    romajiPattern: "~ ue de",
+    meaning: "Setelah melakukan (baru kemudian) / Atas dasar (berdasarkan)",
+    formula: "Kata Kerja (た形 / 辞書形) / Kata Benda の + うえで",
+    level: "N3",
+    category: "Urutan & Dasar",
+    explanation: "Dua makna: (1) Urutan: setelah selesai X, lakukan Y (penting Y harus sesudah X). (2) Atas dasar: berdasarkan data/pembahasan sebelumnya.",
+    exampleSentences: [
+      { japanese: "説明書をよく読んだうえで、組み立ててください。", hiragana: "せつめいしょ を よく よんだ うえで、くみたててください。", translation: "Tolong baca panduan dulu baru rakit setelahnya." },
+      { japanese: "みんなと相談したうえで決めます。", hiragana: "みんな と そうだん した うえで きめます。", translation: "Saya akan putuskan setelah berdiskusi dengan semua." },
+      { japanese: "この報告のうえで、対策を考えましょう。", hiragana: "この ほうこく のうえで、たいさく を かんがえましょう。", translation: "Atas dasar laporan ini, mari kita pikirkan solusi." }
+    ],
+    notes: "Makna (1) urutan: mirip ～てから tapi lebih formal & menekankan 'persiapan matang'.",
+    tags: ["N3", "Urutan", "Dasar"]
+  },
+  {
+    id: "n3bp_soredemo",
+    pattern: "それでも",
+    romajiPattern: "soredemo",
+    meaning: "Meskipun begitu / Walaupun begitu (tetap berlanjut meskipun ada halangan)",
+    formula: "Klausa kesulitan + それでも + Klausa (usaha yang tetap berjalan)",
+    level: "N3",
+    category: "Konjungsi",
+    explanation: "Konjungsi N3 populer. 'Meski ada fakta negatif sebelumnya, tapi tetap lanjut'.",
+    exampleSentences: [
+      { japanese: "何度練習しても、上手にならない。それでも、やる気はあるんだから、続けよう。", hiragana: "なんど れんしゅう しても、じょうず に ならない。それでも、やるき は ある んだから、つづけよう。", translation: "Walau berkali-kali latihan tidak jago, tapi karena ada kemauan, ayo teruskan." },
+      { japanese: "雨はひどかった。それでも、試合は行われた。", hiragana: "あめ は ひどかった。それでも、しあい は おこなわれた。", translation: "Hujan sangat deras. Meski begitu, pertandingan tetap dilaksanakan." },
+      { japanese: "彼は体が弱い。それでも、毎日学校に来る。", hiragana: "かれ は からだ が よわい。それでも、まいにち がっこう に くる。", translation: "Badannya lemah. Walaupun begitu, dia datang ke sekolah setiap hari." }
+    ],
+    notes: "Beda dengan しかし (tapi biasa): それでも menonjolkan 'usaha bertahan'.",
+    tags: ["N3", "Konjungsi", "Meskipun"]
+  },
+  {
+    id: "n3bp_ni_shitatte",
+    pattern: "～にしたって",
+    romajiPattern: "~ ni shitatte",
+    meaning: "Bahkan untuk X pun / Seandainya menjadi X pun (menekankan kesulitan)",
+    formula: "Kata Benda / Kata Kerja/Kata Sifat (普通形) + にしたって",
+    level: "N3",
+    category: "Tekanan",
+    explanation: "Bentuk kasual dari にしても (even if / even for). Menekankan: 'bahkan X pun sama saja sulitnya'.",
+    exampleSentences: [
+      { japanese: "この仕事は私にしたって、彼にはとてもできない。", hiragana: "この しごと は わたし にしたって、かれ に は とても できない。", translation: "Pekerjaan ini bahkan untuk saya (lebih ahli), apalagi dia pasti tidak mampu." },
+      { japanese: "先生にしたって、難しい問題には答えられないこともある。", hiragana: "せんせい にしたって、むずかしい もんだい に は こたえられない こと も ある。", translation: "Bahkan guru pun kadang tidak bisa jawab soal sulit." },
+      { japanese: "安いにしたって、質が悪ければ買わない。", hiragana: "やすい にしたって、しつ が わるければ かわない。", translation: "Bahkan semurah apa pun, kalau kualitas jelek saya tidak beli." }
+    ],
+    notes: "Versi formal = にしても; versi kasual = にしたって.",
+    tags: ["N3", "Tekanan", "Perbandingan"]
+  },
+  {
+    id: "n3bp_ni_demo",
+    pattern: "～にでも",
+    romajiPattern: "~ ni demo",
+    meaning: "Bahkan untuk X / Kepada orang seperti X pun (menurunkan standar / merendahkan)",
+    formula: "Kata Benda (tingkat kesulitan rendah: 子供, 初心者, あなた) + にでも",
+    level: "N3",
+    category: "Batas Minimum",
+    explanation: "Menunjukkan 'bahkan untuk target level terendah pun bisa', sehingga standar adalah minimal.",
+    exampleSentences: [
+      { japanese: "子供のにでも分かるような、易しい本を選んでください。", hiragana: "こども のにでも わかる ような、やさしい ほん を えらんでください。", translation: "Tolong pilih buku mudah yang bahkan anak-anak pun bisa mengerti." },
+      { japanese: "この料理は初心者にでも作れます。", hiragana: "この りょうり は しょしんしゃ にでも つくれます。", translation: "Masakan ini bahkan pemula pun bisa memasaknya." },
+      { japanese: "このカメラは老人にでも簡単に使えます。", hiragana: "この カメラ は ろうじん にでも かんたん に つかえます。", translation: "Kamera ini bahkan orang tua pun mudah memakainya." }
+    ],
+    notes: "にでも = menunjukkan target minimal.",
+    tags: ["N3", "Level", "Batas"]
+  },
+  {
+    id: "n3bp_doori_ni",
+    pattern: "～どおり（に） / ～通り（に）",
+    romajiPattern: "~ doori (ni)",
+    meaning: "Sesuai dengan / Mengikuti (persis seperti yang dijanjikan/diajarkan/ditulis)",
+    formula: "Kata Benda の / Kata Kerja（辞書形・た形） + どおりに",
+    level: "N3",
+    category: "Kesesuaian",
+    explanation: "Melakukan sesuatu persis sama seperti acuan (buku panduan, ucapan, contoh, jadwal). Tanpa penyimpangan.",
+    exampleSentences: [
+      { japanese: "彼は男らしくどおりに、困難に立ち向かった。", hiragana: "かれ は おとこらしくどおりに、こんなん に たちむかった。", translation: "Seperti selayaknya laki-laki sejati, dia menghadapi kesulitan." },
+      { japanese: "説明書のどおりにやれば、できますよ。", hiragana: "せつめいしょ のどおりに やれば、できます よ。", translation: "Kalau dilakukan sesuai panduan, pasti berhasil kok." },
+      { japanese: "約束どおりに10時に来ました。", hiragana: "やくそくどおりに じゅうじ に きました。", translation: "Saya datang jam 10 sesuai janji." },
+      { japanese: "考えていたどおりの結果になった。", hiragana: "かんがえて いたどおりの けっか に なった。", translation: "Hasilnya persis seperti yang dibayangkan." }
+    ],
+    notes: "Bacaan どおり / とおり: 予定どおり (yotei doori) = sesuai jadwal.",
+    tags: ["N3", "Kesesuaian", "Kepatuhan"]
+  },
+  {
+    id: "n3bp_mono_dakara",
+    pattern: "～ものだから / もんだから",
+    romajiPattern: "~ mono dakara / mondakara",
+    meaning: "Karena (beralasan dengan perasaan pribadi, sering menyalahkan keadaan)",
+    formula: "Klausa (普通形) + ものだから + Hasil (umumnya tidak disengaja)",
+    level: "N3",
+    category: "Alasan",
+    explanation: "Alasan dengan nuansa 'memohon dimaklumi' / 'keadaan yang tidak diinginkan'. Lebih emosional dibanding から / ので.",
+    exampleSentences: [
+      { japanese: "朝走ってきたものだから、息が切れている。", hiragana: "あさ はしってきた ものだから、いき が きれて いる。", translation: "Karena tadi lari pagi, jadi sampai terengah-engah." },
+      { japanese: "あまりにも美味しかったもんだから、たくさん食べちゃった。", hiragana: "あまりにも おいしかった もんだから、たくさん たべちゃった。", translation: "Karena terlalu enak, jadi makan kebanyakan deh." },
+      { japanese: "初めての経験だったものだから、緊張しました。", hiragana: "はじめて の けいけん だった ものだから、きんちょう しました。", translation: "Karena ini pengalaman pertama, saya tegang." }
+    ],
+    notes: "もんだから = bentuk kasual ものだから (sering di obrolan perempuan).",
+    tags: ["N3", "Alasan", "Ekuse"]
+  },
+  {
+    id: "n3bp_no_mama_de",
+    pattern: "～まま（で）",
+    romajiPattern: "~ mama (de)",
+    meaning: "Dalam keadaan tetap / Tanpa perubahan / Asalkan begitu saja",
+    formula: "Kata Kerja（た形 / ない形） / Kata Benda + の / い Adj / な Adj な + まま（で）",
+    level: "N3",
+    category: "Keadaan Tetap",
+    explanation: "Menunjukkan 'keadaan yang tidak diubah' — biasanya suatu hal yang tabiatnya harusnya diubah tapi tidak (misal: sepatu masuk rumah, TV nyala tidur).",
+    exampleSentences: [
+      { japanese: "この町は昔のままで、静かでいい所です。", hiragana: "この まち は むかし のままで、しずか で いい ところ です。", translation: "Kota ini masih seperti dahulu, jadi tenang dan bagus." },
+      { japanese: "電気をつけたまま寝てしまった。", hiragana: "でんき を つけたまま ねて しまった。", translation: "Saya tidur dalam keadaan lampu tetap menyala." },
+      { japanese: "立ったままで食べないでください。", hiragana: "たったままで たべないでください。", translation: "Tolong jangan makan sambil berdiri." },
+      { japanese: "わからないまま進めるのは危ない。", hiragana: "わからないまま すすめる の は あぶない。", translation: "Melanjutkan dalam keadaan tidak tahu itu berbahaya." }
+    ],
+    notes: "Jadi 2 makna: (1) tetap / tanpa perubahan (contoh 1), (2) keadaan yang salah/bukan seharusnya (contoh 2 & 3).",
+    tags: ["N3", "Keadaan", "Tetap"]
+  },
+  {
+    id: "n3bp_toshita_tokoro_de",
+    pattern: "～としたところで",
+    romajiPattern: "~ toshita tokoro de",
+    meaning: "Meskipun melakukan / Andai pun mencoba (tidak berguna / sia-sia)",
+    formula: "Kata Kerja意向形（Volitional） + としたところで + Klausa negatif (tidak bisa / sia-sia)",
+    level: "N3",
+    category: "Percobaan Sia-sia",
+    explanation: "Menekankan 'usaha apa pun tidak membuahkan hasil'. Seperti ～ても tapi lebih kuat nuansa 'sia-sia, tidak ada arti usaha'",
+    exampleSentences: [
+      { japanese: "いくら説明したとしたところで、彼は分かってくれなかった。", hiragana: "いくら せつめい した としたところで、かれ は わかって くれなかった。", translation: "Betapapun saya jelaskan berkali-kali, dia tidak mau mengerti juga." },
+      { japanese: "今さら走ったとしたところで、電車には間に合わない。", hiragana: "いまさら はしった としたところで、でんしゃ に は まにあわない。", translation: "Walau lari sekeras apa pun sekarang, sudah tidak akan sempat kereta." },
+      { japanese: "謝ったとしたところで、もう遅い。", hiragana: "あやまった としたところで、もう おそい。", translation: "Walau minta maaf pun, sudah terlambat." }
+    ],
+    notes: "Ciri khas: selalu diikuti hasil yang NEGATIF / sia-sia.",
+    tags: ["N3", "Kontrasepsi", "SiaSia"]
+  },
+  {
+    id: "n3bp_wo_mochimashite",
+    pattern: "～をもちまして",
+    romajiPattern: "~ wo mochimashite",
+    meaning: "Dengan ini / Atas ini (ungkapan resmi untuk penutupan, perpisahan)",
+    formula: "Kata Benda (Waktu / Status) + をもちまして + Klausa formal (biasanya penutupan)",
+    level: "N3",
+    category: "Ungkapan Formal",
+    explanation: "Paling sering di pidato, surat, meeting resmi: 'Dengan ini saya akhiri / nyatakan / dll'. Bentuk sopan 丁寧語 dari をもって.",
+    exampleSentences: [
+      { japanese: "今日は用事があるので、これをもちまして失礼します。", hiragana: "きょう は ようじ が ある ので、これをもちまして しつれい します。", translation: "Karena hari ini ada urusan, dengan ini saya pamit undur diri." },
+      { japanese: "本会議は、これをもちまして終了いたします。", hiragana: "ほんかいぎ は、これをもちまして しゅうりょう いたします。", translation: "Dengan ini, rapat resmi kami akhiri." },
+      { japanese: "本日をもちまして創業10周年を迎えました。", hiragana: "ほんじつ をもちまして そうぎょう じっしゅうねん を むかえました。", translation: "Hari ini genap 10 tahun sejak pendirian perusahaan." }
+    ],
+    notes: "Sering di soal JLPT N3 Reading bagian 'Pidato Peresmian'.",
+    tags: ["N3", "Sopan", "Penutupan"]
+  },
+  {
+    id: "n3bp_wo_tsuujite",
+    pattern: "～を通じて / ～を通して",
+    romajiPattern: "~ wo tsuujite / wo tooshite",
+    meaning: "Melalui (perantara / periode) / Sepanjang (masa)",
+    formula: "Kata Benda (Perantara / Periode Waktu) + を通じて + Klausa",
+    level: "N3",
+    category: "Perantara & Periode",
+    explanation: "2 Makna penting: (1) Melalui perantara (internet, teman, media). (2) Sepanjang masa (sepanjang tahun, sepanjang sejarah).",
+    exampleSentences: [
+      { japanese: "年を通じて、季節の移ろいが感じられる。", hiragana: "とし をつうじて、きせつ の うつろい が かんじられる。", translation: "Sepanjang tahun, orang bisa merasakan pergantian musim." },
+      { japanese: "インターネットを通じて、世界中の人と話せる。", hiragana: "インターネット をつうじて、せかいじゅう の ひと と はなせる。", translation: "Melalui internet, bisa berbicara dengan orang sedunia." },
+      { japanese: "この団体を通して、ボランティア活動に参加した。", hiragana: "この だんたい をとおして、ボランティア かつどう に さんか した。", translation: "Melalui organisasi ini, saya ikut kegiatan sukarela." },
+      { japanese: "一年を通じて暖かい土地です。", hiragana: "いちねん をつうじて あたたかい とち です。", translation: "Daerah yang hangat sepanjang tahun." }
+    ],
+    notes: "を通じて lebih umum; を通して nuansa 'lebih aktif / ada kontak nyata'.",
+    tags: ["N3", "Perantara", "Waktu"]
+  },
+  {
+    id: "n3bp_amari",
+    pattern: "あまり（にも） / ～あまり",
+    romajiPattern: "amari (ni mo) / ~ amari",
+    meaning: "Terlalu / Sangat sampai (berakibat negatif karena keberlebihan)",
+    formula: "Kata Benda の / Kata Sifat / Kata Kerja（普通形） + あまり + Akibat",
+    level: "N3",
+    category: "Akibat Berlebihan",
+    explanation: "Karena sesuatu terlalu berlebihan (emosi biasanya: 驚き, 悲しみ, 嬉しさ, 緊張) sehingga menyebabkan akibat yang aneh / tidak baik.",
+    exampleSentences: [
+      { japanese: "忙しいあまり、休みをも取っている暇もありません。", hiragana: "いそがしいあまり、やすみ を も とって いる ひま も ありません。", translation: "Saking sibuknya, bahkan tidak ada waktu untuk beristirahat sama sekali." },
+      { japanese: "嬉しさのあまり、泣いてしまった。", hiragana: "うれしさ のあまり、ないて しまった。", translation: "Karena terlalu senang, sampai menangis." },
+      { japanese: "緊張のあまり、何も話せなかった。", hiragana: "きんちょう のあまり、なにも はなせなかった。", translation: "Karena terlalu tegang, tidak bisa bicara apa-apa." },
+      { japanese: "父は働きすぎたあまり、病気になった。", hiragana: "ちち は はたらきすぎたあまり、びょうき に なった。", translation: "Ayah karena terlalu keras bekerja, jadi sakit." }
+    ],
+    notes: "Ciri N3 あまり: selalu diikuti AKIBAT dari keberlebihan.",
+    tags: ["N3", "Alasan", "Berlebih"]
+  },
+  {
+    id: "n3bp_tasukeni_kyouju",
+    pattern: "～さんの助けがなかったら / ～がなければ",
+    romajiPattern: "~ san no tasuke ga nakattara / ga nakereba",
+    meaning: "Andaikata tanpa bantuan X (kalau tidak ada X)",
+    formula: "Kata Benda + （の助け / のおかげ / がなかったら） + ～なかっただろう / できなかった",
+    level: "N3",
+    category: "Percobaan Tidak Nyata",
+    explanation: "Pola ungkapan terima kasih / penyesalan: 'Andaikan kalau tidak ada X, maka hasilnya pasti JELEK / tidak berhasil'.",
+    exampleSentences: [
+      { japanese: "田中さんの助けがなかったら、このプロジェクトは成功しなかっただろう。", hiragana: "たなか さんの たすけ が なかったら、この プロジェクト は せいこう しなかった だろう。", translation: "Andaikan tanpa bantuan Tanaka, proyek ini pasti tidak berhasil." },
+      { japanese: "あの時の薬がなかったら、命はなかっただろう。", hiragana: "あの とき の くすり が なかったら、いのち は なかった だろう。", translation: "Kalau waktu itu tidak ada obatnya, mungkin nyawa sudah tidak ada." },
+      { japanese: "君がいなければ、どうしていたか分からない。", hiragana: "きみ が いなければ、どうして いた か わからない。", translation: "Kalau kamu tidak ada, saya tidak tahu akan jadi apa." }
+    ],
+    notes: "Sering juga pola: ～がなければ / ～がなかったら → kalimat kedua bentuk なかっただろう (past counterfactual).",
+    tags: ["N3", "Counterfactual", "TerimaKasih"]
+  },
+  {
+    id: "n3bp_nashi_niwa",
+    pattern: "～なしに（は） / ～を抜きにして",
+    romajiPattern: "~ nashi ni (wa) / wo nuki ni shite",
+    meaning: "Tanpa X (tidak mungkin bisa terjadi)",
+    formula: "Kata Benda + なしに（は） + Kalimat negatif / mustahil",
+    level: "N3",
+    category: "Keharusan",
+    explanation: "'Tanpa adanya X, Y pasti tidak mungkin'. Kata-kata inspirasi N3. X adalah faktor KRITIS.",
+    exampleSentences: [
+      { japanese: "努力なしには、成功はない。", hiragana: "どりょく なしには、せいこう は ない。", translation: "Tanpa usaha, tidak ada kesuksesan." },
+      { japanese: "資金なしには、この計画は実行できない。", hiragana: "しきん なしには、この けいかく は じっこう できない。", translation: "Tanpa dana, rencana ini tidak bisa dijalankan." },
+      { japanese: "ユーモアを抜きにして、人生は語れない。", hiragana: "ユーモア をぬきにして、じんせい は かたれない。", translation: "Tanpa humor, kehidupan tidak bisa dibicarakan." },
+      { japanese: "あなたなしには、生きていけない。", hiragana: "あなた なしには、いきて いけない。", translation: "Tanpamu, aku tidak bisa hidup." }
+    ],
+    notes: "なしに = bentuk klasik ないで. Lebih keren & filosofis.",
+    tags: ["N3", "Keharusan", "Inspirasi"]
+  },
+  {
+    id: "n3bp_ni_watatte",
+    pattern: "～にわたって / ～にわたり",
+    romajiPattern: "~ ni watatte / ni watari",
+    meaning: "Selama / Sepanjang / Mencakup (rentang panjang & luas)",
+    formula: "Kata Benda (Periode panjang / Area luas) + にわたって + Klausa",
+    level: "N3",
+    category: "Rentang Waktu & Area",
+    explanation: "Untuk rentang yang PANJANG & LUAS: 1 tahun, seluruh kota, seluruh cabang perusahaan, 3 jam rapat, dll. Beda dengan で yang hanya spot.",
+    exampleSentences: [
+      { japanese: "会議は2時間にわたって行われた。", hiragana: "かいぎ は にじかん にわたって おこなわれた。", translation: "Rapat berlangsung selama 2 jam (penuh)."},
+      { japanese: "この台風は日本全国にわたって被害を与えた。", hiragana: "この たいふう は にほんぜんこく にわたって ひがい を あたえた。", translation: "Topan ini menyebabkan kerusakan di seluruh Jepang." },
+      { japanese: "10年にわたる研究が、やっと実を結んだ。", hiragana: "じゅうねん にわたる けんきゅう が、やっと み を むすんだ。", translation: "Penelitian selama 10 tahun akhirnya membuahkan hasil." },
+      { japanese: "この制度は、全世代にわたり影響する。", hiragana: "この せいど は、ぜんせだい にわたり えいきょう する。", translation: "Sistem ini berdampak ke seluruh generasi." }
+    ],
+    notes: "Kalau mau bentuk Adjektiva: Kata Benda + にわたる + Kata Benda (例: 3日間にわたる旅行).",
+    tags: ["N3", "Waktu", "Rentang"]
+  },
+  {
+    id: "n3bp_made_shite",
+    pattern: "～までして",
+    romajiPattern: "~ made shite",
+    meaning: "Sampai sejauh itu / Bahkan sampai melakukan (sampai melakukan hal yang tidak seharusnya)",
+    formula: "Kata Benda / Kata Kerja 辞書形 + までして + Klausa (usaha keras atau perbuatan negatif)",
+    level: "N3",
+    category: "Titik Ekstrem",
+    explanation: "Menunjukkan titik EKSTRIM (sampai sejauh itu). Ada 2 arah: (a) Berkorban demi tujuan baik, atau (b) Sampai melakukan hal buruk demi tujuan.",
+    exampleSentences: [
+      { japanese: "どうしても必要なら、明日までして手伝いに行こう。", hiragana: "どうしても ひつよう なら、あした までして てつだいに いこう。", translation: "Kalau benar-benar perlu, besok saya akan datang membantu (sampai lewat batas waktu)." },
+      { japanese: "夜を徹してまでして、ゲームをするな。", hiragana: "よる を てっして までして、ゲーム を するな。", translation: "Jangan main game sampai begadang semalaman." },
+      { japanese: "借金してまで車を買う必要はないでしょ。", hiragana: "しゃっきん して までして くるま を かう ひつよう は ない でしょ。", translation: "Kan tidak perlu beli mobil sampai berutang begitu." },
+      { japanese: "彼は命がけまでして、目標を達成した。", hiragana: "かれ は いのちがけ までして、もくひょう を たっせい した。", translation: "Dia sampai mempertaruhkan nyawa demi mencapai target." }
+    ],
+    notes: "Frasa terkenal: 嘘をついてまで (sampai berbohong), 夜を徹してまで (sampai begadang).",
+    tags: ["N3", "Ekstrem", "Pengorbanan"]
+  },
+  {
+    id: "n3bp_ni_tomonatte",
+    pattern: "～に伴って / ～に伴い",
+    romajiPattern: "~ ni tomonatte / ni tomonoi",
+    meaning: "Bersamaan dengan / Seiring dengan (perubahan X menyebabkan perubahan Y)",
+    formula: "Kata Benda (Perubahan) / Kata Kerja 辞書形 + に伴って + Klausa perubahan kedua",
+    level: "N3",
+    category: "Perubahan Bersamaan",
+    explanation: "Jika X berubah, Y otomatis berubah juga (kausal). Biasanya untuk: perubahan sosial, ekonomi, teknologi, peningkatan populasi, dll. Lebih formal daripada につれて.",
+    exampleSentences: [
+      { japanese: "社長が急に変わったに伴って、社内はずいぶん変わった。", hiragana: "しゃちょう が きゅうに かわった にともなって、しゃない は ずいぶん かわった。", translation: "Seiring dengan pergantian direktur mendadak, suasana kantor banyak berubah." },
+      { japanese: "人口が増えるに伴い、住宅問題も深刻になってきた。", hiragana: "じんこう が ふえる にともない、じゅうたくもんだい も しんこく に なってきた。", translation: "Seiring bertambahnya penduduk, masalah perumahan juga menjadi parah." },
+      { japanese: "都市化に伴って、緑が減ってきた。", hiragana: "としか にともなって、みどり が へって きた。", translation: "Seiring urbanisasi, lahan hijau berkurang." }
+    ],
+    notes: "にともなって umumnya perubahan SKALA BESAR (sosial/ekonomi). につれて umumnya perubahan personal & natural.",
+    tags: ["N3", "Perubahan", "Kausal"]
+  },
+  {
+    id: "n3bp_ni_yotte",
+    pattern: "～によって / ～による",
+    romajiPattern: "~ ni yotte / ni yoru",
+    meaning: "Oleh / Berdasarkan / Karena / Tergantung (4 makna utama N3!)",
+    formula: "Kata Benda + によって / による",
+    level: "N3",
+    category: "Multi-Makna",
+    explanation: "Paling multi-fungsi N3! 4 makna wajib tahu: (1) 原因 = karena (kecelakaan dll). (2) 手段 = dengan / melalui. (3) 受身 agent = oleh (si pelaku passive). (4) 基準 = tergantung / berbeda menurut.",
+    exampleSentences: [
+      { japanese: "今回の事故は不注意によって起きたものだ。", hiragana: "こんかい の じこ は ふちゅうい によって おきた もの だ。", translation: "Kecelakaan ini disebabkan oleh kelalaian." },
+      { japanese: "インターネットによって情報が早く伝わる。", hiragana: "インターネット によって じょうほう が はやく つたわる。", translation: "Informasi cepat tersebar melalui internet." },
+      { japanese: "この建物は有名な建築家によって設計された。", hiragana: "この たてもの は ゆうめい な けんちくか によって せっけい された。", translation: "Gedung ini dirancang oleh arsitek terkenal." },
+      { japanese: "人によって、考え方が違う。", hiragana: "ひと によって、かんがえかた が ちがう。", translation: "Tergantung orangnya, cara berpikir berbeda-beda." }
+    ],
+    notes: "Ciri soal: harus tebak 4 makna mana yang sedang berjalan dari konteks kalimat! Paling sering keluar di N3.",
+    tags: ["N3", "Partikel", "MultiMakna"]
+  },
+  {
+    id: "n3bp_wari_niwa",
+    pattern: "～わりに（は） / ～割に",
+    romajiPattern: "~ wari ni (wa)",
+    meaning: "Meskipun seharusnya / Di luar dugaan (hasil tidak sesuai dengan kenyataan)",
+    formula: "普通形（Kata Kerja / Kata Sifat / Kata Benda な） + わりには + Hasil (yang tidak terduga)",
+    level: "N3",
+    category: "Kontrasepsi",
+    explanation: "Menunjukkan 'tidak sebanding / tidak sesuai harapan'. Ada 2 arah: (a) Harusnya jelek tapi bagus; (b) Harusnya bagus tapi jelek.",
+    exampleSentences: [
+      { japanese: "彼女は先生わりには、とても厳しいです。", hiragana: "かのじょ は せんせい わりには、とても きびしいです。", translation: "Walaupun dia guru, tapi galak banget (padahal guru biasanya ramah)." },
+      { japanese: "あのレストランは値段のわりには、美味しくない。", hiragana: "あの レストラン は ねだん のわりには、おいしくない。", translation: "Restoran itu harganya mahal, tapi ternyata tidak enak (tidak sebanding)."},
+      { japanese: "このワインは安いわりに、味がいい。", hiragana: "この ワイン は やすいわりに、あじ が いい。", translation: "Wine ini harganya murah, tapi rasanya enak (melebihi dugaan)."},
+      { japanese: "祖母は年を取っているわりには、元気だ。", hiragana: "そぼ は とし を とって いるわりには、げんき だ。", translation: "Nenek sudah tua, tapi tetap sehat." }
+    ],
+    notes: "Mirip にしては tapi わりに = lebih menekankan 'perbandingan kualitas tak sebanding'; にしては = 'standar seharusnya tak tercapai'.",
+    tags: ["N3", "Perbandingan", "TidakSesuai"]
+  },
+  {
+    id: "n3bp_sue_ni",
+    pattern: "～すえ（に） / ～末（に）",
+    romajiPattern: "~ sue (ni)",
+    meaning: "Setelah sekian lama (akhirnya) / Pada akhirnya (hasil setelah proses panjang & berliku)",
+    formula: "Kata Kerja（た形） / Kata Benda の + すえに + Hasil Akhir",
+    level: "N3",
+    category: "Akhir Perjalanan",
+    explanation: "Setelah berbagai macam pergolakan, percobaan, penderitaan — akhirnya ada hasil. Mirip あげくに, tapi すえに hasilnya BISA BAIK BISA BURUK. あげくに: biasanya buruk.",
+    exampleSentences: [
+      { japanese: "あの二人は喧嘩していたすえに、結婚した。", hiragana: "あの ふたり は けんか して いたすえに、けっこん した。", translation: "Mereka berdua setelah sering bertengkar hebat, akhirnya menikah." },
+      { japanese: "長い裁判の末に、やっと無罪が証明された。", hiragana: "ながい さいばん のすえに、やっと むざい が しょうめい された。", translation: "Setelah persidangan panjang, akhirnya tidak terbukti bersalah." },
+      { japanese: "何度も失敗した末に、成功した。", hiragana: "なんども しっぱい したすえに、せいこう した。", translation: "Setelah berkali-kali gagal, akhirnya berhasil." }
+    ],
+    notes: "Frasa terkenal: 試行錯誤の末に (setelah coba-coba), 長い話し合いの末に (setelah diskusi panjang).",
+    tags: ["N3", "Waktu", "Hasil"]
+  },
+  {
+    id: "n3bp_mikomi",
+    pattern: "見込み（みこみ） / ～見込みが高い",
+    romajiPattern: "mikomi / ~mikomi ga takai",
+    meaning: "Perkiraan / Prospek / Kemungkinan besar (suatu hal yang diperkirakan akan terjadi)",
+    formula: "Kata Kerja 辞書形 / ない形 + 見込み; ～見込みが（高い / 薄い / ある）",
+    level: "N3",
+    category: "Prospek",
+    explanation: "見込み = kemungkinan terjadinya (berdasarkan data/fakta). Lawan: おそれ = kemungkinan BURUK.",
+    exampleSentences: [
+      { japanese: "明日は雨が降る見込みが高い。", hiragana: "あした は あめ が ふる みこみ が たかい。", translation: "Kemungkinan besok hujan tinggi." },
+      { japanese: "来年の景気は良くなる見込みです。", hiragana: "らいねん の けいき は よくなる みこみ です。", translation: "Prospek ekonomi tahun depan diperkirakan membaik." },
+      { japanese: "合格の見込みが薄い。", hiragana: "ごうかく の みこみ が うすい。", translation: "Kemungkinan lulus kecil (tipis)." },
+      { japanese: "来年、営業利益は2割増える見込みだ。", hiragana: "らいねん、えいぎょうりえき は にわり ふえる みこみ だ。", translation: "Tahun depan laba operasional diperkirakan naik 20%." }
+    ],
+    notes: "よく出る lawan kata: 見込みがある × 見込みがない (prospect ada / tidak ada)." ,
+    tags: ["N3", "Prediksi", "MasaDepan"]
+  },
+  {
+    id: "n3bp_iu_mademonaku",
+    pattern: "言うまでもなく / 言うまでもない",
+    romajiPattern: "iu mademo naku / iu made mo nai",
+    meaning: "Tentu saja / Sudah pasti (tidak perlu diucapkan lagi / sudah jelas)",
+    formula: "Klausa + 言うまでもなく + Fakta umum / Kebenaran",
+    level: "N3",
+    category: "Kebolehan",
+    explanation: "Sesuatu yang sangat jelas, bahkan tidak perlu dijelaskan. Sama dengan もちろん tapi lebih kuat.",
+    exampleSentences: [
+      { japanese: "彼は勉強も言うまでもなく、スポーツもできる優等生だ。", hiragana: "かれ は べんきょう もいうまでもなく、スポーツ も できる ゆうとうせい だ。", translation: "Dia itu siswa teladan, belajar jelas pintar apalagi olahraga juga bisa." },
+      { japanese: "日本の首都が東京だということは、言うまでもない。", hiragana: "にほん の しゅと が とうきょう だ と いう こと は、いうまでもない。", translation: "Sudah jelas (tidak perlu diomongkan) kalau ibu kota Jepang adalah Tokyo." },
+      { japanese: "水が人間に必要なのは、言うまでもない。", hiragana: "みず が にんげん に ひつよう な の は、いうまでもない。", translation: "Air itu penting buat manusia, sudah jelas sekali." }
+    ],
+    notes: "Cara pakai: (1) 言うまでもなく + kalimat (penghubung); (2) 言うまでもない di akhir kalimat.",
+    tags: ["N3", "Kepastian", "Tentu"]
+  },
+  {
+    id: "n3bp_ni_yoruto",
+    pattern: "～によると / ～によれば",
+    romajiPattern: "~ ni yoru to / ni yoreba",
+    meaning: "Menurut (sumber informasi: berita, kabar, orang, rumor)",
+    formula: "Kata Benda (Sumber: ニュース, 天気予報, 彼の話, うわさ) + によると / によれば",
+    level: "N3",
+    category: "Informasi",
+    explanation: "Menampilkan sumber info. Selalu diikuti そうだ / ということだ / らしい / ようだ (bukti itu adalah info dari luar, bukan kepastian pribadi).",
+    exampleSentences: [
+      { japanese: "ニュースによると、今年の冬は暖かいらしい。", hiragana: "ニュース によると、ことし の ふゆ は あたたかい らしい。", translation: "Kabarnya menurut berita, musim dingin tahun ini sepertinya hangat." },
+      { japanese: "天気予報によれば、明日は雪が降るそうだ。", hiragana: "てんきよほう によれば、あした は ゆき が ふる そうだ。", translation: "Menurut prakiraan cuaca, katanya besok turun salju." },
+      { japanese: "田中さんの話によると、社長は来年退社するということだ。", hiragana: "たなか さん の はなし によると、しゃちょう は らいねん たいしゃ する と いう こと だ。", translation: "Menurut cerita Tanaka-san, katanya direktur utama mundur tahun depan." }
+    ],
+    notes: "によると / によれば: selalu berita dari LUAR (sumber).",
+    tags: ["N3", "Kutipan", "Kabar"]
+  },
+  {
+    id: "n3bp_totan_ni",
+    pattern: "～とたん（に） / ～途端（に）",
+    romajiPattern: "~ totan (ni)",
+    meaning: "Tepat saat / Barusan saja (kejadian kedua terjadi TEPAT setelah kejadian pertama, biasanya kejadian tak terduga / negatif)",
+    formula: "Kata Kerja（た形） + とたんに + Kejadian mendadak (biasanya tak terduga)",
+    level: "N3",
+    category: "Momen Singkat",
+    explanation: "Titik perubahan SANGAT SINGKAT (detik). Ciri khas: sering ada 'kaget / kejadian yang tidak disangka'.",
+    exampleSentences: [
+      { japanese: "ボタンを押したとたんに、電源が切れてしまった。", hiragana: "ボタン を おしたとたんに、でんげん が きれて しまった。", translation: "Tepat saat menekan tombol, listriknya malah mati mendadak." },
+      { japanese: "家を出たとたんに、雨が激しく降り出した。", hiragana: "いえ を でたとたんに、あめ が はげしく ふりだした。", translation: "Baru keluar rumah, hujan langsung turun deras." },
+      { japanese: "彼女を見たとたんに、一目惚れした。", hiragana: "かのじょ を みたとたんに、ひとめぼれ した。", translation: "Tepat saat melihat dia, langsung jatuh cinta pandangan pertama." }
+    ],
+    notes: "TIDAK BISA untuk perbuatan yang disengaja. Selalu peristiwa tak terduga.",
+    tags: ["N3", "Waktu", "Mendadak"]
+  },
+  {
+    id: "n3bp_saichuu_no",
+    pattern: "～最中（さいちゅう）に / ～最中の",
+    romajiPattern: "~ saichuu ni / saichuu no",
+    meaning: "Sedang di tengah (melakukan sesuatu, di tengah-tengah acara)",
+    formula: "Kata Kerja ている形 + 最中に; Kata Benda の + 最中（に / の）",
+    level: "N3",
+    category: "Proses Berjalan",
+    explanation: "Kegiatan dalam PROGRESS / sedang berlangsung penuh, lalu ada gangguan di tengah.",
+    exampleSentences: [
+      { japanese: "食事最中のタバコはやめなさい。", hiragana: "しょくじ さいちゅうの タバコ は やめなさい。", translation: "Berhentilah merokok saat sedang makan." },
+      { japanese: "会議の最中中に、大きな地震があった。", hiragana: "かいぎ の さいちゅう に、おおきな じしん が あった。", translation: "Di tengah rapat, terjadi gempa besar." },
+      { japanese: "今、電話で話している最中だから、ちょっと待って。", hiragana: "いま、でんわ で はなして いるさいちゅう だから、ちょっと まって。", translation: "Saya lagi telepon, tunggu sebentar ya." }
+    ],
+    notes: "Pembacaan 最中 = さいちゅう (bukan もなか! もなか = kue bean paste Jepang 😄).",
+    tags: ["N3", "Proses", "Selaan"]
+  },
+  {
+    id: "n3bp_mono_wo",
+    pattern: "～ものを",
+    romajiPattern: "~ mono wo",
+    meaning: "Padahal / Sekiranya (menyesali sesuatu yang tidak dilakukan, padahal bisa)",
+    formula: "～たら / ～ば + 良かった ものを; ～ないものを (padahal tidak perlu)",
+    level: "N3",
+    category: "Penyesalan",
+    explanation: "Menyesali: 'Seandainya melakukan X, pasti sukses. Tapi TIDAK dilakukan jadi menyesal'. Padahal kalau dikasih tahu / dikerjakan — hasilnya beda.",
+    exampleSentences: [
+      { japanese: "彼は時間だったらものを、いつも早く来る彼だけど、今日は遅いですね。", hiragana: "かれ は じかん だったらものを、いつも はやく くる かれ だけど、きょう は おそい です ね。", translation: "Padahal biasanya dia selalu datang awal cuma kenapa hari ini lambat ya (menyesali)." },
+      { japanese: "「早く言ってくれれば、手伝ったものを。」", hiragana: "はやく いって くれれば、てつだった ものを。", translation: "\"Padahal kalau bilang dari tadi, aku bisa bantu lho...\" (menyesal tidak diberitahu)." },
+      { japanese: "あんなに高いレストランで食事をするものではなかった。", hiragana: "あんなに たかい レストラン で しょくじ を する ものを。", translation: "Padahal tidak usah makan di restoran semahal itu saja (sayang uang)." }
+    ],
+    notes: "Ciri khas: Selalu ada perasaan SESAL / MENYESALKAN keadaan / kekeliruan orang lain.",
+    tags: ["N3", "Penyesalan", "Seandainya"]
+  },
+  {
+    id: "n3bp_ni_chikai",
+    pattern: "～に近い（ので） / に近く",
+    romajiPattern: "~ ni chikai (node)",
+    meaning: "Dekat dengan (lokasi / waktu) — sehingga memberi konsekuensi praktis",
+    formula: "Kata Benda + に近い + Klause akibat",
+    level: "N3",
+    category: "Kedekatan",
+    explanation: "Menyatakan kedekatan (tempat / waktu / angka) beserta akibatnya yang menguntungkan/merugikan.",
+    exampleSentences: [
+      { japanese: "このマンションは駅に近いので、便利です。", hiragana: "この マンション は えき にちかい ので、べんり です。", translation: "Apartemen ini dekat stasiun, jadi praktis." },
+      { japanese: "100点に近い点数が取れた！", hiragana: "ひゃくてん にちかい てんすう が とれた！", translation: "Dapat nilai hampir 100!" },
+      { japanese: "締め切りに近いので、急いでください。", hiragana: "しめきり にちかい ので、いそいで ください。", translation: "Karena sudah dekat deadline, mohon segera." }
+    ],
+    notes: "に近い vs に近づく: に近い = STATIC (sudah dekat); に近づく = DINAMIS (mendekat).",
+    tags: ["N3", "Jarak", "Waktu"]
+  },
+  {
+    id: "n3bp_igai_ni",
+    pattern: "～以外に / 以外には / よりほか（に）",
+    romajiPattern: "~ igai ni / igai ni wa / yori hoka ni",
+    meaning: "Selain / Kecuali (selain X, tidak ada yang lain)",
+    formula: "Kata Benda / Klausa 普通形 + 以外に",
+    level: "N3",
+    category: "Pengecualian",
+    explanation: "Menyatakan bahwa 'selain pilihan X, TIDAK ADA PILIHAN LAIN' — atau kadang 'ada juga pilihan lain'.",
+    exampleSentences: [
+      { japanese: "この仕事を一人と、任せられる人は彼以外にいない。", hiragana: "この しごと を ひとり と、まかせられる ひと は かれ いがいに いない。", translation: "Tidak ada orang lain selain dia yang bisa dipercaya untuk menangani pekerjaan ini sendirian." },
+      { japanese: "日本料理以外に、中華料理も好きです。", hiragana: "にほんりょうり いがいに、ちゅうかりょうり も すき です。", translation: "Selain masakan Jepang, saya juga suka masakan Tiongkok." },
+      { japanese: "お金を払うよりほかに、方法がない。", hiragana: "おかね を はらう より ほかに、ほうほう が ない。", translation: "Tidak ada cara lain selain membayar." }
+    ],
+    notes: "Frasa sering keluar: 他に方法がない (tidak ada cara lain); 彼以外に誰もいない (tidak ada orang selain dia).",
+    tags: ["N3", "Pilihan", "Kecuali"]
+  },
+  {
+    id: "n3bp_ni_tsurete",
+    pattern: "～につれて / に従って（したがって）",
+    romajiPattern: "~ ni tsurete / shitagatte",
+    meaning: "Seiring dengan / Mengikuti (semakin X, maka semakin Y juga)",
+    formula: "Kata Kerja 辞書形 / Kata Benda + につれて / にしたがって + Klausa perubahan",
+    level: "N3",
+    category: "Perubahan Proporsional",
+    explanation: "Hubungan linear: X bertambah → Y ikut bertambah (atau berkurang sama arah). Lebih personal & natural dari にともなって.",
+    exampleSentences: [
+      { japanese: "日が沈むにつれて、景色がだんだん暗くなってきた。", hiragana: "ひ が しずむ につれて、けしき が だんだん くらく なって きた。", translation: "Seiring matahari terbenam, pemandangan perlahan-lahan menjadi gelap." },
+      { japanese: "年をとるにつれて、記憶力が悪くなる。", hiragana: "とし を とる につれて、きおくりょく が わるく なる。", translation: "Seiring bertambahnya usia, daya ingat berkurang." },
+      { japanese: "会社の方針に従って、行動してください。", hiragana: "かいしゃ の ほうしん にしたがって、こうどう してください。", translation: "Mohon bertindak sesuai dengan kebijakan perusahaan." }
+    ],
+    notes: "にしたがって memiliki 2 makna: (1) seiring dengan = につれて; (2) menurut / mengikuti (peraturan).",
+    tags: ["N3", "Proporsional", "Perubahan"]
+  },
+  {
+    id: "n3bp_datta_kedo_mama",
+    pattern: "～だったけど / のまま（無事でした）",
+    romajiPattern: "~ datta kedo / mama (buji deshita)",
+    meaning: "Meskipun terjadi X / tapi dalam kondisi tetap — alhamdulillah (cerita saat bencana)",
+    formula: "Peristiwa bahaya + だったけど / だから + ～のまま 無事でした",
+    level: "N3",
+    category: "Kondisi Meskipun",
+    explanation: "Bentuk ekspresi naratif — biasanya menceritakan kejadian bencana / genting tapi berakhir selamat.",
+    exampleSentences: [
+      { japanese: "台風だったけど、私は家にいたのまま無事でした。", hiragana: "たいふう だったけど、わたし は いえ に いた のまま ぶじ でした。", translation: "Waktu itu ada topan kemarin, tapi karena saya di rumah jadinya tetap aman." },
+      { japanese: "危なかったけど、間一髪で助かった。", hiragana: "あぶなかったけど、かんいっぱつ で たすかった。", translation: "Sangat bahaya, tapi selamat dalam seujung rambut." },
+      { japanese: "地震があったけど、みんな無事だった。", hiragana: "じしん が あったけど、みんな ぶじ だった。", translation: "Ada gempa, tapi semua orang selamat." }
+    ],
+    notes: "まれに soal N3 — pola naratif cerita selamat dari bahaya.",
+    tags: ["N3", "Meskipun", "Keselamatan"]
   }
 ];
