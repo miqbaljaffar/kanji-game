@@ -1750,7 +1750,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Dengan / Melalui / Atas dasar (menyatakan sarana formal, batas waktu, atau alasan)",
     formula: "Kata Benda + をもって + Kalimat",
     level: "N3",
-    category: "Partikel Formal",
+    category: "Sopan & Kehormatan",
     explanation: "Pola formal yang berarti 'dengan (menggunakan)', 'dengan dasar', atau 'pada (batas waktu)'. Digunakan dalam situasi resmi, tertulis, atau perpisahan.",
     exampleSentences: [
       { japanese: "この工場では、安全をもって最優先です。", hiragana: "この こうじょう では、あんぜん をもって さいゆうせん です。", translation: "Di pabrik ini, keselamatan adalah prioritas utama." },
@@ -1768,7 +1768,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Sebelum / Di awal (menyatakan sesuatu yang dilakukan lebih dahulu dari event utama)",
     formula: "Kata Benda (Acara) / Kata Kerja bentuk kamus + に先立ち / に先立って",
     level: "N3",
-    category: "Urutan Waktu",
+    category: "Ungkapan & Keinginan",
     explanation: "Menyatakan bahwa suatu aksi persiapan dilakukan sebelum event besar dimulai. Biasanya untuk acara, rapat, proyek, peluncuran.",
     exampleSentences: [
       { japanese: "新しい法律は来年に先立ち実施される予定です。", hiragana: "あたらしい ほうりつ は らいねん にさきだち じっし される よてい です。", translation: "Undang-undang baru rencananya akan diberlakukan mulai tahun depan." },
@@ -1785,7 +1785,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Habis / Putus / Mati total (menyatakan pasokan/tenaga yang habis sama sekali)",
     formula: "Kata Benda (pasokan: 電気, ガス, 水, お金, ネット) + が切れる",
     level: "N3",
-    category: "Kondisi",
+    category: "Ungkapan & Keinginan",
     explanation: "「切れる」berarti 'terpotong / habis total'. Digunakan untuk listrik, gas, air, pulsa, kuota internet, dompet kosong dll yang benar-benar berhenti.",
     exampleSentences: [
       { japanese: "電気がきれて、真っ暗になった。", hiragana: "でんき がきれて、まっくら に なった。", translation: "Listrik mati, jadi gelap gulita." },
@@ -1803,7 +1803,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Menuju / Ke arah (mengarahkan aksi); ぶちまける = mengeluarkan isi hati/meluapkan",
     formula: "Kata Benda (arah) + に向かって + Kata Kerja; （悩みなどを）ぶちまける",
     level: "N3",
-    category: "Arah & Ekspresi",
+    category: "Partikel",
     explanation: "に向かって: bergerak/berbicara menuju arah tertentu. ぶちまける (kata kerja N3): meluapkan perasaan (keluh kesah, rahasia, dll) sepenuhnya kepada orang.",
     exampleSentences: [
       { japanese: "彼は友達に向かって、いつも悩み事をぶちまけている。", hiragana: "かれ は ともだち にむかって、いつも なやみごと を ぶちまけて いる。", translation: "Dia selalu meluapkan masalahnya kepada temannya." },
@@ -1820,7 +1820,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Selain itu / Terlebih lagi / Di atas itu (menambah poin buruk atau baik)",
     formula: "Klausa 1 (普通形) + 上に + Klausa 2; Kata Benda + もさらに",
     level: "N3",
-    category: "Penambahan",
+    category: "Ungkapan & Keinginan",
     explanation: "Digunakan untuk menambahkan fakta kedua (biasanya memperparah atau memperbaiki) ke fakta pertama. Mirip だけでなく tapi penekanannya bertubi-tubi.",
     exampleSentences: [
       { japanese: "この靴はサイズが合わない上に、色もさらに悪い。", hiragana: "この くつ は サイズ が あわない うえに、いろ もさらに わるい。", translation: "Sepatu ini selain ukurannya tidak pas, warnanya juga jelek." },
@@ -1837,7 +1837,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Sekitar / Di sekitar (area tertentu yang tidak pasti tepatnya)",
     formula: "Kata Benda (tempat/waktu) + のあたりに",
     level: "N3",
-    category: "Lokasi & Waktu",
+    category: "Partikel",
     explanation: "Menyatakan area sekitar yang tidak spesifik persis. Bisa tempat (sekitar stasiun) atau waktu (sekitar jam 3). Mirip ごろ tapi nuansa lebih 'sekitar area'",
     exampleSentences: [
       { japanese: "あの店のあたりに、田中さんを見たことがある。", hiragana: "あの みせ のあたりに、たなか さん を みた こと が ある。", translation: "Saya pernah melihat Tanaka-san sekitar area toko itu." },
@@ -1854,7 +1854,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Sebagai (X) / Menurut standar X (menilai dari standar suatu kategori)",
     formula: "Kata Benda (Profesi / Status / Tingkat) + としては + Penilaian",
     level: "N3",
-    category: "Sudut Pandang",
+    category: "Syarat & Perbandingan",
     explanation: "Menghubungkan 'kategori/identitas' dengan 'evaluasi penilaian'. Nuansa: 'menurut standar seorang X (dia bagus / kurang)'.",
     exampleSentences: [
       { japanese: "学生としては、まず第一に学業が大切だ。", hiragana: "がくせい としては、まず だいいち に がくぎょう が たいせつ だ。", translation: "Bagi seorang pelajar, yang utama adalah pendidikan." },
@@ -1871,7 +1871,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Dipicu oleh / Berawal dari / Akibat peristiwa (menyatakan pemicu perubahan besar)",
     formula: "Kata Benda (Peristiwa) + をきっかけに + Perubahan",
     level: "N3",
-    category: "Pemicu",
+    category: "Ungkapan & Keinginan",
     explanation: "Menyatakan suatu peristiwa (nikah, kecelakaan, pindah, hamil, bergabung komunitas) menjadi titik balik perubahan besar dalam hidup.",
     exampleSentences: [
       { japanese: "彼は結婚をきっかけに、急にしっかりしてきた。", hiragana: "かれ は けっこん をきっかけに、きゅうに しっかり してきた。", translation: "Setelah menikah, dia tiba-tiba jadi dewasa." },
@@ -1888,7 +1888,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Perlu waktu sampai titik X (menghabiskan waktu/biaya sampai batas tertentu)",
     formula: "Kata Benda (waktu/tujuan) + までかかる / までかかって + Klausa",
     level: "N3",
-    category: "Waktu & Usaha",
+    category: "Ungkapan & Keinginan",
     explanation: "かかる = butuh (waktu/biaya/tenaga). Digunakan untuk menyatakan 'sampai sejauh itu pun usaha tetap tidak selesai' atau 'perlu sampai titik itu'.",
     exampleSentences: [
       { japanese: "この本は、週末までかかっても読みきれないだろう。", hiragana: "この ほん は、しゅうまつ までかかっても よみきれない だろう。", translation: "Buku ini bahkan sampai akhir pekan mungkin tidak akan selesai dibaca." },
@@ -1905,7 +1905,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Selagi / Sebelum sempat / Di saat (melakukan dalam masa kesempatan masih ada)",
     formula: "Kata Kerja (ない形 / ている形) + うちに; い Adj い / な Adj な + うちに",
     level: "N3",
-    category: "Kesempatan Waktu",
+    category: "Ungkapan & Keinginan",
     explanation: "Sangat penting N3. Digunakan untuk melakukan aksi 'sebelum keadaan berubah dan kesempatan hilang'",
     exampleSentences: [
       { japanese: "雨が降るうちに、早く家に帰ろう。", hiragana: "あめ が ふる うちに、はやく いえ に かえろう。", translation: "Sebelum hujan turun, ayo pulang cepat." },
@@ -1923,7 +1923,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Di samping / Sambil (melakukan kegiatan utama + kegiatan sampingan yang serius)",
     formula: "Kata Kerja (Kamus形) / Kata Benda の + かたわら + Kegiatan kedua",
     level: "N3",
-    category: "Kegiatan Bersamaan",
+    category: "Bentuk Kata Kerja",
     explanation: "Bedakan dengan ながら! ながら: sambil santai (makan sambil nonton TV). かたわら: kegiatan utama + side job/hobi yang serius & berlangsung lama.",
     exampleSentences: [
       { japanese: "ピアノを弾くかたわら、歌も上手です。", hiragana: "ピアノ を ひく かたわら、うた も じょうず です。", translation: "Selain main piano, dia juga pandai bernyanyi." },
@@ -1940,7 +1940,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Setelah melakukan (baru kemudian) / Atas dasar (berdasarkan)",
     formula: "Kata Kerja (た形 / 辞書形) / Kata Benda の + うえで",
     level: "N3",
-    category: "Urutan & Dasar",
+    category: "Ungkapan & Keinginan",
     explanation: "Dua makna: (1) Urutan: setelah selesai X, lakukan Y (penting Y harus sesudah X). (2) Atas dasar: berdasarkan data/pembahasan sebelumnya.",
     exampleSentences: [
       { japanese: "説明書をよく読んだうえで、組み立ててください。", hiragana: "せつめいしょ を よく よんだ うえで、くみたててください。", translation: "Tolong baca panduan dulu baru rakit setelahnya." },
@@ -1957,7 +1957,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Meskipun begitu / Walaupun begitu (tetap berlanjut meskipun ada halangan)",
     formula: "Klausa kesulitan + それでも + Klausa (usaha yang tetap berjalan)",
     level: "N3",
-    category: "Konjungsi",
+    category: "Ungkapan & Keinginan",
     explanation: "Konjungsi N3 populer. 'Meski ada fakta negatif sebelumnya, tapi tetap lanjut'.",
     exampleSentences: [
       { japanese: "何度練習しても、上手にならない。それでも、やる気はあるんだから、続けよう。", hiragana: "なんど れんしゅう しても、じょうず に ならない。それでも、やるき は ある んだから、つづけよう。", translation: "Walau berkali-kali latihan tidak jago, tapi karena ada kemauan, ayo teruskan." },
@@ -1974,7 +1974,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Bahkan untuk X pun / Seandainya menjadi X pun (menekankan kesulitan)",
     formula: "Kata Benda / Kata Kerja/Kata Sifat (普通形) + にしたって",
     level: "N3",
-    category: "Tekanan",
+    category: "Syarat & Perbandingan",
     explanation: "Bentuk kasual dari にしても (even if / even for). Menekankan: 'bahkan X pun sama saja sulitnya'.",
     exampleSentences: [
       { japanese: "この仕事は私にしたって、彼にはとてもできない。", hiragana: "この しごと は わたし にしたって、かれ に は とても できない。", translation: "Pekerjaan ini bahkan untuk saya (lebih ahli), apalagi dia pasti tidak mampu." },
@@ -1991,7 +1991,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Bahkan untuk X / Kepada orang seperti X pun (menurunkan standar / merendahkan)",
     formula: "Kata Benda (tingkat kesulitan rendah: 子供, 初心者, あなた) + にでも",
     level: "N3",
-    category: "Batas Minimum",
+    category: "Syarat & Perbandingan",
     explanation: "Menunjukkan 'bahkan untuk target level terendah pun bisa', sehingga standar adalah minimal.",
     exampleSentences: [
       { japanese: "子供のにでも分かるような、易しい本を選んでください。", hiragana: "こども のにでも わかる ような、やさしい ほん を えらんでください。", translation: "Tolong pilih buku mudah yang bahkan anak-anak pun bisa mengerti." },
@@ -2008,7 +2008,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Sesuai dengan / Mengikuti (persis seperti yang dijanjikan/diajarkan/ditulis)",
     formula: "Kata Benda の / Kata Kerja（辞書形・た形） + どおりに",
     level: "N3",
-    category: "Kesesuaian",
+    category: "Syarat & Perbandingan",
     explanation: "Melakukan sesuatu persis sama seperti acuan (buku panduan, ucapan, contoh, jadwal). Tanpa penyimpangan.",
     exampleSentences: [
       { japanese: "彼は男らしくどおりに、困難に立ち向かった。", hiragana: "かれ は おとこらしくどおりに、こんなん に たちむかった。", translation: "Seperti selayaknya laki-laki sejati, dia menghadapi kesulitan." },
@@ -2026,7 +2026,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Karena (beralasan dengan perasaan pribadi, sering menyalahkan keadaan)",
     formula: "Klausa (普通形) + ものだから + Hasil (umumnya tidak disengaja)",
     level: "N3",
-    category: "Alasan",
+    category: "Ungkapan & Keinginan",
     explanation: "Alasan dengan nuansa 'memohon dimaklumi' / 'keadaan yang tidak diinginkan'. Lebih emosional dibanding から / ので.",
     exampleSentences: [
       { japanese: "朝走ってきたものだから、息が切れている。", hiragana: "あさ はしってきた ものだから、いき が きれて いる。", translation: "Karena tadi lari pagi, jadi sampai terengah-engah." },
@@ -2043,7 +2043,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Dalam keadaan tetap / Tanpa perubahan / Asalkan begitu saja",
     formula: "Kata Kerja（た形 / ない形） / Kata Benda + の / い Adj / な Adj な + まま（で）",
     level: "N3",
-    category: "Keadaan Tetap",
+    category: "Ungkapan & Keinginan",
     explanation: "Menunjukkan 'keadaan yang tidak diubah' — biasanya suatu hal yang tabiatnya harusnya diubah tapi tidak (misal: sepatu masuk rumah, TV nyala tidur).",
     exampleSentences: [
       { japanese: "この町は昔のままで、静かでいい所です。", hiragana: "この まち は むかし のままで、しずか で いい ところ です。", translation: "Kota ini masih seperti dahulu, jadi tenang dan bagus." },
@@ -2061,7 +2061,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Meskipun melakukan / Andai pun mencoba (tidak berguna / sia-sia)",
     formula: "Kata Kerja意向形（Volitional） + としたところで + Klausa negatif (tidak bisa / sia-sia)",
     level: "N3",
-    category: "Percobaan Sia-sia",
+    category: "Syarat & Perbandingan",
     explanation: "Menekankan 'usaha apa pun tidak membuahkan hasil'. Seperti ～ても tapi lebih kuat nuansa 'sia-sia, tidak ada arti usaha'",
     exampleSentences: [
       { japanese: "いくら説明したとしたところで、彼は分かってくれなかった。", hiragana: "いくら せつめい した としたところで、かれ は わかって くれなかった。", translation: "Betapapun saya jelaskan berkali-kali, dia tidak mau mengerti juga." },
@@ -2078,7 +2078,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Dengan ini / Atas ini (ungkapan resmi untuk penutupan, perpisahan)",
     formula: "Kata Benda (Waktu / Status) + をもちまして + Klausa formal (biasanya penutupan)",
     level: "N3",
-    category: "Ungkapan Formal",
+    category: "Partikel",
     explanation: "Paling sering di pidato, surat, meeting resmi: 'Dengan ini saya akhiri / nyatakan / dll'. Bentuk sopan 丁寧語 dari をもって.",
     exampleSentences: [
       { japanese: "今日は用事があるので、これをもちまして失礼します。", hiragana: "きょう は ようじ が ある ので、これをもちまして しつれい します。", translation: "Karena hari ini ada urusan, dengan ini saya pamit undur diri." },
@@ -2095,7 +2095,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Melalui (perantara / periode) / Sepanjang (masa)",
     formula: "Kata Benda (Perantara / Periode Waktu) + を通じて + Klausa",
     level: "N3",
-    category: "Perantara & Periode",
+    category: "Ungkapan & Keinginan",
     explanation: "2 Makna penting: (1) Melalui perantara (internet, teman, media). (2) Sepanjang masa (sepanjang tahun, sepanjang sejarah).",
     exampleSentences: [
       { japanese: "年を通じて、季節の移ろいが感じられる。", hiragana: "とし をつうじて、きせつ の うつろい が かんじられる。", translation: "Sepanjang tahun, orang bisa merasakan pergantian musim." },
@@ -2113,7 +2113,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Terlalu / Sangat sampai (berakibat negatif karena keberlebihan)",
     formula: "Kata Benda の / Kata Sifat / Kata Kerja（普通形） + あまり + Akibat",
     level: "N3",
-    category: "Akibat Berlebihan",
+    category: "Ungkapan & Keinginan",
     explanation: "Karena sesuatu terlalu berlebihan (emosi biasanya: 驚き, 悲しみ, 嬉しさ, 緊張) sehingga menyebabkan akibat yang aneh / tidak baik.",
     exampleSentences: [
       { japanese: "忙しいあまり、休みをも取っている暇もありません。", hiragana: "いそがしいあまり、やすみ を も とって いる ひま も ありません。", translation: "Saking sibuknya, bahkan tidak ada waktu untuk beristirahat sama sekali." },
@@ -2131,7 +2131,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Andaikata tanpa bantuan X (kalau tidak ada X)",
     formula: "Kata Benda + （の助け / のおかげ / がなかったら） + ～なかっただろう / できなかった",
     level: "N3",
-    category: "Percobaan Tidak Nyata",
+    category: "Syarat & Perbandingan",
     explanation: "Pola ungkapan terima kasih / penyesalan: 'Andaikan kalau tidak ada X, maka hasilnya pasti JELEK / tidak berhasil'.",
     exampleSentences: [
       { japanese: "田中さんの助けがなかったら、このプロジェクトは成功しなかっただろう。", hiragana: "たなか さんの たすけ が なかったら、この プロジェクト は せいこう しなかった だろう。", translation: "Andaikan tanpa bantuan Tanaka, proyek ini pasti tidak berhasil." },
@@ -2148,7 +2148,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Tanpa X (tidak mungkin bisa terjadi)",
     formula: "Kata Benda + なしに（は） + Kalimat negatif / mustahil",
     level: "N3",
-    category: "Keharusan",
+    category: "Syarat & Perbandingan",
     explanation: "'Tanpa adanya X, Y pasti tidak mungkin'. Kata-kata inspirasi N3. X adalah faktor KRITIS.",
     exampleSentences: [
       { japanese: "努力なしには、成功はない。", hiragana: "どりょく なしには、せいこう は ない。", translation: "Tanpa usaha, tidak ada kesuksesan." },
@@ -2166,7 +2166,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Selama / Sepanjang / Mencakup (rentang panjang & luas)",
     formula: "Kata Benda (Periode panjang / Area luas) + にわたって + Klausa",
     level: "N3",
-    category: "Rentang Waktu & Area",
+    category: "Ungkapan & Keinginan",
     explanation: "Untuk rentang yang PANJANG & LUAS: 1 tahun, seluruh kota, seluruh cabang perusahaan, 3 jam rapat, dll. Beda dengan で yang hanya spot.",
     exampleSentences: [
       { japanese: "会議は2時間にわたって行われた。", hiragana: "かいぎ は にじかん にわたって おこなわれた。", translation: "Rapat berlangsung selama 2 jam (penuh)."},
@@ -2184,7 +2184,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Sampai sejauh itu / Bahkan sampai melakukan (sampai melakukan hal yang tidak seharusnya)",
     formula: "Kata Benda / Kata Kerja 辞書形 + までして + Klausa (usaha keras atau perbuatan negatif)",
     level: "N3",
-    category: "Titik Ekstrem",
+    category: "Syarat & Perbandingan",
     explanation: "Menunjukkan titik EKSTRIM (sampai sejauh itu). Ada 2 arah: (a) Berkorban demi tujuan baik, atau (b) Sampai melakukan hal buruk demi tujuan.",
     exampleSentences: [
       { japanese: "どうしても必要なら、明日までして手伝いに行こう。", hiragana: "どうしても ひつよう なら、あした までして てつだいに いこう。", translation: "Kalau benar-benar perlu, besok saya akan datang membantu (sampai lewat batas waktu)." },
@@ -2202,7 +2202,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Bersamaan dengan / Seiring dengan (perubahan X menyebabkan perubahan Y)",
     formula: "Kata Benda (Perubahan) / Kata Kerja 辞書形 + に伴って + Klausa perubahan kedua",
     level: "N3",
-    category: "Perubahan Bersamaan",
+    category: "Ungkapan & Keinginan",
     explanation: "Jika X berubah, Y otomatis berubah juga (kausal). Biasanya untuk: perubahan sosial, ekonomi, teknologi, peningkatan populasi, dll. Lebih formal daripada につれて.",
     exampleSentences: [
       { japanese: "社長が急に変わったに伴って、社内はずいぶん変わった。", hiragana: "しゃちょう が きゅうに かわった にともなって、しゃない は ずいぶん かわった。", translation: "Seiring dengan pergantian direktur mendadak, suasana kantor banyak berubah." },
@@ -2219,7 +2219,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Oleh / Berdasarkan / Karena / Tergantung (4 makna utama N3!)",
     formula: "Kata Benda + によって / による",
     level: "N3",
-    category: "Multi-Makna",
+    category: "Partikel",
     explanation: "Paling multi-fungsi N3! 4 makna wajib tahu: (1) 原因 = karena (kecelakaan dll). (2) 手段 = dengan / melalui. (3) 受身 agent = oleh (si pelaku passive). (4) 基準 = tergantung / berbeda menurut.",
     exampleSentences: [
       { japanese: "今回の事故は不注意によって起きたものだ。", hiragana: "こんかい の じこ は ふちゅうい によって おきた もの だ。", translation: "Kecelakaan ini disebabkan oleh kelalaian." },
@@ -2237,7 +2237,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Meskipun seharusnya / Di luar dugaan (hasil tidak sesuai dengan kenyataan)",
     formula: "普通形（Kata Kerja / Kata Sifat / Kata Benda な） + わりには + Hasil (yang tidak terduga)",
     level: "N3",
-    category: "Kontrasepsi",
+    category: "Syarat & Perbandingan",
     explanation: "Menunjukkan 'tidak sebanding / tidak sesuai harapan'. Ada 2 arah: (a) Harusnya jelek tapi bagus; (b) Harusnya bagus tapi jelek.",
     exampleSentences: [
       { japanese: "彼女は先生わりには、とても厳しいです。", hiragana: "かのじょ は せんせい わりには、とても きびしいです。", translation: "Walaupun dia guru, tapi galak banget (padahal guru biasanya ramah)." },
@@ -2255,7 +2255,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Setelah sekian lama (akhirnya) / Pada akhirnya (hasil setelah proses panjang & berliku)",
     formula: "Kata Kerja（た形） / Kata Benda の + すえに + Hasil Akhir",
     level: "N3",
-    category: "Akhir Perjalanan",
+    category: "Bentuk Kata Kerja",
     explanation: "Setelah berbagai macam pergolakan, percobaan, penderitaan — akhirnya ada hasil. Mirip あげくに, tapi すえに hasilnya BISA BAIK BISA BURUK. あげくに: biasanya buruk.",
     exampleSentences: [
       { japanese: "あの二人は喧嘩していたすえに、結婚した。", hiragana: "あの ふたり は けんか して いたすえに、けっこん した。", translation: "Mereka berdua setelah sering bertengkar hebat, akhirnya menikah." },
@@ -2272,7 +2272,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Perkiraan / Prospek / Kemungkinan besar (suatu hal yang diperkirakan akan terjadi)",
     formula: "Kata Kerja 辞書形 / ない形 + 見込み; ～見込みが（高い / 薄い / ある）",
     level: "N3",
-    category: "Prospek",
+    category: "Ungkapan & Keinginan",
     explanation: "見込み = kemungkinan terjadinya (berdasarkan data/fakta). Lawan: おそれ = kemungkinan BURUK.",
     exampleSentences: [
       { japanese: "明日は雨が降る見込みが高い。", hiragana: "あした は あめ が ふる みこみ が たかい。", translation: "Kemungkinan besok hujan tinggi." },
@@ -2290,7 +2290,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Tentu saja / Sudah pasti (tidak perlu diucapkan lagi / sudah jelas)",
     formula: "Klausa + 言うまでもなく + Fakta umum / Kebenaran",
     level: "N3",
-    category: "Kebolehan",
+    category: "Ungkapan & Keinginan",
     explanation: "Sesuatu yang sangat jelas, bahkan tidak perlu dijelaskan. Sama dengan もちろん tapi lebih kuat.",
     exampleSentences: [
       { japanese: "彼は勉強も言うまでもなく、スポーツもできる優等生だ。", hiragana: "かれ は べんきょう もいうまでもなく、スポーツ も できる ゆうとうせい だ。", translation: "Dia itu siswa teladan, belajar jelas pintar apalagi olahraga juga bisa." },
@@ -2307,7 +2307,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Menurut (sumber informasi: berita, kabar, orang, rumor)",
     formula: "Kata Benda (Sumber: ニュース, 天気予報, 彼の話, うわさ) + によると / によれば",
     level: "N3",
-    category: "Informasi",
+    category: "Ungkapan & Keinginan",
     explanation: "Menampilkan sumber info. Selalu diikuti そうだ / ということだ / らしい / ようだ (bukti itu adalah info dari luar, bukan kepastian pribadi).",
     exampleSentences: [
       { japanese: "ニュースによると、今年の冬は暖かいらしい。", hiragana: "ニュース によると、ことし の ふゆ は あたたかい らしい。", translation: "Kabarnya menurut berita, musim dingin tahun ini sepertinya hangat." },
@@ -2324,7 +2324,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Tepat saat / Barusan saja (kejadian kedua terjadi TEPAT setelah kejadian pertama, biasanya kejadian tak terduga / negatif)",
     formula: "Kata Kerja（た形） + とたんに + Kejadian mendadak (biasanya tak terduga)",
     level: "N3",
-    category: "Momen Singkat",
+    category: "Bentuk Kata Kerja",
     explanation: "Titik perubahan SANGAT SINGKAT (detik). Ciri khas: sering ada 'kaget / kejadian yang tidak disangka'.",
     exampleSentences: [
       { japanese: "ボタンを押したとたんに、電源が切れてしまった。", hiragana: "ボタン を おしたとたんに、でんげん が きれて しまった。", translation: "Tepat saat menekan tombol, listriknya malah mati mendadak." },
@@ -2341,7 +2341,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Sedang di tengah (melakukan sesuatu, di tengah-tengah acara)",
     formula: "Kata Kerja ている形 + 最中に; Kata Benda の + 最中（に / の）",
     level: "N3",
-    category: "Proses Berjalan",
+    category: "Bentuk Kata Kerja",
     explanation: "Kegiatan dalam PROGRESS / sedang berlangsung penuh, lalu ada gangguan di tengah.",
     exampleSentences: [
       { japanese: "食事最中のタバコはやめなさい。", hiragana: "しょくじ さいちゅうの タバコ は やめなさい。", translation: "Berhentilah merokok saat sedang makan." },
@@ -2358,7 +2358,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Padahal / Sekiranya (menyesali sesuatu yang tidak dilakukan, padahal bisa)",
     formula: "～たら / ～ば + 良かった ものを; ～ないものを (padahal tidak perlu)",
     level: "N3",
-    category: "Penyesalan",
+    category: "Syarat & Perbandingan",
     explanation: "Menyesali: 'Seandainya melakukan X, pasti sukses. Tapi TIDAK dilakukan jadi menyesal'. Padahal kalau dikasih tahu / dikerjakan — hasilnya beda.",
     exampleSentences: [
       { japanese: "彼は時間だったらものを、いつも早く来る彼だけど、今日は遅いですね。", hiragana: "かれ は じかん だったらものを、いつも はやく くる かれ だけど、きょう は おそい です ね。", translation: "Padahal biasanya dia selalu datang awal cuma kenapa hari ini lambat ya (menyesali)." },
@@ -2375,7 +2375,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Dekat dengan (lokasi / waktu) — sehingga memberi konsekuensi praktis",
     formula: "Kata Benda + に近い + Klause akibat",
     level: "N3",
-    category: "Kedekatan",
+    category: "Partikel",
     explanation: "Menyatakan kedekatan (tempat / waktu / angka) beserta akibatnya yang menguntungkan/merugikan.",
     exampleSentences: [
       { japanese: "このマンションは駅に近いので、便利です。", hiragana: "この マンション は えき にちかい ので、べんり です。", translation: "Apartemen ini dekat stasiun, jadi praktis." },
@@ -2392,7 +2392,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Selain / Kecuali (selain X, tidak ada yang lain)",
     formula: "Kata Benda / Klausa 普通形 + 以外に",
     level: "N3",
-    category: "Pengecualian",
+    category: "Syarat & Perbandingan",
     explanation: "Menyatakan bahwa 'selain pilihan X, TIDAK ADA PILIHAN LAIN' — atau kadang 'ada juga pilihan lain'.",
     exampleSentences: [
       { japanese: "この仕事を一人と、任せられる人は彼以外にいない。", hiragana: "この しごと を ひとり と、まかせられる ひと は かれ いがいに いない。", translation: "Tidak ada orang lain selain dia yang bisa dipercaya untuk menangani pekerjaan ini sendirian." },
@@ -2409,7 +2409,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Seiring dengan / Mengikuti (semakin X, maka semakin Y juga)",
     formula: "Kata Kerja 辞書形 / Kata Benda + につれて / にしたがって + Klausa perubahan",
     level: "N3",
-    category: "Perubahan Proporsional",
+    category: "Ungkapan & Keinginan",
     explanation: "Hubungan linear: X bertambah → Y ikut bertambah (atau berkurang sama arah). Lebih personal & natural dari にともなって.",
     exampleSentences: [
       { japanese: "日が沈むにつれて、景色がだんだん暗くなってきた。", hiragana: "ひ が しずむ につれて、けしき が だんだん くらく なって きた。", translation: "Seiring matahari terbenam, pemandangan perlahan-lahan menjadi gelap." },
@@ -2426,7 +2426,7 @@ export const bunpouDictionaryData: BunpouDictionaryEntry[] = [
     meaning: "Meskipun terjadi X / tapi dalam kondisi tetap — alhamdulillah (cerita saat bencana)",
     formula: "Peristiwa bahaya + だったけど / だから + ～のまま 無事でした",
     level: "N3",
-    category: "Kondisi Meskipun",
+    category: "Syarat & Perbandingan",
     explanation: "Bentuk ekspresi naratif — biasanya menceritakan kejadian bencana / genting tapi berakhir selamat.",
     exampleSentences: [
       { japanese: "台風だったけど、私は家にいたのまま無事でした。", hiragana: "たいふう だったけど、わたし は いえ に いた のまま ぶじ でした。", translation: "Waktu itu ada topan kemarin, tapi karena saya di rumah jadinya tetap aman." },
