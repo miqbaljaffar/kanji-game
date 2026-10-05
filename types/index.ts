@@ -4,7 +4,8 @@ export interface KanjiEntry {
   kanji: string;
   hiragana: string;
   arti: string;
-  category: string; // ✅ FIX: Diubah dari number menjadi string
+  category: string;
+  level: "N5" | "N4";
   onyomi?: string;
   kunyomi?: string;
   mnemonic?: string;
@@ -55,7 +56,10 @@ export interface BunpouEntry {
   translation: string;
   options: string[];
   correctOption: string;
+  level: "N5" | "N4";
 }
+
+export type JlptLevel = "N5" | "N4";
 
 export type BunpouCategory =
   | "Partikel"

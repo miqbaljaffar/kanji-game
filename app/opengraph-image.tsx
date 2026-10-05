@@ -78,7 +78,7 @@ export default function OpenGraphImage() {
 
         {/* Badges */}
         <div style={{ display: "flex", gap: 16 }}>
-          {["JLPT N5", "JLPT N4", "JFT A2"].map((badge) => (
+          {["JLPT N5", "JLPT N4"].map((badge) => (
             <div
               key={badge}
               style={{

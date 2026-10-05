@@ -17,6 +17,8 @@ const LEVEL_STYLE = {
 export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const isSingle = entry.kanjiCount === 1;
+  const isShortCompound = entry.kanjiCount === 2;
+  const isLongCompound = entry.kanjiCount >= 3;
   const lv = LEVEL_STYLE[entry.level as "N5" | "N4"] ?? LEVEL_STYLE.N5;
 
   const playTTS = (e: React.MouseEvent) => {
@@ -98,20 +100,39 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
       </div>
 
       {/* Main Kanji */}
-      <div className="my-1 text-center">
+      <div className="my-1 text-center min-h-[84px] sm:min-h-[96px] flex flex-col items-center justify-center">
         <div
-          className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 group-hover:text-green-600 transition-colors break-all"
-          style={{ fontFamily: "var(--font-jp)" }}
+          className={clsx(
+            "w-full font-black text-slate-800 group-hover:text-green-600 transition-colors whitespace-nowrap",
+            isSingle
+              ? "text-4xl sm:text-5xl md:text-6xl leading-tight"
+              : isShortCompound
+                ? "text-2xl sm:text-3xl md:text-4xl leading-tight"
+                : "text-xl sm:text-2xl md:text-3xl leading-snug",
+          )}
+          style={{
+            fontFamily: "var(--font-jp)",
+            overflowWrap: "normal",
+            wordBreak: "keep-all",
+          }}
         >
           {entry.kanji}
         </div>
         <div
-          className="text-[10px] sm:text-xs font-black text-slate-500 mt-1"
+          className={clsx(
+            "w-full font-black text-slate-500 mt-1 truncate",
+            isLongCompound ? "text-[9px] sm:text-[10px]" : "text-[10px] sm:text-xs",
+          )}
           style={{ fontFamily: "var(--font-jp)" }}
         >
           {entry.hiragana}
         </div>
-        <div className="text-[9px] sm:text-[10px] font-bold text-slate-400 italic">
+        <div
+          className={clsx(
+            "w-full font-bold text-slate-400 italic truncate",
+            isLongCompound ? "text-[8px] sm:text-[9px]" : "text-[9px] sm:text-[10px]",
+          )}
+        >
           {entry.romaji}
         </div>
       </div>

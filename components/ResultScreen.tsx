@@ -1,16 +1,22 @@
 "use client";
 import { useState, useMemo } from "react";
 import Image from "next/image";
-import { GameStats, GameMode, Difficulty } from "@/types";
+import { GameStats, GameMode, Difficulty, JlptLevel } from "@/types";
 import { Mascot } from "./Mascot";
 
 interface ResultScreenProps {
   stats: GameStats;
   gameMode: GameMode;
   difficulty: Difficulty;
+  level: JlptLevel;
   onPlayAgain: () => void;
   onHome: () => void;
 }
+
+const LEVEL_LABEL: Record<JlptLevel, { label: string; icon: string; color: string; bg: string; border: string }> = {
+  N5: { label: "JLPT N5", icon: "🟢", color: "#2a7000", bg: "#d7ffb8", border: "#58cc02" },
+  N4: { label: "JLPT N4", icon: "🔵", color: "#0c6b9e", bg: "#ddf4ff", border: "#1cb0f6" },
+};
 
 function getRankDetail(accuracy: number) {
   if (accuracy >= 90) return {
@@ -50,12 +56,13 @@ function makeConfetti() {
 
 const CONFETTI_ITEMS = makeConfetti();
 
-export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome }: ResultScreenProps) {
+export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, onHome }: ResultScreenProps) {
   const rank = getRankDetail(stats.accuracy);
   const [isDonationOpen, setIsDonationOpen] = useState(false);
   const [showThankYou,   setShowThankYou]   = useState(false);
 
   const showConfetti = stats.accuracy >= 70;
+  const lvl = LEVEL_LABEL[level];
 
   const handleCloseDonation = () => {
     setIsDonationOpen(false);
@@ -110,8 +117,21 @@ export function ResultScreen({ stats, gameMode, difficulty, onPlayAgain, onHome 
             style={{ background: `linear-gradient(90deg, ${rank.border}, ${rank.bottom})` }}
           />
 
+          {/* Level Badge */}
+          <div className="flex justify-center mb-3">
+            <div
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl"
+              style={{ background: lvl.bg, border: `1.5px solid ${lvl.border}` }}
+            >
+              <span className="text-base">{lvl.icon}</span>
+              <span className="text-[10px] font-black" style={{ color: lvl.color }}>
+                {lvl.label}
+              </span>
+            </div>
+          </div>
+
           {/* Rank badge */}
-          <div className="flex flex-col items-center gap-2 mb-4 mt-2">
+          <div className="flex flex-col items-center gap-2 mb-4">
             <div
               className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center font-black text-3xl sm:text-4xl animate-bounce-pop"
               style={{

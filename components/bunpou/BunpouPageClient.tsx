@@ -90,7 +90,7 @@ export function BunpouDictionaryPage() {
               📝 Ensiklopedia Bunpou
             </h1>
             <p className="text-[9px] sm:text-[10px] font-bold text-slate-500">
-              Rumus &amp; Tata Bahasa · N5 / N4 · JFT Basic A2
+              Rumus &amp; Tata Bahasa · JLPT N5 / N4
             </p>
           </div>
         </div>

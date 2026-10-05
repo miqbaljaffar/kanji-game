@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { GameMode, Difficulty } from "@/types";
+import { GameMode, Difficulty, JlptLevel } from "@/types";
 import { kanjiData } from "@/data/kanji";
 import { kanaData } from "@/data/kana";
 import { bunpouData } from "@/data/bunpou";
@@ -8,8 +8,21 @@ import Link from "next/link";
 import clsx from "clsx";
 
 interface HomeScreenProps {
-  onStart: (mode: GameMode, difficulty: Difficulty) => void;
+  onStart: (level: JlptLevel, mode: GameMode, difficulty: Difficulty) => void;
 }
+
+const LEVELS = [
+  {
+    id: "N5" as JlptLevel, label: "JLPT N5", icon: "🟢", desc: "Level Dasar",
+    sub: "Kosakata & Grammar Pemula",
+    bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000",
+  },
+  {
+    id: "N4" as JlptLevel, label: "JLPT N4", icon: "🔵", desc: "Level Menengah",
+    sub: "Kosakata & Grammar Lanjut",
+    bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e",
+  },
+];
 
 const MODES = [
   { id: "kanji-to-arti"      as GameMode, label: "漢字 → Arti",        desc: "Tebak Artinya",   icon: "📖", color: "#ddf4ff", border: "#1cb0f6" },
@@ -19,7 +32,7 @@ const MODES = [
   { id: "hiragana-to-romaji" as GameMode, label: "Romaji → ひら",      desc: "Tebak Hiragana",  icon: "🟣", color: "#f5e6ff", border: "#ce82ff" },
   { id: "katakana-to-romaji" as GameMode, label: "Romaji → カタ",      desc: "Tebak Katakana",  icon: "🔷", color: "#ddf4ff", border: "#1cb0f6" },
   { id: "mixed-kana"         as GameMode, label: "Romaji → ひら/カタ", desc: "Campuran Kana",   icon: "🔶", color: "#fff3e0", border: "#ff9600" },
-  { id: "bunpou"             as GameMode, label: "文法 (Bunpou)",       desc: "Tata Bahasa JFT", icon: "📝", color: "#ffe0e0", border: "#ff4b4b" },
+  { id: "bunpou"             as GameMode, label: "文法 (Bunpou)",       desc: "Tata Bahasa JLPT", icon: "📝", color: "#ffe0e0", border: "#ff4b4b" },
 ];
 
 const DIFFICULTIES = [
@@ -38,11 +51,18 @@ const DIFFICULTIES = [
 ];
 
 export function HomeScreen({ onStart }: HomeScreenProps) {
+  const [selectedLevel, setSelectedLevel] = useState<JlptLevel | null>(null);
   const [selectedMode, setSelectedMode] = useState<GameMode | null>(null);
   const [selectedDiff, setSelectedDiff] = useState<Difficulty | null>(null);
-  const [step, setStep]                 = useState<1 | 2>(1);
+  const [step, setStep]                 = useState<1 | 2 | 3>(1);
 
-  const selectedModeInfo = MODES.find((m) => m.id === selectedMode);
+  const selectedLevelInfo = LEVELS.find((l) => l.id === selectedLevel);
+  const selectedModeInfo  = MODES.find((m) => m.id === selectedMode);
+
+  const n5KanjiCount   = kanjiData.filter((k) => k.level === "N5").length;
+  const n4KanjiCount   = kanjiData.filter((k) => k.level === "N4").length;
+  const n5BunpouCount  = bunpouData.filter((b) => b.level === "N5").length;
+  const n4BunpouCount  = bunpouData.filter((b) => b.level === "N4").length;
 
   return (
     <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-3 sm:px-6 py-10">
@@ -51,7 +71,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       <div className="text-center mb-6 animate-fade-up mt-2">
         <div className="inline-block mb-3">
           <span className="rpg-badge-gold text-[9px] sm:text-[10px] tracking-[0.15em]">
-            ✦ JLPT N5 · N4 · JFT A2 ✦
+            ✦ JLPT N5 · N4 ✦
           </span>
         </div>
 
@@ -146,7 +166,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
           ))}
         </div>
 
-        {/* ── STEP 1: Pilih Mode ── */}
+        {/* ── STEP 1: Pilih Level JLPT ── */}
         {step === 1 ? (
           <div
             className="card-enter stagger-6 p-4 sm:p-5"
@@ -159,66 +179,173 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
             }}
           >
             <h2 className="text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
-              <span>🎮</span> Pilih Mode Quiz
+              <span>🎯</span> Pilih Level JLPT
             </h2>
 
-            <div className="grid grid-cols-2 gap-2 sm:gap-3">
-              {MODES.map((mode, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+              {LEVELS.map((lvl, index) => (
                 <button
-                  key={mode.id}
-                  onClick={() => { setSelectedMode(mode.id); setSelectedDiff(null); setStep(2); }}
-                  aria-label={`Pilih mode ${mode.desc}`}
-                  aria-pressed={selectedMode === mode.id}
+                  key={lvl.id}
+                  onClick={() => { setSelectedLevel(lvl.id); setSelectedMode(null); setSelectedDiff(null); setStep(2); }}
+                  aria-label={`Pilih level ${lvl.label}`}
                   className={clsx(
-                    "card-enter relative p-2.5 sm:p-3.5 flex flex-col items-center justify-center gap-1.5 text-center touch-manipulation min-h-[64px] sm:min-h-[72px] transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1",
-                    `stagger-${Math.min(index + 1, 12)}`,
-                    MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : "",
+                    "card-enter relative p-4 sm:p-5 flex flex-col items-start justify-start gap-2 text-left touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1",
+                    `stagger-${index + 1}`,
                   )}
                   style={{
-                    background: mode.color,
-                    border: `2px solid ${mode.border}`,
-                    borderBottom: `4px solid ${mode.border}`,
-                    borderRadius: 12,
+                    background: lvl.bg,
+                    border: `2px solid ${lvl.border}`,
+                    borderBottom: `4px solid ${lvl.bottom}`,
+                    borderRadius: 14,
                     cursor: "pointer",
                   }}
                 >
-                  <span className="text-xl sm:text-2xl">{mode.icon}</span>
-                  <div className="text-center">
-                    <div className="text-[8px] sm:text-[9px] font-black leading-tight text-slate-700"
-                      style={{ fontFamily: "var(--font-jp)" }}>{mode.label}</div>
-                    <div className="text-[8px] font-bold mt-0.5 text-slate-500">{mode.desc}</div>
+                  <div className="flex items-center gap-2 w-full">
+                    <span className="text-2xl sm:text-3xl">{lvl.icon}</span>
+                    <div className="flex-1">
+                      <div className="text-sm sm:text-base font-black leading-tight"
+                        style={{ color: lvl.text }}>{lvl.label}</div>
+                      <div className="text-[10px] font-bold mt-0.5" style={{ color: lvl.text, opacity: 0.8 }}>
+                        {lvl.desc}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-full mt-2 pt-2 border-t border-dashed"
+                    style={{ borderColor: `${lvl.border}55` }}>
+                    <div className="flex justify-between text-[10px] font-bold" style={{ color: lvl.text }}>
+                      <span>📚 Kosakata</span>
+                      <span>{lvl.id === "N5" ? n5KanjiCount : n4KanjiCount}</span>
+                    </div>
+                    <div className="flex justify-between text-[10px] font-bold mt-1" style={{ color: lvl.text }}>
+                      <span>📝 Grammar</span>
+                      <span>{lvl.id === "N5" ? n5BunpouCount : n4BunpouCount}</span>
+                    </div>
+                    <div className="text-[10px] font-bold mt-2" style={{ color: lvl.text, opacity: 0.8 }}>
+                      {lvl.sub}
+                    </div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
 
-        ) : (
-          /* ── STEP 2: Pilih Kecepatan ── */
+        ) : step === 2 ? (
+          /* ── STEP 2: Pilih Mode ── */
           <div className="space-y-3">
-            {selectedModeInfo && (
+            {selectedLevelInfo && (
               <div
                 className="screen-enter p-3.5 flex items-center justify-between"
                 style={{
-                  background: selectedModeInfo.color,
-                  border: `2px solid ${selectedModeInfo.border}`,
-                  borderBottom: `4px solid ${selectedModeInfo.border}`,
+                  background: selectedLevelInfo.bg,
+                  border: `2px solid ${selectedLevelInfo.border}`,
+                  borderBottom: `4px solid ${selectedLevelInfo.bottom}`,
                   borderRadius: 14,
                 }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{selectedModeInfo.icon}</span>
+                  <span className="text-2xl">{selectedLevelInfo.icon}</span>
                   <div>
-                    <div className="text-xs font-black text-slate-700" style={{ fontFamily: "var(--font-jp)" }}>
-                      {selectedModeInfo.label}
+                    <div className="text-xs font-black" style={{ color: selectedLevelInfo.text }}>
+                      {selectedLevelInfo.label}
                     </div>
-                    <div className="text-[9px] font-bold text-slate-500">{selectedModeInfo.desc}</div>
+                    <div className="text-[9px] font-bold" style={{ color: selectedLevelInfo.text, opacity: 0.8 }}>
+                      {selectedLevelInfo.desc}
+                    </div>
                   </div>
                 </div>
                 <button
-                  onClick={() => { setStep(1); setSelectedDiff(null); }}
-                  aria-label="Ubah mode quiz"
+                  onClick={() => { setStep(1); setSelectedMode(null); setSelectedDiff(null); }}
+                  aria-label="Ubah level JLPT"
                   className="rpg-btn text-[9px] px-3 py-2 touch-manipulation font-black text-slate-600"
+                >
+                  ✏ Ubah
+                </button>
+              </div>
+            )}
+
+            <div
+              className="screen-enter p-4 sm:p-5"
+              style={{
+                background: "#ffffff",
+                border: "2px solid #e5e7eb",
+                borderBottom: "4px solid #d1d5db",
+                borderRadius: 16,
+                boxShadow: "0 2px 10px rgba(0,0,0,0.06)",
+              }}
+            >
+              <h2 className="text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
+                <span>🎮</span> Pilih Mode Quiz
+              </h2>
+
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                {MODES.map((mode, index) => (
+                  <button
+                    key={mode.id}
+                    onClick={() => { setSelectedMode(mode.id); setSelectedDiff(null); setStep(3); }}
+                    aria-label={`Pilih mode ${mode.desc}`}
+                    aria-pressed={selectedMode === mode.id}
+                    className={clsx(
+                      "card-enter relative p-2.5 sm:p-3.5 flex flex-col items-center justify-center gap-1.5 text-center touch-manipulation min-h-[64px] sm:min-h-[72px] transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1",
+                      `stagger-${Math.min(index + 1, 12)}`,
+                      MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : "",
+                    )}
+                    style={{
+                      background: mode.color,
+                      border: `2px solid ${mode.border}`,
+                      borderBottom: `4px solid ${mode.border}`,
+                      borderRadius: 12,
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span className="text-xl sm:text-2xl">{mode.icon}</span>
+                    <div className="text-center">
+                      <div className="text-[8px] sm:text-[9px] font-black leading-tight text-slate-700"
+                        style={{ fontFamily: "var(--font-jp)" }}>{mode.label}</div>
+                      <div className="text-[8px] font-bold mt-0.5 text-slate-500">{mode.desc}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        ) : (
+          /* ── STEP 3: Pilih Kecepatan ── */
+          <div className="space-y-3">
+            {selectedLevelInfo && selectedModeInfo && (
+              <div
+                className="screen-enter p-3.5 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between"
+                style={{
+                  background: "#ffffff",
+                  border: "2px solid #e5e7eb",
+                  borderBottom: "4px solid #d1d5db",
+                  borderRadius: 14,
+                }}
+              >
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
+                    style={{ background: selectedLevelInfo.bg, border: `1px solid ${selectedLevelInfo.border}` }}
+                  >
+                    <span className="text-base">{selectedLevelInfo.icon}</span>
+                    <span className="text-[10px] font-black" style={{ color: selectedLevelInfo.text }}>
+                      {selectedLevelInfo.label}
+                    </span>
+                  </div>
+                  <div
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
+                    style={{ background: selectedModeInfo.color, border: `1px solid ${selectedModeInfo.border}` }}
+                  >
+                    <span className="text-base">{selectedModeInfo.icon}</span>
+                    <span className="text-[10px] font-black text-slate-700" style={{ fontFamily: "var(--font-jp)" }}>
+                      {selectedModeInfo.label}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setStep(2); setSelectedDiff(null); }}
+                  aria-label="Ubah mode quiz"
+                  className="rpg-btn text-[9px] px-3 py-2 touch-manipulation font-black text-slate-600 self-start sm:self-auto"
                 >
                   ✏ Ubah
                 </button>
@@ -282,8 +409,8 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
               {/* Tombol Mulai */}
               <div className="mt-4">
                 <button
-                  onClick={() => selectedMode && selectedDiff && onStart(selectedMode, selectedDiff)}
-                  disabled={!selectedMode || !selectedDiff}
+                  onClick={() => selectedLevel && selectedMode && selectedDiff && onStart(selectedLevel, selectedMode, selectedDiff)}
+                  disabled={!selectedLevel || !selectedMode || !selectedDiff}
                   aria-label="Mulai permainan"
                   className="rpg-btn-gold w-full py-4 text-sm sm:text-base font-black touch-manipulation rpg-glow-gold rounded-xl"
                 >

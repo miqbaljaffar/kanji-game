@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { KanjiEntry, KanaEntry, BunpouEntry, GameMode, GameState, AnswerState, GameStats, QuizQuestion, Difficulty } from "@/types";
+import { KanjiEntry, KanaEntry, BunpouEntry, GameMode, GameState, AnswerState, GameStats, QuizQuestion, Difficulty, JlptLevel } from "@/types";
 import { kanjiData, getRandomOptions, shuffleArray } from "@/data/kanji";
 import { kanaData, getRandomKanaOptions } from "@/data/kana";
 import { bunpouData } from "@/data/bunpou";
@@ -11,6 +11,7 @@ const QUESTIONS_PER_GAME = 20;
 
 export function useGame() {
   const [gameState, setGameState] = useState<GameState>("home");
+  const [selectedLevel, setSelectedLevel] = useState<JlptLevel>("N5");
   const [gameMode, setGameMode] = useState<GameMode>("kanji-to-arti");
   const [difficulty, setDifficulty] = useState<Difficulty>("medium");
   const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion | null>(null);
@@ -35,7 +36,7 @@ export function useGame() {
     }
   }, []);
 
-  const generateQuestion = useCallback((pool: (KanjiEntry | BunpouEntry | KanaEntry)[], index: number, currentMode: GameMode): QuizQuestion => {
+  const generateQuestion = useCallback((pool: (KanjiEntry | BunpouEntry | KanaEntry)[], index: number, currentMode: GameMode, level: JlptLevel): QuizQuestion => {
     if (currentMode === "bunpou") {
       const question = pool[index] as BunpouEntry;
       const options = shuffleArray([...question.options]);
@@ -54,22 +55,26 @@ export function useGame() {
     }
 
     const question = pool[index] as KanjiEntry;
-    const options = getRandomOptions(question, kanjiData, 4);
+    const filteredKanjiForOptions = kanjiData.filter((k) => k.level === level);
+    const options = getRandomOptions(question, filteredKanjiForOptions, 4);
     const correctIndex = options.findIndex((o) => o.id === question.id);
     return { mode: "kanji", kanjiQuestion: question, kanjiOptions: options, correctIndex };
   }, []);
 
-  const startGame = useCallback((mode: GameMode, diff: Difficulty) => {
-    // FIX: Kita deklarasikan tipe dataSource sebagai array campuran secara eksplisit di sini
+  const startGame = useCallback((level: JlptLevel, mode: GameMode, diff: Difficulty) => {
+    const rawKanjiForLevel = kanjiData.filter((k) => k.level === level);
+    const rawBunpouForLevel = bunpouData.filter((b) => b.level === level);
+
     const dataSource: (KanjiEntry | BunpouEntry | KanaEntry)[] =
       mode === "bunpou"
-        ? bunpouData
+        ? rawBunpouForLevel
         : mode === "hiragana-to-romaji" || mode === "katakana-to-romaji" || mode === "mixed-kana"
           ? kanaData
-          : kanjiData;
+          : rawKanjiForLevel;
     
     const pool = shuffleArray(dataSource).slice(0, QUESTIONS_PER_GAME);
     setQuestionPool(pool);
+    setSelectedLevel(level);
     setGameMode(mode);
     setDifficulty(diff);
     setQuestionIndex(0);
@@ -77,7 +82,7 @@ export function useGame() {
     setSelectedIndex(null);
     setStats({ score: 0, streak: 0, maxStreak: 0, correct: 0, wrong: 0, total: 0, timeSpent: 0, accuracy: 0 });
     setTimeLeft(QUESTION_TIME[diff]);
-    setCurrentQuestion(generateQuestion(pool, 0, mode));
+    setCurrentQuestion(generateQuestion(pool, 0, mode, level));
     setGameState("playing");
     startTimeRef.current = Date.now();
   }, [generateQuestion]);
@@ -92,8 +97,8 @@ export function useGame() {
     setAnswerState("idle");
     setSelectedIndex(null);
     setTimeLeft(QUESTION_TIME[difficulty]);
-    setCurrentQuestion(generateQuestion(questionPool, nextIndex, gameMode));
-  }, [questionIndex, questionPool, difficulty, gameMode, generateQuestion]);
+    setCurrentQuestion(generateQuestion(questionPool, nextIndex, gameMode, selectedLevel));
+  }, [questionIndex, questionPool, difficulty, gameMode, selectedLevel, generateQuestion]);
 
   const handleAnswer = useCallback((selectedIdx: number) => {
     if (answerState !== "idle" || !currentQuestion) return;
@@ -173,15 +178,16 @@ export function useGame() {
     setAnswerState("idle");
     setSelectedIndex(null);
     setTimeLeft(QUESTION_TIME[difficulty]);
-    setCurrentQuestion(generateQuestion(questionPool, nextIndex, gameMode));
+    setCurrentQuestion(generateQuestion(questionPool, nextIndex, gameMode, selectedLevel));
     setGameState("playing");
-  }, [questionIndex, questionPool, difficulty, gameMode, generateQuestion]);
+  }, [questionIndex, questionPool, difficulty, gameMode, selectedLevel, generateQuestion]);
 
   const totalQuestions = Math.min(QUESTIONS_PER_GAME, questionPool.length);
   const timeRatio = timeLeft / QUESTION_TIME[difficulty];
 
   return {
     gameState,
+    selectedLevel,
     gameMode,
     difficulty,
     currentQuestion,

@@ -27,6 +27,8 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
   if (!entry) return null;
 
   const isSingle = entry.kanjiCount === 1;
+  const isShortCompound = entry.kanjiCount === 2;
+  const isLongCompound = entry.kanjiCount >= 3;
   const lv = LEVEL_COLOR[entry.level as "N5" | "N4"] ?? LEVEL_COLOR.N5;
 
   const playTTS = () => {
@@ -88,7 +90,14 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
             {/* Big Kanji box */}
             <div className="flex flex-col items-center gap-2">
               <div
-                className="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center text-5xl sm:text-6xl font-black"
+                className={clsx(
+                  "flex items-center justify-center font-black whitespace-nowrap",
+                  isSingle
+                    ? "w-24 h-24 sm:w-28 sm:h-28 text-5xl sm:text-6xl"
+                    : isShortCompound
+                      ? "w-32 h-24 sm:w-36 sm:h-28 text-3xl sm:text-4xl"
+                      : "w-36 h-24 sm:w-40 sm:h-28 text-2xl sm:text-3xl",
+                )}
                 style={{
                   fontFamily: "var(--font-jp)",
                   background: "#ffffff",
@@ -96,6 +105,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   borderRadius: 14,
                   color: "#1c1c1c",
                   boxShadow: `0 4px 0 ${lv.accent}`,
+                  wordBreak: "keep-all",
                 }}
               >
                 {entry.kanji}

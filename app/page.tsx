@@ -77,6 +77,7 @@ function AnimatedScreen({
 export default function Home() {
   const {
     gameState,
+    selectedLevel,
     gameMode,
     difficulty,
     currentQuestion,
@@ -165,7 +166,8 @@ export default function Home() {
               stats={stats}
               gameMode={gameMode}
               difficulty={difficulty}
-              onPlayAgain={() => startGame(gameMode, difficulty)}
+              level={selectedLevel}
+              onPlayAgain={() => startGame(selectedLevel, gameMode, difficulty)}
               onHome={goHome}
             />
           )}
