@@ -6,8 +6,8 @@ import clsx from "clsx";
 interface BunpouFilterBarProps {
   searchQuery: string;
   onSearchChange: (q: string) => void;
-  selectedLevel: "ALL" | "N5" | "N4";
-  onLevelChange: (lvl: "ALL" | "N5" | "N4") => void;
+  selectedLevel: "ALL" | "N5" | "N4" | "N3";
+  onLevelChange: (lvl: "ALL" | "N5" | "N4" | "N3") => void;
   selectedCategory: "ALL" | BunpouCategory;
   onCategoryChange: (cat: "ALL" | BunpouCategory) => void;
   totalResults: number;
@@ -98,10 +98,10 @@ export function BunpouFilterBar({
             <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mr-0.5 hidden xs:block">
               LV:
             </span>
-            {(["ALL", "N5", "N4"] as const).map((lvl) => {
+            {(["ALL", "N5", "N4", "N3"] as const).map((lvl) => {
               const active = selectedLevel === lvl;
-              const accentMap = { ALL: "#1cb0f6", N5: "#58cc02", N4: "#1cb0f6" };
-              const bottomMap = { ALL: "#0490c8", N5: "#46a302", N4: "#0490c8" };
+              const accentMap = { ALL: "#1cb0f6", N5: "#58cc02", N4: "#1cb0f6", N3: "#a855f7" };
+              const bottomMap = { ALL: "#0490c8", N5: "#46a302", N4: "#0490c8", N3: "#7e22ce" };
               return (
                 <button
                   key={lvl}

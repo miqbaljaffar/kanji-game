@@ -12,6 +12,7 @@ interface KanjiCardProps {
 const LEVEL_STYLE = {
   N5: { bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000", badge: "#2a7000" },
   N4: { bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e", badge: "#0c6b9e" },
+  N3: { bg: "#f3e8ff", border: "#a855f7", bottom: "#7e22ce", text: "#6b21a8", badge: "#6b21a8" },
 } as const;
 
 export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
@@ -19,7 +20,7 @@ export function KanjiCard({ entry, onSelect }: KanjiCardProps) {
   const isSingle = entry.kanjiCount === 1;
   const isShortCompound = entry.kanjiCount === 2;
   const isLongCompound = entry.kanjiCount >= 3;
-  const lv = LEVEL_STYLE[entry.level as "N5" | "N4"] ?? LEVEL_STYLE.N5;
+  const lv = LEVEL_STYLE[entry.level as "N5" | "N4" | "N3"] ?? LEVEL_STYLE.N5;
 
   const playTTS = (e: React.MouseEvent) => {
     e.stopPropagation();

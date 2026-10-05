@@ -12,6 +12,7 @@ interface KanjiDetailModalProps {
 const LEVEL_COLOR = {
   N5: { accent: "#58cc02", pale: "#d7ffb8", text: "#2a7000" },
   N4: { accent: "#1cb0f6", pale: "#ddf4ff", text: "#0c6b9e" },
+  N3: { accent: "#a855f7", pale: "#f3e8ff", text: "#6b21a8" },
 };
 
 export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
@@ -29,7 +30,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
   const isSingle = entry.kanjiCount === 1;
   const isShortCompound = entry.kanjiCount === 2;
   const isLongCompound = entry.kanjiCount >= 3;
-  const lv = LEVEL_COLOR[entry.level as "N5" | "N4"] ?? LEVEL_COLOR.N5;
+  const lv = LEVEL_COLOR[entry.level as "N5" | "N4" | "N3"] ?? LEVEL_COLOR.N5;
 
   const playTTS = () => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {

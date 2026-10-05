@@ -1,7 +1,7 @@
 {
   "name": "KanjiMocha — Belajar Kanji & Bunpou",
   "short_name": "KanjiMocha",
-  "description": "Platform belajar Bahasa Jepang interaktif JLPT N5 & N4.",
+  "description": "Platform belajar Bahasa Jepang interaktif JLPT N5, N4 & N3.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f7f7f7",

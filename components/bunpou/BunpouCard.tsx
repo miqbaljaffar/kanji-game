@@ -12,11 +12,12 @@ interface BunpouCardProps {
 const LEVEL_STYLE = {
   N5: { bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000" },
   N4: { bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e" },
+  N3: { bg: "#f3e8ff", border: "#a855f7", bottom: "#7e22ce", text: "#6b21a8" },
 } as const;
 
 export function BunpouCard({ entry, onSelect }: BunpouCardProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const lv = LEVEL_STYLE[entry.level as "N5" | "N4"] ?? LEVEL_STYLE.N5;
+  const lv = LEVEL_STYLE[entry.level as "N5" | "N4" | "N3"] ?? LEVEL_STYLE.N5;
 
   const playTTS = (e: React.MouseEvent) => {
     e.stopPropagation();

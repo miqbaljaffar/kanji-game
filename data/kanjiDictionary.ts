@@ -10,7 +10,7 @@ export const singleKanjiMaster: Record<string, {
   kunyomi: string;
   mnemonic: string;
   strokes: number;
-  level: "N5" | "N4";
+  level: "N5" | "N4" | "N3";
   meaning: string;
   hiragana: string;
   romaji: string;
@@ -113,7 +113,7 @@ export const singleKanjiMaster: Record<string, {
  * Compound Kanji Custom Breakdowns for 2+ Kanji Words (Jukugo N4 & N5)
  */
 export const compoundBreakdowns: Record<string, {
-  level: "N5" | "N4";
+  level: "N5" | "N4" | "N3";
   components: Array<{ char: string; meaning: string; onyomi?: string; kunyomi?: string }>;
   mnemonic?: string;
   exampleSentence?: { japanese: string; hiragana: string; translation: string };
@@ -811,7 +811,7 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
     let kunyomi = item.kunyomi;
     let mnemonic = item.mnemonic;
     let strokes: number | undefined = undefined;
-    let level: "N5" | "N4" = n4Ids.has(item.id) ? "N4" : "N5";
+    let level: "N5" | "N4" | "N3" = n4Ids.has(item.id) ? "N4" : "N5";
     let components: KanjiDictionaryEntry["components"] = undefined;
     let exampleSentence = undefined;
 

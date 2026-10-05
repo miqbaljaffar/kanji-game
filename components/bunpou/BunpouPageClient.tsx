@@ -12,7 +12,7 @@ import { GameBackground } from "@/components/Background";
 
 export function BunpouDictionaryPage() {
   const [searchQuery,       setSearchQuery]       = useState("");
-  const [selectedLevel,     setSelectedLevel]     = useState<"ALL" | "N5" | "N4">("ALL");
+  const [selectedLevel,     setSelectedLevel]     = useState<"ALL" | "N5" | "N4" | "N3">("ALL");
   const [selectedCategory,  setSelectedCategory]  = useState<"ALL" | BunpouCategory>("ALL");
   const [activeEntry,       setActiveEntry]       = useState<BunpouDictionaryEntry | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,6 +25,7 @@ export function BunpouDictionaryPage() {
     total:         bunpouDictionaryData.length,
     n5Count:       bunpouDictionaryData.filter((b) => b.level === "N5").length,
     n4Count:       bunpouDictionaryData.filter((b) => b.level === "N4").length,
+    n3Count:       bunpouDictionaryData.filter((b) => b.level === "N3").length,
     particleCount: bunpouDictionaryData.filter((b) => b.category === "Partikel").length,
   }), []);
 
@@ -90,7 +91,7 @@ export function BunpouDictionaryPage() {
               📝 Ensiklopedia Bunpou
             </h1>
             <p className="text-[9px] sm:text-[10px] font-bold text-slate-500">
-              Rumus &amp; Tata Bahasa · JLPT N5 / N4
+              Rumus &amp; Tata Bahasa · JLPT N5 / N4 / N3
             </p>
           </div>
         </div>

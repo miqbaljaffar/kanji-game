@@ -12,6 +12,7 @@ interface BunpouDetailModalProps {
 const LEVEL_COLOR = {
   N5: { accent: "#58cc02", pale: "#d7ffb8", text: "#2a7000" },
   N4: { accent: "#1cb0f6", pale: "#ddf4ff", text: "#0c6b9e" },
+  N3: { accent: "#a855f7", pale: "#f3e8ff", text: "#6b21a8" },
 };
 
 export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
@@ -26,7 +27,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
 
   if (!entry) return null;
 
-  const lv = LEVEL_COLOR[entry.level as "N5" | "N4"] ?? LEVEL_COLOR.N5;
+  const lv = LEVEL_COLOR[entry.level as "N5" | "N4" | "N3"] ?? LEVEL_COLOR.N5;
 
   const playTTS = (text: string, index: number) => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {

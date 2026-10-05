@@ -22,6 +22,11 @@ const LEVELS = [
     sub: "Kosakata & Grammar Lanjut",
     bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e",
   },
+  {
+    id: "N3" as JlptLevel, label: "JLPT N3", icon: "🟣", desc: "Level Lanjut",
+    sub: "Kosakata & Grammar Intermediate",
+    bg: "#f3e8ff", border: "#a855f7", bottom: "#7e22ce", text: "#6b21a8",
+  },
 ];
 
 const MODES = [
@@ -61,8 +66,10 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
 
   const n5KanjiCount   = kanjiData.filter((k) => k.level === "N5").length;
   const n4KanjiCount   = kanjiData.filter((k) => k.level === "N4").length;
+  const n3KanjiCount   = kanjiData.filter((k) => k.level === "N3").length;
   const n5BunpouCount  = bunpouData.filter((b) => b.level === "N5").length;
   const n4BunpouCount  = bunpouData.filter((b) => b.level === "N4").length;
+  const n3BunpouCount  = bunpouData.filter((b) => b.level === "N3").length;
 
   return (
     <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-3 sm:px-6 py-10">
@@ -71,7 +78,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
       <div className="text-center mb-6 animate-fade-up mt-2">
         <div className="inline-block mb-3">
           <span className="rpg-badge-gold text-[9px] sm:text-[10px] tracking-[0.15em]">
-            ✦ JLPT N5 · N4 ✦
+            ✦ JLPT N5 · N4 · N3 ✦
           </span>
         </div>
 
@@ -214,11 +221,11 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     style={{ borderColor: `${lvl.border}55` }}>
                     <div className="flex justify-between text-[10px] font-bold" style={{ color: lvl.text }}>
                       <span>📚 Kosakata</span>
-                      <span>{lvl.id === "N5" ? n5KanjiCount : n4KanjiCount}</span>
+                      <span>{lvl.id === "N5" ? n5KanjiCount : lvl.id === "N4" ? n4KanjiCount : n3KanjiCount}</span>
                     </div>
                     <div className="flex justify-between text-[10px] font-bold mt-1" style={{ color: lvl.text }}>
                       <span>📝 Grammar</span>
-                      <span>{lvl.id === "N5" ? n5BunpouCount : n4BunpouCount}</span>
+                      <span>{lvl.id === "N5" ? n5BunpouCount : lvl.id === "N4" ? n4BunpouCount : n3BunpouCount}</span>
                     </div>
                     <div className="text-[10px] font-bold mt-2" style={{ color: lvl.text, opacity: 0.8 }}>
                       {lvl.sub}

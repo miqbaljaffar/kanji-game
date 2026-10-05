@@ -117,13 +117,14 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    level: e.target.value as "N5" | "N4",
+                    level: e.target.value as "N5" | "N4" | "N3",
                   })
                 }
                 className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white font-bold"
               >
                 <option value="N5">🟢 N5 — Level Dasar</option>
                 <option value="N4">🔵 N4 — Level Menengah</option>
+                <option value="N3">🟣 N3 — Level Lanjut</option>
               </select>
             </div>
 

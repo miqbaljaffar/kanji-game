@@ -78,20 +78,24 @@ export default function OpenGraphImage() {
 
         {/* Badges */}
         <div style={{ display: "flex", gap: 16 }}>
-          {["JLPT N5", "JLPT N4"].map((badge) => (
+          {[
+            { label: "JLPT N5", bg: "#d7ffb8", border: "#58cc02", color: "#2a7000" },
+            { label: "JLPT N4", bg: "#ddf4ff", border: "#1cb0f6", color: "#0c6b9e" },
+            { label: "JLPT N3", bg: "#f3e8ff", border: "#a855f7", color: "#6b21a8" },
+          ].map((badge) => (
             <div
-              key={badge}
+              key={badge.label}
               style={{
-                background: "#d7ffb8",
-                border: "2px solid #58cc02",
+                background: badge.bg,
+                border: `2px solid ${badge.border}`,
                 borderRadius: 999,
                 padding: "8px 20px",
                 fontSize: 20,
                 fontWeight: 800,
-                color: "#2a7000",
+                color: badge.color,
               }}
             >
-              {badge}
+              {badge.label}
             </div>
           ))}
         </div>

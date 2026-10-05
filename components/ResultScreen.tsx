@@ -16,6 +16,7 @@ interface ResultScreenProps {
 const LEVEL_LABEL: Record<JlptLevel, { label: string; icon: string; color: string; bg: string; border: string }> = {
   N5: { label: "JLPT N5", icon: "🟢", color: "#2a7000", bg: "#d7ffb8", border: "#58cc02" },
   N4: { label: "JLPT N4", icon: "🔵", color: "#0c6b9e", bg: "#ddf4ff", border: "#1cb0f6" },
+  N3: { label: "JLPT N3", icon: "🟣", color: "#6b21a8", bg: "#f3e8ff", border: "#a855f7" },
 };
 
 function getRankDetail(accuracy: number) {

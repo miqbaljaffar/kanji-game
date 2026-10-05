@@ -36,7 +36,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kanjimocha.vercel.
 const SITE_NAME = "KanjiMocha";
 const TITLE = "KanjiMocha — Belajar Kanji & Bunpou Bahasa Jepang";
 const DESCRIPTION =
-  "Platform belajar Bahasa Jepang interaktif untuk JLPT N5 & N4. Game kuis, Ensiklopedia Kanji 1 & 2+ Karakter, dan Kamus Tata Bahasa Bunpou lengkap!";
+  "Platform belajar Bahasa Jepang interaktif untuk JLPT N5, N4 & N3. Game kuis, Ensiklopedia Kanji 1 & 2+ Karakter, dan Kamus Tata Bahasa Bunpou lengkap!";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -52,6 +52,7 @@ export const metadata: Metadata = {
     "Tata Bahasa Jepang",
     "JLPT N5",
     "JLPT N4",
+    "JLPT N3",
     "Belajar Bahasa Jepang",
     "KanjiMocha",
     "Game Kanji",

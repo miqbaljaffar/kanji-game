@@ -5,7 +5,7 @@ export interface KanjiEntry {
   hiragana: string;
   arti: string;
   category: string;
-  level: "N5" | "N4";
+  level: "N5" | "N4" | "N3";
   onyomi?: string;
   kunyomi?: string;
   mnemonic?: string;
@@ -31,7 +31,7 @@ export interface KanjiDictionaryEntry {
   hiragana: string;
   romaji: string;
   arti: string;
-  level: "N5" | "N4";
+  level: "N5" | "N4" | "N3";
   kanjiCount: number; // 1 for single, 2+ for compound
   category: string;
   onyomi?: string;
@@ -56,10 +56,10 @@ export interface BunpouEntry {
   translation: string;
   options: string[];
   correctOption: string;
-  level: "N5" | "N4";
+  level: "N5" | "N4" | "N3";
 }
 
-export type JlptLevel = "N5" | "N4";
+export type JlptLevel = "N5" | "N4" | "N3";
 
 export type BunpouCategory =
   | "Partikel"
@@ -80,7 +80,7 @@ export interface BunpouDictionaryEntry {
   romajiPattern: string;
   meaning: string;
   formula: string;
-  level: "N5" | "N4";
+  level: "N5" | "N4" | "N3";
   category: BunpouCategory;
   explanation: string;
   exampleSentences: BunpouExampleSentence[];

@@ -12,7 +12,7 @@ import { GameBackground } from "@/components/Background";
 
 export function KanjiDictionaryPage() {
   const [searchQuery,    setSearchQuery]    = useState("");
-  const [selectedLevel,  setSelectedLevel]  = useState<"ALL" | "N5" | "N4">("ALL");
+  const [selectedLevel,  setSelectedLevel]  = useState<"ALL" | "N5" | "N4" | "N3">("ALL");
   const [selectedType,   setSelectedType]   = useState<"ALL" | "SINGLE" | "COMPOUND">("ALL");
   const [activeEntry,    setActiveEntry]    = useState<KanjiDictionaryEntry | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,6 +25,7 @@ export function KanjiDictionaryPage() {
     total:         kanjiDictionaryData.length,
     n5Count:       kanjiDictionaryData.filter((k) => k.level === "N5").length,
     n4Count:       kanjiDictionaryData.filter((k) => k.level === "N4").length,
+    n3Count:       kanjiDictionaryData.filter((k) => k.level === "N3").length,
     compoundCount: kanjiDictionaryData.filter((k) => k.kanjiCount > 1).length,
   }), []);
 
@@ -92,7 +93,7 @@ export function KanjiDictionaryPage() {
               📚 Ensiklopedia Kanji
             </h1>
             <p className="text-[9px] sm:text-[10px] font-bold text-slate-500">
-              Kanji 1 Karakter &amp; Majemuk (2+) · N5 / N4
+              Kanji 1 Karakter &amp; Majemuk (2+) · N5 / N4 / N3
             </p>
           </div>
         </div>

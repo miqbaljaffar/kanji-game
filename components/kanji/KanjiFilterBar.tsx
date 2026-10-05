@@ -5,8 +5,8 @@ import clsx from "clsx";
 interface KanjiFilterBarProps {
   searchQuery: string;
   onSearchChange: (q: string) => void;
-  selectedLevel: "ALL" | "N5" | "N4";
-  onLevelChange: (lvl: "ALL" | "N5" | "N4") => void;
+  selectedLevel: "ALL" | "N5" | "N4" | "N3";
+  onLevelChange: (lvl: "ALL" | "N5" | "N4" | "N3") => void;
   selectedType: "ALL" | "SINGLE" | "COMPOUND";
   onTypeChange: (type: "ALL" | "SINGLE" | "COMPOUND") => void;
   totalResults: number;
@@ -74,10 +74,12 @@ export function KanjiFilterBar({
             <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mr-0.5 hidden xs:block">
               LV:
             </span>
-            {(["ALL", "N5", "N4"] as const).map((lvl) => {
+            {(["ALL", "N5", "N4", "N3"] as const).map((lvl) => {
               const active = selectedLevel === lvl;
-              const accentMap = { ALL: "#1cb0f6", N5: "#58cc02", N4: "#1cb0f6" };
+              const accentMap = { ALL: "#1cb0f6", N5: "#58cc02", N4: "#1cb0f6", N3: "#a855f7" };
+              const bottomMap = { ALL: "#0490c8", N5: "#46a302", N4: "#0490c8", N3: "#7e22ce" };
               const accent = accentMap[lvl];
+              const bottom = bottomMap[lvl];
               return (
                 <button
                   key={lvl}
@@ -86,7 +88,7 @@ export function KanjiFilterBar({
                   style={{
                     background: active ? accent : "#f3f4f6",
                     border: `2px solid ${active ? accent : "#e5e7eb"}`,
-                    borderBottom: `3px solid ${active ? (accent === "#58cc02" ? "#46a302" : "#0490c8") : "#d1d5db"}`,
+                    borderBottom: `3px solid ${active ? bottom : "#d1d5db"}`,
                     borderRadius: 8,
                     color: active ? "#ffffff" : "#6b7280",
                   }}
