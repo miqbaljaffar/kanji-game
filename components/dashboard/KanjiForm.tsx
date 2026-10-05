@@ -19,7 +19,8 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
       hiragana: "",
       romaji: "",
       arti: "",
-      category: "A" // ✅ FIX: Diubah menjadi string sesuai dengan interface KanjiEntry
+      category: "A",
+      level: "N5",
     }
   );
 
@@ -95,17 +96,36 @@ export function KanjiForm({ initialData, onSave, onClose }: KanjiFormProps) {
 
             {/* CATEGORY INPUT */}
             <input
-              type="text" // ✅ FIX: Diubah menjadi text karena category bertipe string
+              type="text"
               value={formData.category}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  category: e.target.value, // ✅ FIX: Hapus Number()
+                  category: e.target.value,
                 })
               }
               placeholder="Kategori (Misal: A, B, N4, dst)"
               className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
             />
+
+            {/* LEVEL SELECT */}
+            <div>
+              <label className="block text-sm font-bold text-slate-600 mb-1">Level JLPT *</label>
+              <select
+                required
+                value={formData.level}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    level: e.target.value as "N5" | "N4",
+                  })
+                }
+                className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white font-bold"
+              >
+                <option value="N5">🟢 N5 — Level Dasar</option>
+                <option value="N4">🔵 N4 — Level Menengah</option>
+              </select>
+            </div>
 
           </div>
 

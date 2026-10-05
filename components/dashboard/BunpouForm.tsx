@@ -9,7 +9,7 @@ interface BunpouFormProps {
 
 export function BunpouForm({ initialData, onSave, onClose }: BunpouFormProps) {
   const [formData, setFormData] = useState<BunpouEntry>(initialData || { 
-    id: '', sentence: '', translation: '', options: ['', '', '', ''], correctOption: '' 
+    id: '', sentence: '', translation: '', options: ['', '', '', ''], correctOption: '', level: 'N5' 
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -73,6 +73,14 @@ export function BunpouForm({ initialData, onSave, onClose }: BunpouFormProps) {
               {formData.options.filter(o => o.trim() !== '').map((opt, idx) => (
                 <option key={idx} value={opt}>{opt}</option>
               ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold text-slate-600 mb-1">Level JLPT *</label>
+            <select required name="level" value={formData.level} onChange={handleChange} className="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-green-500 outline-none bg-white font-bold">
+              <option value="N5">🟢 N5 — Level Dasar</option>
+              <option value="N4">🔵 N4 — Level Menengah</option>
             </select>
           </div>
 
