@@ -91,12 +91,12 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
             <div className="flex flex-col items-center gap-2">
               <div
                 className={clsx(
-                  "flex items-center justify-center font-black whitespace-nowrap",
+                  "flex items-center justify-center font-black whitespace-nowrap overflow-visible w-auto",
                   isSingle
-                    ? "w-24 h-24 sm:w-28 sm:h-28 text-5xl sm:text-6xl"
+                    ? "min-w-[96px] h-24 sm:min-w-[112px] sm:h-28 px-5 text-4xl sm:text-5xl"
                     : isShortCompound
-                      ? "w-32 h-24 sm:w-36 sm:h-28 text-3xl sm:text-4xl"
-                      : "w-36 h-24 sm:w-40 sm:h-28 text-2xl sm:text-3xl",
+                      ? "min-w-[128px] h-24 sm:min-w-[144px] sm:h-28 px-6 text-3xl sm:text-4xl"
+                      : "min-w-[144px] h-24 sm:min-w-[160px] sm:h-28 px-6 text-2xl sm:text-3xl",
                 )}
                 style={{
                   fontFamily: "var(--font-jp)",
@@ -106,6 +106,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   color: "#1c1c1c",
                   boxShadow: `0 4px 0 ${lv.accent}`,
                   wordBreak: "keep-all",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {entry.kanji}
