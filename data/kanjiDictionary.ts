@@ -106,7 +106,39 @@ export const singleKanjiMaster: Record<string, {
   "痛": { onyomi: "ツウ (tsuu)", kunyomi: "いた・い (ita-i)", mnemonic: "Berada di ranjang sakit (疒) menahan rasa perih nyeri hebat.", strokes: 12, level: "N4", meaning: "Sakit / Nyeri", hiragana: "いたい", romaji: "itai" },
   "暑": { onyomi: "ショ (sho)", kunyomi: "あつ・い (atsu-i)", mnemonic: "Matahari (日) terik menyengat di atas tanah musim panas.", strokes: 12, level: "N4", meaning: "Panas (Cuaca)", hiragana: "あつい", romaji: "atsui" },
   "寒": { onyomi: "カン (kan)", kunyomi: "さむ・い (samu-i)", mnemonic: "Tiga titik es membeku di bawah atap rumah musim dingin.", strokes: 12, level: "N4", meaning: "Dingin (Cuaca)", hiragana: "さむい", romaji: "samui" },
-  "冷": { onyomi: "レイ (rei)", kunyomi: "つめ・たい (tsume-tai)", mnemonic: "Titik es (冫) membekukan minuman hingga sangat dingin.", strokes: 7, level: "N4", meaning: "Dingin (Benda)", hiragana: "つめたい", romaji: "tsumetai" }
+  "冷": { onyomi: "レイ (rei)", kunyomi: "つめ・たい (tsume-tai)", mnemonic: "Titik es (冫) membekukan minuman hingga sangat dingin.", strokes: 7, level: "N4", meaning: "Dingin (Benda)", hiragana: "つめたい", romaji: "tsumetai" },
+
+  // Kanji N3 yang sering dijumpai dalam kosakata dan bacaan
+  "政": { onyomi: "セイ (sei)", kunyomi: "まつりごと (matsurigoto)", mnemonic: "Tindakan tegas untuk mengatur urusan negara.", strokes: 9, level: "N3", meaning: "Politik / Pemerintahan", hiragana: "せい", romaji: "sei" },
+  "経": { onyomi: "ケイ (kei), キョウ (kyou)", kunyomi: "へ・る (he-ru)", mnemonic: "Benang yang membentang sepanjang jalur perjalanan.", strokes: 11, level: "N3", meaning: "Mengelola / Melewati", hiragana: "けい", romaji: "kei" },
+  "済": { onyomi: "サイ (sai)", kunyomi: "す・む (su-mu), す・ます (su-masu)", mnemonic: "Air yang akhirnya surut dan urusan pun terselesaikan.", strokes: 11, level: "N3", meaning: "Selesai / Menyelesaikan", hiragana: "すむ", romaji: "sumu" },
+  "議": { onyomi: "ギ (gi)", kunyomi: "-", mnemonic: "Berkumpul untuk menyampaikan pendapat dan berdiskusi.", strokes: 20, level: "N3", meaning: "Rapat / Diskusi", hiragana: "ぎ", romaji: "gi" },
+  "民": { onyomi: "ミン (min)", kunyomi: "たみ (tami)", mnemonic: "Orang-orang yang membentuk masyarakat.", strokes: 5, level: "N3", meaning: "Rakyat", hiragana: "たみ", romaji: "tami" },
+  "連": { onyomi: "レン (ren)", kunyomi: "つら・なる (tsura-naru), つ・れる (tsu-reru)", mnemonic: "Langkah-langkah yang tersambung membentuk sebuah rangkaian.", strokes: 10, level: "N3", meaning: "Menghubungkan / Mengajak", hiragana: "つれる", romaji: "tsureru" },
+  "対": { onyomi: "タイ (tai), ツイ (tsui)", kunyomi: "-", mnemonic: "Dua pihak saling berhadapan.", strokes: 7, level: "N3", meaning: "Lawan / Terhadap", hiragana: "たい", romaji: "tai" },
+  "部": { onyomi: "ブ (bu)", kunyomi: "-", mnemonic: "Bagian yang tergabung dalam suatu kelompok.", strokes: 11, level: "N3", meaning: "Bagian / Departemen", hiragana: "ぶ", romaji: "bu" },
+  "合": { onyomi: "ゴウ (gou), ガッ (ga)", kunyomi: "あ・う (a-u), あ・わせる (a-waseru)", mnemonic: "Beberapa bagian bertemu dan menjadi satu.", strokes: 6, level: "N3", meaning: "Cocok / Bergabung", hiragana: "あう", romaji: "au" },
+  "市": { onyomi: "シ (shi)", kunyomi: "いち (ichi)", mnemonic: "Pasar ramai yang berkembang menjadi sebuah kota.", strokes: 5, level: "N3", meaning: "Kota / Pasar", hiragana: "し", romaji: "shi" },
+  "内": { onyomi: "ナイ (nai), ダイ (dai)", kunyomi: "うち (uchi)", mnemonic: "Sesuatu yang berada di dalam batas.", strokes: 4, level: "N3", meaning: "Dalam / Bagian dalam", hiragana: "うち", romaji: "uchi" },
+  "相": { onyomi: "ソウ (sou), ショウ (shou)", kunyomi: "あい (ai)", mnemonic: "Mata yang mengamati pohon dan keadaan di sekitarnya.", strokes: 9, level: "N3", meaning: "Saling / Menteri", hiragana: "あい", romaji: "ai" },
+  "定": { onyomi: "テイ (tei), ジョウ (jou)", kunyomi: "さだ・める (sada-meru), さだ・まる (sada-maru)", mnemonic: "Menetapkan langkah yang mantap di bawah atap.", strokes: 8, level: "N3", meaning: "Menentukan / Tetap", hiragana: "さだめる", romaji: "sadameru" },
+  "回": { onyomi: "カイ (kai), エ (e)", kunyomi: "まわ・る (mawa-ru), まわ・す (mawa-su)", mnemonic: "Sesuatu bergerak berputar mengelilingi pusat.", strokes: 6, level: "N3", meaning: "Kali / Berputar", hiragana: "まわる", romaji: "mawaru" },
+  "選": { onyomi: "セン (sen)", kunyomi: "えら・ぶ (era-bu)", mnemonic: "Berjalan melalui pilihan untuk menentukan yang terbaik.", strokes: 15, level: "N3", meaning: "Memilih", hiragana: "えらぶ", romaji: "erabu" },
+  "米": { onyomi: "ベイ (bei), マイ (mai)", kunyomi: "こめ (kome)", mnemonic: "Butiran beras yang tersusun di tangkai padi.", strokes: 6, level: "N3", meaning: "Beras / Amerika", hiragana: "こめ", romaji: "kome" },
+  "実": { onyomi: "ジツ (jitsu)", kunyomi: "み (mi), みの・る (mino-ru)", mnemonic: "Buah yang matang dan berisi di bawah atap.", strokes: 8, level: "N3", meaning: "Nyata / Buah", hiragana: "み", romaji: "mi" },
+  "関": { onyomi: "カン (kan)", kunyomi: "せき (seki), かか・わる (kaka-waru)", mnemonic: "Gerbang yang menghubungkan dua tempat.", strokes: 14, level: "N3", meaning: "Hubungan / Gerbang", hiragana: "かかわる", romaji: "kakawaru" },
+  "決": { onyomi: "ケツ (ketsu)", kunyomi: "き・める (ki-meru), き・まる (ki-maru)", mnemonic: "Air mengalir ke satu arah setelah keputusan dibuat.", strokes: 7, level: "N3", meaning: "Memutuskan / Menetapkan", hiragana: "きめる", romaji: "kimeru" },
+  "全": { onyomi: "ゼン (zen)", kunyomi: "まった・く (matta-ku), すべ・て (sube-te)", mnemonic: "Semua bagian terkumpul menjadi satu kesatuan utuh.", strokes: 6, level: "N3", meaning: "Seluruh / Semua", hiragana: "すべて", romaji: "subete" },
+  "表": { onyomi: "ヒョウ (hyou)", kunyomi: "おもて (omote), あらわ・す (arawa-su)", mnemonic: "Bagian luar yang menampilkan sesuatu.", strokes: 8, level: "N3", meaning: "Permukaan / Menyatakan", hiragana: "おもて", romaji: "omote" },
+  "戦": { onyomi: "セン (sen)", kunyomi: "たたか・う (tataka-u), いくさ (ikusa)", mnemonic: "Senjata yang digunakan dalam pertempuran.", strokes: 13, level: "N3", meaning: "Perang / Bertarung", hiragana: "たたかう", romaji: "tatakau" },
+  "面": { onyomi: "メン (men)", kunyomi: "おも (omo), おもて (omote)", mnemonic: "Wajah dan permukaan yang terlihat dari depan.", strokes: 9, level: "N3", meaning: "Wajah / Permukaan", hiragana: "おもて", romaji: "omote" },
+  "法": { onyomi: "ホウ (hou), ハッ (ha)", kunyomi: "-", mnemonic: "Aturan yang menjaga aliran kehidupan tetap teratur.", strokes: 8, level: "N3", meaning: "Hukum / Cara", hiragana: "ほう", romaji: "hou" },
+  "信": { onyomi: "シン (shin)", kunyomi: "-", mnemonic: "Perkataan seseorang yang dapat dipercaya.", strokes: 9, level: "N3", meaning: "Percaya / Kepercayaan", hiragana: "しん", romaji: "shin" },
+  "受": { onyomi: "ジュ (ju)", kunyomi: "う・ける (u-keru), う・かる (u-karu)", mnemonic: "Menerima sesuatu yang diserahkan dari tangan ke tangan.", strokes: 8, level: "N3", meaning: "Menerima / Mengikuti", hiragana: "うける", romaji: "ukeru" },
+  "化": { onyomi: "カ (ka), ケ (ke)", kunyomi: "ば・ける (ba-keru), ば・かす (ba-kasu)", mnemonic: "Seseorang berubah bentuk menjadi sesuatu yang baru.", strokes: 4, level: "N3", meaning: "Perubahan / Berubah", hiragana: "ばける", romaji: "bakeru" },
+  "向": { onyomi: "コウ (kou)", kunyomi: "む・く (mu-ku), む・ける (mu-keru)", mnemonic: "Seseorang menghadap ke arah tertentu.", strokes: 6, level: "N3", meaning: "Arah / Menghadap", hiragana: "むく", romaji: "muku" },
+  "平": { onyomi: "ヘイ (hei), ビョウ (byou)", kunyomi: "たい・ら (tai-ra), ひら (hira)", mnemonic: "Permukaan rata tanpa bagian yang lebih tinggi.", strokes: 5, level: "N3", meaning: "Rata / Damai", hiragana: "たいら", romaji: "taira" },
+  "発": { onyomi: "ハツ (hatsu), ホツ (hotsu)", kunyomi: "-", mnemonic: "Sesuatu melesat keluar dan mulai bergerak.", strokes: 9, level: "N3", meaning: "Berangkat / Memancarkan", hiragana: "はつ", romaji: "hatsu" }
 };
 
 /**
@@ -791,18 +823,6 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
   const dictionary: KanjiDictionaryEntry[] = [];
   const seenKanjiWords = new Set<string>();
 
-  // List of known N4 IDs from kanjiData
-  const n4Ids = new Set([
-    "b8", "b10", "b11", "b13", "c6", "c9", "c13", "d3", "d11", "d14", "d20",
-    "f1", "f2", "f7", "f12", "g6", "g7", "g15", "h28", "j5", "j9", "k9", "k20",
-    "s13", "s28", "s30", "t12", "t16", "t21", "u4", "u5", "y11", "y12", "y15"
-  ]);
-
-  // N3 IDs (prefiks n3-*) dari kanji.ts
-  const n3Ids = new Set(
-    kanjiData.filter((k) => k.id.startsWith("n3-")).map((k) => k.id)
-  );
-
   // 1. Process all kanjiData items
   kanjiData.forEach((item) => {
     if (seenKanjiWords.has(item.kanji)) return;
@@ -816,7 +836,7 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
     let kunyomi = item.kunyomi;
     let mnemonic = item.mnemonic;
     let strokes: number | undefined = undefined;
-    let level: "N5" | "N4" | "N3" = n3Ids.has(item.id) ? "N3" : n4Ids.has(item.id) ? "N4" : "N5";
+    let level: "N5" | "N4" | "N3" = item.level;
     let components: KanjiDictionaryEntry["components"] = undefined;
     let exampleSentence = undefined;
 
