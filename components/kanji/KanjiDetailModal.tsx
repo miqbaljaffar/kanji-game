@@ -275,40 +275,86 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   )}
                 </div>
               )}
-              {entry.mnemonic && (
-                <div
-                  className="p-4 space-y-2"
-                  style={{ background: "#fffef0", border: "2px solid #ffc800", borderRadius: 12 }}
-                >
-                  <p className="text-[9px] font-black text-amber-600 uppercase">💡 Tips Memori</p>
-                  <div className="rpg-divider" />
-                  <p className="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">{entry.mnemonic}</p>
-                </div>
-              )}
+              <div
+                className="p-4 space-y-2"
+                style={{ background: "#fffef0", border: "2px solid #ffc800", borderRadius: 12 }}
+              >
+                <p className="text-[9px] font-black text-amber-600 uppercase">
+                  {entry.mnemonic ? "💡 Tips Memori" : "💡 Catatan Belajar"}
+                </p>
+                <div className="rpg-divider" />
+                <p className="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">
+                  {entry.mnemonic || `Pelajari kanji ${entry.kanji} melalui bacaan ${entry.hiragana} yang berarti “${entry.arti}”.`}
+                </p>
+              </div>
             </div>
           )}
 
           {/* READINGS */}
           {activeTab === "readings" && (
             <div className="space-y-3 animate-fade-up">
+              <div
+                className="p-4 space-y-2"
+                style={{ background: "#ddf4ff", border: "2px solid #1cb0f6", borderRadius: 12 }}
+              >
+                <p className="text-[8px] font-black text-blue-700 uppercase tracking-widest">
+                  Bacaan kosakata
+                </p>
+                <div className="text-xl font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
+                  {entry.hiragana}
+                </div>
+                <p className="text-xs font-bold italic text-slate-500">{entry.romaji}</p>
+                <p className="text-[9px] font-bold text-blue-600">Bacaan ini mengikuti hiragana pada kosakata.</p>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div
                   className="p-4 space-y-2"
                   style={{ background: "#f5e6ff", border: "2px solid #ce82ff", borderRadius: 12 }}
                 >
                   <p className="text-[8px] font-black text-purple-700 uppercase tracking-widest">音読み (Onyomi)</p>
-                  <div className="text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>{entry.onyomi || "–"}</div>
-                  <p className="text-[9px] font-bold text-purple-500">Digunakan pada kata majemuk (2+ kanji).</p>
+                  <div className="text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
+                    {entry.onyomi || (isSingle ? "Belum tersedia" : "Lihat bacaan tiap kanji di bawah")}
+                  </div>
+                  <p className="text-[9px] font-bold text-purple-500">Bacaan onyomi dicantumkan per karakter jika tersedia.</p>
                 </div>
                 <div
                   className="p-4 space-y-2"
                   style={{ background: "#d7ffb8", border: "2px solid #58cc02", borderRadius: 12 }}
                 >
                   <p className="text-[8px] font-black text-green-700 uppercase tracking-widest">訓読み (Kunyomi)</p>
-                  <div className="text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>{entry.kunyomi || "–"}</div>
-                  <p className="text-[9px] font-bold text-green-600">Digunakan saat kanji berdiri sendiri.</p>
+                  <div className="text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
+                    {entry.kunyomi || (isSingle ? "Belum tersedia" : "Lihat bacaan tiap kanji di bawah")}
+                  </div>
+                  <p className="text-[9px] font-bold text-green-600">Bacaan kunyomi dicantumkan per karakter jika tersedia.</p>
                 </div>
               </div>
+              {entry.components && entry.components.length > 0 && (
+                <div
+                  className="p-4 space-y-3"
+                  style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
+                >
+                  <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest">
+                    Bacaan tiap karakter
+                  </p>
+                  <div className="space-y-2">
+                    {entry.components.map((component, index) => (
+                      <div key={`${component.char}-${index}`} className="flex items-start gap-3 text-xs">
+                        <span className="w-8 shrink-0 text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
+                          {component.char}
+                        </span>
+                        <div className="min-w-0 space-y-1">
+                          <p className="font-bold text-slate-600">{component.meaning}</p>
+                          <p className="text-slate-500">
+                            On: <span className="font-bold text-slate-700">{component.onyomi || "Belum tersedia"}</span>
+                            {" · "}
+                            Kun: <span className="font-bold text-slate-700">{component.kunyomi || "Belum tersedia"}</span>
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div
                 className="p-4 space-y-2"
                 style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
@@ -316,7 +362,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                 <p className="text-[8px] font-black text-amber-600 uppercase">🧠 Cara Mengingat</p>
                 <div className="rpg-divider" />
                 <p className="text-xs sm:text-sm font-bold text-slate-600 leading-relaxed">
-                  {entry.mnemonic || "Asosiasikan bentuk kanji dengan benda di sekitar untuk memudahkan hafalan."}
+                  {entry.mnemonic || `Hubungkan bacaan ${entry.hiragana} dengan arti “${entry.arti}”, lalu ulangi dengan contoh kosakata.`}
                 </p>
               </div>
             </div>

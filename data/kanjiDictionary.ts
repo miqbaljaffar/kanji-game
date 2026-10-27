@@ -1,6 +1,7 @@
 import { KanjiDictionaryEntry } from "@/types";
 import { kanjiData } from "./kanji";
 import { kanjiDetails } from "./kanjiDetails";
+import { hiraganaToRomaji } from "@/lib/japanese";
 
 /**
  * Single Kanji master database with character breakdown, strokes, mnemonics, onyomi, kunyomi
@@ -146,6 +147,8 @@ export const singleKanjiMaster: Record<string, {
  */
 export const compoundBreakdowns: Record<string, {
   level: "N5" | "N4" | "N3";
+  reading?: string;
+  meaning?: string;
   components: Array<{ char: string; meaning: string; onyomi?: string; kunyomi?: string }>;
   mnemonic?: string;
   exampleSentence?: { japanese: string; hiragana: string; translation: string };
@@ -168,6 +171,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "質問": {
     level: "N4",
+    reading: "しつもん",
+    meaning: "Pertanyaan",
     components: [
       { char: "質", meaning: "Kualitas / Sifat", onyomi: "シツ (shitsu)" },
       { char: "問", meaning: "Pertanyaan / Bertanya", onyomi: "モン (mon)", kunyomi: "todou" }
@@ -246,6 +251,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "趣味": {
     level: "N4",
+    reading: "しゅみ",
+    meaning: "Hobi",
     components: [
       { char: "趣", meaning: "Daya Tarik / Keindahan", onyomi: "シュ (shu)" },
       { char: "味", meaning: "Rasa / Kenikmatan", onyomi: "ミ (mi)" }
@@ -259,6 +266,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "運動": {
     level: "N4",
+    reading: "うんどう",
+    meaning: "Olahraga",
     components: [
       { char: "運", meaning: "Mengangkut / Nasib", onyomi: "ウン (un)" },
       { char: "動", meaning: "Bergerak", onyomi: "ドウ (dou)" }
@@ -315,6 +324,8 @@ export const compoundBreakdowns: Record<string, {
   // ==========================================
   "月曜日": {
     level: "N5",
+    reading: "べんきょう",
+    meaning: "Belajar",
     components: [
       { char: "月", meaning: "Bulan", onyomi: "ゲツ (getsu)", kunyomi: "つき (tsuki)" },
       { char: "曜", meaning: "Hari dalam seminggu", onyomi: "ヨウ (you)" },
@@ -329,6 +340,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "火曜日": {
     level: "N5",
+    reading: "かようび",
+    meaning: "Hari Selasa",
     components: [
       { char: "火", meaning: "Api", onyomi: "カ (ka)", kunyomi: "ひ (hi)" },
       { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
@@ -371,6 +384,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "金曜日": {
     level: "N5",
+    reading: "きんようび",
+    meaning: "Hari Jumat",
     components: [
       { char: "金", meaning: "Emas / Uang", onyomi: "キン (kin)", kunyomi: "かね (kane)" },
       { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
@@ -385,6 +400,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "土曜日": {
     level: "N5",
+    reading: "どようび",
+    meaning: "Hari Sabtu",
     components: [
       { char: "土", meaning: "Tanah", onyomi: "ド (do)", kunyomi: "つち (tsuchi)" },
       { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
@@ -399,6 +416,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "日曜日": {
     level: "N5",
+    reading: "にちようび",
+    meaning: "Hari Minggu",
     components: [
       { char: "日", meaning: "Matahari", onyomi: "ニチ (nichi)", kunyomi: "ひ (hi)" },
       { char: "曜", meaning: "Hari", onyomi: "ヨウ (you)" },
@@ -429,6 +448,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "美術館": {
     level: "N4",
+    reading: "びじゅつかん",
+    meaning: "Museum seni",
     components: [
       { char: "美", meaning: "Indah", onyomi: "ビ (bi)", kunyomi: "utsukushii" },
       { char: "術", meaning: "Seni / Teknik", onyomi: "ジュツ (jutsu)" },
@@ -443,6 +464,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "大使館": {
     level: "N4",
+    reading: "たいしかん",
+    meaning: "Kedutaan besar",
     components: [
       { char: "大", meaning: "Besar", onyomi: "タイ (tai)" },
       { char: "使", meaning: "Utusan / Menggunakan", onyomi: "シ (shi)" },
@@ -471,6 +494,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "新幹線": {
     level: "N4",
+    reading: "しんかんせん",
+    meaning: "Kereta cepat Shinkansen",
     components: [
       { char: "新", meaning: "Baru", onyomi: "シン (shin)" },
       { char: "幹", meaning: "Jalur Batang Utama", onyomi: "カン (kan)" },
@@ -499,6 +524,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "交番": {
     level: "N5",
+    reading: "こうばん",
+    meaning: "Pos polisi",
     components: [
       { char: "交", meaning: "Saling / Lalu Lintas", onyomi: "コウ (kou)" },
       { char: "番", meaning: "Nomor / Tugas Jaga", onyomi: "バン (ban)" }
@@ -512,6 +539,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "会社員": {
     level: "N5",
+    reading: "かいしゃいん",
+    meaning: "Karyawan perusahaan",
     components: [
       { char: "会", meaning: "Perkumpulan", onyomi: "カイ (kai)" },
       { char: "社", meaning: "Perusahaan", onyomi: "シャ (sha)" },
@@ -553,6 +582,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "研究者": {
     level: "N4",
+    reading: "けんきゅうしゃ",
+    meaning: "Peneliti",
     components: [
       { char: "研", meaning: "Meneliti", onyomi: "ケン (ken)" },
       { char: "究", meaning: "Mendalami", onyomi: "キュウ (kyuu)" },
@@ -606,6 +637,8 @@ export const compoundBreakdowns: Record<string, {
   },
   "勉強": {
     level: "N4",
+    reading: "べんきょう",
+    meaning: "Belajar",
     components: [
       { char: "勉", meaning: "Berusaha keras", onyomi: "ベン (ben)" },
       { char: "強", meaning: "Kuat", onyomi: "キョウ (kyou)", kunyomi: "つよい (tsuyoi)" }
@@ -816,6 +849,14 @@ export function getKanjiChars(text: string): string[] {
   return Array.from(new Set(text.match(kanjiRegex) || []));
 }
 
+function makeExampleSentence(kanji: string, hiragana: string) {
+  return {
+    japanese: `「${kanji}」の意味を調べます。`,
+    hiragana: `「${hiragana}」の いみ を しらべます。`,
+    translation: `Saya mencari arti kata "${kanji}".`,
+  };
+}
+
 /**
  * Build the full list of Kanji Dictionary entries combining base dataset + details + breakdowns
  */
@@ -828,6 +869,8 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
     if (seenKanjiWords.has(item.kanji)) return;
     seenKanjiWords.add(item.kanji);
 
+    const breakdown = compoundBreakdowns[item.kanji];
+    const hiragana = breakdown?.reading ?? item.hiragana;
     const kChars = getKanjiChars(item.kanji);
     const kCount = kChars.length > 0 ? kChars.length : 1;
     const isSingle = kCount === 1;
@@ -856,8 +899,8 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
     }
 
     // Check compound breakdown
-    if (compoundBreakdowns[item.kanji]) {
-      const comp = compoundBreakdowns[item.kanji];
+    if (breakdown) {
+      const comp = breakdown;
       level = comp.level;
       components = comp.components;
       mnemonic = mnemonic || comp.mnemonic;
@@ -866,11 +909,15 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
       // Auto build components for compounds if available in single master
       components = kChars.map((char) => {
         const info = singleKanjiMaster[char] || kanjiDetails[char];
+        const sourceEntry = kanjiData.find((candidate) => candidate.kanji === char);
         return {
           char,
-          meaning: info && "meaning" in info ? info.meaning : (info ? "Karakter penyusun" : char),
+          meaning: info && "meaning" in info
+            ? info.meaning
+            : sourceEntry?.arti ?? "Makna ditentukan oleh gabungan kanji ini",
           onyomi: info?.onyomi,
           kunyomi: info?.kunyomi,
+          strokes: info && "strokes" in info ? info.strokes : undefined,
         };
       });
     }
@@ -878,8 +925,8 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
     dictionary.push({
       id: item.id,
       kanji: item.kanji,
-      hiragana: item.hiragana,
-      romaji: item.romaji,
+      hiragana,
+      romaji: hiraganaToRomaji(hiragana),
       arti: item.arti,
       level,
       kanjiCount: kCount,
@@ -889,7 +936,7 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
       mnemonic,
       strokes,
       components,
-      exampleSentence,
+      exampleSentence: exampleSentence ?? makeExampleSentence(item.kanji, hiragana),
       tags: [level, isSingle ? "1 Kanji" : `${kCount} Kanji`, `Kategori ${item.category}`]
     });
   });
@@ -903,7 +950,7 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
       id: `sk_${char}`,
       kanji: char,
       hiragana: info.hiragana,
-      romaji: info.romaji,
+      romaji: hiraganaToRomaji(info.hiragana),
       arti: info.meaning,
       level: info.level,
       kanjiCount: 1,
@@ -912,6 +959,7 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
       kunyomi: info.kunyomi,
       mnemonic: info.mnemonic,
       strokes: info.strokes,
+      exampleSentence: makeExampleSentence(char, info.hiragana),
       tags: [info.level, "1 Kanji", "Tunggal Dasar"]
     });
   });
@@ -922,19 +970,22 @@ export function getKanjiDictionary(): KanjiDictionaryEntry[] {
     seenKanjiWords.add(word);
 
     const kChars = getKanjiChars(word);
+    const hiragana = info.reading
+      ?? kanjiData.find((item) => item.kanji === word)?.hiragana
+      ?? word;
 
     dictionary.push({
       id: `cb_${word}`,
       kanji: word,
-      hiragana: info.exampleSentence?.hiragana || word,
-      romaji: word,
-      arti: info.mnemonic || word,
+      hiragana,
+      romaji: hiraganaToRomaji(hiragana),
+      arti: info.meaning || word,
       level: info.level,
       kanjiCount: kChars.length > 0 ? kChars.length : 2,
       category: "Majemuk",
       components: info.components,
       mnemonic: info.mnemonic,
-      exampleSentence: info.exampleSentence,
+      exampleSentence: info.exampleSentence ?? makeExampleSentence(word, hiragana),
       tags: [info.level, `${kChars.length} Kanji`, "Majemuk Jukugo"]
     });
   });
