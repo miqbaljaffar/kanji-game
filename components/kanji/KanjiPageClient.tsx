@@ -9,6 +9,7 @@ import { KanjiFilterBar } from "@/components/kanji/KanjiFilterBar";
 import { KanjiDetailModal } from "@/components/kanji/KanjiDetailModal";
 import { KanjiPagination } from "@/components/kanji/KanjiPagination";
 import { GameBackground } from "@/components/Background";
+import { DarkModeToggle } from "@/components/ui/DarkModeToggle";
 
 export function KanjiDictionaryPage() {
   const [searchQuery,    setSearchQuery]    = useState("");
@@ -68,35 +69,41 @@ export function KanjiDictionaryPage() {
     >
       <GameBackground />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-6">
+      <main className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-6" aria-label="Ensiklopedia Kanji">
 
         {/* ── Navigation Bar ── */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-5 p-3.5 sm:p-4"
+        <nav
+          aria-label="Navigasi halaman"
+          className="sticky top-0 z-30 flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-5 p-3.5 sm:p-4"
           style={{
-            background: "#ffffff",
+            background: "rgba(255,255,255,0.95)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
             border: "2px solid #e5e7eb",
             borderBottom: "4px solid #d1d5db",
             borderRadius: 16,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
           }}
         >
           <Link
             href="/"
-            className="rpg-btn w-full sm:w-auto px-4 py-2.5 flex items-center justify-center gap-2 touch-manipulation font-black text-xs"
+            className="rpg-btn w-full sm:w-auto px-5 py-2.5 flex items-center justify-center gap-2 touch-manipulation font-black text-sm"
+            aria-label="Kembali ke halaman utama KanjiMocha"
           >
-            ◀ Kembali
+            <span aria-hidden="true">◀</span> Kembali ke Menu
           </Link>
 
-          <div className="text-center sm:text-right">
+          <div className="text-center sm:text-right flex-1">
             <h1 className="text-sm sm:text-lg font-black text-slate-800 tracking-tight">
               📚 Ensiklopedia Kanji
             </h1>
-            <p className="text-[9px] sm:text-[10px] font-bold text-slate-500">
+            <p className="text-xs font-bold text-slate-500">
               Kanji 1 Karakter &amp; Majemuk (2+) · N5 / N4 / N3
             </p>
           </div>
-        </div>
+
+          <DarkModeToggle />
+        </nav>
 
         {/* ── Quick Stats ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
@@ -186,7 +193,7 @@ export function KanjiDictionaryPage() {
         )}
 
         <KanjiDetailModal entry={activeEntry} onClose={() => setActiveEntry(null)} />
-      </div>
+      </main>
     </div>
   );
 }

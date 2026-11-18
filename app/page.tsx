@@ -1,6 +1,9 @@
 "use client";
 
 import { useGame } from "@/hooks/useGame";
+import { useGameStats } from "@/hooks/useGameStats";
+import { useDarkMode } from "@/hooks/useDarkMode";
+import { DarkModeToggle } from "@/components/ui/DarkModeToggle";
 import { HomeScreen } from "@/components/HomeScreen";
 import { GameScreen } from "@/components/GameScreen";
 import { AnswerScreen } from "@/components/AnswerScreen";
@@ -97,82 +100,131 @@ export default function Home() {
     finishGame,
   } = useGame();
 
-  return (
-    <div className="relative h-dvh w-full overflow-y-auto overflow-x-hidden text-slate-800 font-body"
-      style={{ background: "#f7f7f7" }}>
+  const { saveSession, storedStats } = useGameStats();
 
+  // Wire: save session when game transitions to "result"
+  const prevStateRef = useRef(gameState);
+  useEffect(() => {
+    if (prevStateRef.current !== "result" && gameState === "result") {
+      saveSession(
+        selectedLevel,
+        gameMode,
+        difficulty,
+        stats.score,
+        stats.accuracy,
+        stats.correct,
+        stats.total,
+        stats.maxStreak,
+      );
+    }
+    prevStateRef.current = gameState;
+  }, [gameState, selectedLevel, gameMode, difficulty, stats, saveSession]);
+
+  return (
+    <div
+      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden font-body"
+      data-page-bg
+      style={{ background: "var(--bg-page)", color: "var(--text-primary)" }}
+    >
       {/* Background JRPG malam */}
       <GameBackground />
 
+      {/* Skip-to-main link untuk keyboard users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:font-black focus:text-sm focus:bg-white focus:text-slate-800 focus:shadow-lg"
+      >
+        Langsung ke konten utama
+      </a>
+
       {/* Navigasi header (hanya di home) */}
       {gameState === "home" && (
-        <div className="absolute top-3 right-3 sm:top-4 sm:right-6 z-50 flex items-center gap-2 screen-enter">
+        <nav
+          aria-label="Navigasi utama"
+          className="absolute top-3 right-3 sm:top-4 sm:right-6 z-50 flex items-center gap-2 screen-enter"
+        >
+          <DarkModeToggle />
           <Link
             href="/kanji"
-            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation font-black"
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-xs touch-manipulation font-black"
           >
             📚 Kanji
           </Link>
           <Link
             href="/bunpou"
-            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-[9px] sm:text-[10px] touch-manipulation font-black"
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 min-h-[44px] text-xs touch-manipulation font-black"
           >
             📝 Bunpou
           </Link>
-        </div>
+        </nav>
       )}
 
+      {/* Live region: umumkan pergantian layar ke screen reader */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {gameState === "home"    && "Halaman utama KanjiMocha"}
+        {gameState === "playing" && "Soal sedang berjalan"}
+        {gameState === "answer"  && "Layar jawaban"}
+        {gameState === "result"  && "Layar hasil permainan"}
+      </div>
+
       {/* ── Game States dengan Animated Transition ── */}
-      <AnimatedScreen stateKey={gameState}>
-        <>
-          {gameState === "home" && (
-            <HomeScreen onStart={startGame} />
-          )}
+      <main id="main-content" aria-label="Konten permainan">
+        <AnimatedScreen stateKey={gameState}>
+          <>
+            {gameState === "home" && (
+              <HomeScreen onStart={startGame} storedStats={storedStats} />
+            )}
 
-          {gameState === "playing" && currentQuestion && (
-            <GameScreen
-              question={currentQuestion}
-              questionIndex={questionIndex}
-              totalQuestions={totalQuestions}
-              answerState={answerState}
-              selectedIndex={selectedIndex}
-              stats={stats}
-              timeLeft={timeLeft}
-              timeRatio={timeRatio}
-              gameMode={gameMode}
-              difficulty={difficulty}
-              showFloatingScore={showFloatingScore}
-              floatingScoreValue={floatingScoreValue}
-              onAnswer={handleAnswer}
-              onExit={finishGame}
-            />
-          )}
+            {gameState === "playing" && currentQuestion && (
+              <GameScreen
+                question={currentQuestion}
+                questionIndex={questionIndex}
+                totalQuestions={totalQuestions}
+                answerState={answerState}
+                selectedIndex={selectedIndex}
+                stats={stats}
+                timeLeft={timeLeft}
+                timeRatio={timeRatio}
+                gameMode={gameMode}
+                difficulty={difficulty}
+                showFloatingScore={showFloatingScore}
+                floatingScoreValue={floatingScoreValue}
+                onAnswer={handleAnswer}
+                onExit={finishGame}
+              />
+            )}
 
-          {gameState === "answer" && currentQuestion && selectedIndex !== null && (
-            <AnswerScreen
-              question={currentQuestion}
-              questionIndex={questionIndex}
-              totalQuestions={totalQuestions}
-              selectedIndex={selectedIndex}
-              stats={stats}
-              gameMode={gameMode}
-              onNext={nextQuestionFromAnswer}
-              onExit={finishGame}
-            />
-          )}
+            {gameState === "answer" && currentQuestion && selectedIndex !== null && (
+              <AnswerScreen
+                question={currentQuestion}
+                questionIndex={questionIndex}
+                totalQuestions={totalQuestions}
+                selectedIndex={selectedIndex}
+                stats={stats}
+                gameMode={gameMode}
+                onNext={nextQuestionFromAnswer}
+                onExit={finishGame}
+              />
+            )}
 
-          {gameState === "result" && (
-            <ResultScreen
-              stats={stats}
-              gameMode={gameMode}
-              difficulty={difficulty}
-              level={selectedLevel}
-              onPlayAgain={() => startGame(selectedLevel, gameMode, difficulty)}
-              onHome={goHome}
-            />
-          )}
-        </>
-      </AnimatedScreen>
+            {gameState === "result" && (
+              <ResultScreen
+                stats={stats}
+                gameMode={gameMode}
+                difficulty={difficulty}
+                level={selectedLevel}
+                highScore={storedStats.highScore}
+                onPlayAgain={() => startGame(selectedLevel, gameMode, difficulty)}
+                onHome={goHome}
+              />
+            )}
+          </>
+        </AnimatedScreen>
+      </main>
     </div>
   );
 }

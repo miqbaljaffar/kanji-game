@@ -9,6 +9,7 @@ interface ResultScreenProps {
   gameMode: GameMode;
   difficulty: Difficulty;
   level: JlptLevel;
+  highScore: number;
   onPlayAgain: () => void;
   onHome: () => void;
 }
@@ -57,13 +58,16 @@ function makeConfetti() {
 
 const CONFETTI_ITEMS = makeConfetti();
 
-export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, onHome }: ResultScreenProps) {
+export function ResultScreen({ stats, gameMode, difficulty, level, highScore, onPlayAgain, onHome }: ResultScreenProps) {
   const rank = getRankDetail(stats.accuracy);
   const [isDonationOpen, setIsDonationOpen] = useState(false);
   const [showThankYou,   setShowThankYou]   = useState(false);
 
   const showConfetti = stats.accuracy >= 70;
   const lvl = LEVEL_LABEL[level];
+  // High score baru jika score saat ini lebih tinggi dari highScore sebelumnya
+  // highScore yang dikirim adalah nilai SEBELUM sesi ini disimpan
+  const isNewHigh = stats.score > 0 && stats.score >= highScore;
 
   const handleCloseDonation = () => {
     setIsDonationOpen(false);
@@ -125,7 +129,7 @@ export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, 
               style={{ background: lvl.bg, border: `1.5px solid ${lvl.border}` }}
             >
               <span className="text-base">{lvl.icon}</span>
-              <span className="text-[10px] font-black" style={{ color: lvl.color }}>
+              <span className="text-xs font-black" style={{ color: lvl.color }}>
                 {lvl.label}
               </span>
             </div>
@@ -143,7 +147,7 @@ export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, 
                 boxShadow: `0 4px 0 ${rank.bottom}`,
               }}
             >{rank.rank}</div>
-            <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em] font-black">
+            <p className="text-xs text-slate-400 uppercase tracking-[0.2em] font-black">
               Pelajaran Selesai!
             </p>
             <h1 className="text-xl sm:text-2xl font-black" style={{ color: rank.color }}>
@@ -152,6 +156,25 @@ export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, 
           </div>
 
           <div className="rpg-divider my-3" />
+
+          {/* 🏆 High Score Banner */}
+          {isNewHigh && (
+            <div
+              className="mb-4 py-2.5 px-4 flex items-center justify-center gap-2 animate-bounce-pop"
+              style={{
+                background: "linear-gradient(135deg, #fff8d6 0%, #fff3e0 100%)",
+                border: "2px solid #ffc800",
+                borderBottom: "4px solid #c49800",
+                borderRadius: 12,
+              }}
+            >
+              <span className="text-xl">🏆</span>
+              <span className="text-sm font-black text-amber-700 uppercase tracking-wider">
+                Rekor Baru! High Score Dipecahkan!
+              </span>
+              <span className="text-xl">🏆</span>
+            </div>
+          )}
 
           {/* Total skor */}
           <div
@@ -163,7 +186,7 @@ export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, 
               borderRadius: 14,
             }}
           >
-            <p className="text-[9px] font-black text-amber-600 uppercase tracking-[0.18em] mb-1">Total Skor</p>
+            <p className="text-xs font-black text-amber-600 uppercase tracking-[0.18em] mb-1">Total Skor</p>
             <div className="text-4xl sm:text-5xl font-black text-amber-600">
               ⭐ {stats.score.toLocaleString()}
             </div>
@@ -189,7 +212,7 @@ export function ResultScreen({ stats, gameMode, difficulty, level, onPlayAgain, 
               >
                 <div className="text-xl mb-1">{st.icon}</div>
                 <div className="text-xl sm:text-2xl font-black" style={{ color: st.text }}>{st.val}</div>
-                <div className="text-[8px] font-black uppercase tracking-widest mt-0.5" style={{ color: st.text, opacity: 0.7 }}>
+                <div className="text-[11px] font-black uppercase tracking-widest mt-0.5" style={{ color: st.text, opacity: 0.7 }}>
                   {st.label}
                 </div>
               </div>

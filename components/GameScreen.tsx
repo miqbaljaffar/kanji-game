@@ -103,7 +103,10 @@ export function GameScreen({
   }
 
   return (
-    <div className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 max-w-lg mx-auto overflow-x-hidden">
+    <main
+      className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 max-w-lg mx-auto overflow-x-hidden"
+      aria-label="Layar permainan"
+    >
       {isExitConfirmOpen && (
         <ConfirmModal
           title="Keluar permainan?"
@@ -135,15 +138,15 @@ export function GameScreen({
 
         <div className="flex-1 min-w-0 space-y-1.5">
           <div className="flex justify-between items-center">
-            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest">
+            <span className="text-xs text-slate-500 font-black uppercase tracking-widest">
               {questionIndex + 1} / {totalQuestions}
             </span>
             {/* Timer */}
             <div className="flex items-center gap-1">
-              <span className="text-[10px]">⏱</span>
+              <span className="text-[11px]">⏱</span>
               <span
                 className={clsx(
-                  "text-[11px] font-black w-5 text-right",
+                  "text-xs font-black w-5 text-right",
                   timeRatio <= 0.3 ? "text-red-500 animate-pulse" : "text-slate-600",
                 )}
               >{timeLeft}</span>
@@ -186,7 +189,10 @@ export function GameScreen({
       </div>
 
       {/* ── QUESTION AREA ── */}
-      <div className="flex-1 flex flex-col justify-center relative mt-10 mb-4 z-10 min-h-0">
+      <section
+        aria-label="Area soal"
+        className="flex-1 flex flex-col justify-center relative mt-10 mb-4 z-10 min-h-0"
+      >
 
         {/* Mascot */}
         <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
@@ -218,7 +224,7 @@ export function GameScreen({
             boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
           }}
         >
-          <p className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-[0.18em] mb-3 mt-3">
+          <p className="text-xs sm:text-xs font-black text-slate-400 uppercase tracking-[0.18em] mb-3 mt-3">
             {display.prompt}
           </p>
 
@@ -250,10 +256,13 @@ export function GameScreen({
             </div>
           )}
         </div>
-      </div>
+      </section>
 
       {/* ── GRID JAWABAN ── */}
-      <div className="flex-none grid grid-cols-2 gap-2.5 sm:gap-3 pb-3 z-20">
+      <section
+        aria-label="Pilihan jawaban"
+        className="flex-none grid grid-cols-2 gap-2.5 sm:gap-3 pb-3 z-20"
+      >
         {allOptions.map((opt, idx) => {
           const optionText   = getOptionText(opt);
           const isSelected   = selectedIndex === idx;
@@ -299,15 +308,15 @@ export function GameScreen({
               >{optionText}</span>
 
               {revealed && isCorrectOpt && (
-                <span className="text-[9px] mt-1 font-black text-green-600 relative z-10">✓ BENAR</span>
+                <span className="text-xs mt-1 font-black text-green-600 relative z-10">✓ BENAR</span>
               )}
               {revealed && isSelected && !isCorrectOpt && (
-                <span className="text-[9px] mt-1 font-black text-red-500 relative z-10">✗ SALAH</span>
+                <span className="text-xs mt-1 font-black text-red-500 relative z-10">✗ SALAH</span>
               )}
             </button>
           );
         })}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

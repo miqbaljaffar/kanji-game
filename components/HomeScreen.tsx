@@ -6,9 +6,14 @@ import { kanaData } from "@/data/kana";
 import { bunpouData } from "@/data/bunpou";
 import Link from "next/link";
 import clsx from "clsx";
+import type { StoredStats } from "@/hooks/useGameStats";
 
 interface HomeScreenProps {
   onStart: (level: JlptLevel, mode: GameMode, difficulty: Difficulty) => void;
+  storedStats?: StoredStats;
+  defaultLevel?: JlptLevel | null;
+  defaultMode?: GameMode | null;
+  defaultDifficulty?: Difficulty | null;
 }
 
 const LEVELS = [
@@ -55,7 +60,7 @@ const DIFFICULTIES = [
   },
 ];
 
-export function HomeScreen({ onStart }: HomeScreenProps) {
+export function HomeScreen({ onStart, storedStats }: HomeScreenProps) {
   const [selectedLevel, setSelectedLevel] = useState<JlptLevel | null>(null);
   const [selectedMode, setSelectedMode] = useState<GameMode | null>(null);
   const [selectedDiff, setSelectedDiff] = useState<Difficulty | null>(null);
@@ -72,18 +77,20 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
   const n3BunpouCount  = bunpouData.filter((b) => b.level === "N3").length;
 
   return (
-    <div className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-3 sm:px-6 py-10">
-
+    <main
+      className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-3 sm:px-6 py-10"
+      aria-label="Halaman utama KanjiMocha"
+    >
       {/* ── TITLE ── */}
-      <div className="text-center mb-6 animate-fade-up mt-2">
+      <header className="text-center mb-6 animate-fade-up mt-2">
         <div className="inline-block mb-3">
-          <span className="rpg-badge-gold text-[9px] sm:text-[10px] tracking-[0.15em]">
+          <span className="rpg-badge-gold text-[11px] sm:text-xs tracking-[0.15em]">
             ✦ JLPT N5 · N4 · N3 ✦
           </span>
         </div>
 
         <div className="flex items-center justify-center gap-2 mb-2">
-          <span className="text-3xl sm:text-5xl">🎌</span>
+          <span className="text-3xl sm:text-5xl" aria-hidden="true">🎌</span>
           <h1
             className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight"
             style={{
@@ -98,18 +105,21 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
           </h1>
         </div>
 
-        <div className="rpg-divider max-w-xs mx-auto" />
+        <div className="rpg-divider max-w-xs mx-auto" aria-hidden="true" />
         <p className="text-xs sm:text-sm text-slate-500 font-bold tracking-wider">
           Belajar Bahasa Jepang dengan Seru 🎉
         </p>
-      </div>
+      </header>
 
       {/* ── STAT CARDS ── */}
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5">
+      <section aria-label="Statistik konten tersedia" className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5">
         {[
           { val: kanjiData.length,  label: "Kosakata", icon: "📚", bg: "#ddf4ff", border: "#1cb0f6", text: "#0c6b9e" },
           { val: kanaData.length,   label: "Kana",     icon: "🔠", bg: "#d7ffb8", border: "#58cc02", text: "#2a7000" },
           { val: bunpouData.length, label: "Grammar",  icon: "📝", bg: "#fff8d6", border: "#ffc800", text: "#7a5a00" },
+          ...(storedStats && storedStats.highScore > 0
+            ? [{ val: storedStats.highScore.toLocaleString(), label: "High Score", icon: "🏆", bg: "#fff3e0", border: "#ff9600", text: "#7a3200" }]
+            : []),
         ].map((stat, i) => (
           <div
             key={stat.label}
@@ -127,16 +137,16 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
               <span className="text-base sm:text-lg font-black leading-none" style={{ color: stat.text }}>
                 {stat.val}
               </span>
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider" style={{ color: stat.text, opacity: 0.75 }}>
+              <span className="text-[11px] sm:xs font-bold uppercase tracking-wider" style={{ color: stat.text, opacity: 0.75 }}>
                 {stat.label}
               </span>
             </div>
           </div>
         ))}
-      </div>
+      </section>
 
       {/* ── MAIN PANEL ── */}
-      <div className="w-full max-w-lg space-y-3">
+      <section className="w-full max-w-lg space-y-3" aria-label="Pilih mode permainan">
 
         {/* Link Ensiklopedia */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -164,7 +174,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                 <div className="text-xs font-black tracking-tight truncate" style={{ color: l.text }}>
                   {l.label}
                 </div>
-                <div className="text-[9px] font-bold truncate" style={{ color: l.text, opacity: 0.7 }}>
+                <div className="text-[11px] font-bold truncate" style={{ color: l.text, opacity: 0.7 }}>
                   {l.sub}
                 </div>
               </div>
@@ -212,22 +222,22 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     <div className="flex-1">
                       <div className="text-sm sm:text-base font-black leading-tight"
                         style={{ color: lvl.text }}>{lvl.label}</div>
-                      <div className="text-[10px] font-bold mt-0.5" style={{ color: lvl.text, opacity: 0.8 }}>
+                      <div className="text-xs font-bold mt-0.5" style={{ color: lvl.text, opacity: 0.8 }}>
                         {lvl.desc}
                       </div>
                     </div>
                   </div>
                   <div className="w-full mt-2 pt-2 border-t border-dashed"
                     style={{ borderColor: `${lvl.border}55` }}>
-                    <div className="flex justify-between text-[10px] font-bold" style={{ color: lvl.text }}>
+                    <div className="flex justify-between text-[11px] font-bold" style={{ color: lvl.text }}>
                       <span>📚 Kosakata</span>
                       <span>{lvl.id === "N5" ? n5KanjiCount : lvl.id === "N4" ? n4KanjiCount : n3KanjiCount}</span>
                     </div>
-                    <div className="flex justify-between text-[10px] font-bold mt-1" style={{ color: lvl.text }}>
+                    <div className="flex justify-between text-[11px] font-bold mt-1" style={{ color: lvl.text }}>
                       <span>📝 Grammar</span>
                       <span>{lvl.id === "N5" ? n5BunpouCount : lvl.id === "N4" ? n4BunpouCount : n3BunpouCount}</span>
                     </div>
-                    <div className="text-[10px] font-bold mt-2" style={{ color: lvl.text, opacity: 0.8 }}>
+                    <div className="text-[11px] font-bold mt-2" style={{ color: lvl.text, opacity: 0.8 }}>
                       {lvl.sub}
                     </div>
                   </div>
@@ -255,7 +265,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     <div className="text-xs font-black" style={{ color: selectedLevelInfo.text }}>
                       {selectedLevelInfo.label}
                     </div>
-                    <div className="text-[9px] font-bold" style={{ color: selectedLevelInfo.text, opacity: 0.8 }}>
+                    <div className="text-xs font-bold" style={{ color: selectedLevelInfo.text, opacity: 0.8 }}>
                       {selectedLevelInfo.desc}
                     </div>
                   </div>
@@ -263,7 +273,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                 <button
                   onClick={() => { setStep(1); setSelectedMode(null); setSelectedDiff(null); }}
                   aria-label="Ubah level JLPT"
-                  className="rpg-btn text-[9px] px-3 py-2 touch-manipulation font-black text-slate-600"
+                  className="rpg-btn text-xs px-3 py-2 touch-manipulation font-black text-slate-600"
                 >
                   ✏ Ubah
                 </button>
@@ -306,9 +316,9 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                   >
                     <span className="text-xl sm:text-2xl">{mode.icon}</span>
                     <div className="text-center">
-                      <div className="text-[8px] sm:text-[9px] font-black leading-tight text-slate-700"
+                      <div className="text-[11px] sm:text-xs font-black leading-tight text-slate-700"
                         style={{ fontFamily: "var(--font-jp)" }}>{mode.label}</div>
-                      <div className="text-[8px] font-bold mt-0.5 text-slate-500">{mode.desc}</div>
+                      <div className="text-[11px] font-bold mt-0.5 text-slate-500">{mode.desc}</div>
                     </div>
                   </button>
                 ))}
@@ -335,7 +345,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     style={{ background: selectedLevelInfo.bg, border: `1px solid ${selectedLevelInfo.border}` }}
                   >
                     <span className="text-base">{selectedLevelInfo.icon}</span>
-                    <span className="text-[10px] font-black" style={{ color: selectedLevelInfo.text }}>
+                    <span className="text-xs font-black" style={{ color: selectedLevelInfo.text }}>
                       {selectedLevelInfo.label}
                     </span>
                   </div>
@@ -344,7 +354,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     style={{ background: selectedModeInfo.color, border: `1px solid ${selectedModeInfo.border}` }}
                   >
                     <span className="text-base">{selectedModeInfo.icon}</span>
-                    <span className="text-[10px] font-black text-slate-700" style={{ fontFamily: "var(--font-jp)" }}>
+                    <span className="text-xs font-black text-slate-700" style={{ fontFamily: "var(--font-jp)" }}>
                       {selectedModeInfo.label}
                     </span>
                   </div>
@@ -352,7 +362,7 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                 <button
                   onClick={() => { setStep(2); setSelectedDiff(null); }}
                   aria-label="Ubah mode quiz"
-                  className="rpg-btn text-[9px] px-3 py-2 touch-manipulation font-black text-slate-600 self-start sm:self-auto"
+                  className="rpg-btn text-xs px-3 py-2 touch-manipulation font-black text-slate-600 self-start sm:self-auto"
                 >
                   ✏ Ubah
                 </button>
@@ -397,13 +407,13 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
                     >
                       <span className="text-2xl mb-1">{diff.icon}</span>
                       <div
-                        className="text-[8px] font-black uppercase"
+                        className="text-[11px] font-black uppercase"
                         style={{ color: isSelected ? diff.text : "#6b7280" }}
                       >
                         {diff.label}
                       </div>
                       <div
-                        className="text-[7px] font-bold mt-0.5"
+                        className="text-[11px] font-bold mt-0.5"
                         style={{ color: isSelected ? diff.text : "#9ca3af", opacity: 0.8 }}
                       >
                         {diff.desc}
@@ -427,12 +437,14 @@ export function HomeScreen({ onStart }: HomeScreenProps) {
             </div>
           </div>
         )}
-      </div>
+      </section>
 
       {/* Footer */}
-      <p className="mt-6 text-[9px] sm:text-[10px] text-slate-400 font-bold tracking-widest uppercase">
-        KanjiMocha · Belajar Bahasa Jepang
-      </p>
-    </div>
+      <footer>
+        <p className="mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">
+          KanjiMocha · Belajar Bahasa Jepang
+        </p>
+      </footer>
+    </main>
   );
 }
