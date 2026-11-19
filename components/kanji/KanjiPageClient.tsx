@@ -10,24 +10,33 @@ import { KanjiDetailModal } from "@/components/kanji/KanjiDetailModal";
 import { KanjiPagination } from "@/components/kanji/KanjiPagination";
 import { GameBackground } from "@/components/Background";
 import { DarkModeToggle } from "@/components/ui/DarkModeToggle";
+import clsx from "clsx";
+
+/* stat configs — reuse CSS classes dari globals.css */
+const QUICK_STATS = [
+  { key: "total",    label: "Total Kanji", icon: "📚", cls: "dm-panel",       textCls: "dm-text-primary"   },
+  { key: "n5",       label: "N5",          icon: "🟢", cls: "lvl-N5",         textCls: "lvl-text-N5"       },
+  { key: "n4",       label: "N4",          icon: "🔵", cls: "lvl-N4",         textCls: "lvl-text-N4"       },
+  { key: "compound", label: "Majemuk",     icon: "🧩", cls: "result-combo",   textCls: "result-text-combo" },
+] as const;
 
 export function KanjiDictionaryPage() {
-  const [searchQuery,    setSearchQuery]    = useState("");
-  const [selectedLevel,  setSelectedLevel]  = useState<"ALL" | "N5" | "N4" | "N3">("ALL");
-  const [selectedType,   setSelectedType]   = useState<"ALL" | "SINGLE" | "COMPOUND">("ALL");
-  const [activeEntry,    setActiveEntry]    = useState<KanjiDictionaryEntry | null>(null);
+  const [searchQuery,   setSearchQuery]   = useState("");
+  const [selectedLevel, setSelectedLevel] = useState<"ALL" | "N5" | "N4" | "N3">("ALL");
+  const [selectedType,  setSelectedType]  = useState<"ALL" | "SINGLE" | "COMPOUND">("ALL");
+  const [activeEntry,   setActiveEntry]   = useState<KanjiDictionaryEntry | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [currentPage,    setCurrentPage]    = useState(1);
-  const [itemsPerPage,   setItemsPerPage]   = useState(12);
+  const [currentPage,   setCurrentPage]   = useState(1);
+  const [itemsPerPage,  setItemsPerPage]  = useState(12);
 
   useEffect(() => { setCurrentPage(1); }, [searchQuery, selectedLevel, selectedType, itemsPerPage]);
 
   const stats = useMemo(() => ({
-    total:         kanjiDictionaryData.length,
-    n5Count:       kanjiDictionaryData.filter((k) => k.level === "N5").length,
-    n4Count:       kanjiDictionaryData.filter((k) => k.level === "N4").length,
-    n3Count:       kanjiDictionaryData.filter((k) => k.level === "N3").length,
-    compoundCount: kanjiDictionaryData.filter((k) => k.kanjiCount > 1).length,
+    total:    kanjiDictionaryData.length,
+    n5:       kanjiDictionaryData.filter((k) => k.level === "N5").length,
+    n4:       kanjiDictionaryData.filter((k) => k.level === "N4").length,
+    n3:       kanjiDictionaryData.filter((k) => k.level === "N3").length,
+    compound: kanjiDictionaryData.filter((k) => k.kanjiCount > 1).length,
   }), []);
 
   const filteredKanji = useMemo(() => {
@@ -62,42 +71,37 @@ export function KanjiDictionaryPage() {
   };
 
   return (
+    /* wrapper — background dari CSS var, bukan hardcoded */
     <div
       ref={containerRef}
-      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden text-slate-800 font-body pb-16 rpg-scroll"
-      style={{ background: "#f7f7f7" }}
+      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden font-body pb-16 rpg-scroll"
+      data-page-bg
     >
       <GameBackground />
 
-      <main className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-6" aria-label="Ensiklopedia Kanji">
+      <main className="relative z-10 max-w-7xl mx-auto px-3 sm:px-5 xl:px-8 pt-4 sm:pt-6" aria-label="Ensiklopedia Kanji">
 
         {/* ── Navigation Bar ── */}
         <nav
           aria-label="Navigasi halaman"
-          className="sticky top-0 z-30 flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-5 p-3.5 sm:p-4"
-          style={{
-            background: "rgba(255,255,255,0.95)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            border: "2px solid #e5e7eb",
-            borderBottom: "4px solid #d1d5db",
-            borderRadius: 16,
-            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-          }}
+          className="sticky top-0 z-30 flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5 p-3 sm:p-4 dm-game-header"
         >
+          {/* Kembali */}
           <Link
             href="/"
-            className="rpg-btn w-full sm:w-auto px-5 py-2.5 flex items-center justify-center gap-2 touch-manipulation font-black text-sm"
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-5 py-2.5 touch-manipulation font-black text-sm shrink-0"
             aria-label="Kembali ke halaman utama KanjiMocha"
           >
-            <span aria-hidden="true">◀</span> Kembali ke Menu
+            <span aria-hidden="true">◀</span>
+            <span className="hidden xs:inline">Kembali</span>
           </Link>
 
-          <div className="text-center sm:text-right flex-1">
-            <h1 className="text-sm sm:text-lg font-black text-slate-800 tracking-tight">
+          {/* Title — grow */}
+          <div className="flex-1 text-center min-w-0">
+            <h1 className="text-sm sm:text-lg font-black dm-text-primary tracking-tight leading-tight truncate">
               📚 Ensiklopedia Kanji
             </h1>
-            <p className="text-xs font-bold text-slate-500">
+            <p className="text-[11px] sm:text-xs font-bold dm-text-secondary hidden xs:block">
               Kanji 1 Karakter &amp; Majemuk (2+) · N5 / N4 / N3
             </p>
           </div>
@@ -107,30 +111,19 @@ export function KanjiDictionaryPage() {
 
         {/* ── Quick Stats ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
-          {[
-            { label: "Total Kanji", val: stats.total,         icon: "📚", bg: "#ffffff", border: "#e5e7eb",  bottom: "#d1d5db",  text: "#3c3c3c" },
-            { label: "N5",          val: stats.n5Count,       icon: "🟢", bg: "#d7ffb8", border: "#58cc02",  bottom: "#46a302",  text: "#2a7000" },
-            { label: "N4",          val: stats.n4Count,       icon: "🔵", bg: "#ddf4ff", border: "#1cb0f6",  bottom: "#0490c8",  text: "#0c6b9e" },
-            { label: "Majemuk",     val: stats.compoundCount, icon: "🧩", bg: "#f5e6ff", border: "#ce82ff",  bottom: "#9333ea",  text: "#6b21a8" },
-          ].map((item) => (
+          {QUICK_STATS.map((s) => (
             <div
-              key={item.label}
-              className="relative flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4"
-              style={{
-                background: item.bg,
-                border: `2px solid ${item.border}`,
-                borderBottom: `4px solid ${item.bottom}`,
-                borderRadius: 14,
-                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-              }}
+              key={s.key}
+              className={clsx("relative flex items-center gap-2 sm:gap-3 p-2.5 sm:p-4", s.cls)}
+              style={{ borderRadius: 14, border: "2px solid", borderBottom: "4px solid", boxShadow: "0 2px 6px rgba(0,0,0,0.05)" }}
             >
-              <span className="text-xl sm:text-2xl shrink-0">{item.icon}</span>
+              <span className="text-lg sm:text-2xl shrink-0" aria-hidden="true">{s.icon}</span>
               <div className="min-w-0">
-                <div className="text-base sm:text-xl font-black leading-none" style={{ color: item.text }}>
-                  {item.val}
+                <div className={clsx("text-base sm:text-xl font-black leading-none tabular-nums", s.textCls)}>
+                  {stats[s.key as keyof typeof stats]}
                 </div>
-                <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider mt-0.5 leading-tight" style={{ color: item.text, opacity: 0.7 }}>
-                  {item.label}
+                <div className={clsx("text-[11px] font-bold uppercase tracking-wider mt-0.5 leading-tight", s.textCls)} style={{ opacity: 0.7 }}>
+                  {s.label}
                 </div>
               </div>
             </div>
@@ -151,7 +144,8 @@ export function KanjiDictionaryPage() {
         {/* ── Cards Grid ── */}
         {paginatedKanji.length > 0 ? (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+            {/* 2 col mobile → 3 col md → 4 col lg → 5 col xl → 6 col 2xl */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 sm:gap-3">
               {paginatedKanji.map((entry, idx) => (
                 <div key={entry.id} className={`stagger-${Math.min((idx % 12) + 1, 12)}`}>
                   <KanjiCard entry={entry} onSelect={setActiveEntry} />
@@ -168,19 +162,11 @@ export function KanjiDictionaryPage() {
             />
           </>
         ) : (
-          <div
-            className="relative p-10 text-center my-10 max-w-md mx-auto space-y-4"
-            style={{
-              background: "#ffffff",
-              border: "2px solid #e5e7eb",
-              borderBottom: "4px solid #d1d5db",
-              borderRadius: 16,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-            }}
-          >
-            <div className="text-4xl">🔍</div>
-            <h3 className="text-sm font-black text-slate-700">Kanji Tidak Ditemukan</h3>
-            <p className="text-xs font-bold text-slate-400">
+          <div className="dm-panel relative p-8 sm:p-10 text-center my-10 max-w-md mx-auto space-y-4"
+            style={{ borderRadius: 16, border: "2px solid", borderBottom: "4px solid" }}>
+            <div className="text-4xl" aria-hidden="true">🔍</div>
+            <h3 className="text-sm font-black dm-text-primary">Kanji Tidak Ditemukan</h3>
+            <p className="text-xs font-bold dm-text-secondary">
               Coba kata kunci lain atau sesuaikan filter level.
             </p>
             <button

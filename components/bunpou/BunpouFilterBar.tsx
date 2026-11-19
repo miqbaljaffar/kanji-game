@@ -46,33 +46,27 @@ export function BunpouFilterBar({
 
   return (
     <div
-      className="relative p-3.5 sm:p-5 mb-4 sm:mb-6 space-y-3"
-      style={{
-        background: "#ffffff",
-        border: "2px solid #e5e7eb",
-        borderBottom: "4px solid #d1d5db",
-        borderRadius: 16,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-      }}
+      className="dm-panel relative p-3.5 sm:p-5 mb-4 sm:mb-6 space-y-3"
+      style={{ borderRadius: 16, border: "2px solid", borderBottom: "4px solid" }}
     >
       {/* Search */}
       <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-base text-slate-400 pointer-events-none">🔍</span>
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-base dm-text-muted pointer-events-none" aria-hidden="true">🔍</span>
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Cari Tata Bahasa, Rumus, Fungsi (cth: ～てください)..."
           aria-label="Cari pola bunpou"
-          className="w-full pl-9 pr-10 py-3 text-xs sm:text-sm font-bold text-slate-700 placeholder-slate-300 outline-none transition-all"
+          className="w-full pl-9 pr-10 py-3 text-xs sm:text-sm font-bold outline-none transition-all dm-text-primary"
           style={{
-            background: "#f9fafb",
-            border: "2px solid #e5e7eb",
+            background: "var(--bg-surface2, #f9fafb)",
+            border: "2px solid var(--border-base, #e5e7eb)",
             borderRadius: 10,
             minHeight: "44px",
           }}
           onFocus={(e) => (e.currentTarget.style.borderColor = "#58cc02")}
-          onBlur={(e)  => (e.currentTarget.style.borderColor = "#e5e7eb")}
+          onBlur={(e)  => (e.currentTarget.style.borderColor = "var(--border-base, #e5e7eb)")}
         />
         {searchQuery && (
           <button
@@ -95,7 +89,7 @@ export function BunpouFilterBar({
 
           {/* Level */}
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mr-0.5 hidden xs:block">
+            <span className="text-xs font-black text-slate-400 uppercase tracking-widest mr-0.5 hidden xs:block">
               LV:
             </span>
             {(["ALL", "N5", "N4", "N3"] as const).map((lvl) => {
@@ -106,13 +100,13 @@ export function BunpouFilterBar({
                 <button
                   key={lvl}
                   onClick={() => onLevelChange(lvl)}
-                  className="px-3 py-2 text-[9px] font-black transition-all cursor-pointer touch-manipulation min-h-[36px]"
+                  className="px-3 py-2 text-xs font-black transition-all cursor-pointer touch-manipulation min-h-[36px]"
                   style={{
-                    background: active ? accentMap[lvl] : "#f3f4f6",
-                    border: `2px solid ${active ? accentMap[lvl] : "#e5e7eb"}`,
-                    borderBottom: `3px solid ${active ? bottomMap[lvl] : "#d1d5db"}`,
+                    background: active ? accentMap[lvl] : "var(--bg-surface3, #f3f4f6)",
+                    border: `2px solid ${active ? accentMap[lvl] : "var(--border-base, #e5e7eb)"}`,
+                    borderBottom: `3px solid ${active ? bottomMap[lvl] : "var(--border-strong, #d1d5db)"}`,
                     borderRadius: 8,
-                    color: active ? "#ffffff" : "#6b7280",
+                    color: active ? "#ffffff" : "var(--text-secondary, #6b7280)",
                   }}
                 >
                   {lvl}
@@ -125,7 +119,7 @@ export function BunpouFilterBar({
 
           {/* Category */}
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mr-0.5 hidden xs:block">
+            <span className="text-xs font-black text-slate-400 uppercase tracking-widest mr-0.5 hidden xs:block">
               KAT:
             </span>
             {CATEGORIES.map((cat) => {
@@ -135,13 +129,13 @@ export function BunpouFilterBar({
                 <button
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
-                  className="px-3 py-2 text-[9px] font-black transition-all cursor-pointer shrink-0 touch-manipulation min-h-[36px]"
+                  className="px-3 py-2 text-xs font-black transition-all cursor-pointer shrink-0 touch-manipulation min-h-[36px]"
                   style={{
-                    background: active ? accent : "#f3f4f6",
-                    border: `2px solid ${active ? accent : "#e5e7eb"}`,
-                    borderBottom: `3px solid ${active ? bottom : "#d1d5db"}`,
+                    background: active ? accent : "var(--bg-surface3, #f3f4f6)",
+                    border: `2px solid ${active ? accent : "var(--border-base, #e5e7eb)"}`,
+                    borderBottom: `3px solid ${active ? bottom : "var(--border-strong, #d1d5db)"}`,
                     borderRadius: 8,
-                    color: active ? "#ffffff" : "#6b7280",
+                    color: active ? "#ffffff" : "var(--text-secondary, #6b7280)",
                   }}
                 >
                   {CATEGORY_LABELS[cat] ?? cat}
@@ -154,7 +148,7 @@ export function BunpouFilterBar({
         {/* Counter & Reset */}
         <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 border-t sm:border-t-0 border-gray-100 pt-2 sm:pt-0">
           <span
-            className="text-[8px] font-black px-3 py-1.5 rounded-full"
+            className="text-xs font-black px-3 py-1.5 rounded-full"
             style={{ background: "#d7ffb8", color: "#2a7000", border: "1px solid #58cc02" }}
           >
             {totalResults} POLA
@@ -162,7 +156,7 @@ export function BunpouFilterBar({
           {hasActiveFilters && (
             <button
               onClick={() => { onSearchChange(""); onLevelChange("ALL"); onCategoryChange("ALL"); }}
-              className="rpg-btn-red px-3 py-2 text-[8px] touch-manipulation min-h-[36px] font-black"
+              className="rpg-btn-red px-3 py-2 text-xs touch-manipulation min-h-[36px] font-black"
             >
               RESET
             </button>

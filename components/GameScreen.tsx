@@ -104,7 +104,7 @@ export function GameScreen({
 
   return (
     <main
-      className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 max-w-lg mx-auto overflow-x-hidden"
+      className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 xl:p-6 max-w-lg xl:max-w-2xl mx-auto overflow-x-hidden"
       aria-label="Layar permainan"
     >
       {isExitConfirmOpen && (
@@ -119,16 +119,7 @@ export function GameScreen({
       )}
 
       {/* ── HEADER ── */}
-      <div
-        className="flex-none flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 mb-3"
-        style={{
-          background: "#ffffff",
-          border: "2px solid #e5e7eb",
-          borderBottom: "4px solid #d1d5db",
-          borderRadius: 16,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-        }}
-      >
+      <div className="dm-game-header flex-none flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 mb-3">
         {/* Exit button */}
         <button
           onClick={() => setIsExitConfirmOpen(true)}
@@ -138,23 +129,24 @@ export function GameScreen({
 
         <div className="flex-1 min-w-0 space-y-1.5">
           <div className="flex justify-between items-center">
-            <span className="text-xs text-slate-500 font-black uppercase tracking-widest">
+            <span className="text-xs dm-text-secondary font-black uppercase tracking-widest">
               {questionIndex + 1} / {totalQuestions}
             </span>
             {/* Timer */}
             <div className="flex items-center gap-1">
-              <span className="text-[11px]">⏱</span>
+              <span className="text-[11px]" aria-hidden="true">⏱</span>
               <span
                 className={clsx(
-                  "text-xs font-black w-5 text-right",
-                  timeRatio <= 0.3 ? "text-red-500 animate-pulse" : "text-slate-600",
+                  "text-xs font-black w-5 text-right tabular-nums",
+                  timeRatio <= 0.3 ? "text-red-500 animate-pulse" : "dm-text-secondary",
                 )}
+                aria-label={`Waktu tersisa ${timeLeft} detik`}
               >{timeLeft}</span>
             </div>
           </div>
 
           {/* HP Bar (timer) */}
-          <div className="rpg-hp-bar">
+          <div className="rpg-hp-bar" role="progressbar" aria-label="Timer" aria-valuenow={Math.round(timeRatio*100)} aria-valuemin={0} aria-valuemax={100}>
             <div
               key={`hp-${hpKey}`}
               className={clsx("rpg-hp-fill bg-gradient-to-r rpg-hp-fill-new", hpBarColor(timeRatio))}
@@ -163,7 +155,7 @@ export function GameScreen({
           </div>
 
           {/* EXP Bar (progress soal) */}
-          <div className="rpg-hp-bar" style={{ height: "8px" }}>
+          <div className="rpg-hp-bar" style={{ height: "8px" }} role="progressbar" aria-label="Progress soal" aria-valuenow={questionIndex} aria-valuemin={0} aria-valuemax={totalQuestions}>
             <div
               className="rpg-hp-fill bg-gradient-to-r from-blue-400 to-cyan-400"
               style={{ width: `${(questionIndex / totalQuestions) * 100}%`, transition: "width 0.5s ease" }}
@@ -172,17 +164,9 @@ export function GameScreen({
         </div>
 
         {/* Skor */}
-        <div
-          className="px-2.5 py-1.5 flex items-center gap-1 shrink-0"
-          style={{
-            background: "#fff8d6",
-            border: "2px solid #ffc800",
-            borderBottom: "3px solid #c49800",
-            borderRadius: 10,
-          }}
-        >
-          <span className="text-sm">⭐</span>
-          <span className="font-black text-amber-600 text-xs sm:text-sm">
+        <div className="dm-score-box px-2.5 py-1.5 flex items-center gap-1 shrink-0">
+          <span className="text-sm" aria-hidden="true">⭐</span>
+          <span className="font-black text-amber-600 dark:text-amber-400 text-xs sm:text-sm tabular-nums">
             {stats.score}
           </span>
         </div>
@@ -193,55 +177,36 @@ export function GameScreen({
         aria-label="Area soal"
         className="flex-1 flex flex-col justify-center relative mt-10 mb-4 z-10 min-h-0"
       >
-
         {/* Mascot */}
         <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
           <div
             className={clsx(
-              "p-2 transition-transform",
+              "dm-mascot-box p-2 transition-transform",
               mascotAttacking ? "[animation:mascotAttack_0.35s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]" : "",
             )}
-            style={{
-              background: "#ffffff",
-              border: "3px solid #1cb0f6",
-              borderBottom: "5px solid #0490c8",
-              borderRadius: 14,
-              boxShadow: "0 4px 16px rgba(28,176,246,0.25)",
-            }}
           >
             <Mascot state={answerState} />
           </div>
         </div>
 
         {/* Kotak pertanyaan */}
-        <div
-          className="w-full relative flex flex-col items-center justify-center p-5 sm:p-7 text-center min-h-40"
-          style={{
-            background: "#ffffff",
-            border: "2px solid #e5e7eb",
-            borderBottom: "4px solid #d1d5db",
-            borderRadius: 20,
-            boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
-          }}
-        >
-          <p className="text-xs sm:text-xs font-black text-slate-400 uppercase tracking-[0.18em] mb-3 mt-3">
+        <div className="dm-question-box w-full relative flex flex-col items-center justify-center p-5 sm:p-7 text-center min-h-40">
+          <p className="text-xs font-black dm-text-muted uppercase tracking-[0.18em] mb-3 mt-3">
             {display.prompt}
           </p>
 
           <h2
             className={clsx(
-              "font-black leading-tight text-slate-800 break-words w-full",
+              "font-black leading-tight dm-text-primary break-words w-full",
               gameMode === "arti-to-kanji" ? "text-3xl sm:text-4xl"
-              : gameMode === "bunpou"       ? "text-xl sm:text-2xl"
+              : gameMode === "bunpou"       ? "text-lg sm:text-2xl"
               : "text-5xl sm:text-7xl",
             )}
-            style={{
-              fontFamily: isJpQ ? "var(--font-jp)" : "var(--font-body)",
-            }}
+            style={{ fontFamily: isJpQ ? "var(--font-jp)" : "var(--font-body)" }}
           >{display.main}</h2>
 
           {display.sub && (
-            <p className="text-xs sm:text-sm font-bold text-slate-500 mt-3 px-2">
+            <p className="text-xs sm:text-sm font-bold dm-text-secondary mt-3 px-2">
               &ldquo;{display.sub}&rdquo;
             </p>
           )}
@@ -261,7 +226,7 @@ export function GameScreen({
       {/* ── GRID JAWABAN ── */}
       <section
         aria-label="Pilihan jawaban"
-        className="flex-none grid grid-cols-2 gap-2.5 sm:gap-3 pb-3 z-20"
+        className="flex-none grid grid-cols-2 xl:grid-cols-4 gap-2 sm:gap-2.5 pb-3 z-20"
       >
         {allOptions.map((opt, idx) => {
           const optionText   = getOptionText(opt);
@@ -281,10 +246,11 @@ export function GameScreen({
               aria-label={`Pilihan ${idx + 1}: ${optionText}${revealed ? (isCorrectOpt ? " — Jawaban benar" : isSelected ? " — Jawaban salah" : "") : ""}`}
               aria-pressed={isSelected || undefined}
               className={clsx(
-                "rpg-btn relative w-full p-3.5 sm:p-4 flex flex-col items-center justify-center min-h-[56px] sm:min-h-[64px]",
-                "text-center transition-all duration-150 outline-none touch-manipulation overflow-hidden",
+                "rpg-btn relative w-full p-3 sm:p-4 flex flex-col items-center justify-center",
+                "min-h-[52px] sm:min-h-[64px] text-center transition-all duration-150",
+                "outline-none touch-manipulation overflow-hidden",
                 stateClass,
-                !revealed && "hover:-translate-y-0.5",
+                !revealed && "hover:-translate-y-0.5 active:translate-y-0",
               )}
             >
               {/* Glow burst overlay */}
@@ -296,13 +262,14 @@ export function GameScreen({
                     background: "radial-gradient(circle, rgba(88,204,2,0.3) 0%, transparent 70%)",
                     animation: "glowBurst 0.5s ease-out forwards",
                   }}
+                  aria-hidden="true"
                 />
               )}
 
               <span
                 className={clsx(
-                  "block font-black leading-tight relative z-10 text-slate-800",
-                  isJpOpt ? "text-xl sm:text-2xl" : "text-sm sm:text-base",
+                  "block font-black leading-tight relative z-10 dm-text-primary",
+                  isJpOpt ? "text-lg sm:text-2xl" : "text-sm sm:text-base",
                 )}
                 style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}
               >{optionText}</span>

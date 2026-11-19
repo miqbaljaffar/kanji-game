@@ -37,18 +37,10 @@ export function KanjiPagination({
   };
 
   return (
-    <div
-      className="relative mt-6 p-3.5 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3"
-      style={{
-        background: "#ffffff",
-        border: "2px solid #e5e7eb",
-        borderBottom: "4px solid #d1d5db",
-        borderRadius: 16,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-      }}
-    >
+    <div className="dm-panel relative mt-6 p-3.5 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3"
+      style={{ borderRadius: 16, border: "2px solid", borderBottom: "4px solid" }}>
       {/* Range info */}
-      <div className="text-[9px] sm:text-[10px] font-black text-slate-500 text-center sm:text-left uppercase tracking-widest">
+      <div className="text-xs font-black dm-text-secondary text-center sm:text-left uppercase tracking-widest">
         {startItem}–{endItem} / {totalItems} Kanji
       </div>
 
@@ -60,21 +52,21 @@ export function KanjiPagination({
             disabled={currentPage === 1}
             aria-label="Halaman sebelumnya"
             className={clsx(
-              "rpg-btn px-3.5 py-2.5 text-[9px] touch-manipulation min-h-[40px] font-black",
+              "rpg-btn px-3.5 py-2.5 text-xs touch-manipulation min-h-[40px] font-black",
               currentPage === 1 && "opacity-40 cursor-not-allowed"
             )}
           >◀ Prev</button>
 
           {getPageNumbers().map((page, idx) =>
             typeof page === "string" ? (
-              <span key={`e${idx}`} className="text-slate-400 text-xs font-bold px-1">···</span>
+              <span key={`e${idx}`} className="dm-text-muted text-xs font-bold px-1">···</span>
             ) : (
               <button
                 key={page}
                 onClick={() => onPageChange(page)}
                 aria-label={`Halaman ${page}`}
                 aria-current={currentPage === page ? "page" : undefined}
-                className="w-10 h-10 text-[9px] font-black transition-all cursor-pointer touch-manipulation flex items-center justify-center"
+                className="w-10 h-10 text-xs font-black transition-all cursor-pointer touch-manipulation flex items-center justify-center"
                 style={currentPage === page ? {
                   background: "#58cc02",
                   border: "2px solid #58cc02",
@@ -83,11 +75,11 @@ export function KanjiPagination({
                   color: "#ffffff",
                   transform: "scale(1.05)",
                 } : {
-                  background: "#f3f4f6",
-                  border: "2px solid #e5e7eb",
-                  borderBottom: "3px solid #d1d5db",
+                  background: "var(--bg-surface3, #f3f4f6)",
+                  border: "2px solid var(--border-base, #e5e7eb)",
+                  borderBottom: "3px solid var(--border-strong, #d1d5db)",
                   borderRadius: 8,
-                  color: "#6b7280",
+                  color: "var(--text-secondary, #6b7280)",
                 }}
               >
                 {page}
@@ -100,7 +92,7 @@ export function KanjiPagination({
             disabled={currentPage === totalPages}
             aria-label="Halaman berikutnya"
             className={clsx(
-              "rpg-btn px-3.5 py-2.5 text-[9px] touch-manipulation min-h-[40px] font-black",
+              "rpg-btn px-3.5 py-2.5 text-xs touch-manipulation min-h-[40px] font-black",
               currentPage === totalPages && "opacity-40 cursor-not-allowed"
             )}
           >Next ▶</button>
@@ -109,16 +101,16 @@ export function KanjiPagination({
 
       {/* Per-page selector */}
       <div className="flex items-center gap-2">
-        <span className="text-[9px] font-black text-slate-400 uppercase">Show:</span>
+        <span className="text-xs font-black dm-text-muted uppercase">Show:</span>
         <select
           value={itemsPerPage}
           onChange={(e) => onItemsPerPageChange(Number(e.target.value))}
           aria-label="Jumlah kanji per halaman"
-          className="px-3 py-2 text-[9px] font-black text-slate-600 outline-none cursor-pointer min-h-[36px]"
+          className="px-3 py-2 text-xs font-black outline-none cursor-pointer min-h-[36px] dm-text-primary"
           style={{
-            background: "#f9fafb",
-            border: "2px solid #e5e7eb",
-            borderBottom: "3px solid #d1d5db",
+            background: "var(--bg-surface2, #f9fafb)",
+            border: "2px solid var(--border-base, #e5e7eb)",
+            borderBottom: "3px solid var(--border-strong, #d1d5db)",
             borderRadius: 8,
           }}
         >

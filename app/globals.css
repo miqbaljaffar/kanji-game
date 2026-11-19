@@ -592,11 +592,11 @@ a:focus-visible,
 }
 
 /* ─────────────────────────────────────────
-   DARK MODE — Component overrides
-   Semua komponen yang pakai var() otomatis
-   mengikuti. Ini hanya untuk inline styles
-   yang tidak bisa pakai CSS var.
+   DARK MODE — Full system override
+   Semua surface, border, text, komponen RPG
 ───────────────────────────────────────── */
+
+/* ── Component classes ── */
 html.dark .rpg-box {
   background: var(--bg-surface);
   border-color: var(--border-base);
@@ -604,7 +604,11 @@ html.dark .rpg-box {
   box-shadow: var(--shadow-card);
   color: var(--text-primary);
 }
-
+html.dark .rpg-box-gold {
+  background: #1e1a0a;
+  border-color: #c49800;
+  border-bottom-color: #8a6a00;
+}
 html.dark .rpg-btn {
   background: var(--bg-surface2);
   border-color: var(--border-base);
@@ -613,50 +617,293 @@ html.dark .rpg-btn {
 }
 html.dark .rpg-btn:hover:not(:disabled) {
   background: var(--bg-surface3);
+  border-color: var(--border-strong);
+}
+html.dark .rpg-hp-bar {
+  background: var(--bg-surface3);
+  border-color: var(--border-base);
+}
+html.dark .rpg-badge {
+  background: var(--bg-surface3);
+  border-color: var(--border-strong);
+  color: var(--text-secondary);
+}
+html.dark .rpg-badge-gold {
+  background: #1e1a0a;
+  border-color: #c49800;
+  color: #ffc800;
+}
+html.dark .rpg-divider {
+  opacity: 0.4;
 }
 
-/* Scrollbar dark */
+/* ── Scrollbar ── */
 html.dark .rpg-scroll::-webkit-scrollbar-track { background: var(--bg-surface2); }
 html.dark .rpg-scroll::-webkit-scrollbar-thumb { background: var(--border-strong); }
 html.dark .rpg-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* Utility: dark surface for inline-styled divs */
-html.dark [data-surface] {
-  background: var(--bg-surface) !important;
-  border-color: var(--border-base) !important;
-  color: var(--text-primary) !important;
-}
-html.dark [data-surface="2"] {
-  background: var(--bg-surface2) !important;
-  border-color: var(--border-base) !important;
-}
-
-/* Background page wrapper */
+/* ── Page background ── */
 html.dark [data-page-bg] {
   background: var(--bg-page) !important;
 }
 
-/* Text muted overrides in dark */
-html.dark .text-slate-500,
-html.dark .text-slate-400 {
-  color: var(--text-secondary) !important;
+/* ── Generic surface utility classes (dipakai di className) ── */
+/* Gunakan class .dm-surface di div yang sebelumnya style={{ background:"#fff" }} */
+.dm-surface {
+  background: #ffffff;
+  border-color: #e5e7eb;
 }
-html.dark .text-slate-800,
-html.dark .text-slate-700 {
+html.dark .dm-surface {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
   color: var(--text-primary) !important;
 }
-html.dark .text-slate-600 {
-  color: var(--text-secondary) !important;
+.dm-surface-2 {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+html.dark .dm-surface-2 {
+  background: var(--bg-surface2) !important;
+  border-color: var(--border-base) !important;
+}
+.dm-surface-3 {
+  background: #f3f4f6;
+}
+html.dark .dm-surface-3 {
+  background: var(--bg-surface3) !important;
+  border-color: var(--border-base) !important;
 }
 
-/* Border overrides */
-html.dark .border-slate-200,
-html.dark .border-gray-200 { border-color: var(--border-base) !important; }
-html.dark .bg-white { background: var(--bg-surface) !important; }
+/* ── Border utility ── */
+.dm-border { border-color: #e5e7eb; }
+html.dark .dm-border { border-color: var(--border-base) !important; }
+
+.dm-border-strong { border-color: #d1d5db; }
+html.dark .dm-border-strong { border-color: var(--border-strong) !important; }
+
+/* ── Text utilities ── */
+.dm-text-primary { color: #3c3c3c; }
+html.dark .dm-text-primary { color: var(--text-primary) !important; }
+
+.dm-text-secondary { color: #6b7280; }
+html.dark .dm-text-secondary { color: var(--text-secondary) !important; }
+
+.dm-text-muted { color: #9ca3af; }
+html.dark .dm-text-muted { color: var(--text-muted) !important; }
+
+/* ── Shadow utility ── */
+.dm-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+html.dark .dm-shadow { box-shadow: var(--shadow-card) !important; }
+
+.dm-shadow-lg { box-shadow: 0 4px 20px rgba(0,0,0,0.10); }
+html.dark .dm-shadow-lg { box-shadow: var(--shadow-card-lg) !important; }
+
+/* ── Game-specific surface overrides ── */
+/* Header bar di GameScreen / AnswerScreen */
+.dm-game-header {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-bottom: 4px solid #d1d5db;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+html.dark .dm-game-header {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+/* Kotak soal */
+.dm-question-box {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-bottom: 4px solid #d1d5db;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+html.dark .dm-question-box {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+/* Score box kuning */
+.dm-score-box {
+  background: #fff8d6;
+  border: 2px solid #ffc800;
+  border-bottom: 3px solid #c49800;
+  border-radius: 10px;
+}
+html.dark .dm-score-box {
+  background: #1e1a0a !important;
+  border-color: #c49800 !important;
+  border-bottom-color: #8a6a00 !important;
+}
+
+/* Mascot box biru */
+.dm-mascot-box {
+  background: #ffffff;
+  border: 3px solid #1cb0f6;
+  border-bottom: 5px solid #0490c8;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(28,176,246,0.25);
+}
+html.dark .dm-mascot-box {
+  background: var(--bg-surface) !important;
+  border-color: #0490c8 !important;
+  border-bottom-color: #036e9a !important;
+  box-shadow: 0 4px 16px rgba(4,144,200,0.3) !important;
+}
+
+/* Panel putih umum (step selector, card container) */
+.dm-panel {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-bottom: 4px solid #d1d5db;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+html.dark .dm-panel {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+/* Difficulty unselected state */
+.dm-diff-idle {
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-bottom: 4px solid #d1d5db;
+}
+html.dark .dm-diff-idle {
+  background: var(--bg-surface2) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+}
+
+/* Answer screen info card */
+.dm-info-card {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-bottom: 4px solid #d1d5db;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+html.dark .dm-info-card {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+/* Kanji detail card di answer screen */
+.dm-kanji-onyomi {
+  background: #f5e6ff;
+  border: 1px solid #ce82ff;
+  border-radius: 8px;
+}
+html.dark .dm-kanji-onyomi {
+  background: #1e1428 !important;
+  border-color: #7c3aed !important;
+}
+.dm-kanji-kunyomi {
+  background: #d7ffb8;
+  border: 1px solid #58cc02;
+  border-radius: 8px;
+}
+html.dark .dm-kanji-kunyomi {
+  background: #0d1f07 !important;
+  border-color: #3a8f00 !important;
+}
+.dm-kanji-mnemonic {
+  background: #fffef0;
+  border: 1px solid #ffc800;
+  border-radius: 8px;
+}
+html.dark .dm-kanji-mnemonic {
+  background: #1a1600 !important;
+  border-color: #a07000 !important;
+}
+.dm-kanji-char-box {
+  background: #fff8d6;
+  border: 2px solid #ffc800;
+  border-radius: 10px;
+}
+html.dark .dm-kanji-char-box {
+  background: #1a1600 !important;
+  border-color: #a07000 !important;
+}
+
+/* Green info box (info kata di answer screen) */
+.dm-info-green {
+  background: #f0fdf4;
+  border: 2px solid #bbf7d0;
+  border-bottom: 4px solid #86efac;
+  border-radius: 14px;
+}
+html.dark .dm-info-green {
+  background: #071a0d !important;
+  border-color: #166534 !important;
+  border-bottom-color: #14532d !important;
+}
+
+/* Result card */
+.dm-result-card {
+  background: #ffffff;
+  border-radius: 24px;
+}
+html.dark .dm-result-card {
+  background: var(--bg-surface) !important;
+}
+
+/* Modal backdrop content */
+.dm-modal-content {
+  background: #ffffff;
+  border: 2px solid #ffc800;
+  border-bottom: 6px solid #c49800;
+  border-radius: 20px;
+}
+html.dark .dm-modal-content {
+  background: var(--bg-surface) !important;
+  border-color: #c49800 !important;
+  border-bottom-color: #8a6a00 !important;
+}
+
+/* Toast */
+.dm-toast {
+  background: #fffef0;
+  border: 2px solid #ffc800;
+  border-bottom: 4px solid #c49800;
+  border-radius: 14px;
+}
+html.dark .dm-toast {
+  background: #1a1600 !important;
+  border-color: #c49800 !important;
+  border-bottom-color: #8a6a00 !important;
+}
+
+/* Tailwind text color overrides for dark */
+html.dark .text-slate-800 { color: var(--text-primary) !important; }
+html.dark .text-slate-700 { color: var(--text-primary) !important; }
+html.dark .text-slate-600 { color: var(--text-secondary) !important; }
+html.dark .text-slate-500 { color: var(--text-secondary) !important; }
+html.dark .text-slate-400 { color: var(--text-muted) !important; }
+
+/* Pagination / filter dark overrides */
+html.dark .bg-white  { background: var(--bg-surface)  !important; }
 html.dark .bg-gray-50,
-html.dark .bg-slate-50 { background: var(--bg-surface2) !important; }
+html.dark .bg-slate-50  { background: var(--bg-surface2) !important; }
 html.dark .bg-gray-100,
 html.dark .bg-slate-100 { background: var(--bg-surface3) !important; }
+html.dark .bg-gray-200  { background: var(--bg-surface3) !important; }
+html.dark .bg-f9fafb    { background: var(--bg-surface2) !important; }
+html.dark .border-gray-100,
+html.dark .border-gray-200 { border-color: var(--border-base) !important; }
+html.dark .h-px.bg-green-200 { background: #166534 !important; }
+html.dark .h-px.bg-gray-100  { background: var(--border-base) !important; }
 
 /* ─────────────────────────────────────────
    ACCESSIBILITY UTILITIES
@@ -683,3 +930,548 @@ html.dark .bg-slate-100 { background: var(--bg-surface3) !important; }
   clip: auto;
   white-space: normal;
 }
+
+/* ─────────────────────────────────────────
+   XL DESKTOP — Layout utilities
+───────────────────────────────────────── */
+@media (min-width: 1280px) {
+  /* Game screens max-width expansion */
+  .xl-game-container {
+    max-width: 640px;
+  }
+
+  /* Side margin untuk konten yang terlalu sempit di desktop */
+  .xl-center-padded {
+    padding-left: max(2rem, calc(50vw - 640px));
+    padding-right: max(2rem, calc(50vw - 640px));
+  }
+
+  /* Ensure answer grid 4-col doesn't look stretched */
+  .rpg-btn {
+    min-height: 44px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   LEVEL CARD DARK VARIANTS
+───────────────────────────────────────── */
+/* N5 — hijau */
+.lvl-N5 { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #46a302; }
+html.dark .lvl-N5 { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #1f5000 !important; }
+
+/* N4 — biru */
+.lvl-N4 { background: #ddf4ff; border-color: #1cb0f6; border-bottom-color: #0490c8; }
+html.dark .lvl-N4 { background: #071828 !important; border-color: #0a5a80 !important; border-bottom-color: #074060 !important; }
+
+/* N3 — ungu */
+.lvl-N3 { background: #f3e8ff; border-color: #a855f7; border-bottom-color: #7e22ce; }
+html.dark .lvl-N3 { background: #140820 !important; border-color: #6a2c9a !important; border-bottom-color: #4a1a7a !important; }
+
+/* ── level text colors ── */
+.lvl-text-N5 { color: #2a7000; }
+html.dark .lvl-text-N5 { color: #7fff3a !important; }
+.lvl-text-N4 { color: #0c6b9e; }
+html.dark .lvl-text-N4 { color: #60d8ff !important; }
+.lvl-text-N3 { color: #6b21a8; }
+html.dark .lvl-text-N3 { color: #c880ff !important; }
+
+/* ─────────────────────────────────────────
+   MODE CARD DARK VARIANTS (index 0-7)
+───────────────────────────────────────── */
+.mode-0 { background: #ddf4ff; border-color: #1cb0f6; border-bottom-color: #1cb0f6; }
+html.dark .mode-0 { background: #071828 !important; border-color: #0a5a80 !important; border-bottom-color: #0a5a80 !important; }
+
+.mode-1 { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #58cc02; }
+html.dark .mode-1 { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #2a6b00 !important; }
+
+.mode-2 { background: #fff8d6; border-color: #ffc800; border-bottom-color: #ffc800; }
+html.dark .mode-2 { background: #1a1400 !important; border-color: #a07000 !important; border-bottom-color: #a07000 !important; }
+
+.mode-3, .mode-4 { background: #f5e6ff; border-color: #ce82ff; border-bottom-color: #ce82ff; }
+html.dark .mode-3, html.dark .mode-4 { background: #140820 !important; border-color: #6a2c9a !important; border-bottom-color: #6a2c9a !important; }
+
+.mode-5 { background: #ddf4ff; border-color: #1cb0f6; border-bottom-color: #1cb0f6; }
+html.dark .mode-5 { background: #071828 !important; border-color: #0a5a80 !important; border-bottom-color: #0a5a80 !important; }
+
+.mode-6 { background: #fff3e0; border-color: #ff9600; border-bottom-color: #ff9600; }
+html.dark .mode-6 { background: #1a0e00 !important; border-color: #804a00 !important; border-bottom-color: #804a00 !important; }
+
+.mode-7 { background: #ffe0e0; border-color: #ff4b4b; border-bottom-color: #ff4b4b; }
+html.dark .mode-7 { background: #1a0808 !important; border-color: #8a2020 !important; border-bottom-color: #8a2020 !important; }
+
+/* ─────────────────────────────────────────
+   DIFFICULTY CARD DARK VARIANTS
+───────────────────────────────────────── */
+.diff-easy { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #46a302; }
+html.dark .diff-easy { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #1f5000 !important; }
+.diff-text-easy { color: #2a7000; }
+html.dark .diff-text-easy { color: #7fff3a !important; }
+
+.diff-medium { background: #fff8d6; border-color: #ffc800; border-bottom-color: #c49800; }
+html.dark .diff-medium { background: #1a1400 !important; border-color: #a07000 !important; border-bottom-color: #7a5000 !important; }
+.diff-text-medium { color: #7a5a00; }
+html.dark .diff-text-medium { color: #ffd54f !important; }
+
+.diff-hard { background: #ffe0e0; border-color: #ff4b4b; border-bottom-color: #cc0000; }
+html.dark .diff-hard { background: #1a0808 !important; border-color: #8a2020 !important; border-bottom-color: #6a0000 !important; }
+.diff-text-hard { color: #880000; }
+html.dark .diff-text-hard { color: #ff8080 !important; }
+
+/* ─────────────────────────────────────────
+   ENCYCLOPEDIA LINK DARK VARIANTS
+───────────────────────────────────────── */
+.ency-kanji { background: #ddf4ff; border-color: #1cb0f6; border-bottom-color: #0490c8; }
+html.dark .ency-kanji { background: #071828 !important; border-color: #0a5a80 !important; border-bottom-color: #074060 !important; }
+.ency-text-kanji { color: #0c6b9e; }
+html.dark .ency-text-kanji { color: #60d8ff !important; }
+
+.ency-bunpou { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #46a302; }
+html.dark .ency-bunpou { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #1f5000 !important; }
+.ency-text-bunpou { color: #2a7000; }
+html.dark .ency-text-bunpou { color: #7fff3a !important; }
+
+/* ─────────────────────────────────────────
+   STAT CARD DARK VARIANTS
+───────────────────────────────────────── */
+.stat-kosakata { background: #ddf4ff; border-color: #1cb0f6; border-bottom-color: #1cb0f6; }
+html.dark .stat-kosakata { background: #071828 !important; border-color: #0a5a80 !important; border-bottom-color: #0a5a80 !important; }
+.stat-text-kosakata { color: #0c6b9e; }
+html.dark .stat-text-kosakata { color: #60d8ff !important; }
+
+.stat-kana { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #58cc02; }
+html.dark .stat-kana { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #2a6b00 !important; }
+.stat-text-kana { color: #2a7000; }
+html.dark .stat-text-kana { color: #7fff3a !important; }
+
+.stat-grammar { background: #fff8d6; border-color: #ffc800; border-bottom-color: #ffc800; }
+html.dark .stat-grammar { background: #1a1400 !important; border-color: #a07000 !important; border-bottom-color: #a07000 !important; }
+.stat-text-grammar { color: #7a5a00; }
+html.dark .stat-text-grammar { color: #ffd54f !important; }
+
+.stat-highscore { background: #fff3e0; border-color: #ff9600; border-bottom-color: #ff9600; }
+html.dark .stat-highscore { background: #1a0e00 !important; border-color: #804a00 !important; border-bottom-color: #804a00 !important; }
+.stat-text-highscore { color: #7a3200; }
+html.dark .stat-text-highscore { color: #ffb74d !important; }
+
+/* ─────────────────────────────────────────
+   RESULT STAT GRID DARK VARIANTS
+───────────────────────────────────────── */
+.result-benar { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #58cc02; }
+html.dark .result-benar { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #2a6b00 !important; }
+.result-text-benar { color: #2a7000; }
+html.dark .result-text-benar { color: #7fff3a !important; }
+
+.result-salah { background: #ffe0e0; border-color: #ff4b4b; border-bottom-color: #ff4b4b; }
+html.dark .result-salah { background: #1a0808 !important; border-color: #8a2020 !important; border-bottom-color: #8a2020 !important; }
+.result-text-salah { color: #880000; }
+html.dark .result-text-salah { color: #ff8080 !important; }
+
+.result-akurasi { background: #ddf4ff; border-color: #1cb0f6; border-bottom-color: #1cb0f6; }
+html.dark .result-akurasi { background: #071828 !important; border-color: #0a5a80 !important; border-bottom-color: #0a5a80 !important; }
+.result-text-akurasi { color: #0c6b9e; }
+html.dark .result-text-akurasi { color: #60d8ff !important; }
+
+.result-combo { background: #f5e6ff; border-color: #ce82ff; border-bottom-color: #ce82ff; }
+html.dark .result-combo { background: #140820 !important; border-color: #6a2c9a !important; border-bottom-color: #6a2c9a !important; }
+.result-text-combo { color: #6b21a8; }
+html.dark .result-text-combo { color: #c880ff !important; }
+
+.result-skor { background: #fff8d6; border-color: #ffc800; border-bottom-color: #c49800; }
+html.dark .result-skor { background: #1a1400 !important; border-color: #a07000 !important; border-bottom-color: #7a5000 !important; }
+
+/* ─────────────────────────────────────────
+   ANSWER SCREEN STATUS DARK VARIANTS
+───────────────────────────────────────── */
+.status-correct { background: #d7ffb8; border-color: #58cc02; border-bottom-color: #58cc02; }
+html.dark .status-correct { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #2a6b00 !important; }
+
+.status-wrong { background: #ffe0e0; border-color: #ff4b4b; border-bottom-color: #ff4b4b; }
+html.dark .status-wrong { background: #1a0808 !important; border-color: #8a2020 !important; border-bottom-color: #8a2020 !important; }
+
+.status-timeout { background: #fff8d6; border-color: #ffc800; border-bottom-color: #c49800; }
+html.dark .status-timeout { background: #1a1400 !important; border-color: #a07000 !important; border-bottom-color: #7a5000 !important; }
+
+.answer-correct-box { background: #d7ffb8; border: 2px solid #58cc02; border-bottom: 4px solid #46a302; border-radius: 14px; }
+html.dark .answer-correct-box { background: #0d2208 !important; border-color: #2a6b00 !important; border-bottom-color: #1f5000 !important; }
+
+.answer-wrong-box { background: #ffe0e0; border: 2px solid #ff4b4b; border-bottom: 4px solid #cc0000; border-radius: 14px; }
+html.dark .answer-wrong-box { background: #1a0808 !important; border-color: #8a2020 !important; border-bottom-color: #6a0000 !important; }
+
+/* ─────────────────────────────────────────
+   RESPONSIVITAS HELPERS
+───────────────────────────────────────── */
+/* xs breakpoint — 400px (antara 320px dan sm:640px) */
+@media (min-width: 400px) {
+  .xs\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .xs\:flex-row { flex-direction: row; }
+  .xs\:items-center { align-items: center; }
+  .xs\:justify-between { justify-content: space-between; }
+  .xs\:self-auto { align-self: auto; }
+}
+
+/* Pastikan teks di dalam mode card tidak overflow di 320px */
+@media (max-width: 359px) {
+  .mode-label-jp { font-size: 10px !important; }
+  .mode-label-desc { display: none; }
+}
+
+/* ─────────────────────────────────────────
+   STICKY NAV DARK MODE
+───────────────────────────────────────── */
+/* Navbar sticky ensiklopedia — dark glass effect */
+html.dark .dm-game-header {
+  background: rgba(26, 29, 39, 0.96) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.5) !important;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVITAS — 320px (iPhone SE, old)
+───────────────────────────────────────── */
+@media (max-width: 374px) {
+  /* GameScreen: score box lebih compact */
+  .dm-score-box {
+    padding: 4px 8px !important;
+  }
+
+  /* GameScreen header: kurangi gap */
+  .dm-game-header {
+    gap: 6px !important;
+    padding: 8px !important;
+  }
+
+  /* Timer text lebih kecil di 320px */
+  .dm-game-header .tabular-nums {
+    width: auto !important;
+    min-width: 16px;
+  }
+
+  /* AnswerScreen/GameScreen main padding */
+  main[aria-label="Layar permainan"],
+  main[aria-label="Layar penjelasan jawaban"] {
+    padding: 8px !important;
+  }
+
+  /* HomeScreen padding lebih tight */
+  main[aria-label="Halaman utama KanjiMocha"] {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  /* Mode cards: label JP lebih kecil */
+  .mode-label-jp {
+    font-size: 10px !important;
+  }
+
+  /* Mode desc — sembunyikan di layar sangat kecil */
+  .mode-label-desc {
+    display: none !important;
+  }
+
+  /* Difficulty cards lebih compact */
+  .diff-easy, .diff-medium, .diff-hard, .dm-diff-idle {
+    padding: 8px 4px !important;
+    min-height: 60px !important;
+  }
+
+  /* Skip stat cards overflow */
+  .stat-kosakata, .stat-kana, .stat-grammar, .stat-highscore {
+    padding: 6px 10px !important;
+  }
+
+  /* Encyclopedia link labels */
+  .ency-kanji, .ency-bunpou {
+    padding: 8px 10px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVITAS — 375px–639px (mobile normal)
+───────────────────────────────────────── */
+@media (min-width: 375px) and (max-width: 639px) {
+  /* GameScreen kotak soal — min height sedikit lebih besar */
+  .dm-question-box {
+    min-height: 160px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVITAS — 1280px–1439px (xl laptop)
+───────────────────────────────────────── */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  /* Game screen di xl — tidak terlalu lebar */
+  main[aria-label="Layar permainan"],
+  main[aria-label="Layar penjelasan jawaban"] {
+    max-width: 760px !important;
+  }
+
+  /* HomeScreen — panel lebih lebar */
+  main[aria-label="Halaman utama KanjiMocha"] section[aria-label="Pilih mode permainan"] {
+    max-width: 720px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVITAS — 1440px+ (desktop lebar)
+───────────────────────────────────────── */
+@media (min-width: 1440px) {
+  /* Pastikan game screen punya max-width yang nyaman */
+  main[aria-label="Layar permainan"],
+  main[aria-label="Layar penjelasan jawaban"] {
+    max-width: 800px !important;
+  }
+
+  /* Result screen lebih lebar */
+  main[aria-label="Layar hasil permainan"] > div {
+    max-width: 540px !important;
+  }
+
+  /* HomeScreen panel lebih lebar */
+  main[aria-label="Halaman utama KanjiMocha"] section[aria-label="Pilih mode permainan"] {
+    max-width: 800px !important;
+  }
+
+  /* Ensiklopedia — lebih leluasa */
+  .max-w-7xl {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVITAS — 1920px+ (4K / ultrawide)
+───────────────────────────────────────── */
+@media (min-width: 1920px) {
+  .max-w-7xl {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  main[aria-label="Layar permainan"],
+  main[aria-label="Layar penjelasan jawaban"],
+  main[aria-label="Halaman utama KanjiMocha"] {
+    max-width: 900px !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   FilterBar & Pagination — dark mode
+───────────────────────────────────────── */
+/* search input dark */
+html.dark input[type="text"] {
+  background: var(--bg-surface2) !important;
+  border-color: var(--border-base) !important;
+  color: var(--text-primary) !important;
+}
+html.dark input[type="text"]::placeholder {
+  color: var(--text-muted) !important;
+}
+html.dark input[type="text"]:focus {
+  border-color: #1cb0f6 !important;
+}
+
+/* select dark */
+html.dark select {
+  background: var(--bg-surface2) !important;
+  border-color: var(--border-base) !important;
+  color: var(--text-primary) !important;
+}
+
+/* filter bar container */
+html.dark .dm-panel input[type="text"],
+html.dark [class*="filter"] input {
+  background: var(--bg-surface2) !important;
+  color: var(--text-primary) !important;
+}
+
+/* pagination button unselected */
+html.dark [style*="#f3f4f6"] {
+  background: var(--bg-surface3) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* filter chip unselected state */
+html.dark [style*="background: #f3f4f6"],
+html.dark [style*='background: "#f3f4f6"'] {
+  background: var(--bg-surface3) !important;
+  border-color: var(--border-base) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ─────────────────────────────────────────
+   CONFIRM MODAL — dark mode
+───────────────────────────────────────── */
+html.dark .fixed.inset-0 > [style*="#ffffff"] {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+}
+
+/* ─────────────────────────────────────────
+   DETAIL MODALS — Dark mode global overrides
+   Menargetkan inline styles yang masih hardcoded
+───────────────────────────────────────── */
+
+/* Modal container itself */
+html.dark .fixed.inset-0.z-50 [style*="#ffffff"][style*="max-w-2xl"],
+html.dark .fixed.inset-0.z-50 [style*="#ffffff"][style*="max-w-md"],
+html.dark .fixed.inset-0.z-50 [style*="#ffffff"][style*="max-w-sm"],
+html.dark .fixed.inset-0.z-50 [style*="#fffef0"] {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+}
+
+/* KanjiDetailModal — main modal bg */
+html.dark .fixed.inset-0.z-50 > div[style*="background: #ffffff"][style*="max-w-2xl"] {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+}
+
+/* Big kanji box putih */
+html.dark .fixed.inset-0.z-50 div[style*="background: #ffffff"][style*="3px solid"] {
+  background: var(--bg-surface) !important;
+}
+
+/* Tabs container */
+html.dark .fixed.inset-0.z-50 div[style*="background: #ffffff"][style*="border-bottom: 2px solid #f3f4f6"],
+html.dark .fixed.inset-0.z-50 div[style*="border-bottom: 2px solid #f3f4f6"][style*="background: #ffffff"] {
+  background: var(--bg-surface) !important;
+  border-bottom-color: var(--border-base) !important;
+}
+
+/* Tab content area */
+html.dark .fixed.inset-0.z-50 div[style*="background: #f9fafb"] {
+  background: var(--bg-surface2) !important;
+}
+
+/* Card-kanji dalam breakdown */
+html.dark .fixed.inset-0.z-50 div[style*="background: #ffffff"][style*="2px solid #e5e7eb"][style*="border-bottom: 3px solid #d1d5db"] {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+  border-bottom-color: var(--border-strong) !important;
+}
+
+/* Card-kanji 12 radius */
+html.dark .fixed.inset-0.z-50 div[style*="background: #ffffff"][style*="2px solid #e5e7eb"][style*="borderRadius: 12"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #ffffff"][style*="border: 2px solid #e5e7eb"][style*="borderRadius: 12"] {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-base) !important;
+}
+
+/* Kotak kanji besar dalam breakdown */
+html.dark .fixed.inset-0.z-50 div[style*="background: #fff8d6"][style*="2px solid #ffc800"][style*="borderRadius: 8"] {
+  background: #1a1400 !important;
+  border-color: #a07000 !important;
+}
+
+/* Biru box (bacaan kosakata, contoh kalimat) */
+html.dark .fixed.inset-0.z-50 div[style*="background: #ddf4ff"][style*="2px solid #1cb0f6"] {
+  background: #071828 !important;
+  border-color: #0a5a80 !important;
+}
+html.dark .fixed.inset-0.z-50 div[style*="background: #ddf4ff"][style*="border: 2px solid #1cb0f6"] {
+  background: #071828 !important;
+  border-color: #0a5a80 !important;
+}
+html.dark .fixed.inset-0.z-50 div[style*="background: #ddf4ff"][style*="1px solid #1cb0f6"] {
+  background: #071828 !important;
+  border-color: #0a5a80 !important;
+}
+
+/* Ungu box (onyomi) */
+html.dark .fixed.inset-0.z-50 div[style*="background: #f5e6ff"][style*="2px solid #ce82ff"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #f5e6ff"][style*="border: 2px solid #ce82ff"] {
+  background: #140820 !important;
+  border-color: #6a2c9a !important;
+}
+
+/* Hijau box (kunyomi) */
+html.dark .fixed.inset-0.z-50 div[style*="background: #d7ffb8"][style*="2px solid #58cc02"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #d7ffb8"][style*="border: 2px solid #58cc02"] {
+  background: #0d2208 !important;
+  border-color: #2a6b00 !important;
+}
+
+/* Kuning box (mnemonic, catatan) */
+html.dark .fixed.inset-0.z-50 div[style*="background: #fffef0"][style*="2px solid #ffc800"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #fffef0"][style*="border: 2px solid #ffc800"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #fffef0"][style*="1px solid #ffc800"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #fffef0"][style*="border: 1px solid #ffc800"] {
+  background: #1a1400 !important;
+  border-color: #a07000 !important;
+}
+
+/* Footer modal */
+html.dark .fixed.inset-0.z-50 div[style*="borderTop: 2px solid #f3f4f6"][style*="background: #ffffff"],
+html.dark .fixed.inset-0.z-50 div[style*="border-top: 2px solid #f3f4f6"][style*="background: #ffffff"] {
+  background: var(--bg-surface) !important;
+  border-top-color: var(--border-base) !important;
+}
+
+/* Inner putih box dalam contoh kalimat */
+html.dark .fixed.inset-0.z-50 div[style*="background: #ffffff"][style*="borderRadius: 8"] {
+  background: var(--bg-surface2) !important;
+}
+
+/* Level header pale background */
+html.dark .fixed.inset-0.z-50 div[style*="background: #d7ffb8"][style*="borderBottom: 2px solid"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #ddf4ff"][style*="borderBottom: 2px solid"],
+html.dark .fixed.inset-0.z-50 div[style*="background: #f3e8ff"][style*="borderBottom: 2px solid"] {
+  background: var(--bg-surface2) !important;
+}
+
+/* Hiragana label dalam header */
+html.dark .fixed.inset-0.z-50 div[style*="background: #f9fafb"][style*="1px solid #e5e7eb"] {
+  background: var(--bg-surface2) !important;
+  border-color: var(--border-base) !important;
+}
+
+/* Badge dalam modal */
+html.dark .fixed.inset-0.z-50 span[style*="background: #f5e6ff"][style*="1.5px solid #ce82ff"] {
+  background: #140820 !important; color: #c880ff !important; border-color: #6a2c9a !important;
+}
+html.dark .fixed.inset-0.z-50 span[style*="background: #fff8d6"][style*="1.5px solid #ffc800"] {
+  background: #1a1400 !important; color: #ffd54f !important; border-color: #a07000 !important;
+}
+html.dark .fixed.inset-0.z-50 span[style*="background: #fff8d6"][style*="1px solid #ffc800"] {
+  background: #1a1400 !important; color: #ffd54f !important; border-color: #a07000 !important;
+}
+
+/* Text colors dalam modal */
+html.dark .fixed.inset-0.z-50 .text-slate-800 { color: var(--text-primary) !important; }
+html.dark .fixed.inset-0.z-50 .text-slate-700 { color: var(--text-primary) !important; }
+html.dark .fixed.inset-0.z-50 .text-slate-600 { color: var(--text-secondary) !important; }
+html.dark .fixed.inset-0.z-50 .text-slate-500 { color: var(--text-secondary) !important; }
+html.dark .fixed.inset-0.z-50 .text-slate-400 { color: var(--text-muted) !important; }
+html.dark .fixed.inset-0.z-50 .text-blue-700 { color: #60d8ff !important; }
+html.dark .fixed.inset-0.z-50 .text-purple-700 { color: #c880ff !important; }
+html.dark .fixed.inset-0.z-50 .text-green-700 { color: #7fff3a !important; }
+html.dark .fixed.inset-0.z-50 .text-amber-600 { color: #ffd54f !important; }
+html.dark .fixed.inset-0.z-50 .text-amber-700 { color: #ffd54f !important; }
+html.dark .fixed.inset-0.z-50 .text-green-600 { color: #7fff3a !important; }
+html.dark .fixed.inset-0.z-50 .text-blue-600 { color: #60d8ff !important; }
+html.dark .fixed.inset-0.z-50 .text-purple-600 { color: #c880ff !important; }
+html.dark .fixed.inset-0.z-50 .text-purple-500 { color: #c880ff !important; }
+html.dark .fixed.inset-0.z-50 .text-green-500 { color: #7fff3a !important; }
+html.dark .fixed.inset-0.z-50 .text-blue-500 { color: #60d8ff !important; }
+
+/* Border colors dalam modal */
+html.dark .fixed.inset-0.z-50 .border-gray-100 { border-color: var(--border-base) !important; }
+html.dark .fixed.inset-0.z-50 .h-px.bg-green-200 { background: #166534 !important; }
+html.dark .fixed.inset-0.z-50 .h-px.bg-gray-100 { background: var(--border-base) !important; }
+
+/* Mobile handle */
+html.dark .fixed.inset-0.z-50 .bg-gray-200 { background: var(--border-strong) !important; }
+
+/* Active tab hijau */
+html.dark .fixed.inset-0.z-50 .bg-green-50 { background: #0d2208 !important; }
+
+/* ─────────────────────────────────────────
+   DASHBOARD (admin) — Dark mode minimal
+───────────────────────────────────────── */
+html.dark .bg-white { background: var(--bg-surface) !important; }
+html.dark .bg-gray-50 { background: var(--bg-surface2) !important; }
+html.dark .bg-gray-100 { background: var(--bg-surface3) !important; }
+html.dark .bg-gray-200 { background: var(--border-base) !important; }
+html.dark .text-slate-300 { color: var(--border-strong) !important; }

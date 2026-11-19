@@ -10,29 +10,36 @@ import { BunpouDetailModal } from "@/components/bunpou/BunpouDetailModal";
 import { BunpouPagination } from "@/components/bunpou/BunpouPagination";
 import { GameBackground } from "@/components/Background";
 import { DarkModeToggle } from "@/components/ui/DarkModeToggle";
+import clsx from "clsx";
+
+const QUICK_STATS = [
+  { key: "total",    label: "Total Grammar", icon: "📝", cls: "dm-panel",       textCls: "dm-text-primary"   },
+  { key: "n5",       label: "N5",            icon: "🟢", cls: "lvl-N5",         textCls: "lvl-text-N5"       },
+  { key: "n4",       label: "N4",            icon: "🔵", cls: "lvl-N4",         textCls: "lvl-text-N4"       },
+  { key: "particle", label: "Partikel",      icon: "🔖", cls: "result-combo",   textCls: "result-text-combo" },
+] as const;
 
 export function BunpouDictionaryPage() {
-  const [searchQuery,       setSearchQuery]       = useState("");
-  const [selectedLevel,     setSelectedLevel]     = useState<"ALL" | "N5" | "N4" | "N3">("ALL");
-  const [selectedCategory,  setSelectedCategory]  = useState<"ALL" | BunpouCategory>("ALL");
-  const [activeEntry,       setActiveEntry]       = useState<BunpouDictionaryEntry | null>(null);
+  const [searchQuery,      setSearchQuery]      = useState("");
+  const [selectedLevel,    setSelectedLevel]    = useState<"ALL" | "N5" | "N4" | "N3">("ALL");
+  const [selectedCategory, setSelectedCategory] = useState<"ALL" | BunpouCategory>("ALL");
+  const [activeEntry,      setActiveEntry]      = useState<BunpouDictionaryEntry | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [currentPage,       setCurrentPage]       = useState(1);
-  const [itemsPerPage,      setItemsPerPage]      = useState(12);
+  const [currentPage,      setCurrentPage]      = useState(1);
+  const [itemsPerPage,     setItemsPerPage]     = useState(12);
 
   useEffect(() => { setCurrentPage(1); }, [searchQuery, selectedLevel, selectedCategory, itemsPerPage]);
 
   const stats = useMemo(() => ({
-    total:         bunpouDictionaryData.length,
-    n5Count:       bunpouDictionaryData.filter((b) => b.level === "N5").length,
-    n4Count:       bunpouDictionaryData.filter((b) => b.level === "N4").length,
-    n3Count:       bunpouDictionaryData.filter((b) => b.level === "N3").length,
-    particleCount: bunpouDictionaryData.filter((b) => b.category === "Partikel").length,
+    total:    bunpouDictionaryData.length,
+    n5:       bunpouDictionaryData.filter((b) => b.level === "N5").length,
+    n4:       bunpouDictionaryData.filter((b) => b.level === "N4").length,
+    particle: bunpouDictionaryData.filter((b) => b.category === "Partikel").length,
   }), []);
 
   const filteredBunpou = useMemo(() => {
     return bunpouDictionaryData.filter((entry) => {
-      if (selectedLevel   !== "ALL" && entry.level    !== selectedLevel)   return false;
+      if (selectedLevel    !== "ALL" && entry.level    !== selectedLevel)    return false;
       if (selectedCategory !== "ALL" && entry.category !== selectedCategory) return false;
       if (searchQuery.trim() !== "") {
         const q = searchQuery.toLowerCase().trim();
@@ -62,40 +69,32 @@ export function BunpouDictionaryPage() {
   return (
     <div
       ref={containerRef}
-      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden text-slate-800 font-body pb-16 rpg-scroll"
-      style={{ background: "#f7f7f7" }}
+      className="relative h-dvh w-full overflow-y-auto overflow-x-hidden font-body pb-16 rpg-scroll"
+      data-page-bg
     >
       <GameBackground />
 
-      <main className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-6" aria-label="Ensiklopedia Bunpou">
+      <main className="relative z-10 max-w-7xl mx-auto px-3 sm:px-5 xl:px-8 pt-4 sm:pt-6" aria-label="Ensiklopedia Bunpou">
 
         {/* ── Navigation Bar ── */}
         <nav
           aria-label="Navigasi halaman"
-          className="sticky top-0 z-30 flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 sm:mb-5 p-3.5 sm:p-4"
-          style={{
-            background: "rgba(255,255,255,0.95)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            border: "2px solid #e5e7eb",
-            borderBottom: "4px solid #d1d5db",
-            borderRadius: 16,
-            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-          }}
+          className="sticky top-0 z-30 flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5 p-3 sm:p-4 dm-game-header"
         >
           <Link
             href="/"
-            className="rpg-btn w-full sm:w-auto px-5 py-2.5 flex items-center justify-center gap-2 touch-manipulation font-black text-sm"
+            className="rpg-btn flex items-center gap-1.5 px-3 sm:px-5 py-2.5 touch-manipulation font-black text-sm shrink-0"
             aria-label="Kembali ke halaman utama KanjiMocha"
           >
-            <span aria-hidden="true">◀</span> Kembali ke Menu
+            <span aria-hidden="true">◀</span>
+            <span className="hidden xs:inline">Kembali</span>
           </Link>
 
-          <div className="text-center sm:text-right flex-1">
-            <h1 className="text-sm sm:text-lg font-black text-slate-800 tracking-tight">
+          <div className="flex-1 text-center min-w-0">
+            <h1 className="text-sm sm:text-lg font-black dm-text-primary tracking-tight leading-tight truncate">
               📝 Ensiklopedia Bunpou
             </h1>
-            <p className="text-xs font-bold text-slate-500">
+            <p className="text-[11px] sm:text-xs font-bold dm-text-secondary hidden xs:block">
               Rumus &amp; Tata Bahasa · JLPT N5 / N4 / N3
             </p>
           </div>
@@ -105,30 +104,19 @@ export function BunpouDictionaryPage() {
 
         {/* ── Quick Stats ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
-          {[
-            { label: "Total Grammar",  val: stats.total,         icon: "📝", bg: "#ffffff", border: "#e5e7eb",  bottom: "#d1d5db",  text: "#3c3c3c" },
-            { label: "N5",             val: stats.n5Count,       icon: "🟢", bg: "#d7ffb8", border: "#58cc02",  bottom: "#46a302",  text: "#2a7000" },
-            { label: "N4",             val: stats.n4Count,       icon: "🔵", bg: "#ddf4ff", border: "#1cb0f6",  bottom: "#0490c8",  text: "#0c6b9e" },
-            { label: "Partikel",       val: stats.particleCount, icon: "🔖", bg: "#f5e6ff", border: "#ce82ff",  bottom: "#9333ea",  text: "#6b21a8" },
-          ].map((item) => (
+          {QUICK_STATS.map((s) => (
             <div
-              key={item.label}
-              className="relative flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4"
-              style={{
-                background: item.bg,
-                border: `2px solid ${item.border}`,
-                borderBottom: `4px solid ${item.bottom}`,
-                borderRadius: 14,
-                boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-              }}
+              key={s.key}
+              className={clsx("relative flex items-center gap-2 sm:gap-3 p-2.5 sm:p-4", s.cls)}
+              style={{ borderRadius: 14, border: "2px solid", borderBottom: "4px solid", boxShadow: "0 2px 6px rgba(0,0,0,0.05)" }}
             >
-              <span className="text-xl sm:text-2xl shrink-0">{item.icon}</span>
+              <span className="text-lg sm:text-2xl shrink-0" aria-hidden="true">{s.icon}</span>
               <div className="min-w-0">
-                <div className="text-base sm:text-xl font-black leading-none" style={{ color: item.text }}>
-                  {item.val}
+                <div className={clsx("text-base sm:text-xl font-black leading-none tabular-nums", s.textCls)}>
+                  {stats[s.key as keyof typeof stats]}
                 </div>
-                <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider mt-0.5 leading-tight" style={{ color: item.text, opacity: 0.7 }}>
-                  {item.label}
+                <div className={clsx("text-[11px] font-bold uppercase tracking-wider mt-0.5 leading-tight", s.textCls)} style={{ opacity: 0.7 }}>
+                  {s.label}
                 </div>
               </div>
             </div>
@@ -149,7 +137,8 @@ export function BunpouDictionaryPage() {
         {/* ── Cards Grid ── */}
         {paginatedBunpou.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
+            {/* 1 col mobile → 2 col sm → 3 col md → 4 col xl */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-3">
               {paginatedBunpou.map((entry, idx) => (
                 <div key={entry.id} className={`stagger-${Math.min((idx % 12) + 1, 12)}`}>
                   <BunpouCard entry={entry} onSelect={setActiveEntry} />
@@ -166,19 +155,11 @@ export function BunpouDictionaryPage() {
             />
           </>
         ) : (
-          <div
-            className="relative p-10 text-center my-10 max-w-md mx-auto space-y-4"
-            style={{
-              background: "#ffffff",
-              border: "2px solid #e5e7eb",
-              borderBottom: "4px solid #d1d5db",
-              borderRadius: 16,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-            }}
-          >
-            <div className="text-4xl">🔍</div>
-            <h3 className="text-sm font-black text-slate-700">Bunpou Tidak Ditemukan</h3>
-            <p className="text-xs font-bold text-slate-400">
+          <div className="dm-panel relative p-8 sm:p-10 text-center my-10 max-w-md mx-auto space-y-4"
+            style={{ borderRadius: 16, border: "2px solid", borderBottom: "4px solid" }}>
+            <div className="text-4xl" aria-hidden="true">🔍</div>
+            <h3 className="text-sm font-black dm-text-primary">Bunpou Tidak Ditemukan</h3>
+            <p className="text-xs font-bold dm-text-secondary">
               Coba kata kunci lain atau sesuaikan filter.
             </p>
             <button

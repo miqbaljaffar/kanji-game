@@ -116,7 +116,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                 onClick={playTTS}
                 aria-label={isPlayingAudio ? `Sedang memutar ${entry.kanji}` : `Putar pengucapan ${entry.kanji}`}
                 className={clsx(
-                  "px-3 py-2 text-[9px] font-black min-h-[36px] touch-manipulation rounded-lg transition-all",
+                  "px-3 py-2 text-xs font-black min-h-[36px] touch-manipulation rounded-lg transition-all",
                   isPlayingAudio ? "animate-pulse" : ""
                 )}
                 style={isPlayingAudio ? {
@@ -139,20 +139,20 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
             <div className="text-center sm:text-left space-y-2 flex-1">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <span
-                  className="text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
+                  className="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
                   style={{ background: lv.pale, color: lv.text, border: `1.5px solid ${lv.accent}` }}
                 >
                   JLPT {entry.level}
                 </span>
                 <span
-                  className="text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
+                  className="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
                   style={{ background: "#f5e6ff", color: "#6b21a8", border: "1.5px solid #ce82ff" }}
                 >
                   {isSingle ? "1 Kanji" : `${entry.kanjiCount} Kanji`}
                 </span>
                 {entry.strokes && (
                   <span
-                    className="text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
+                    className="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
                     style={{ background: "#fff8d6", color: "#7a5a00", border: "1.5px solid #ffc800" }}
                   >
                     {entry.strokes} Goresan
@@ -190,7 +190,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
               key={t.id}
               onClick={() => setActiveTab(t.id)}
               className={clsx(
-                "px-4 py-3 text-[9px] sm:text-[10px] font-black transition-all cursor-pointer shrink-0 touch-manipulation border-b-2",
+                "px-4 py-3 text-xs sm:text-xs font-black transition-all cursor-pointer shrink-0 touch-manipulation border-b-2",
                 activeTab === t.id
                   ? "border-green-500 text-green-600 bg-green-50"
                   : "border-transparent text-slate-400 hover:text-slate-600"
@@ -215,7 +215,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                     className="p-3 mb-3"
                     style={{ background: "#ddf4ff", border: "1px solid #1cb0f6", borderRadius: 10 }}
                   >
-                    <p className="text-[9px] font-black text-blue-700 uppercase mb-1">
+                    <p className="text-xs font-black text-blue-700 uppercase mb-1">
                       💡 Kanji Majemuk ({entry.kanjiCount} Karakter)
                     </p>
                     <p className="text-xs font-bold text-slate-600 leading-relaxed">
@@ -260,14 +260,14 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   className="p-4 space-y-2"
                   style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
                 >
-                  <p className="text-[9px] font-black text-slate-500 uppercase">🈁 Karakter Tunggal</p>
+                  <p className="text-xs font-black text-slate-500 uppercase">🈁 Karakter Tunggal</p>
                   <div className="rpg-divider" />
                   <p className="text-xs font-bold text-slate-600 leading-relaxed">
                     Kanji <strong className="text-amber-600" style={{ fontFamily: "var(--font-jp)", fontSize: "1.1em" }}>{entry.kanji}</strong> adalah karakter dasar level {entry.level}.
                   </p>
                   {entry.strokes && (
                     <span
-                      className="text-[8px] font-black px-2.5 py-1 rounded-full inline-block"
+                      className="text-[11px] font-black px-2.5 py-1 rounded-full inline-block"
                       style={{ background: "#fff8d6", color: "#7a5a00", border: "1px solid #ffc800" }}
                     >
                       Goresan: {entry.strokes}
@@ -279,7 +279,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                 className="p-4 space-y-2"
                 style={{ background: "#fffef0", border: "2px solid #ffc800", borderRadius: 12 }}
               >
-                <p className="text-[9px] font-black text-amber-600 uppercase">
+                <p className="text-xs font-black text-amber-600 uppercase">
                   {entry.mnemonic ? "💡 Tips Memori" : "💡 Catatan Belajar"}
                 </p>
                 <div className="rpg-divider" />
@@ -297,35 +297,35 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                 className="p-4 space-y-2"
                 style={{ background: "#ddf4ff", border: "2px solid #1cb0f6", borderRadius: 12 }}
               >
-                <p className="text-[8px] font-black text-blue-700 uppercase tracking-widest">
+                <p className="text-xs font-black text-blue-700 uppercase tracking-widest">
                   Bacaan kosakata
                 </p>
                 <div className="text-xl font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
                   {entry.hiragana}
                 </div>
                 <p className="text-xs font-bold italic text-slate-500">{entry.romaji}</p>
-                <p className="text-[9px] font-bold text-blue-600">Bacaan ini mengikuti hiragana pada kosakata.</p>
+                <p className="text-xs font-bold text-blue-600">Bacaan ini mengikuti hiragana pada kosakata.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div
                   className="p-4 space-y-2"
                   style={{ background: "#f5e6ff", border: "2px solid #ce82ff", borderRadius: 12 }}
                 >
-                  <p className="text-[8px] font-black text-purple-700 uppercase tracking-widest">音読み (Onyomi)</p>
+                  <p className="text-xs font-black text-purple-700 uppercase tracking-widest">音読み (Onyomi)</p>
                   <div className="text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
                     {entry.onyomi || (isSingle ? "Belum tersedia" : "Lihat bacaan tiap kanji di bawah")}
                   </div>
-                  <p className="text-[9px] font-bold text-purple-500">Bacaan onyomi dicantumkan per karakter jika tersedia.</p>
+                  <p className="text-xs font-bold text-purple-500">Bacaan onyomi dicantumkan per karakter jika tersedia.</p>
                 </div>
                 <div
                   className="p-4 space-y-2"
                   style={{ background: "#d7ffb8", border: "2px solid #58cc02", borderRadius: 12 }}
                 >
-                  <p className="text-[8px] font-black text-green-700 uppercase tracking-widest">訓読み (Kunyomi)</p>
+                  <p className="text-xs font-black text-green-700 uppercase tracking-widest">訓読み (Kunyomi)</p>
                   <div className="text-lg font-black text-slate-800" style={{ fontFamily: "var(--font-jp)" }}>
                     {entry.kunyomi || (isSingle ? "Belum tersedia" : "Lihat bacaan tiap kanji di bawah")}
                   </div>
-                  <p className="text-[9px] font-bold text-green-600">Bacaan kunyomi dicantumkan per karakter jika tersedia.</p>
+                  <p className="text-xs font-bold text-green-600">Bacaan kunyomi dicantumkan per karakter jika tersedia.</p>
                 </div>
               </div>
               {entry.components && entry.components.length > 0 && (
@@ -333,7 +333,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   className="p-4 space-y-3"
                   style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
                 >
-                  <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest">
+                  <p className="text-xs font-black text-slate-600 uppercase tracking-widest">
                     Bacaan tiap karakter
                   </p>
                   <div className="space-y-2">
@@ -359,7 +359,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                 className="p-4 space-y-2"
                 style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
               >
-                <p className="text-[8px] font-black text-amber-600 uppercase">🧠 Cara Mengingat</p>
+                <p className="text-xs font-black text-amber-600 uppercase">🧠 Cara Mengingat</p>
                 <div className="rpg-divider" />
                 <p className="text-xs sm:text-sm font-bold text-slate-600 leading-relaxed">
                   {entry.mnemonic || `Hubungkan bacaan ${entry.hiragana} dengan arti “${entry.arti}”, lalu ulangi dengan contoh kosakata.`}
@@ -377,7 +377,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   style={{ background: "#ddf4ff", border: "2px solid #1cb0f6", borderRadius: 14 }}
                 >
                   <div className="flex items-center justify-between">
-                    <p className="text-[8px] font-black text-blue-700 uppercase tracking-widest">Contoh Kalimat</p>
+                    <p className="text-xs font-black text-blue-700 uppercase tracking-widest">Contoh Kalimat</p>
                     <button
                       onClick={() => {
                         if ("speechSynthesis" in window) {
@@ -387,7 +387,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                           window.speechSynthesis.speak(u);
                         }
                       }}
-                      className="rpg-btn px-2.5 py-2 text-[8px] min-h-[36px] touch-manipulation font-black"
+                      className="rpg-btn px-2.5 py-2 text-xs min-h-[36px] touch-manipulation font-black"
                       aria-label="Putar contoh kalimat"
                     >🔊 Putar</button>
                   </div>
@@ -414,7 +414,7 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
                   style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
                 >
                   <div className="text-3xl">📝</div>
-                  <p className="text-[9px] font-black text-slate-500 uppercase">Belum Ada Contoh</p>
+                  <p className="text-xs font-black text-slate-500 uppercase">Belum Ada Contoh</p>
                   <p className="text-xs font-bold text-slate-400">
                     Kata <strong style={{ fontFamily: "var(--font-jp)" }}>{entry.kanji}</strong> sering muncul di JLPT {entry.level}.
                   </p>
@@ -429,13 +429,13 @@ export function KanjiDetailModal({ entry, onClose }: KanjiDetailModalProps) {
           className="p-3.5 sm:p-4 flex items-center justify-between shrink-0"
           style={{ borderTop: "2px solid #f3f4f6", background: "#ffffff" }}
         >
-          <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
+          <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
             KanjiMocha · JLPT {entry.level}
           </span>
           <button
             onClick={onClose}
             aria-label="Tutup detail kanji"
-            className="rpg-btn px-5 py-2.5 text-[9px] touch-manipulation font-black"
+            className="rpg-btn px-5 py-2.5 text-xs touch-manipulation font-black"
           >Tutup</button>
         </div>
       </div>

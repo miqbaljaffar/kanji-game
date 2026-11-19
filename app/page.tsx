@@ -2,7 +2,6 @@
 
 import { useGame } from "@/hooks/useGame";
 import { useGameStats } from "@/hooks/useGameStats";
-import { useDarkMode } from "@/hooks/useDarkMode";
 import { DarkModeToggle } from "@/components/ui/DarkModeToggle";
 import { HomeScreen } from "@/components/HomeScreen";
 import { GameScreen } from "@/components/GameScreen";
@@ -11,7 +10,6 @@ import { ResultScreen } from "@/components/ResultScreen";
 import { GameBackground } from "@/components/Background";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { GameState } from "@/types";
 
 /**
  * Komponen wrapper dengan animasi transisi antar screen.

@@ -11,133 +11,128 @@ import type { StoredStats } from "@/hooks/useGameStats";
 interface HomeScreenProps {
   onStart: (level: JlptLevel, mode: GameMode, difficulty: Difficulty) => void;
   storedStats?: StoredStats;
-  defaultLevel?: JlptLevel | null;
-  defaultMode?: GameMode | null;
-  defaultDifficulty?: Difficulty | null;
 }
 
+/* ── Level configs ── */
 const LEVELS = [
   {
-    id: "N5" as JlptLevel, label: "JLPT N5", icon: "🟢", desc: "Level Dasar",
-    sub: "Kosakata & Grammar Pemula",
-    bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000",
+    id: "N5" as JlptLevel, label: "JLPT N5", icon: "🟢",
+    desc: "Level Dasar", sub: "Kosakata & Grammar Pemula",
+    cls: "lvl-N5", textCls: "lvl-text-N5",
   },
   {
-    id: "N4" as JlptLevel, label: "JLPT N4", icon: "🔵", desc: "Level Menengah",
-    sub: "Kosakata & Grammar Lanjut",
-    bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e",
+    id: "N4" as JlptLevel, label: "JLPT N4", icon: "🔵",
+    desc: "Level Menengah", sub: "Kosakata & Grammar Lanjut",
+    cls: "lvl-N4", textCls: "lvl-text-N4",
   },
   {
-    id: "N3" as JlptLevel, label: "JLPT N3", icon: "🟣", desc: "Level Lanjut",
-    sub: "Kosakata & Grammar Intermediate",
-    bg: "#f3e8ff", border: "#a855f7", bottom: "#7e22ce", text: "#6b21a8",
+    id: "N3" as JlptLevel, label: "JLPT N3", icon: "🟣",
+    desc: "Level Lanjut", sub: "Kosakata & Grammar Intermediate",
+    cls: "lvl-N3", textCls: "lvl-text-N3",
   },
 ];
 
+/* ── Mode configs ── */
 const MODES = [
-  { id: "kanji-to-arti"      as GameMode, label: "漢字 → Arti",        desc: "Tebak Artinya",   icon: "📖", color: "#ddf4ff", border: "#1cb0f6" },
-  { id: "arti-to-kanji"      as GameMode, label: "Arti → 漢字",        desc: "Pilih Kanji",     icon: "🎯", color: "#d7ffb8", border: "#58cc02" },
-  { id: "kanji-to-hiragana"  as GameMode, label: "漢字 → ひら",        desc: "Cara Baca",       icon: "🗣️", color: "#fff8d6", border: "#ffc800" },
-  { id: "hiragana-to-arti"   as GameMode, label: "ひら → Arti",        desc: "Dari Hiragana",   icon: "✨", color: "#f5e6ff", border: "#ce82ff" },
-  { id: "hiragana-to-romaji" as GameMode, label: "Romaji → ひら",      desc: "Tebak Hiragana",  icon: "🟣", color: "#f5e6ff", border: "#ce82ff" },
-  { id: "katakana-to-romaji" as GameMode, label: "Romaji → カタ",      desc: "Tebak Katakana",  icon: "🔷", color: "#ddf4ff", border: "#1cb0f6" },
-  { id: "mixed-kana"         as GameMode, label: "Romaji → ひら/カタ", desc: "Campuran Kana",   icon: "🔶", color: "#fff3e0", border: "#ff9600" },
-  { id: "bunpou"             as GameMode, label: "文法 (Bunpou)",       desc: "Tata Bahasa JLPT", icon: "📝", color: "#ffe0e0", border: "#ff4b4b" },
+  { id: "kanji-to-arti"      as GameMode, label: "漢字 → Arti",        desc: "Tebak Artinya",    icon: "📖", cls: "mode-0" },
+  { id: "arti-to-kanji"      as GameMode, label: "Arti → 漢字",        desc: "Pilih Kanji",      icon: "🎯", cls: "mode-1" },
+  { id: "kanji-to-hiragana"  as GameMode, label: "漢字 → ひら",        desc: "Cara Baca",        icon: "🗣️", cls: "mode-2" },
+  { id: "hiragana-to-arti"   as GameMode, label: "ひら → Arti",        desc: "Dari Hiragana",    icon: "✨", cls: "mode-3" },
+  { id: "hiragana-to-romaji" as GameMode, label: "Romaji → ひら",      desc: "Tebak Hiragana",   icon: "🟣", cls: "mode-4" },
+  { id: "katakana-to-romaji" as GameMode, label: "Romaji → カタ",      desc: "Tebak Katakana",   icon: "🔷", cls: "mode-5" },
+  { id: "mixed-kana"         as GameMode, label: "ひら/カタ Mix",       desc: "Campuran Kana",    icon: "🔶", cls: "mode-6" },
+  { id: "bunpou"             as GameMode, label: "文法",                desc: "Tata Bahasa JLPT", icon: "📝", cls: "mode-7" },
 ];
 
+/* ── Difficulty configs ── */
 const DIFFICULTIES = [
-  {
-    id: "easy" as Difficulty, label: "SANTAI", icon: "🐢", desc: "20s / soal",
-    bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000",
-  },
-  {
-    id: "medium" as Difficulty, label: "NORMAL", icon: "🏃", desc: "12s / soal",
-    bg: "#fff8d6", border: "#ffc800", bottom: "#c49800", text: "#7a5a00",
-  },
-  {
-    id: "hard" as Difficulty, label: "CEPAT", icon: "🚀", desc: "7s / soal",
-    bg: "#ffe0e0", border: "#ff4b4b", bottom: "#cc0000", text: "#880000",
-  },
+  { id: "easy"   as Difficulty, label: "SANTAI", icon: "🐢", desc: "20s/soal", cls: "diff-easy",   textCls: "diff-text-easy"   },
+  { id: "medium" as Difficulty, label: "NORMAL", icon: "🏃", desc: "12s/soal", cls: "diff-medium", textCls: "diff-text-medium" },
+  { id: "hard"   as Difficulty, label: "CEPAT",  icon: "🚀", desc: "7s/soal",  cls: "diff-hard",   textCls: "diff-text-hard"   },
+];
+
+/* ── Stat cards ── */
+const STAT_CONFIGS = [
+  { key: "kosakata",  label: "Kosakata",   icon: "📚", cls: "stat-kosakata",  textCls: "stat-text-kosakata"  },
+  { key: "kana",      label: "Kana",       icon: "🔠", cls: "stat-kana",      textCls: "stat-text-kana"      },
+  { key: "grammar",   label: "Grammar",    icon: "📝", cls: "stat-grammar",   textCls: "stat-text-grammar"   },
+  { key: "highscore", label: "High Score", icon: "🏆", cls: "stat-highscore", textCls: "stat-text-highscore" },
 ];
 
 export function HomeScreen({ onStart, storedStats }: HomeScreenProps) {
   const [selectedLevel, setSelectedLevel] = useState<JlptLevel | null>(null);
-  const [selectedMode, setSelectedMode] = useState<GameMode | null>(null);
-  const [selectedDiff, setSelectedDiff] = useState<Difficulty | null>(null);
-  const [step, setStep]                 = useState<1 | 2 | 3>(1);
+  const [selectedMode,  setSelectedMode]  = useState<GameMode | null>(null);
+  const [selectedDiff,  setSelectedDiff]  = useState<Difficulty | null>(null);
+  const [step, setStep]                   = useState<1 | 2 | 3>(1);
 
-  const selectedLevelInfo = LEVELS.find((l) => l.id === selectedLevel);
-  const selectedModeInfo  = MODES.find((m) => m.id === selectedMode);
+  const selectedLevelCfg = LEVELS.find((l) => l.id === selectedLevel);
+  const selectedModeCfg  = MODES.find((m) => m.id === selectedMode);
 
-  const n5KanjiCount   = kanjiData.filter((k) => k.level === "N5").length;
-  const n4KanjiCount   = kanjiData.filter((k) => k.level === "N4").length;
-  const n3KanjiCount   = kanjiData.filter((k) => k.level === "N3").length;
-  const n5BunpouCount  = bunpouData.filter((b) => b.level === "N5").length;
-  const n4BunpouCount  = bunpouData.filter((b) => b.level === "N4").length;
-  const n3BunpouCount  = bunpouData.filter((b) => b.level === "N3").length;
+  const counts = {
+    N5k: kanjiData.filter((k) => k.level === "N5").length,
+    N4k: kanjiData.filter((k) => k.level === "N4").length,
+    N3k: kanjiData.filter((k) => k.level === "N3").length,
+    N5b: bunpouData.filter((b) => b.level === "N5").length,
+    N4b: bunpouData.filter((b) => b.level === "N4").length,
+    N3b: bunpouData.filter((b) => b.level === "N3").length,
+  };
+
+  const statValues: Record<string, string | number> = {
+    kosakata:  kanjiData.length,
+    kana:      kanaData.length,
+    grammar:   bunpouData.length,
+    highscore: storedStats?.highScore ?? 0,
+  };
 
   return (
     <main
-      className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-3 sm:px-6 py-10"
+      className="relative z-10 min-h-dvh flex flex-col items-center justify-center px-3 sm:px-6 xl:px-8 py-10"
       aria-label="Halaman utama KanjiMocha"
     >
       {/* ── TITLE ── */}
-      <header className="text-center mb-6 animate-fade-up mt-2">
+      <header className="text-center mb-5 sm:mb-6 animate-fade-up mt-2 w-full max-w-lg xl:max-w-2xl">
         <div className="inline-block mb-3">
           <span className="rpg-badge-gold text-[11px] sm:text-xs tracking-[0.15em]">
             ✦ JLPT N5 · N4 · N3 ✦
           </span>
         </div>
-
         <div className="flex items-center justify-center gap-2 mb-2">
           <span className="text-3xl sm:text-5xl" aria-hidden="true">🎌</span>
           <h1
-            className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight"
+            className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-black tracking-tight leading-tight"
             style={{
               background: "linear-gradient(135deg, #58cc02 0%, #1cb0f6 50%, #ce82ff 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))",
+              filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.12))",
             }}
           >
             KanjiMocha
           </h1>
         </div>
-
         <div className="rpg-divider max-w-xs mx-auto" aria-hidden="true" />
-        <p className="text-xs sm:text-sm text-slate-500 font-bold tracking-wider">
+        <p className="text-xs sm:text-sm dm-text-secondary font-bold tracking-wider mt-2">
           Belajar Bahasa Jepang dengan Seru 🎉
         </p>
       </header>
 
       {/* ── STAT CARDS ── */}
-      <section aria-label="Statistik konten tersedia" className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5">
-        {[
-          { val: kanjiData.length,  label: "Kosakata", icon: "📚", bg: "#ddf4ff", border: "#1cb0f6", text: "#0c6b9e" },
-          { val: kanaData.length,   label: "Kana",     icon: "🔠", bg: "#d7ffb8", border: "#58cc02", text: "#2a7000" },
-          { val: bunpouData.length, label: "Grammar",  icon: "📝", bg: "#fff8d6", border: "#ffc800", text: "#7a5a00" },
-          ...(storedStats && storedStats.highScore > 0
-            ? [{ val: storedStats.highScore.toLocaleString(), label: "High Score", icon: "🏆", bg: "#fff3e0", border: "#ff9600", text: "#7a3200" }]
-            : []),
-        ].map((stat, i) => (
+      <section aria-label="Statistik konten" className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5 w-full max-w-lg xl:max-w-2xl">
+        {STAT_CONFIGS.filter((s) => s.key !== "highscore" || (storedStats && storedStats.highScore > 0)).map((stat, i) => (
           <div
-            key={stat.label}
-            className={`card-enter stagger-${i + 1} px-4 sm:px-5 py-2.5 flex items-center gap-2.5`}
-            style={{
-              background: stat.bg,
-              border: `2px solid ${stat.border}`,
-              borderBottom: `4px solid ${stat.border}`,
-              borderRadius: 14,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-            }}
+            key={stat.key}
+            className={clsx(`card-enter stagger-${i + 1}`, stat.cls, "px-3 sm:px-5 py-2 sm:py-2.5 flex items-center gap-2 sm:gap-2.5")}
+            style={{ borderRadius: 14, boxShadow: "0 2px 8px rgba(0,0,0,0.07)", border: "2px solid", borderBottom: "4px solid" }}
           >
-            <span className="text-xl sm:text-2xl">{stat.icon}</span>
+            <span className="text-lg sm:text-2xl" aria-hidden="true">{stat.icon}</span>
             <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-black leading-none" style={{ color: stat.text }}>
-                {stat.val}
+              <span className={clsx("text-sm sm:text-lg font-black leading-none", stat.textCls)}>
+                {stat.key === "highscore"
+                  ? (storedStats?.highScore ?? 0).toLocaleString()
+                  : statValues[stat.key]}
               </span>
-              <span className="text-[11px] sm:xs font-bold uppercase tracking-wider" style={{ color: stat.text, opacity: 0.75 }}>
+              <span className={clsx("text-[11px] font-bold uppercase tracking-wider", stat.textCls)} style={{ opacity: 0.75 }}>
                 {stat.label}
               </span>
             </div>
@@ -146,155 +141,111 @@ export function HomeScreen({ onStart, storedStats }: HomeScreenProps) {
       </section>
 
       {/* ── MAIN PANEL ── */}
-      <section className="w-full max-w-lg space-y-3" aria-label="Pilih mode permainan">
+      <section className="w-full max-w-lg xl:max-w-2xl space-y-3" aria-label="Pilih mode permainan">
 
-        {/* Link Ensiklopedia */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          {[
-            { href: "/kanji",  icon: "📚", label: "Ensiklopedia Kanji",  sub: "1 & 2+ Kanji Majemuk",
-              bg: "#ddf4ff", border: "#1cb0f6", bottom: "#0490c8", text: "#0c6b9e", cls: "stagger-4" },
-            { href: "/bunpou", icon: "📝", label: "Ensiklopedia Bunpou", sub: "Rumus & Tata Bahasa",
-              bg: "#d7ffb8", border: "#58cc02", bottom: "#46a302", text: "#2a7000", cls: "stagger-5" },
-          ].map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`card-enter ${l.cls} flex items-center gap-3 px-4 py-3 touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1`}
-              style={{
-                background: l.bg,
-                border: `2px solid ${l.border}`,
-                borderBottom: `4px solid ${l.bottom}`,
-                borderRadius: 14,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-                textDecoration: "none",
-              }}
-            >
-              <span className="text-xl shrink-0">{l.icon}</span>
-              <div className="text-left min-w-0 flex-1">
-                <div className="text-xs font-black tracking-tight truncate" style={{ color: l.text }}>
-                  {l.label}
-                </div>
-                <div className="text-[11px] font-bold truncate" style={{ color: l.text, opacity: 0.7 }}>
-                  {l.sub}
-                </div>
-              </div>
-              <span className="ml-auto text-lg" style={{ color: l.border }}>›</span>
-            </Link>
-          ))}
-        </div>
-
-        {/* ── STEP 1: Pilih Level JLPT ── */}
-        {step === 1 ? (
-          <div
-            className="card-enter stagger-6 p-4 sm:p-5"
-            style={{
-              background: "#ffffff",
-              border: "2px solid #e5e7eb",
-              borderBottom: "4px solid #d1d5db",
-              borderRadius: 16,
-              boxShadow: "0 2px 10px rgba(0,0,0,0.06)",
-            }}
+        {/* ── Link Ensiklopedia ── */}
+        <nav aria-label="Ensiklopedia" className="grid grid-cols-2 gap-2 sm:gap-2.5">
+          <Link
+            href="/kanji"
+            className="card-enter stagger-4 ency-kanji flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5"
+            style={{ borderRadius: 14, boxShadow: "0 2px 8px rgba(0,0,0,0.07)", border: "2px solid", borderBottom: "4px solid", textDecoration: "none" }}
           >
-            <h2 className="text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
-              <span>🎯</span> Pilih Level JLPT
-            </h2>
+            <span className="text-xl shrink-0" aria-hidden="true">📚</span>
+            <div className="text-left min-w-0 flex-1">
+              <div className="text-xs font-black tracking-tight truncate ency-text-kanji">Ensiklopedia Kanji</div>
+              <div className="text-[11px] font-bold truncate ency-text-kanji" style={{ opacity: 0.7 }}>1 & 2+ Kanji Majemuk</div>
+            </div>
+            <span className="ml-auto text-lg shrink-0 ency-text-kanji" aria-hidden="true">›</span>
+          </Link>
+          <Link
+            href="/bunpou"
+            className="card-enter stagger-5 ency-bunpou flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5"
+            style={{ borderRadius: 14, boxShadow: "0 2px 8px rgba(0,0,0,0.07)", border: "2px solid", borderBottom: "4px solid", textDecoration: "none" }}
+          >
+            <span className="text-xl shrink-0" aria-hidden="true">📝</span>
+            <div className="text-left min-w-0 flex-1">
+              <div className="text-xs font-black tracking-tight truncate ency-text-bunpou">Ensiklopedia Bunpou</div>
+              <div className="text-[11px] font-bold truncate ency-text-bunpou" style={{ opacity: 0.7 }}>Rumus & Tata Bahasa</div>
+            </div>
+            <span className="ml-auto text-lg shrink-0 ency-text-bunpou" aria-hidden="true">›</span>
+          </Link>
+        </nav>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+        {/* ── STEP 1: Pilih Level ── */}
+        {step === 1 && (
+          <div className="dm-panel card-enter stagger-6 p-4 sm:p-5">
+            <h2 className="text-xs font-black dm-text-muted mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
+              <span aria-hidden="true">🎯</span> Pilih Level JLPT
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
               {LEVELS.map((lvl, index) => (
                 <button
                   key={lvl.id}
                   onClick={() => { setSelectedLevel(lvl.id); setSelectedMode(null); setSelectedDiff(null); setStep(2); }}
                   aria-label={`Pilih level ${lvl.label}`}
                   className={clsx(
-                    "card-enter relative p-4 sm:p-5 flex flex-col items-start justify-start gap-2 text-left touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1",
-                    `stagger-${index + 1}`,
+                    `card-enter stagger-${index + 1}`,
+                    lvl.cls,
+                    "relative p-4 sm:p-5 flex flex-col items-start gap-2 text-left",
+                    "touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5",
                   )}
-                  style={{
-                    background: lvl.bg,
-                    border: `2px solid ${lvl.border}`,
-                    borderBottom: `4px solid ${lvl.bottom}`,
-                    borderRadius: 14,
-                    cursor: "pointer",
-                  }}
+                  style={{ borderRadius: 14, border: "2px solid", borderBottom: "4px solid", cursor: "pointer" }}
                 >
                   <div className="flex items-center gap-2 w-full">
-                    <span className="text-2xl sm:text-3xl">{lvl.icon}</span>
-                    <div className="flex-1">
-                      <div className="text-sm sm:text-base font-black leading-tight"
-                        style={{ color: lvl.text }}>{lvl.label}</div>
-                      <div className="text-xs font-bold mt-0.5" style={{ color: lvl.text, opacity: 0.8 }}>
-                        {lvl.desc}
-                      </div>
+                    <span className="text-2xl sm:text-3xl" aria-hidden="true">{lvl.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className={clsx("text-sm sm:text-base font-black leading-tight", lvl.textCls)}>{lvl.label}</div>
+                      <div className={clsx("text-xs font-bold mt-0.5", lvl.textCls)} style={{ opacity: 0.8 }}>{lvl.desc}</div>
                     </div>
                   </div>
-                  <div className="w-full mt-2 pt-2 border-t border-dashed"
-                    style={{ borderColor: `${lvl.border}55` }}>
-                    <div className="flex justify-between text-[11px] font-bold" style={{ color: lvl.text }}>
+                  <div className="w-full mt-1 pt-2 border-t border-dashed border-current opacity-30" />
+                  <div className="w-full space-y-1">
+                    <div className={clsx("flex justify-between text-[11px] font-bold", lvl.textCls)}>
                       <span>📚 Kosakata</span>
-                      <span>{lvl.id === "N5" ? n5KanjiCount : lvl.id === "N4" ? n4KanjiCount : n3KanjiCount}</span>
+                      <span>{lvl.id === "N5" ? counts.N5k : lvl.id === "N4" ? counts.N4k : counts.N3k}</span>
                     </div>
-                    <div className="flex justify-between text-[11px] font-bold mt-1" style={{ color: lvl.text }}>
+                    <div className={clsx("flex justify-between text-[11px] font-bold", lvl.textCls)}>
                       <span>📝 Grammar</span>
-                      <span>{lvl.id === "N5" ? n5BunpouCount : lvl.id === "N4" ? n4BunpouCount : n3BunpouCount}</span>
+                      <span>{lvl.id === "N5" ? counts.N5b : lvl.id === "N4" ? counts.N4b : counts.N3b}</span>
                     </div>
-                    <div className="text-[11px] font-bold mt-2" style={{ color: lvl.text, opacity: 0.8 }}>
-                      {lvl.sub}
-                    </div>
+                    <div className={clsx("text-[11px] font-bold leading-snug", lvl.textCls)} style={{ opacity: 0.8 }}>{lvl.sub}</div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
+        )}
 
-        ) : step === 2 ? (
-          /* ── STEP 2: Pilih Mode ── */
+        {/* ── STEP 2: Pilih Mode ── */}
+        {step === 2 && (
           <div className="space-y-3">
-            {selectedLevelInfo && (
+            {/* Selected level chip */}
+            {selectedLevelCfg && (
               <div
-                className="screen-enter p-3.5 flex items-center justify-between"
-                style={{
-                  background: selectedLevelInfo.bg,
-                  border: `2px solid ${selectedLevelInfo.border}`,
-                  borderBottom: `4px solid ${selectedLevelInfo.bottom}`,
-                  borderRadius: 14,
-                }}
+                className={clsx("screen-enter flex items-center justify-between p-3 sm:p-3.5", selectedLevelCfg.cls)}
+                style={{ borderRadius: 14, border: "2px solid", borderBottom: "4px solid" }}
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{selectedLevelInfo.icon}</span>
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className="text-xl sm:text-2xl" aria-hidden="true">{selectedLevelCfg.icon}</span>
                   <div>
-                    <div className="text-xs font-black" style={{ color: selectedLevelInfo.text }}>
-                      {selectedLevelInfo.label}
-                    </div>
-                    <div className="text-xs font-bold" style={{ color: selectedLevelInfo.text, opacity: 0.8 }}>
-                      {selectedLevelInfo.desc}
-                    </div>
+                    <div className={clsx("text-xs font-black", selectedLevelCfg.textCls)}>{selectedLevelCfg.label}</div>
+                    <div className={clsx("text-[11px] font-bold", selectedLevelCfg.textCls)} style={{ opacity: 0.8 }}>{selectedLevelCfg.desc}</div>
                   </div>
                 </div>
                 <button
                   onClick={() => { setStep(1); setSelectedMode(null); setSelectedDiff(null); }}
                   aria-label="Ubah level JLPT"
-                  className="rpg-btn text-xs px-3 py-2 touch-manipulation font-black text-slate-600"
-                >
-                  ✏ Ubah
-                </button>
+                  className="rpg-btn text-xs px-3 py-2 touch-manipulation font-black dm-text-secondary shrink-0"
+                >✏ Ubah</button>
               </div>
             )}
 
-            <div
-              className="screen-enter p-4 sm:p-5"
-              style={{
-                background: "#ffffff",
-                border: "2px solid #e5e7eb",
-                borderBottom: "4px solid #d1d5db",
-                borderRadius: 16,
-                boxShadow: "0 2px 10px rgba(0,0,0,0.06)",
-              }}
-            >
-              <h2 className="text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
-                <span>🎮</span> Pilih Mode Quiz
+            <div className="dm-panel screen-enter p-4 sm:p-5">
+              <h2 className="text-xs font-black dm-text-muted mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
+                <span aria-hidden="true">🎮</span> Pilih Mode Quiz
               </h2>
-
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              {/* 2 col di mobile (320px+), 4 col di xl */}
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 sm:gap-2.5">
                 {MODES.map((mode, index) => (
                   <button
                     key={mode.id}
@@ -302,120 +253,96 @@ export function HomeScreen({ onStart, storedStats }: HomeScreenProps) {
                     aria-label={`Pilih mode ${mode.desc}`}
                     aria-pressed={selectedMode === mode.id}
                     className={clsx(
-                      "card-enter relative p-2.5 sm:p-3.5 flex flex-col items-center justify-center gap-1.5 text-center touch-manipulation min-h-[64px] sm:min-h-[72px] transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1",
-                      `stagger-${Math.min(index + 1, 12)}`,
-                      MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2" : "",
+                      `card-enter stagger-${Math.min(index + 1, 12)}`,
+                      mode.cls,
+                      "relative flex flex-col items-center justify-center gap-1.5 text-center",
+                      "touch-manipulation transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5",
+                      "p-2 sm:p-3 min-h-[60px] sm:min-h-[72px]",
+                      MODES.length % 2 !== 0 && index === MODES.length - 1 ? "col-span-2 xl:col-span-1" : "",
                     )}
-                    style={{
-                      background: mode.color,
-                      border: `2px solid ${mode.border}`,
-                      borderBottom: `4px solid ${mode.border}`,
-                      borderRadius: 12,
-                      cursor: "pointer",
-                    }}
+                    style={{ borderRadius: 12, border: "2px solid", borderBottom: "4px solid", cursor: "pointer" }}
                   >
-                    <span className="text-xl sm:text-2xl">{mode.icon}</span>
-                    <div className="text-center">
-                      <div className="text-[11px] sm:text-xs font-black leading-tight text-slate-700"
-                        style={{ fontFamily: "var(--font-jp)" }}>{mode.label}</div>
-                      <div className="text-[11px] font-bold mt-0.5 text-slate-500">{mode.desc}</div>
+                    <span className="text-xl leading-none" aria-hidden="true">{mode.icon}</span>
+                    <div className="text-center w-full px-0.5">
+                      {/* label JP dipersingkat untuk 320px */}
+                      <div
+                        className="text-[11px] sm:text-xs font-black leading-tight dm-text-primary mode-label-jp"
+                        style={{ fontFamily: "var(--font-jp)" }}
+                      >
+                        {mode.label}
+                      </div>
+                      <div className="text-[11px] font-bold mt-0.5 dm-text-secondary mode-label-desc">{mode.desc}</div>
                     </div>
                   </button>
                 ))}
               </div>
             </div>
           </div>
+        )}
 
-        ) : (
-          /* ── STEP 3: Pilih Kecepatan ── */
+        {/* ── STEP 3: Pilih Kecepatan ── */}
+        {step === 3 && (
           <div className="space-y-3">
-            {selectedLevelInfo && selectedModeInfo && (
-              <div
-                className="screen-enter p-3.5 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between"
-                style={{
-                  background: "#ffffff",
-                  border: "2px solid #e5e7eb",
-                  borderBottom: "4px solid #d1d5db",
-                  borderRadius: 14,
-                }}
-              >
+            {/* Selected chips row */}
+            {selectedLevelCfg && selectedModeCfg && (
+              <div className="dm-panel screen-enter p-3 sm:p-3.5 flex flex-col xs:flex-row gap-2 xs:items-center xs:justify-between">
                 <div className="flex items-center gap-2 flex-wrap">
                   <div
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
-                    style={{ background: selectedLevelInfo.bg, border: `1px solid ${selectedLevelInfo.border}` }}
+                    className={clsx("flex items-center gap-1.5 px-2.5 py-1 rounded-lg", selectedLevelCfg.cls)}
+                    style={{ border: "1px solid" }}
                   >
-                    <span className="text-base">{selectedLevelInfo.icon}</span>
-                    <span className="text-xs font-black" style={{ color: selectedLevelInfo.text }}>
-                      {selectedLevelInfo.label}
-                    </span>
+                    <span className="text-sm" aria-hidden="true">{selectedLevelCfg.icon}</span>
+                    <span className={clsx("text-xs font-black", selectedLevelCfg.textCls)}>{selectedLevelCfg.label}</span>
                   </div>
                   <div
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
-                    style={{ background: selectedModeInfo.color, border: `1px solid ${selectedModeInfo.border}` }}
+                    className={clsx("flex items-center gap-1.5 px-2.5 py-1 rounded-lg", selectedModeCfg.cls)}
+                    style={{ border: "1px solid" }}
                   >
-                    <span className="text-base">{selectedModeInfo.icon}</span>
-                    <span className="text-xs font-black text-slate-700" style={{ fontFamily: "var(--font-jp)" }}>
-                      {selectedModeInfo.label}
-                    </span>
+                    <span className="text-sm" aria-hidden="true">{selectedModeCfg.icon}</span>
+                    <span className="text-xs font-black dm-text-primary" style={{ fontFamily: "var(--font-jp)" }}>{selectedModeCfg.label}</span>
                   </div>
                 </div>
                 <button
                   onClick={() => { setStep(2); setSelectedDiff(null); }}
                   aria-label="Ubah mode quiz"
-                  className="rpg-btn text-xs px-3 py-2 touch-manipulation font-black text-slate-600 self-start sm:self-auto"
-                >
-                  ✏ Ubah
-                </button>
+                  className="rpg-btn text-xs px-3 py-2 touch-manipulation font-black dm-text-secondary self-start xs:self-auto shrink-0"
+                >✏ Ubah</button>
               </div>
             )}
 
-            <div
-              className="screen-enter p-4 sm:p-5"
-              style={{
-                background: "#ffffff",
-                border: "2px solid #e5e7eb",
-                borderBottom: "4px solid #d1d5db",
-                borderRadius: 16,
-                boxShadow: "0 2px 10px rgba(0,0,0,0.06)",
-              }}
-            >
-              <h2 className="text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
-                <span>⚡</span> Pilih Kecepatan
+            <div className="dm-panel screen-enter p-4 sm:p-5">
+              <h2 className="text-xs font-black dm-text-muted mb-3 uppercase tracking-[0.15em] text-center flex items-center justify-center gap-2">
+                <span aria-hidden="true">⚡</span> Pilih Kecepatan
               </h2>
-
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {DIFFICULTIES.map((diff, i) => {
-                  const isSelected = selectedDiff === diff.id;
+                  const isSel = selectedDiff === diff.id;
                   return (
                     <button
                       key={diff.id}
                       onClick={() => setSelectedDiff(diff.id)}
                       aria-label={`Pilih kecepatan ${diff.label} — ${diff.desc}`}
-                      aria-pressed={isSelected}
+                      aria-pressed={isSel}
                       className={clsx(
-                        "card-enter relative p-3 sm:p-4 flex flex-col items-center justify-center transition-all duration-150 touch-manipulation min-h-[72px] sm:min-h-[80px]",
-                        `stagger-${i + 1}`,
+                        `card-enter stagger-${i + 1}`,
+                        isSel ? diff.cls : "dm-diff-idle",
+                        "relative flex flex-col items-center justify-center",
+                        "transition-all duration-150 touch-manipulation",
+                        "min-h-[68px] sm:min-h-[80px] p-2.5 sm:p-4",
                       )}
                       style={{
-                        background: isSelected ? diff.bg : "#f9fafb",
-                        border: `2px solid ${isSelected ? diff.border : "#e5e7eb"}`,
-                        borderBottom: `4px solid ${isSelected ? diff.bottom : "#d1d5db"}`,
                         borderRadius: 12,
+                        border: "2px solid",
+                        borderBottom: "4px solid",
                         cursor: "pointer",
-                        transform: isSelected ? "translateY(-2px)" : undefined,
+                        transform: isSel ? "translateY(-2px)" : undefined,
                       }}
                     >
-                      <span className="text-2xl mb-1">{diff.icon}</span>
-                      <div
-                        className="text-[11px] font-black uppercase"
-                        style={{ color: isSelected ? diff.text : "#6b7280" }}
-                      >
+                      <span className="text-xl sm:text-2xl mb-0.5" aria-hidden="true">{diff.icon}</span>
+                      <div className={clsx("text-[11px] font-black uppercase", isSel ? diff.textCls : "dm-text-secondary")}>
                         {diff.label}
                       </div>
-                      <div
-                        className="text-[11px] font-bold mt-0.5"
-                        style={{ color: isSelected ? diff.text : "#9ca3af", opacity: 0.8 }}
-                      >
+                      <div className={clsx("text-[11px] font-bold mt-0.5", isSel ? diff.textCls : "dm-text-muted")} style={{ opacity: 0.8 }}>
                         {diff.desc}
                       </div>
                     </button>
@@ -423,7 +350,6 @@ export function HomeScreen({ onStart, storedStats }: HomeScreenProps) {
                 })}
               </div>
 
-              {/* Tombol Mulai */}
               <div className="mt-4">
                 <button
                   onClick={() => selectedLevel && selectedMode && selectedDiff && onStart(selectedLevel, selectedMode, selectedDiff)}
@@ -439,9 +365,8 @@ export function HomeScreen({ onStart, storedStats }: HomeScreenProps) {
         )}
       </section>
 
-      {/* Footer */}
       <footer>
-        <p className="mt-6 text-xs text-slate-400 font-bold tracking-widest uppercase">
+        <p className="mt-6 text-xs dm-text-muted font-bold tracking-widest uppercase">
           KanjiMocha · Belajar Bahasa Jepang
         </p>
       </footer>

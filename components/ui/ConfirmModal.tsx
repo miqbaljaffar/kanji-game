@@ -20,48 +20,54 @@ export function ConfirmModal({
   onCancel,
 }: ConfirmModalProps) {
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+    <div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirm-title"
+      aria-describedby="confirm-message"
+    >
       <div
-        className="relative w-full p-4 sm:p-6 text-center animate-bounce-pop"
+        className="dm-panel relative w-full p-4 sm:p-6 text-center animate-bounce-pop"
         style={{
-          background: "#ffffff",
-          border: "2px solid #ffc800",
-          borderBottom: "6px solid #c49800",
+          border: "2px solid",
+          borderBottom: "6px solid",
           borderRadius: 20,
-          boxShadow: "0 8px 40px rgba(255,200,0,0.2)",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.25)",
           maxWidth: "min(384px, calc(100vw - 32px))",
         }}
       >
         {/* Icon */}
         <div
-          className="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-3xl"
+          className="w-14 h-14 mx-auto mb-4 flex items-center justify-center text-3xl"
           style={{
             background: "#fff8d6",
             border: "2px solid #ffc800",
             borderRadius: 14,
           }}
+          aria-hidden="true"
         >
           ⚠️
         </div>
 
-        <h3 className="text-sm font-black text-slate-800 mb-2">{title}</h3>
+        <h3 id="confirm-title" className="text-sm font-black dm-text-primary mb-2">{title}</h3>
 
-        <div className="rpg-divider my-3" />
+        <div className="rpg-divider my-3" aria-hidden="true" />
 
-        <p className="text-xs font-bold text-slate-500 mb-6 leading-relaxed">{message}</p>
+        <p id="confirm-message" className="text-xs font-bold dm-text-secondary mb-6 leading-relaxed">{message}</p>
 
         <div className="flex gap-3">
           <button
             onClick={onCancel}
             aria-label={cancelText}
-            className="rpg-btn flex-1 py-3.5 text-[9px] touch-manipulation font-black"
+            className="rpg-btn flex-1 py-3.5 text-xs touch-manipulation font-black dm-text-secondary"
           >
             {cancelText}
           </button>
           <button
             onClick={onConfirm}
             aria-label={confirmText}
-            className="rpg-btn-red flex-1 py-3.5 text-[9px] touch-manipulation font-black"
+            className="rpg-btn-red flex-1 py-3.5 text-xs touch-manipulation font-black"
           >
             {confirmText}
           </button>

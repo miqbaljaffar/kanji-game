@@ -81,13 +81,13 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2">
               <span
-                className="text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
+                className="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
                 style={{ background: "#ffffff", color: lv.text, border: `1.5px solid ${lv.accent}` }}
               >
                 JLPT {entry.level}
               </span>
               <span
-                className="text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
+                className="text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wide"
                 style={{ background: "#ddf4ff", color: "#0c6b9e", border: "1.5px solid #1cb0f6" }}
               >
                 {entry.category}
@@ -101,11 +101,11 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
             >
               {entry.pattern}
             </h2>
-            <p className="text-[9px] font-bold text-slate-500 italic">{entry.romajiPattern}</p>
+            <p className="text-xs font-bold text-slate-500 italic">{entry.romajiPattern}</p>
 
             {/* Formula pill */}
             <div
-              className="inline-block px-3 py-1.5 text-[9px] sm:text-xs font-mono font-bold text-amber-700 max-w-full truncate"
+              className="inline-block px-3 py-1.5 text-xs sm:text-xs font-mono font-bold text-amber-700 max-w-full truncate"
               style={{ background: "#fffef0", border: "1px solid #fde68a", borderRadius: 8 }}
             >
               📐 {entry.formula}
@@ -126,7 +126,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
               key={t.id}
               onClick={() => setActiveTab(t.id)}
               className={clsx(
-                "px-4 py-3 text-[9px] font-black transition-all cursor-pointer shrink-0 touch-manipulation border-b-2",
+                "px-4 py-3 text-xs font-black transition-all cursor-pointer shrink-0 touch-manipulation border-b-2",
                 activeTab === t.id
                   ? "border-green-500 text-green-600 bg-green-50"
                   : "border-transparent text-slate-400 hover:text-slate-600"
@@ -150,7 +150,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
                 className="p-4 space-y-2"
                 style={{ background: "#ddf4ff", border: "2px solid #1cb0f6", borderRadius: 12 }}
               >
-                <p className="text-[8px] font-black text-blue-700 uppercase tracking-widest">
+                <p className="text-xs font-black text-blue-700 uppercase tracking-widest">
                   💡 Fungsi &amp; Arti Utama
                 </p>
                 <div className="h-px bg-blue-200 rounded" />
@@ -165,7 +165,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
                 className="p-4 space-y-2"
                 style={{ background: "#ffffff", border: "2px solid #e5e7eb", borderRadius: 12 }}
               >
-                <p className="text-[8px] font-black text-slate-500 uppercase tracking-widest">
+                <p className="text-xs font-black text-slate-500 uppercase tracking-widest">
                   📐 Rumus Pembentukan
                 </p>
                 <div className="rpg-divider" />
@@ -183,7 +183,7 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
                   className="p-4 space-y-2"
                   style={{ background: "#fff8d6", border: "2px solid #ffc800", borderRadius: 12 }}
                 >
-                  <p className="text-[8px] font-black text-amber-600 uppercase tracking-widest">
+                  <p className="text-xs font-black text-amber-600 uppercase tracking-widest">
                     ⚠️ Catatan Khusus
                   </p>
                   <div className="rpg-divider" />
@@ -255,13 +255,13 @@ export function BunpouDetailModal({ entry, onClose }: BunpouDetailModalProps) {
           className="p-3.5 sm:p-4 flex items-center justify-between shrink-0"
           style={{ borderTop: "2px solid #f3f4f6", background: "#ffffff" }}
         >
-          <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
+          <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
             KanjiMocha · JLPT {entry.level}
           </span>
           <button
             onClick={onClose}
             aria-label="Tutup detail bunpou"
-            className="rpg-btn px-5 py-2.5 text-[9px] touch-manipulation font-black"
+            className="rpg-btn px-5 py-2.5 text-xs touch-manipulation font-black"
           >Tutup</button>
         </div>
       </div>

@@ -59,7 +59,6 @@ function getComboLabel(streak: number): { text: string; color: string; size: "no
   return               { text: `⭐ ${streak}x NICE!`,            color: "#ffc800", size: "normal" };
 }
 
-/** Milestone khusus untuk streak angka bulat besar */
 function getMilestone(streak: number): { title: string; sub: string; emoji: string; color: string; bg: string } | null {
   if (streak === 5)  return { title: "5 BENAR BERUNTUN!", sub: "Luar biasa! Terus semangat! 💪", emoji: "🌟", color: "#0c6b9e", bg: "#ddf4ff" };
   if (streak === 10) return { title: "10 STREAK!", sub: "SEMPURNA! Kamu master!", emoji: "👑", color: "#7a5a00", bg: "#fff8d6" };
@@ -73,14 +72,15 @@ export function AnswerScreen({
   stats, gameMode, onNext, onExit,
 }: AnswerScreenProps) {
   const [isExitConfirmOpen, setIsExitConfirmOpen] = useState(false);
-  const [fetchedDetails, setFetchedDetails] = useState<
-    Record<string, { onyomi: string; kunyomi: string; mnemonic: string }>
-  >({});
-  const [loadingChars, setLoadingChars] = useState<Set<string>>(new Set());
-  const [showCombo, setShowCombo] = useState(false);
-  const [showMilestone, setShowMilestone] = useState(false);
-  const comboTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [fetchedDetails, setFetchedDetails] = useState<Record<string, { onyomi: string; kunyomi: string; mnemonic: string }>>({});
+  const [loadingChars,   setLoadingChars]   = useState<Set<string>>(new Set());
+  const [showCombo,      setShowCombo]      = useState(false);
+  const [showMilestone,  setShowMilestone]  = useState(false);
+  const comboTimerRef     = useRef<ReturnType<typeof setTimeout> | null>(null);
   const milestoneTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const isTimeout = selectedIndex < 0;
+  const isCorrect = !isTimeout && selectedIndex === question.correctIndex;
 
   useEffect(() => {
     if (stats.streak >= 2 && isCorrect) {
@@ -88,7 +88,6 @@ export function AnswerScreen({
       if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
       comboTimerRef.current = setTimeout(() => setShowCombo(false), 1800);
     }
-    // Milestone untuk streak 5, 10, 15, 20...
     const milestone = getMilestone(stats.streak);
     if (milestone && isCorrect) {
       setShowMilestone(true);
@@ -96,28 +95,26 @@ export function AnswerScreen({
       milestoneTimerRef.current = setTimeout(() => setShowMilestone(false), 2800);
     }
     return () => {
-      if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
+      if (comboTimerRef.current)     clearTimeout(comboTimerRef.current);
       if (milestoneTimerRef.current) clearTimeout(milestoneTimerRef.current);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stats.streak]);
 
-  const display   = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
-  const isJpQ     = ["kanji-to-arti","kanji-to-hiragana","hiragana-to-arti","bunpou"].includes(gameMode);
-  const isJpOpt   = ["arti-to-kanji","kanji-to-hiragana","bunpou","hiragana-to-romaji","katakana-to-romaji","mixed-kana"].includes(gameMode);
-  const isTimeout = selectedIndex < 0;
-  const isCorrect = !isTimeout && selectedIndex === question.correctIndex;
+  const display  = useMemo(() => getQuestionDisplay(question, gameMode), [question, gameMode]);
+  const isJpQ    = ["kanji-to-arti","kanji-to-hiragana","hiragana-to-arti","bunpou"].includes(gameMode);
+  const isJpOpt  = ["arti-to-kanji","kanji-to-hiragana","bunpou","hiragana-to-romaji","katakana-to-romaji","mixed-kana"].includes(gameMode);
 
   const allOptions =
     question.mode === "bunpou" ? question.stringOptions!
     : question.mode === "kana" ? question.kanaOptions!
     : question.kanjiOptions!;
+
   const selectedAnswer = isTimeout ? null : allOptions[selectedIndex];
   const correctAnswer  = allOptions[question.correctIndex];
   const selectedText   = getAnswerText(selectedAnswer, gameMode, question.kanaScript);
   const correctText    = getAnswerText(correctAnswer,  gameMode, question.kanaScript);
-
-  const comboLabel = getComboLabel(stats.streak);
+  const comboLabel     = getComboLabel(stats.streak);
 
   const kanjiChars = useMemo(() => {
     if (question.mode !== "kanji" || !question.kanjiQuestion) return [];
@@ -133,7 +130,7 @@ export function AnswerScreen({
         const res = await fetch(`https://kanjiapi.dev/v1/kanji/${encodeURIComponent(char)}`);
         if (res.ok) {
           const data = await res.json();
-          const onyomi   = data.on_readings.join(", ")  || "-";
+          const onyomi   = data.on_readings.join(", ") || "-";
           const kunyomi  = data.kun_readings.join(", ") || "-";
           const meanings = data.meanings.slice(0, 3).join(", ");
           const mnemonic = `Arti: ${meanings}. Jumlah coretan: ${data.stroke_count}.`;
@@ -151,14 +148,15 @@ export function AnswerScreen({
     [kanjiChars, fetchedDetails],
   );
 
-  /* colors */
-  const statusBg     = isCorrect ? "#d7ffb8" : isTimeout ? "#fff8d6" : "#ffe0e0";
-  const statusBorder = isCorrect ? "#58cc02" : isTimeout ? "#ffc800" : "#ff4b4b";
-  const statusText   = isCorrect ? "#2a7000" : isTimeout ? "#7a5a00" : "#880000";
+  /* Status class — menggunakan CSS classes dari globals.css */
+  const statusCls = isCorrect ? "status-correct" : isTimeout ? "status-timeout" : "status-wrong";
+  const statusTextColor = isCorrect ? "text-green-800 dark:text-green-300"
+    : isTimeout ? "text-amber-700 dark:text-amber-300"
+    : "text-red-800 dark:text-red-300";
 
   return (
     <main
-      className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 max-w-lg mx-auto overflow-x-hidden"
+      className="relative z-10 flex flex-col min-h-dvh p-3 sm:p-5 xl:p-6 max-w-lg xl:max-w-2xl mx-auto overflow-x-hidden"
       aria-label="Layar penjelasan jawaban"
     >
       {isExitConfirmOpen && (
@@ -172,124 +170,50 @@ export function AnswerScreen({
         />
       )}
 
-      {/* ── MILESTONE OVERLAY (streak 5, 10, 15…) ── */}
+      {/* ── MILESTONE OVERLAY ── */}
       {showMilestone && isCorrect && (() => {
         const m = getMilestone(stats.streak);
         if (!m) return null;
         return (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            {/* Backdrop pulse */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `radial-gradient(circle at center, ${m.bg}cc 0%, transparent 65%)`,
-                animation: "glowBurst 1s ease-out forwards",
-              }}
-            />
-            {/* Card */}
-            <div
-              className="relative text-center px-8 py-6"
-              style={{
-                background: m.bg,
-                border: `3px solid ${m.color}`,
-                borderBottom: `6px solid ${m.color}`,
-                borderRadius: 20,
-                boxShadow: `0 8px 40px ${m.color}55`,
-                animation: "popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards",
-              }}
-            >
-              <div
-                className="text-5xl sm:text-6xl mb-3"
-                style={{ animation: "bouncePop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards" }}
-              >
-                {m.emoji}
-              </div>
-              <p
-                className="text-xl sm:text-2xl font-black tracking-tight"
-                style={{ color: m.color }}
-              >
-                {m.title}
-              </p>
-              <p className="text-sm font-bold mt-1" style={{ color: m.color, opacity: 0.8 }}>
-                {m.sub}
-              </p>
+          <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none" aria-live="assertive" aria-atomic="true">
+            <div className="absolute inset-0" style={{ background: `radial-gradient(circle at center, ${m.bg}bb 0%, transparent 65%)`, animation: "glowBurst 1s ease-out forwards" }} />
+            <div className="relative text-center px-8 py-6" style={{ background: m.bg, border: `3px solid ${m.color}`, borderBottom: `6px solid ${m.color}`, borderRadius: 20, boxShadow: `0 8px 40px ${m.color}55`, animation: "popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards" }}>
+              <div className="text-5xl sm:text-6xl mb-3" style={{ animation: "bouncePop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards" }}>{m.emoji}</div>
+              <p className="text-xl sm:text-2xl font-black tracking-tight" style={{ color: m.color }}>{m.title}</p>
+              <p className="text-sm font-bold mt-1" style={{ color: m.color, opacity: 0.8 }}>{m.sub}</p>
             </div>
           </div>
         );
       })()}
 
-      {/* ── COMBO POPUP (streak 2+) ── */}
+      {/* ── COMBO POPUP ── */}
       {showCombo && comboLabel && isCorrect && (
-        <div
-          className="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
-          aria-live="polite"
-          style={{ animation: "comboPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards, comboFade 0.8s ease-out 1s forwards" }}
-        >
-          <div
-            className="px-5 py-3 text-center whitespace-nowrap"
-            style={{
-              background: "#ffffff",
-              border: `2px solid ${comboLabel.color}`,
-              borderBottom: `4px solid ${comboLabel.color}`,
-              borderRadius: 14,
-              boxShadow: `0 4px 20px ${comboLabel.color}40`,
-              transform: comboLabel.size === "epic" ? "scale(1.1)" : comboLabel.size === "big" ? "scale(1.05)" : "scale(1)",
-            }}
-          >
-            <span
-              className={`font-black ${comboLabel.size === "epic" ? "text-lg sm:text-xl" : comboLabel.size === "big" ? "text-base sm:text-lg" : "text-sm sm:text-base"}`}
-              style={{ color: comboLabel.color }}
-            >
-              {comboLabel.text}
-            </span>
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none" aria-live="polite"
+          style={{ animation: "comboPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards, comboFade 0.8s ease-out 1s forwards" }}>
+          <div className="dm-panel px-5 py-3 text-center whitespace-nowrap"
+            style={{ boxShadow: `0 4px 20px ${comboLabel.color}40`, borderRadius: 14, transform: comboLabel.size === "epic" ? "scale(1.1)" : comboLabel.size === "big" ? "scale(1.05)" : "scale(1)" }}>
+            <span className={clsx("font-black", comboLabel.size === "epic" ? "text-lg sm:text-xl" : comboLabel.size === "big" ? "text-base sm:text-lg" : "text-sm sm:text-base")}
+              style={{ color: comboLabel.color }}>{comboLabel.text}</span>
           </div>
         </div>
       )}
 
       {/* ── HEADER ── */}
-      <div
-        className="flex-none flex items-center justify-between p-2.5 sm:p-3 mb-3"
-        style={{
-          background: "#ffffff",
-          border: "2px solid #e5e7eb",
-          borderBottom: "4px solid #d1d5db",
-          borderRadius: 16,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-        }}
-      >
-        <button
-          onClick={() => setIsExitConfirmOpen(true)}
-          aria-label="Keluar dari permainan"
-          className="rpg-btn-red w-11 h-11 flex items-center justify-center text-sm font-black touch-manipulation rounded-xl"
-        >✕</button>
-
+      <div className="dm-game-header flex-none flex items-center justify-between p-2.5 sm:p-3 mb-3">
+        <button onClick={() => setIsExitConfirmOpen(true)} aria-label="Keluar dari permainan"
+          className="rpg-btn-red w-11 h-11 flex items-center justify-center text-sm font-black touch-manipulation rounded-xl shrink-0">✕</button>
         <div className="flex-1 mx-3">
-          <div className="rpg-hp-bar">
-            <div
-              className="rpg-hp-fill bg-gradient-to-r from-blue-400 to-cyan-400"
-              style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%`, transition: "width 0.5s ease" }}
-            />
+          <div className="rpg-hp-bar" role="progressbar" aria-valuenow={questionIndex + 1} aria-valuemin={0} aria-valuemax={totalQuestions}>
+            <div className="rpg-hp-fill bg-gradient-to-r from-blue-400 to-cyan-400"
+              style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%`, transition: "width 0.5s ease" }} />
           </div>
-          <p className="text-xs text-slate-400 font-black text-center mt-1 uppercase tracking-widest">
+          <p className="text-xs dm-text-muted font-black text-center mt-1 uppercase tracking-widest">
             {questionIndex + 1} / {totalQuestions}
           </p>
         </div>
-
-        <div
-          className="px-2.5 py-1.5 flex items-center gap-1"
-          style={{
-            background: "#fff8d6",
-            border: "2px solid #ffc800",
-            borderBottom: "3px solid #c49800",
-            borderRadius: 10,
-          }}
-        >
-          <span className="text-sm">⭐</span>
-          <span className="font-black text-amber-600 text-xs">{stats.score}</span>
+        <div className="dm-score-box px-2.5 py-1.5 flex items-center gap-1 shrink-0">
+          <span className="text-sm" aria-hidden="true">⭐</span>
+          <span className="font-black text-amber-600 text-xs tabular-nums">{stats.score}</span>
         </div>
       </div>
 
@@ -297,33 +221,17 @@ export function AnswerScreen({
       <div className="flex-1 flex flex-col gap-3 overflow-y-auto rpg-scroll pb-2">
 
         {/* Status Benar / Salah */}
-        <div
-          className="screen-enter relative p-3 sm:p-4 text-center"
-          style={{
-            background: statusBg,
-            border: `2px solid ${statusBorder}`,
-            borderBottom: `4px solid ${statusBorder}`,
-            borderRadius: 16,
-            boxShadow: `0 4px 16px ${statusBorder}30`,
-          }}
-        >
-          <div className="text-3xl mb-1">{isCorrect ? "🎉" : isTimeout ? "⏰" : "💔"}</div>
-          <p className="text-sm sm:text-base font-black" style={{ color: statusText }}>
+        <div className={clsx("screen-enter relative p-3 sm:p-4 text-center", statusCls)}
+          style={{ borderRadius: 16, border: "2px solid", borderBottom: "4px solid", boxShadow: "0 4px 16px rgba(0,0,0,0.1)" }}>
+          <div className="text-3xl mb-1" aria-hidden="true">{isCorrect ? "🎉" : isTimeout ? "⏰" : "💔"}</div>
+          <p className={clsx("text-sm sm:text-base font-black", statusTextColor)}>
             {isCorrect ? "BENAR! Keren!" : isTimeout ? "WAKTU HABIS!" : "SALAH! Coba lagi!"}
           </p>
-
-          {/* Streak dots */}
           {stats.streak >= 2 && isCorrect && (
-            <div className="mt-2 flex items-center justify-center gap-1">
+            <div className="mt-2 flex items-center justify-center gap-1" aria-label={`${stats.streak} streak berturut-turut`}>
               {Array.from({ length: Math.min(stats.streak, 10) }).map((_, i) => (
-                <span
-                  key={i}
-                  className="inline-block w-2.5 h-2.5 rounded-full bg-green-500"
-                  style={{
-                    animation: `bouncePop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) ${i * 0.05}s both`,
-                    opacity: 0.6 + i * 0.04,
-                  }}
-                />
+                <span key={i} className="inline-block w-2.5 h-2.5 rounded-full bg-green-500"
+                  style={{ animation: `bouncePop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) ${i * 0.05}s both`, opacity: 0.6 + i * 0.04 }} />
               ))}
               <span className="text-xs font-black text-green-700 ml-1">{stats.streak} STREAK! 🔥</span>
             </div>
@@ -331,56 +239,26 @@ export function AnswerScreen({
         </div>
 
         {/* Soal */}
-        <div
-          className="relative p-4 text-center card-enter stagger-1"
-          style={{
-            background: "#ffffff",
-            border: "2px solid #e5e7eb",
-            borderBottom: "4px solid #d1d5db",
-            borderRadius: 16,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-          }}
-        >
-          <p className="text-xs font-black text-slate-400 uppercase tracking-[0.18em] mb-2">SOAL</p>
+        <div className="dm-info-card relative p-4 text-center card-enter stagger-1"
+          style={{ border: "2px solid", borderBottom: "4px solid" }}>
+          <p className="text-xs font-black dm-text-muted uppercase tracking-[0.18em] mb-2">SOAL</p>
           <h2
-            className={clsx(
-              "font-black leading-tight text-slate-800 break-words",
+            className={clsx("font-black leading-tight dm-text-primary break-words",
               gameMode === "arti-to-kanji" ? "text-2xl sm:text-3xl"
-              : gameMode === "bunpou" ? "text-lg sm:text-xl" : "text-4xl sm:text-5xl",
-            )}
+              : gameMode === "bunpou"      ? "text-lg sm:text-xl"
+              : "text-4xl sm:text-5xl")}
             style={{ fontFamily: isJpQ ? "var(--font-jp)" : "var(--font-body)" }}
           >{display.main}</h2>
-          {display.sub && (
-            <p className="text-xs font-bold text-slate-500 mt-2">&ldquo;{display.sub}&rdquo;</p>
-          )}
+          {display.sub && <p className="text-xs font-bold dm-text-secondary mt-2">&ldquo;{display.sub}&rdquo;</p>}
         </div>
 
         {/* Jawaban User */}
         <div className="card-enter stagger-2">
-          <p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 pl-1">
-            › Jawaban kamu
-          </p>
-          <div
-            className="relative p-4 text-center rpg-answer-correct"
-            style={!isCorrect ? {
-              background: "#ffe0e0",
-              border: "2px solid #ff4b4b",
-              borderBottom: "4px solid #cc0000",
-              borderRadius: 14,
-            } : {
-              background: "#d7ffb8",
-              border: "2px solid #58cc02",
-              borderBottom: "4px solid #46a302",
-              borderRadius: 14,
-            }}
-          >
-            <span
-              className="block font-black text-xl sm:text-2xl"
-              style={{
-                fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)",
-                color: isCorrect ? "#2a7000" : "#880000",
-              }}
-            >
+          <p className="text-xs font-black dm-text-muted uppercase tracking-widest mb-1.5 pl-1">› Jawaban kamu</p>
+          <div className={clsx(isCorrect ? "answer-correct-box" : "answer-wrong-box", "relative p-4 text-center")}
+            style={{ border: "2px solid", borderBottom: "4px solid" }}>
+            <span className={clsx("block font-black text-xl sm:text-2xl", isCorrect ? "text-green-800 dark:text-green-300" : "text-red-800 dark:text-red-300")}
+              style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}>
               {selectedText}
             </span>
           </div>
@@ -389,61 +267,38 @@ export function AnswerScreen({
         {/* Jawaban Benar (jika salah) */}
         {!isCorrect && (
           <div className="card-enter stagger-3">
-            <p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 pl-1">
-              › Jawaban yang benar
-            </p>
-            <div
-              className="relative p-4 text-center"
-              style={{
-                background: "#d7ffb8",
-                border: "2px solid #58cc02",
-                borderBottom: "4px solid #46a302",
-                borderRadius: 14,
-              }}
-            >
-              <span
-                className="block font-black text-xl sm:text-2xl text-green-800"
-                style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}
-              >
+            <p className="text-xs font-black dm-text-muted uppercase tracking-widest mb-1.5 pl-1">› Jawaban yang benar</p>
+            <div className="answer-correct-box relative p-4 text-center" style={{ border: "2px solid", borderBottom: "4px solid" }}>
+              <span className="block font-black text-xl sm:text-2xl text-green-800 dark:text-green-300"
+                style={{ fontFamily: isJpOpt ? "var(--font-jp)" : "var(--font-body)" }}>
                 {correctText}
               </span>
             </div>
           </div>
         )}
 
-        {/* Detail kata (kanji mode) */}
+        {/* Info Kata (kanji mode) */}
         {question.mode === "kanji" && question.kanjiQuestion && (
-          <div
-            className="card-enter stagger-4 p-4 space-y-2 text-xs"
-            style={{
-              background: "#f0fdf4",
-              border: "2px solid #bbf7d0",
-              borderBottom: "4px solid #86efac",
-              borderRadius: 14,
-            }}
-          >
-            <p className="text-xs font-black text-green-700 uppercase tracking-[0.15em]">📖 Info Kata</p>
-            <div className="h-px bg-green-200 rounded" />
+          <div className="dm-info-green card-enter stagger-4 p-4 space-y-2 text-xs"
+            style={{ border: "2px solid", borderBottom: "4px solid" }}>
+            <p className="text-xs font-black text-green-700 dark:text-green-400 uppercase tracking-[0.15em]">📖 Info Kata</p>
+            <div className="h-px bg-green-200 dark:bg-green-900 rounded" />
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
               <div>
-                <span className="text-green-600 font-black block text-xs uppercase">Kanji</span>
-                <span className="text-slate-800 font-black text-lg" style={{ fontFamily: "var(--font-jp)" }}>
-                  {question.kanjiQuestion.kanji}
-                </span>
+                <span className="text-green-600 dark:text-green-400 font-black block text-xs uppercase">Kanji</span>
+                <span className="dm-text-primary font-black text-lg" style={{ fontFamily: "var(--font-jp)" }}>{question.kanjiQuestion.kanji}</span>
               </div>
               <div>
-                <span className="text-green-600 font-black block text-xs uppercase">Hiragana</span>
-                <span className="text-slate-700 font-bold text-base" style={{ fontFamily: "var(--font-jp)" }}>
-                  {question.kanjiQuestion.hiragana}
-                </span>
+                <span className="text-green-600 dark:text-green-400 font-black block text-xs uppercase">Hiragana</span>
+                <span className="dm-text-primary font-bold text-base" style={{ fontFamily: "var(--font-jp)" }}>{question.kanjiQuestion.hiragana}</span>
               </div>
               <div>
-                <span className="text-green-600 font-black block text-xs uppercase">Romaji</span>
-                <span className="text-slate-600 font-bold italic">{question.kanjiQuestion.romaji}</span>
+                <span className="text-green-600 dark:text-green-400 font-black block text-xs uppercase">Romaji</span>
+                <span className="dm-text-secondary font-bold italic">{question.kanjiQuestion.romaji}</span>
               </div>
               <div>
-                <span className="text-green-600 font-black block text-xs uppercase">Arti</span>
-                <span className="text-amber-700 font-bold">{question.kanjiQuestion.arti}</span>
+                <span className="text-green-600 dark:text-green-400 font-black block text-xs uppercase">Arti</span>
+                <span className="text-amber-700 dark:text-amber-400 font-bold">{question.kanjiQuestion.arti}</span>
               </div>
             </div>
           </div>
@@ -452,93 +307,53 @@ export function AnswerScreen({
         {/* Detail per karakter kanji */}
         {matchedKanjiDetails.length > 0 && (
           <div className="space-y-2">
-            <p className="text-xs font-black text-slate-500 uppercase pl-1 tracking-widest">
+            <p className="text-xs font-black dm-text-muted uppercase pl-1 tracking-widest">
               🔍 Detail Kanji ({matchedKanjiDetails.length})
             </p>
             {matchedKanjiDetails.map(({ char, detail }, di) => {
               const isLoading = loadingChars.has(char);
               return (
-                <div
-                  key={char}
-                  className={`card-enter stagger-${Math.min(di + 5, 12)} p-4`}
-                  style={{
-                    background: "#ffffff",
-                    border: "2px solid #e5e7eb",
-                    borderBottom: "4px solid #d1d5db",
-                    borderRadius: 14,
-                    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-                  }}
-                >
+                <div key={char} className={clsx(`card-enter stagger-${Math.min(di + 5, 12)}`, "dm-info-card p-4")}
+                  style={{ border: "2px solid", borderBottom: "4px solid" }}>
                   <div className="flex items-center gap-4 mb-3">
-                    <div
-                      className="w-14 h-14 flex items-center justify-center text-3xl font-black shrink-0"
-                      style={{
-                        fontFamily: "var(--font-jp)",
-                        background: "#fff8d6",
-                        border: "2px solid #ffc800",
-                        borderRadius: 10,
-                        color: "#7a5a00",
-                      }}
+                    <div className="dm-kanji-char-box w-14 h-14 flex items-center justify-center text-3xl font-black shrink-0"
+                      style={{ fontFamily: "var(--font-jp)", borderRadius: 10, border: "2px solid", color: "#7a5a00" }}
                     >{char}</div>
                     <div className="flex flex-col gap-1">
-                      <p className="text-xs text-slate-400 font-black uppercase tracking-widest">
-                        Karakter Kanji
-                      </p>
+                      <p className="text-xs dm-text-muted font-black uppercase tracking-widest">Karakter Kanji</p>
                       {isLoading && (
-                        <span className="inline-flex items-center gap-1.5 text-[11px] text-slate-400 font-bold">
-                          <span
-                            className="inline-block w-3 h-3 rounded-full border-2 border-slate-300 border-t-slate-500"
-                            style={{ animation: "spin 0.8s linear infinite" }}
-                            aria-hidden="true"
-                          />
+                        <span className="inline-flex items-center gap-1.5 text-[11px] dm-text-muted font-bold">
+                          <span className="inline-block w-3 h-3 rounded-full border-2 border-slate-300 border-t-slate-500"
+                            style={{ animation: "spin 0.8s linear infinite" }} aria-hidden="true" />
                           Memuat data…
                         </span>
                       )}
                     </div>
                   </div>
-
-                  <div className="h-px bg-gray-100 mb-3 rounded" />
-
+                  <div className="h-px dm-border mb-3 rounded" style={{ background: "currentColor", opacity: 0.1 }} />
                   <div className="grid grid-cols-2 gap-2 text-xs">
-                    {/* On'yomi */}
-                    <div
-                      className="p-2"
-                      style={{ background: "#f5e6ff", border: "1px solid #ce82ff", borderRadius: 8 }}
-                    >
-                      <span className="block text-[11px] font-black text-purple-600 uppercase mb-1">音読み (On)</span>
-                      {isLoading ? (
-                        <div className="h-4 w-20 rounded bg-purple-100 animate-pulse" aria-label="Memuat..." />
-                      ) : (
-                        <span className="text-slate-700 font-bold">{detail?.onyomi ?? "–"}</span>
+                    <div className="dm-kanji-onyomi p-2" style={{ border: "1px solid", borderRadius: 8 }}>
+                      <span className="block text-[11px] font-black text-purple-600 dark:text-purple-400 uppercase mb-1">音読み (On)</span>
+                      {isLoading ? <div className="h-4 w-20 rounded bg-purple-100 dark:bg-purple-900 animate-pulse" /> : (
+                        <span className="dm-text-primary font-bold">{detail?.onyomi ?? "–"}</span>
                       )}
                     </div>
-                    {/* Kun'yomi */}
-                    <div
-                      className="p-2"
-                      style={{ background: "#d7ffb8", border: "1px solid #58cc02", borderRadius: 8 }}
-                    >
-                      <span className="block text-[11px] font-black text-green-700 uppercase mb-1">訓読み (Kun)</span>
-                      {isLoading ? (
-                        <div className="h-4 w-20 rounded bg-green-100 animate-pulse" aria-label="Memuat..." />
-                      ) : (
-                        <span className="text-slate-700 font-bold break-all">{detail?.kunyomi ?? "–"}</span>
+                    <div className="dm-kanji-kunyomi p-2" style={{ border: "1px solid", borderRadius: 8 }}>
+                      <span className="block text-[11px] font-black text-green-700 dark:text-green-400 uppercase mb-1">訓読み (Kun)</span>
+                      {isLoading ? <div className="h-4 w-20 rounded bg-green-100 dark:bg-green-900 animate-pulse" /> : (
+                        <span className="dm-text-primary font-bold break-all">{detail?.kunyomi ?? "–"}</span>
                       )}
                     </div>
                   </div>
-
-                  {/* Mnemonic */}
-                  <div
-                    className="p-3 mt-2 text-xs"
-                    style={{ background: "#fffef0", border: "1px solid #ffc800", borderRadius: 8 }}
-                  >
-                    <span className="block text-[11px] font-black text-amber-600 uppercase mb-1">💡 Mnemonic</span>
+                  <div className="dm-kanji-mnemonic p-3 mt-2 text-xs" style={{ border: "1px solid", borderRadius: 8 }}>
+                    <span className="block text-[11px] font-black text-amber-600 dark:text-amber-400 uppercase mb-1">💡 Mnemonic</span>
                     {isLoading ? (
-                      <div className="space-y-1.5" aria-label="Memuat...">
-                        <div className="h-3 w-full rounded bg-amber-100 animate-pulse" />
-                        <div className="h-3 w-3/4 rounded bg-amber-100 animate-pulse" />
+                      <div className="space-y-1.5">
+                        <div className="h-3 w-full rounded bg-amber-100 dark:bg-amber-900 animate-pulse" />
+                        <div className="h-3 w-3/4 rounded bg-amber-100 dark:bg-amber-900 animate-pulse" />
                       </div>
                     ) : (
-                      <p className="text-slate-600 font-semibold leading-relaxed">
+                      <p className="dm-text-secondary font-semibold leading-relaxed">
                         {detail?.mnemonic ?? "Bayangkan visual kanji ini agar mudah diingat."}
                       </p>
                     )}
@@ -558,7 +373,7 @@ export function AnswerScreen({
           className="rpg-btn-gold w-full py-4 sm:py-5 flex items-center justify-center gap-3 touch-manipulation rpg-glow-gold rounded-xl text-sm font-black"
         >
           {questionIndex + 1 >= totalQuestions ? "🏆 Lihat Hasil" : "Soal Berikutnya"}
-          <ChevronRight size={18} />
+          <ChevronRight size={18} aria-hidden="true" />
         </button>
       </div>
     </main>
